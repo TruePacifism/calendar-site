@@ -12,7 +12,7 @@ import {
   InputLabel,
   Button,
 } from "@mui/material";
-import { ThemeProvider, createTheme, makeStyles } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
   activeColor,
   basicButtonBorderColor,
@@ -53,15 +53,6 @@ for (let i = 1; i < 61; i++) {
 
 const mainTheme = createTheme({
   components: {
-    MuiButtonBase: {
-      styleOverrides: {
-        root: {
-          ":hover": {
-            backgroundColor: "inherit",
-          },
-        },
-      },
-    },
     MuiInput: {
       styleOverrides: {
         input: {
@@ -124,7 +115,7 @@ const mainTheme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
-        root: {
+        root: ({ ownerState }) => ({
           paddingTop: 15,
           paddingBottom: 15,
           paddingLeft: 29,
@@ -139,7 +130,11 @@ const mainTheme = createTheme({
           textAlign: "center",
           display: "block",
           marginRight: "auto",
-        },
+          "&:hover": {
+            backgroundColor: activeColor,
+            opacity: 0.8,
+          },
+        }),
       },
     },
   },

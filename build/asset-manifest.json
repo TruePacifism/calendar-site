@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d113baba.css",
+    "main.js": "/static/js/main.911f0d1c.js",
+    "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
+    "static/media/in-yan-icon.svg": "/static/media/in-yan-icon.474d9ca042aa2a7a110b77b682657d7b.svg",
+    "static/media/home-icon.svg": "/static/media/home-icon.ba403c7427065b0e448a731587dff2a5.svg",
+    "static/media/file-icon.svg": "/static/media/file-icon.79dac6a1b519c3c9c0bfcafa926f1486.svg",
+    "index.html": "/index.html",
+    "static/media/cabinet-icon.svg": "/static/media/cabinet-icon.81263e740461ca517e5834646a6c6f0f.svg",
+    "static/media/back-icon.svg": "/static/media/back-icon.6c55b4edd7af168a9146d004ad495c4c.svg",
+    "static/media/down-arrow.svg": "/static/media/down-arrow.b80553a43069f6b3b94ef87481f265ff.svg",
+    "static/media/burger-icon.svg": "/static/media/burger-icon.9272a79812b498b0a64e567e435c4dd4.svg",
+    "static/media/calendar-icon.svg": "/static/media/calendar-icon.6e5a9e92e2ac14430a0b008793e70d3d.svg",
+    "main.d113baba.css.map": "/static/css/main.d113baba.css.map",
+    "main.911f0d1c.js.map": "/static/js/main.911f0d1c.js.map",
+    "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d113baba.css",
+    "static/js/main.911f0d1c.js"
+  ]
+}
