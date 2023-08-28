@@ -1,0 +1,18 @@
+.image {
+  width: 52px;
+  height: 47px;
+  margin-bottom: 4px;
+}
+.black {
+  border: 2px solid black;
+}
+.name {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  margin-bottom: 4px;
+}

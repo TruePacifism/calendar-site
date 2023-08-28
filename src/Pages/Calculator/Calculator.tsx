@@ -19,6 +19,7 @@ import {
   hiddenTextColor,
 } from "../../utils/vars";
 import { ReactComponent as DownArrowIcon } from "../../images/down-arrow.svg";
+import CustomCheckBoxGroup from "../../Components/CustomCheckBoxGroup";
 
 const getPreetyNumber = (number: number): string => {
   let formattedNum: string = String(number); // Преобразовываем число в строку
@@ -379,44 +380,19 @@ export default function Calculator() {
           <div className={styles.formFieldContainer}>
             <span className={styles.label}>Пол</span>
             <div className={styles.dateInputBox}>
-              <ThemeProvider theme={radioTheme}>
-                <RadioGroup
-                  name="gender"
-                  onChange={(e) => {
-                    const gender: string = e.target.value;
-                    if (gender === "Мужской" || gender === "Женский") {
-                      setSelectedGender(gender);
-                    } else {
-                      console.log("Неправильный пол: " + gender);
-                    }
-                  }}
-                >
-                  <ThemeProvider
-                    theme={
-                      selectedGender === "Мужской"
-                        ? selectedRadioTheme
-                        : radioTheme
-                    }
-                  >
-                    <InputLabel>
-                      Мужской
-                      <Radio value="Мужской" title="Мужской" hidden />
-                    </InputLabel>
-                  </ThemeProvider>
-                  <ThemeProvider
-                    theme={
-                      selectedGender === "Мужской"
-                        ? radioTheme
-                        : selectedRadioTheme
-                    }
-                  >
-                    <InputLabel>
-                      Женский
-                      <Radio value="Женский" title="Женский" hidden />
-                    </InputLabel>
-                  </ThemeProvider>
-                </RadioGroup>
-              </ThemeProvider>
+              <CustomCheckBoxGroup
+                checkboxesInfo={[
+                  {
+                    title: "Мужской",
+                    value: "male",
+                  },
+                  {
+                    title: "Женский",
+                    value: "female",
+                  },
+                ]}
+                onChange={() => {}}
+              />
             </div>
           </div>
           <div className={styles.formFieldContainer}>

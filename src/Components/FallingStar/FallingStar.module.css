@@ -1,0 +1,43 @@
+.container {
+  background-color: aqua;
+  color: blue;
+  position: relative;
+}
+.white {
+  background-color: white;
+}
+.yellow {
+  background-color: yellow;
+}
+.lightGreen {
+  background-color: greenyellow;
+}
+.darkGreen {
+  background-color: green;
+  color: white;
+}
+.red {
+  background-color: red;
+  color: white;
+}
+.black {
+  background-color: black;
+  color: white;
+}
+.purple {
+  background-color: purple;
+  color: white;
+}
+.year {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.month {
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+}
