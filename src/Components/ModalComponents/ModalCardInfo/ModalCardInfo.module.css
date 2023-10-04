@@ -1,0 +1,12 @@
+.container {
+  background-color: var(--background-color);
+  padding-top: 16px;
+  padding-left: 26px;
+  padding-right: 26px;
+  padding-bottom: 23px;
+}
+.list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}

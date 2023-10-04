@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
-  activeColor,
+  accentColor,
   basicButtonBorderColor,
   hiddenTextColor,
 } from "../../utils/vars";
@@ -122,7 +122,7 @@ const mainTheme = createTheme({
           paddingLeft: 29,
           paddingRight: 29,
           color: "#ffffff",
-          backgroundColor: activeColor,
+          backgroundColor: accentColor,
           fontFamily: "Roboto Slab",
           fontSize: "15px",
           fontWeight: "400",
@@ -132,7 +132,7 @@ const mainTheme = createTheme({
           display: "block",
           marginRight: "auto",
           "&:hover": {
-            backgroundColor: activeColor,
+            backgroundColor: accentColor,
             opacity: 0.8,
           },
         }),

@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, {
+  DetailedHTMLProps,
+  HTMLAttributes,
+  MouseEventHandler,
+  useState,
+} from "react";
 import IconedCardInfoListItem from "../IconedCardInfoListItem/IconedCardInfoListItem";
 import { ReactComponent as AgeIcon } from "../../images/age-icon.svg";
 import { ReactComponent as BirthSideIcon } from "../../images/birth-side-icon.svg";
@@ -19,9 +24,10 @@ type valueInfo = {
 
 type propsType = {
   cardInfo: cardInfoType;
+  onClick: MouseEventHandler<HTMLUListElement>;
 };
 
-export default function IconedCardInfoList({ cardInfo }: propsType) {
+export default function IconedCardInfoList({ cardInfo, onClick }: propsType) {
   const [values, setValues] = useState([
     {
       Icon: AgeIcon,
@@ -46,7 +52,7 @@ export default function IconedCardInfoList({ cardInfo }: propsType) {
   ]);
 
   return (
-    <ul className={styles.list}>
+    <ul className={styles.list} onClick={onClick}>
       {values.map((value) => (
         <IconedCardInfoListItem Icon={value.Icon} value={value.value} />
       ))}

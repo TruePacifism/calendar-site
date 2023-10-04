@@ -3,6 +3,7 @@
   padding-bottom: 10px;
   padding-left: 42px;
   padding-right: 42px;
+  height: 52px;
 }
 
 .name {
@@ -18,6 +19,7 @@
   padding-right: 26px;
   padding-left: 26px;
   background-color: white;
+  height: 39px;
 }
 .cardHeading {
   font-size: 20px;
@@ -25,8 +27,25 @@
   line-height: 26px;
   letter-spacing: 0em;
   text-align: left;
+  text-transform: uppercase;
 }
+.otherInfoNamesList {
+  display: flex;
+  background-color: white;
+  align-items: center;
+  height: 39px;
+  justify-content: space-between;
+}
+.otherInfoNamesItem {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0em;
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
 
+  width: calc((100vw - 2px * 2) / 3);
+}
 .otherInfoList {
   display: flex;
   align-items: center;
@@ -35,6 +54,7 @@
 
 .otherInfoListItem {
   background-color: var(--light-accent-color);
+  box-shadow: var(--top-shadow);
   padding: 16px;
   height: 122px;
   display: flex;
@@ -44,4 +64,32 @@
   &:not(:last-child) {
     margin-right: 2px;
   }
+}
+
+.chartTitleBox {
+  padding-left: 22px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.chartTitle {
+}
+.chartCheckboxes {
+  width: 60vw;
+}
+.saveContainer {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left: 26px;
+  padding-right: 26px;
+}
+.saveText {
+  margin-top: 13px;
+  font-size: 13px;
+  font-weight: 400;
+  text-align: left;
 }

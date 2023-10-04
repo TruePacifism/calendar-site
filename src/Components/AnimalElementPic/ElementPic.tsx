@@ -77,8 +77,10 @@ export default function ElementPic({ element }: propsType) {
   }, []);
   return (
     <>
-      <img src={src} alt="" className={className} />{" "}
-      <span className={styles.name}>{element.name}</span>
+      <div className={styles.imageWrapper}>
+        <img src={src} alt="" className={className} />
+      </div>
+      <span className={styles.name}>{element.name.split(" ")[0]}</span>
     </>
   );
 }

@@ -95,11 +95,13 @@ type checkboxInfoType = {
 type propsType = {
   checkboxesInfo: checkboxInfoType[];
   onChange: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
+  className?: string;
 };
 
 export default function CustomCheckBoxGroup({
   checkboxesInfo,
   onChange,
+  className,
 }: propsType) {
   const [selectedCheckbox, setSelectedCheckbox]: [
     string,
@@ -114,6 +116,7 @@ export default function CustomCheckBoxGroup({
           setSelectedCheckbox(value);
           onChange(e, value);
         }}
+        className={className}
       >
         {checkboxesInfo.map((checkboxInfo, idx) => (
           <ThemeProvider

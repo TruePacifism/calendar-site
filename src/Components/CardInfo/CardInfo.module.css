@@ -4,9 +4,24 @@
   padding-left: 26px;
   padding-right: 26px;
 
+  position: relative;
+
+  box-shadow: var(--top-shadow);
+
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: start;
 
   background-color: var(--light-accent-color);
+}
+.separator {
+  height: 101%;
+  position: absolute;
+  top: -0.1px;
+  left: 0;
+  transform: translateX(
+    calc(26px + 52px * 4 + ((100vw - 26px * 2 - 52px * 5) / 4 * 3.5))
+  );
+  width: 2px;
+  background-color: white;
 }

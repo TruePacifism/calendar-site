@@ -85,7 +85,16 @@ export default function AnimalPic({ animal }: propsType) {
   }, []);
   return (
     <>
-      <img src={src} alt="" className={className} />
+      <div
+        className={[
+          styles.imageWrapper,
+          animal.isGood ? styles.whiteBorder : styles.grayBorder,
+        ].join(" ")}
+      >
+        <div className={animal.isBlack ? styles.blackBorder : ""}>
+          <img src={src} alt="" className={className} />
+        </div>
+      </div>
       <span className={styles.name}>{animal.name}</span>
     </>
   );

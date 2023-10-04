@@ -1,23 +1,23 @@
 .container {
   background-color: aqua;
-  color: blue;
+  color: var(--dark-blue-color);
   position: relative;
 }
 .white {
   background-color: white;
 }
 .yellow {
-  background-color: yellow;
+  background-color: var(--yellow-color);
 }
 .lightGreen {
-  background-color: greenyellow;
+  background-color: var(--light-green-color);
 }
 .darkGreen {
-  background-color: green;
+  background-color: var(--dark-green-color);
   color: white;
 }
 .red {
-  background-color: red;
+  background-color: var(--red-color);
   color: white;
 }
 .black {
@@ -25,7 +25,7 @@
   color: white;
 }
 .purple {
-  background-color: purple;
+  background-color: var(--purple-color);
   color: white;
 }
 .year {

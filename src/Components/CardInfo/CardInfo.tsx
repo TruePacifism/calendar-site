@@ -23,6 +23,7 @@ export default function CardInfo({ cardInfo }: propsType) {
         animal={cardInfo.hour.animal}
         element={cardInfo.hour.element}
       />
+      <div className={styles.separator}></div>
       <CardColumn
         animal={cardInfo.currentPillar.animal}
         element={cardInfo.currentPillar.element}

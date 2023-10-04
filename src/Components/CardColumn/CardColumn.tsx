@@ -1,20 +1,33 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./CardColumn.module.css";
-import { animalType, elementType } from "../../types";
+import { animalType, collisionType, elementType } from "../../types";
 import AnimalPic from "../AnimalElementPic/AnimalPic";
 import ElementPic from "../AnimalElementPic/ElementPic";
+import CollisionsList from "../CollisionsList/CollisionsList";
 
 type propsType = {
   animal: animalType;
   element: elementType;
+  isCurrentPillar?: boolean;
 };
 
-export default function CardColumn({ element, animal }: propsType) {
+export default function CardColumn({
+  element,
+  animal,
+  isCurrentPillar,
+}: propsType) {
   return (
-    <li className={styles.container}>
+    <li
+      className={
+        isCurrentPillar
+          ? [styles.container, styles.currentPillar].join(" ")
+          : styles.container
+      }
+    >
       <h3 className={styles.heading}>23:51</h3>
-      <AnimalPic animal={animal} />
       <ElementPic element={element} />
+      <AnimalPic animal={animal} />
+      <CollisionsList collisions={animal.collisions} />
     </li>
   );
 }

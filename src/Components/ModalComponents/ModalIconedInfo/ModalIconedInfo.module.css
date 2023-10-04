@@ -1,0 +1,39 @@
+.container {
+  background-color: var(--background-color);
+  padding: 20px;
+  width: 100%;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+  list-style: none;
+  width: 100%;
+}
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &:not(:last-child) {
+    margin-bottom: 28px;
+  }
+}
+.icon {
+  min-width: 26px;
+  min-height: 26px;
+  max-width: 26px;
+  max-height: 26px;
+  margin-right: 3px;
+  fill: var(--accent-color);
+}
+.value {
+  font-size: 20px;
+  font-weight: 400;
+  margin-right: 3px;
+}
+.description {
+  font-size: 15px;
+  font-weight: 400;
+  text-align: left;
+}

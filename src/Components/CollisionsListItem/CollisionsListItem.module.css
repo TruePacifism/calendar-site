@@ -1,0 +1,53 @@
+.red,
+.lightGreen,
+.brown,
+.darkGreen,
+.purple,
+.orange,
+.lightBlue,
+.yellow,
+.pink {
+  min-width: 12px;
+  max-width: 12px;
+  min-height: 12px;
+  max-height: 12px;
+  stroke: white;
+  &:not(:last-child) {
+    margin-right: 2px;
+  }
+}
+.lightGreen {
+  fill: var(--light-green-color);
+}
+
+.brown {
+  fill: var(--brown-color);
+}
+
+.darkGreen {
+  fill: var(--dark-green-color);
+}
+
+.purple {
+  fill: var(--purple-color);
+}
+
+.orange {
+  fill: var(--orange-color);
+}
+
+.lightBlue {
+  fill: var(--light-blue-color);
+}
+
+.yellow {
+  fill: var(--yellow-color);
+}
+
+.red {
+  fill: var(--red-color);
+}
+
+.pink {
+  fill: var(--pink-color);
+}

@@ -1,8 +1,22 @@
 @import-normalize; /* bring in normalize.css styles */
 :root {
+  --background-color: #ffffff;
   --accent-color: #5767a0;
   --inactive-color: #cecece;
   --light-accent-color: #a7b1d4;
+  --mini-accent-color: #cecece;
+  --top-shadow: 0 4px 4px 0 inset rgba(0, 0, 0, 0.25);
+  --bottom-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  --light-green-color: #a6bf3f;
+  --brown-color: #7c5037;
+  --dark-green-color: #278926;
+  --purple-color: #88385b;
+  --orange-color: #ff7510;
+  --light-blue-color: #94b7d5;
+  --dark-blue-color: #314b70;
+  --yellow-color: #ead522;
+  --red-color: #d12a21;
+  --pink-color: #d094af;
 }
 *,
 *::before,
@@ -11,7 +25,6 @@
   margin: 0;
   padding: 0;
 }
-
 ul,
 li {
   text-decoration: none;

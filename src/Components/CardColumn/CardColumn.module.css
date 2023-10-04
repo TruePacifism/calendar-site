@@ -16,3 +16,6 @@
 
   margin-bottom: 4px;
 }
+.currentPillar {
+  background-color: var(--mini-accent-color);
+}

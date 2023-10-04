@@ -1,10 +1,29 @@
 .image {
+  width: 100%;
+  height: 100%;
+}
+.imageWrapper {
   width: 52px;
   height: 47px;
   margin-bottom: 4px;
+  box-shadow: var(--bottom-shadow);
 }
-.black {
-  border: 2px solid black;
+.whiteBorder,
+.grayBorder,
+.blackBorder {
+  border-width: 3px;
+  border-style: solid;
+}
+.whiteBorder {
+  border-color: white;
+}
+.grayBorder {
+  border-color: gray;
+}
+.blackBorder {
+  width: 100%;
+  height: 100%;
+  border-color: black;
 }
 .name {
   font-family: Roboto;

@@ -1,0 +1,60 @@
+.container {
+  background-color: var(--main-background-color);
+  padding: 26px;
+}
+.starsList {
+  width: 171px;
+  height: 171px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Задает три колонки равной ширины */
+  gap: 10px; /* Задает промежуток между элементами */
+  margin-right: auto;
+  margin-left: auto;
+}
+.star {
+  background-color: aqua;
+  color: var(--dark-blue-color);
+  position: relative;
+  font-family: "Lilita One", cursive;
+  border-radius: 5px;
+}
+.white {
+  background-color: white;
+  border: 1px solid black;
+}
+.yellow {
+  background-color: var(--yellow-color);
+}
+.lightGreen {
+  background-color: var(--light-green-color);
+}
+.darkGreen {
+  background-color: var(--dark-green-color);
+  color: white;
+}
+.red {
+  background-color: var(--red-color);
+  color: white;
+}
+.black {
+  background-color: black;
+  color: white;
+}
+.purple {
+  background-color: var(--purple-color);
+  color: white;
+}
+.year {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+}
+.month {
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
