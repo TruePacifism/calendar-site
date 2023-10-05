@@ -7,7 +7,6 @@ import {
   LineElement,
   LinearScale,
   PointElement,
-  plugins,
 } from "chart.js";
 import { Point } from "chart.js/dist/core/core.controller";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";

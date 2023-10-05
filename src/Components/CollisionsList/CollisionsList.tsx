@@ -11,8 +11,8 @@ export default function CollisionsList({ collisions }: propsType) {
   return (
     <ul className={styles.list}>
       {collisions &&
-        collisions.map((collision) => (
-          <CollisionsListItem collision={collision} />
+        collisions.map((collision, idx) => (
+          <CollisionsListItem collision={collision} key={idx} />
         ))}
     </ul>
   );

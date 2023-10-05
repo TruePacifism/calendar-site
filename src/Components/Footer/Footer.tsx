@@ -14,27 +14,27 @@ const navLinks = [
   },
   {
     icon: InYanIcon,
-    to: "/",
+    to: "/calculator",
   },
   {
     icon: CalendarIcon,
-    to: "/",
+    to: "/card",
   },
   {
     icon: FileIcon,
-    to: "/",
+    to: "/null",
   },
   {
     icon: CabinetIcon,
-    to: "/",
+    to: "/null",
   },
 ];
 
 export default function Footer() {
   return (
     <div className={styles.container}>
-      {navLinks.map((navLink) => (
-        <NavLinkIconed to={navLink.to} Icon={navLink.icon} />
+      {navLinks.map((navLink, idx) => (
+        <NavLinkIconed key={idx} to={navLink.to} Icon={navLink.icon} />
       ))}
     </div>
   );

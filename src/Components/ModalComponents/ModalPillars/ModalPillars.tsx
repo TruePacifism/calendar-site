@@ -28,6 +28,7 @@ export default function ModalPillars({ pillars, currentPillar }: propsType) {
         <div className={styles.pillarsInnerContainer}>
           {pillars.map((pillar) => (
             <CardColumn
+              key={pillar.year}
               animal={pillar.animal}
               element={pillar.element}
               isCurrentPillar={currentPillar.ageYear === pillar.ageYear}
@@ -36,8 +37,8 @@ export default function ModalPillars({ pillars, currentPillar }: propsType) {
         </div>
       </div>
       <ul className={styles.collisionsList}>
-        {getAllCollisions(pillars).map((collision) => (
-          <ModalCollision collision={collision} />
+        {getAllCollisions(pillars).map((collision, idx) => (
+          <ModalCollision collision={collision} key={idx} />
         ))}
       </ul>
     </div>

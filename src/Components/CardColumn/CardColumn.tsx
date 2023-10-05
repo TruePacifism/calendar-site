@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React from "react";
 import styles from "./CardColumn.module.css";
-import { animalType, collisionType, elementType } from "../../types";
+import { animalType, elementType } from "../../types";
 import AnimalPic from "../AnimalElementPic/AnimalPic";
 import ElementPic from "../AnimalElementPic/ElementPic";
 import CollisionsList from "../CollisionsList/CollisionsList";

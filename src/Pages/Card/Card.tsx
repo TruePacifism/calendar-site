@@ -9,7 +9,7 @@ import FallingStarsField from "../../Components/FallingStarsField/FallingStarsFi
 import CardLineChart from "../../Components/CardLineChart/CardLineChart";
 import PillarsInfo from "../../Components/PillarsInfo/PillarsInfo";
 import AnimalChart from "../../Components/AnimalChart/AnimalChart";
-import { Button, Dialog, Modal, ThemeProvider } from "@mui/material";
+import { Button, Dialog, ThemeProvider } from "@mui/material";
 import { buttonTheme, modalTheme } from "../../utils/muiThemes";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import ModalIconedInfo from "../../Components/ModalComponents/ModalIconedInfo/ModalIconedInfo";

@@ -35,8 +35,8 @@ export default function ModalFallingStars({ fallingStars }: propsType) {
     <div className={styles.container}>
       <ModalHeading text="ЛЕТЯЩИЕ ЗВЕЗДЫ" />
       <ul className={styles.starsList}>
-        {fallingStars.map((star) => (
-          <li className={getClassName(star.yearNumber)}>
+        {fallingStars.map((star, idx) => (
+          <li className={getClassName(star.yearNumber)} key={idx}>
             <span className={styles.year}>{star.yearNumber}</span>
             <span className={styles.month}>{star.monthNumber}</span>
           </li>

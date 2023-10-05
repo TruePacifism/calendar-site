@@ -2,8 +2,6 @@ import React from "react";
 import styles from "./ModalCardInfo.module.css";
 import { cardInfoType, collisionType } from "../../../types";
 import CardColumn from "../../CardColumn/CardColumn";
-import CollisionIcon from "../../CollisionIcon/CollisionIcon";
-import CollisionsListItem from "../../CollisionsListItem/CollisionsListItem";
 import ModalCollision from "../ModalCollision/ModalCollision";
 import ModalHeading from "../ModalHeading/ModalHeading";
 
@@ -31,47 +29,44 @@ const getAllCollisions = (cardInfo: cardInfoType): collisionType[] => {
   return result;
 };
 
+const keys = ["year", "month", "day", "hour", "pillar"];
+
 export default function ModalCardInfo({ cardInfo }: propsType) {
   return (
     <div className={styles.container}>
       <ModalHeading text="КАРТА" />
       <ul className={styles.list}>
-        <li className={styles.column}>
-          <CardColumn
-            animal={cardInfo.year.animal}
-            element={cardInfo.year.element}
-          />
-        </li>
-        <li className={styles.column}>
-          <CardColumn
-            animal={cardInfo.month.animal}
-            element={cardInfo.month.element}
-          />
-        </li>
-        <li className={styles.column}>
-          <CardColumn
-            animal={cardInfo.day.animal}
-            element={cardInfo.day.element}
-          />
-        </li>
-        <li className={styles.column}>
-          <CardColumn
-            animal={cardInfo.hour.animal}
-            element={cardInfo.hour.element}
-          />
-        </li>
+        <CardColumn
+          key={keys[0]}
+          animal={cardInfo.year.animal}
+          element={cardInfo.year.element}
+        />
+        <CardColumn
+          key={keys[1]}
+          animal={cardInfo.month.animal}
+          element={cardInfo.month.element}
+        />
+        <CardColumn
+          key={keys[2]}
+          animal={cardInfo.day.animal}
+          element={cardInfo.day.element}
+        />
+        <CardColumn
+          key={keys[3]}
+          animal={cardInfo.hour.animal}
+          element={cardInfo.hour.element}
+        />
         <div></div>
-        <li className={styles.column}>
-          <CardColumn
-            animal={cardInfo.currentPillar.animal}
-            element={cardInfo.currentPillar.element}
-          />
-        </li>
+        <CardColumn
+          key={keys[4]}
+          animal={cardInfo.currentPillar.animal}
+          element={cardInfo.currentPillar.element}
+        />
       </ul>
       <ul className={styles.collisionsList}>
-        {getAllCollisions(cardInfo).map((collision) => (
+        {getAllCollisions(cardInfo).map((collision, idx) => (
           <>
-            <ModalCollision collision={collision} />
+            <ModalCollision collision={collision} key={idx} />
           </>
         ))}
       </ul>

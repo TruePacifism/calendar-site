@@ -61,7 +61,7 @@ export default function ElementPic({ element }: propsType) {
         setSrc(NoElement);
         break;
     }
-  }, []);
+  }, [element, element.isBlack, element.isGood]);
 
   const [className, setClassName]: [string, Dispatch<SetStateAction<string>>] =
     useState(styles.image);
@@ -74,7 +74,7 @@ export default function ElementPic({ element }: propsType) {
       initClassNames.push(styles.bad);
     }
     setClassName(initClassNames.join(" "));
-  }, []);
+  }, [element.isBlack, element.isGood]);
   return (
     <>
       <div className={styles.imageWrapper}>

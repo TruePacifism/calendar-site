@@ -10,8 +10,8 @@ type propsType = {
 export default function FallingStarsField({ stars }: propsType) {
   return (
     <ul className={styles.container}>
-      {stars.map((star) => (
-        <FallingStar star={star} />
+      {stars.map((star, idx) => (
+        <FallingStar star={star} key={idx} />
       ))}
     </ul>
   );

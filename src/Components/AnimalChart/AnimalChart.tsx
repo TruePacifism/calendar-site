@@ -1,10 +1,9 @@
 import React, { SetStateAction, Dispatch, useState, useEffect } from "react";
 import styles from "./AnimalChart.module.css";
-import { Line, PolarArea, Radar } from "react-chartjs-2";
+import { PolarArea } from "react-chartjs-2";
 import { ChartData, RadialLinearScale } from "chart.js";
 import { Point } from "chart.js/dist/core/core.controller";
 import { Chart as ChartJS } from "chart.js";
-import { chartBackgroundColor } from "../../utils/vars";
 ChartJS.register(RadialLinearScale);
 
 type chartDataType = ChartData<"polarArea", (number | Point)[], unknown>;

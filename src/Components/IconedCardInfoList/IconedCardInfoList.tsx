@@ -1,7 +1,7 @@
 import React, {
-  DetailedHTMLProps,
-  HTMLAttributes,
+  Dispatch,
   MouseEventHandler,
+  SetStateAction,
   useState,
 } from "react";
 import IconedCardInfoListItem from "../IconedCardInfoListItem/IconedCardInfoListItem";
@@ -19,7 +19,7 @@ type valueInfo = {
       title?: string;
     }
   >;
-  value: string;
+  value: string | number;
 };
 
 type propsType = {
@@ -28,7 +28,10 @@ type propsType = {
 };
 
 export default function IconedCardInfoList({ cardInfo, onClick }: propsType) {
-  const [values, setValues] = useState([
+  const [values, setValues]: [
+    valueInfo[],
+    Dispatch<SetStateAction<valueInfo[]>>
+  ] = useState([
     {
       Icon: AgeIcon,
       value: "39,10",
@@ -53,8 +56,12 @@ export default function IconedCardInfoList({ cardInfo, onClick }: propsType) {
 
   return (
     <ul className={styles.list} onClick={onClick}>
-      {values.map((value) => (
-        <IconedCardInfoListItem Icon={value.Icon} value={value.value} />
+      {values.map((value, idx) => (
+        <IconedCardInfoListItem
+          Icon={value.Icon}
+          value={value.value}
+          key={idx}
+        />
       ))}
     </ul>
   );

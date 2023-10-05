@@ -42,10 +42,10 @@ export default function ModalMainElementStar({ mainElement }: propsType) {
       default:
         break;
     }
-  });
+  }, [mainElement.name, mainElement.elements]);
   return (
     <div className={styles.container}>
-            <ModalHeading text="ЭЛЕМЕНТЫ" />
+      <ModalHeading text="ЭЛЕМЕНТЫ" />
       <img src={starSrc} alt="" className={styles.image} />
     </div>
   );

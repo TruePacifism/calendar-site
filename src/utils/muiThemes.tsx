@@ -1,10 +1,5 @@
 import { createTheme } from "@mui/material";
-import {
-  accentColor,
-  basicButtonBorderColor,
-  hiddenTextColor,
-  miniAccentColor,
-} from "./vars";
+import { accentColor, basicButtonBorderColor, hiddenTextColor } from "./vars";
 import { hexToRgba } from "./hexToRgba";
 
 export const buttonTheme = createTheme({

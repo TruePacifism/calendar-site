@@ -125,6 +125,7 @@ export default function CustomCheckBoxGroup({
                 ? selectedRadioTheme
                 : radioTheme
             }
+            key={idx}
           >
             <InputLabel>
               {checkboxInfo.title}

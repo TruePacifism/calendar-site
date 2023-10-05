@@ -69,7 +69,7 @@ export default function AnimalPic({ animal }: propsType) {
         setSrc(NoAnimal);
         break;
     }
-  }, []);
+  }, [animal, animal.isBlack, animal.isGood]);
 
   const [className, setClassName]: [string, Dispatch<SetStateAction<string>>] =
     useState(styles.image);
@@ -82,7 +82,7 @@ export default function AnimalPic({ animal }: propsType) {
       initClassNames.push(styles.bad);
     }
     setClassName(initClassNames.join(" "));
-  }, []);
+  }, [animal.isBlack, animal.isGood]);
   return (
     <>
       <div
