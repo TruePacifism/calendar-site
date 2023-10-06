@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./FallingStar.module.css";
-import { fallingStarType } from "../../types";
+import { fallingStarType } from "../../utils/types";
 
 type propsType = {
   star: fallingStarType;

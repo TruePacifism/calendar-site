@@ -31,6 +31,16 @@ export type monthListType = [
   monthType
 ];
 
+export type colorType = {
+  hex: string;
+  backgroundClassName: string;
+  name: string;
+}
+
+export type CustomEnum<T> = {
+  [key: string]: T
+}
+
 export type genderType = "Мужской" | "Женский";
 
 export type collisionTargetType = {

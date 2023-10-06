@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./Pic.module.css";
-import { animalType } from "../../types";
+import { animalType } from "../../utils/types";
 import Bull from "../../images/animals/bull-gn.jpg";
 import Tiger from "../../images/animals/tiger+.jpg";
 import Cat from "../../images/animals/cat-gn.jpg";

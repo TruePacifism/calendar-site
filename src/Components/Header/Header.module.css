@@ -8,9 +8,8 @@
   top: 0;
   left: 0;
   width: 100vw;
+  height: 52px;
 
-  padding-top: 11px;
-  padding-bottom: 11px;
   padding-left: 25px;
   padding-right: 25px;
 
@@ -30,4 +29,9 @@
   fill: white;
   width: 26px;
   height: 26px;
+}
+.centerIcon {
+  width: 43px;
+  height: 43px;
+  fill: white;
 }

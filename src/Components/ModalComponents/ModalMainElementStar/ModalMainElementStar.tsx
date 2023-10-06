@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./ModalMainElementStar.module.css";
-import { mainElementType } from "../../../types";
+import { mainElementType } from "../../../utils/types";
 
 import FireGood from "../../../images/mainStar/f+.png";
 import FireBad from "../../../images/mainStar/f-.png";

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ModalIconedInfo.module.css";
-import { cardInfoType } from "../../../types";
+import { cardInfoType } from "../../../utils/types";
 import { ReactComponent as AgeIcon } from "../../../images/age-icon.svg";
 import { ReactComponent as BirthSideIcon } from "../../../images/birth-side-icon.svg";
 import { ReactComponent as GenderIcon } from "../../../images/gender-icon.svg";

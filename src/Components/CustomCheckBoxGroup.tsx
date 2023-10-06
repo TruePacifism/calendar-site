@@ -87,7 +87,7 @@ const selectedRadioTheme = createTheme({
   },
 });
 
-type checkboxInfoType = {
+export type checkboxInfoType = {
   title: string;
   value: string;
 };
@@ -130,6 +130,7 @@ export default function CustomCheckBoxGroup({
             <InputLabel>
               {checkboxInfo.title}
               <Radio
+                defaultChecked={idx === 1}
                 value={checkboxInfo.value}
                 title={checkboxInfo.title}
                 hidden

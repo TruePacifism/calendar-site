@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./CardInfo.module.css";
 import CardColumn from "../CardColumn/CardColumn";
-import { cardInfoType } from "../../types";
+import { cardInfoType } from "../../utils/types";
 
 type propsType = {
   cardInfo: cardInfoType;

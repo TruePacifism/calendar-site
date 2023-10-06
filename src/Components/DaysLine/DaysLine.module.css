@@ -1,0 +1,28 @@
+.container {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 11px;
+  padding-right: 11px;
+
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dayItem {
+  color: var(--hidden-text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.currentDayItem {
+  color: var(--main-text-color);
+}
+.date {
+  font-size: 20px;
+}
+.dayOfWeek {
+  font-size: 13px;
+}

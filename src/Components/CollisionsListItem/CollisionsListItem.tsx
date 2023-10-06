@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./CollisionsListItem.module.css";
-import { collisionType } from "../../types";
+import { collisionType } from "../../utils/types";
 import { ReactComponent as Rectangle } from "../../images/collisions/rectangle.svg";
 import { ReactComponent as Circle } from "../../images/collisions/circle.svg";
 import { ReactComponent as Heart } from "../../images/collisions/heart.svg";

@@ -6,6 +6,7 @@ import Footer from "./Components/Footer/Footer";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Card from "./Pages/Card/Card";
 import MainPage from "./Pages/MainPage/MainPage";
+import Cards from "./Pages/Cards/Cards";
 
 const getHeadingText = (path: string): string => {
   switch (path) {
@@ -15,8 +16,8 @@ const getHeadingText = (path: string): string => {
       return "Карта";
     case "/":
       return "Мой феншуй";
-    case "/calculator":
-      return "Калькулятор";
+    case "/cards":
+      return "Картотека";
     default:
       return "Калькулятор";
   }
@@ -41,6 +42,7 @@ function App() {
         <Route Component={MainPage} path="/" />
         <Route Component={Calculator} path="/calculator" />
         <Route Component={Card} path="/card" />
+        <Route Component={Cards} path="/cards" />
       </Routes>
       <Footer />
     </>

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./CollisionsList.module.css";
-import { collisionType } from "../../types";
+import { collisionType } from "../../utils/types";
 import CollisionsListItem from "../CollisionsListItem/CollisionsListItem";
 
 type propsType = {

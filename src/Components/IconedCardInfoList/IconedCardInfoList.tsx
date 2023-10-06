@@ -11,7 +11,7 @@ import { ReactComponent as GenderIcon } from "../../images/gender-icon.svg";
 import { ReactComponent as PowerIcon } from "../../images/power-icon.svg";
 import { ReactComponent as LivingsideIcon } from "../../images/living-side-icon.svg";
 import styles from "./IconedCardInfoList.module.css";
-import { cardInfoType } from "../../types";
+import { cardInfoType } from "../../utils/types";
 
 type valueInfo = {
   Icon: React.FunctionComponent<
@@ -24,7 +24,7 @@ type valueInfo = {
 
 type propsType = {
   cardInfo: cardInfoType;
-  onClick: MouseEventHandler<HTMLUListElement>;
+  onClick?: MouseEventHandler<HTMLUListElement>;
 };
 
 export default function IconedCardInfoList({ cardInfo, onClick }: propsType) {

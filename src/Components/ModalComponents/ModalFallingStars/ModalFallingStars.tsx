@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ModalFallingStars.module.css";
-import { fallingStarType } from "../../../types";
+import { fallingStarType } from "../../../utils/types";
 import ModalHeading from "../ModalHeading/ModalHeading";
 
 type propsType = {

@@ -1,4 +1,4 @@
-import { monthType } from "./types";
+import { monthType } from "./utils/types";
 
 export enum MonthName {
   Январь = 0,

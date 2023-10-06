@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ModalPillars.module.css";
-import { collisionType, pillarType } from "../../../types";
+import { collisionType, pillarType } from "../../../utils/types";
 import ModalHeading from "../ModalHeading/ModalHeading";
 import CardColumn from "../../CardColumn/CardColumn";
 import ModalCollision from "../ModalCollision/ModalCollision";

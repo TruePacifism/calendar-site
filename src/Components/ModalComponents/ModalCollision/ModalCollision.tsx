@@ -4,7 +4,7 @@ import { ReactComponent as Rectangle } from "../../../images/collisions/rectangl
 import { ReactComponent as Circle } from "../../../images/collisions/circle.svg";
 import { ReactComponent as Heart } from "../../../images/collisions/heart.svg";
 import { ReactComponent as Cloud } from "../../../images/collisions/cloud.svg";
-import { collisionType } from "../../../types";
+import { collisionType } from "../../../utils/types";
 
 type propsType = {
   collision: collisionType;

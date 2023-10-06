@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./FallingStarsField.module.css";
-import { fallingStarType } from "../../types";
+import { fallingStarType } from "../../utils/types";
 import FallingStar from "../FallingStar/FallingStar";
 
 type propsType = {

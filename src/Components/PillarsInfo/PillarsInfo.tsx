@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./PillarsInfo.module.css";
-import { pillarType } from "../../types";
+import { pillarType } from "../../utils/types";
 import CardColumn from "../CardColumn/CardColumn";
 
 type propsType = {

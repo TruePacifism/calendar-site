@@ -26,7 +26,7 @@ const navLinks = [
   },
   {
     icon: CabinetIcon,
-    to: "/null",
+    to: "/cards",
   },
 ];
 

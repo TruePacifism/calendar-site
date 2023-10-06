@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./Pic.module.css";
-import { elementType } from "../../types";
+import { elementType } from "../../utils/types";
 
 import WoodIn from "../../images/elements/din+.jpg";
 import WoodYan from "../../images/elements/djan+.jpg";

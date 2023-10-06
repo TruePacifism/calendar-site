@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ModalCardInfo.module.css";
-import { cardInfoType, collisionType } from "../../../types";
+import { cardInfoType, collisionType } from "../../../utils/types";
 import CardColumn from "../../CardColumn/CardColumn";
 import ModalCollision from "../ModalCollision/ModalCollision";
 import ModalHeading from "../ModalHeading/ModalHeading";

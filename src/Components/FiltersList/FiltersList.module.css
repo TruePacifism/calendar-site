@@ -1,0 +1,37 @@
+.container {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left: 26px;
+  padding-right: 26px;
+
+  position: relative;
+
+  background-color: var(--background-color);
+}
+.checkBoxes {
+  margin-right: 13px;
+  flex-wrap: nowrap !important;
+  overflow: scroll;
+}
+.iconContainer {
+  width: 52px;
+  position: absolute;
+  right: 13px;
+  top: 13px;
+
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #ffffff 85.42%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon {
+  height: 26px;
+  width: 26px;
+  fill: var(--accent-color);
+}
