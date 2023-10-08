@@ -1,0 +1,9 @@
+.container {
+  padding: 13px;
+
+  border-top: 1px solid var(--background-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}

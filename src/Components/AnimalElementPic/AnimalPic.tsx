@@ -1,6 +1,10 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import styles from "./Pic.module.css";
-import { animalType } from "../../utils/types";
+
+import calculatorStyles from "./Pic-Calculator.module.css";
+import cardGridItemStyles from "./Pic-CardGridItem.module.css";
+import homePageStyles from "./Pic-HomePage.module.css";
+
+import { animalType, stylesType } from "../../utils/types";
 import Bull from "../../images/animals/bull-gn.jpg";
 import Tiger from "../../images/animals/tiger+.jpg";
 import Cat from "../../images/animals/cat-gn.jpg";
@@ -17,9 +21,32 @@ import NoAnimal from "../../images/animals/no.png";
 
 type propsType = {
   animal: animalType;
+  doneFor: doneForType;
 };
 
-export default function AnimalPic({ animal }: propsType) {
+type doneForType = "Calculator" | "CardGridItem" | "HomePage";
+
+const getStyles = (doneFor: doneForType): stylesType => {
+  switch (doneFor) {
+    case "Calculator":
+      return calculatorStyles;
+    case "CardGridItem":
+      return cardGridItemStyles;
+    case "HomePage":
+      return homePageStyles;
+  }
+};
+
+export default function AnimalPic({ animal, doneFor }: propsType) {
+  const [styles, setStyles]: [
+    stylesType,
+    Dispatch<SetStateAction<stylesType>>
+  ] = useState({});
+  //УДАЛИТЬ В КОНЦЕ
+  useEffect(() => {
+    setStyles(getStyles(doneFor));
+  });
+
   const [src, setSrc]: [string, Dispatch<SetStateAction<string>>] =
     useState("");
   useEffect(() => {
@@ -84,18 +111,24 @@ export default function AnimalPic({ animal }: propsType) {
     setClassName(initClassNames.join(" "));
   }, [animal.isBlack, animal.isGood]);
   return (
-    <>
-      <div
-        className={[
-          styles.imageWrapper,
-          animal.isGood ? styles.whiteBorder : styles.grayBorder,
-        ].join(" ")}
-      >
-        <div className={animal.isBlack ? styles.blackBorder : ""}>
-          <img src={src} alt="" className={className} />
+    styles && (
+      <>
+        <div
+          className={[
+            styles.imageWrapper,
+            animal.isGood ? styles.whiteBorder : styles.grayBorder,
+          ].join(" ")}
+        >
+          <div
+            className={
+              animal.isBlack ? styles.blackBorder : styles.noBlackBorder
+            }
+          >
+            <img src={src} alt="" className={styles.image} />
+          </div>
         </div>
-      </div>
-      <span className={styles.name}>{animal.name}</span>
-    </>
+        <span className={styles.name}>{animal.name}</span>
+      </>
+    )
   );
 }

@@ -1,0 +1,51 @@
+.cardsInfoContainer {
+  background-color: var(--light-accent-color);
+  padding-top: 13px;
+  padding-bottom: 13px;
+  box-shadow: var(--top-shadow);
+}
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 13px;
+  padding-right: 13px;
+}
+.viewSettings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.listIcon {
+  fill: var(--background-color);
+  width: 26px;
+}
+.gridIcon {
+  fill: var(--background-color);
+  width: 26px;
+}
+.sortingContainer {
+  margin-left: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sortingIcon {
+  fill: var(--background-color);
+  width: 24px;
+  margin-right: 2px;
+}
+.sortingName {
+  color: var(--background-color);
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+}
+.cardsGrid {
+  border-top: 1px solid var(--background-color);
+  border-bottom: 1px solid var(--background-color);
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Задает две колонки равной ширины */
+}
+.cardList {
+}

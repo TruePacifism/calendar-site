@@ -14,6 +14,7 @@ export default function PillarsInfo({ pillars, currentPillar }: propsType) {
       <div className={styles.innerContainer}>
         {pillars.map((pillar, idx) => (
           <CardColumn
+            doneFor="Calculator"
             key={idx}
             animal={pillar.animal}
             element={pillar.element}

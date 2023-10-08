@@ -1,0 +1,17 @@
+.container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 13px;
+  padding-right: 13px;
+
+  position: relative;
+
+  border-top: 1px solid var(--background-color);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.separator {
+  display: none;
+}

@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.icon {
+  width: 13px;
+  height: 13px;
+  fill: white;
+  margin-right: 2px;
+}
+.value {
+  color: var(--main-text-color);
+  line-height: normal;
+  font-size: 13px;
+}

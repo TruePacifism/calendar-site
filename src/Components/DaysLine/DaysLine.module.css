@@ -22,7 +22,9 @@
 }
 .date {
   font-size: 20px;
+  line-height: normal;
 }
 .dayOfWeek {
   font-size: 13px;
+  line-height: normal;
 }

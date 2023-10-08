@@ -1,0 +1,46 @@
+.section {
+  background-color: transparent;
+  padding: 13px;
+  width: calc((100vw) / 2);
+  border-top: 1px solid var(--background-color);
+  border-bottom: 1px solid var(--background-color);
+  &:nth-child(2n) {
+    border-left: 1px solid var(--background-color);
+  }
+  &:nth-child(2n + 1) {
+    border-right: 1px solid var(--background-color);
+  }
+}
+.container {
+  padding-left: 7px;
+  padding-top: 7px;
+  padding-right: 7px;
+  padding-bottom: 18px;
+}
+.name {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  line-height: normal;
+  font-size: 15px;
+  height: 43px;
+}
+.mainInfoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 4px;
+}
+.pfp {
+  flex-grow: 1; /* Растягиваем картинку, чтобы заполнить доступное пространство */
+  max-height: 100%; /* Устанавливаем максимальную ширину картинки */
+  margin-right: 14px;
+}
+.birthdate {
+  color: var(--main-text-color);
+  text-align: left;
+  font-size: 15px;
+  display: block;
+  margin-bottom: 4px;
+}

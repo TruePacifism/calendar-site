@@ -35,13 +35,15 @@ export type colorType = {
   hex: string;
   backgroundClassName: string;
   name: string;
-}
+};
 
 export type CustomEnum<T> = {
-  [key: string]: T
-}
+  [key: string]: T;
+};
 
 export type genderType = "Мужской" | "Женский";
+
+export type collisionTimeType = "День" | "Месяц" | "Год" | "Час";
 
 export type collisionTargetType = {
   target: string;
@@ -55,6 +57,7 @@ export type collisionTargetType = {
       end: number;
     };
   };
+  time: collisionTimeType;
 };
 
 export type collisionType = {
@@ -142,4 +145,8 @@ export type cardInfoType = {
   fallingStars: fallingStarType[];
   momCard?: cardInfoType;
   dadCard?: cardInfoType;
+};
+
+export type stylesType = {
+  readonly [key: string]: string;
 };

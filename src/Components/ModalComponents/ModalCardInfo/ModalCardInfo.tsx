@@ -37,27 +37,32 @@ export default function ModalCardInfo({ cardInfo }: propsType) {
       <ModalHeading text="КАРТА" />
       <ul className={styles.list}>
         <CardColumn
+          doneFor="Calculator"
           key={keys[0]}
           animal={cardInfo.year.animal}
           element={cardInfo.year.element}
         />
         <CardColumn
+          doneFor="Calculator"
           key={keys[1]}
           animal={cardInfo.month.animal}
           element={cardInfo.month.element}
         />
         <CardColumn
+          doneFor="Calculator"
           key={keys[2]}
           animal={cardInfo.day.animal}
           element={cardInfo.day.element}
         />
         <CardColumn
+          doneFor="Calculator"
           key={keys[3]}
           animal={cardInfo.hour.animal}
           element={cardInfo.hour.element}
         />
         <div></div>
         <CardColumn
+          doneFor="Calculator"
           key={keys[4]}
           animal={cardInfo.currentPillar.animal}
           element={cardInfo.currentPillar.element}

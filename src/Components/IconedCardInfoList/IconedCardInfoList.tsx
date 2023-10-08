@@ -4,14 +4,18 @@ import React, {
   SetStateAction,
   useState,
 } from "react";
+
+import calculatorStyles from "./IconedCardInfoList-Calculator.module.css";
+import cardGridItemStyles from "./IconedCardInfoList-CardGridItem.module.css";
+import homePageStyles from "./IconedCardInfoList-HomePage.module.css";
+
 import IconedCardInfoListItem from "../IconedCardInfoListItem/IconedCardInfoListItem";
 import { ReactComponent as AgeIcon } from "../../images/age-icon.svg";
 import { ReactComponent as BirthSideIcon } from "../../images/birth-side-icon.svg";
 import { ReactComponent as GenderIcon } from "../../images/gender-icon.svg";
 import { ReactComponent as PowerIcon } from "../../images/power-icon.svg";
 import { ReactComponent as LivingsideIcon } from "../../images/living-side-icon.svg";
-import styles from "./IconedCardInfoList.module.css";
-import { cardInfoType } from "../../utils/types";
+import { cardInfoType, stylesType } from "../../utils/types";
 
 type valueInfo = {
   Icon: React.FunctionComponent<
@@ -25,17 +29,39 @@ type valueInfo = {
 type propsType = {
   cardInfo: cardInfoType;
   onClick?: MouseEventHandler<HTMLUListElement>;
+  doneFor: doneForType;
 };
 
-export default function IconedCardInfoList({ cardInfo, onClick }: propsType) {
+type doneForType = "CardGridItem" | "Calculator" | "HomePage";
+
+const getStyles = (doneFor: doneForType): stylesType => {
+  switch (doneFor) {
+    case "Calculator":
+      return calculatorStyles;
+    case "CardGridItem":
+      return cardGridItemStyles;
+    case "HomePage":
+      return homePageStyles;
+    default:
+      break;
+  }
+};
+
+export default function IconedCardInfoList({
+  cardInfo,
+  onClick,
+  doneFor,
+}: propsType) {
   const [values, setValues]: [
     valueInfo[],
     Dispatch<SetStateAction<valueInfo[]>>
   ] = useState([
-    {
-      Icon: AgeIcon,
-      value: "39,10",
-    },
+    doneFor === "HomePage"
+      ? undefined
+      : {
+          Icon: AgeIcon,
+          value: "39,10",
+        },
     {
       Icon: BirthSideIcon,
       value: "ЮВ",
@@ -53,16 +79,23 @@ export default function IconedCardInfoList({ cardInfo, onClick }: propsType) {
       value: "ЮВ",
     },
   ]);
-
+  const [styles, setStyles]: [
+    stylesType,
+    Dispatch<SetStateAction<stylesType>>
+  ] = useState(getStyles(doneFor));
   return (
     <ul className={styles.list} onClick={onClick}>
-      {values.map((value, idx) => (
-        <IconedCardInfoListItem
-          Icon={value.Icon}
-          value={value.value}
-          key={idx}
-        />
-      ))}
+      {values.map(
+        (value, idx) =>
+          value && (
+            <IconedCardInfoListItem
+              doneFor={doneFor}
+              Icon={value.Icon}
+              value={value.value}
+              key={idx}
+            />
+          )
+      )}
     </ul>
   );
 }

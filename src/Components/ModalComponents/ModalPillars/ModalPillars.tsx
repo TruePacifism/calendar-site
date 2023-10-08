@@ -28,6 +28,7 @@ export default function ModalPillars({ pillars, currentPillar }: propsType) {
         <div className={styles.pillarsInnerContainer}>
           {pillars.map((pillar) => (
             <CardColumn
+              doneFor="Calculator"
               key={pillar.year}
               animal={pillar.animal}
               element={pillar.element}

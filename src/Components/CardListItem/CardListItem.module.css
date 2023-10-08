@@ -1,0 +1,14 @@
+.section {
+  padding: 13px;
+  border-top: 1px solid var(--background-color);
+  border-bottom: 1px solid var(--background-color);
+}
+.container {
+  padding: 7px;
+  border-radius: 5px;
+}
+.name,
+.birthdate {
+  display: block;
+  text-align: left;
+}
