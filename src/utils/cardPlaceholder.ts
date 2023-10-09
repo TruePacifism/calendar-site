@@ -2,7 +2,7 @@ import { cardInfoType } from "./types";
 
 const cardInfoPlaceholder: cardInfoType = {
   id: "1c2b973d-b86f-4096-934b-0b1094d33dd5",
-  name: "Евгений Егоров Юрьевич",
+  name: "Евгений Егоров",
   gender: "Мужской",
   birthdate: {
     year: 2003,

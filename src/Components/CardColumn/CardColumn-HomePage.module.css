@@ -3,6 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  width: 15vw;
 }
 .container:not(:last-child) {
   margin-right: 7px;
@@ -18,4 +20,20 @@
 }
 .currentPillar {
   background-color: var(--mini-accent-color);
+}
+.headingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.arrow {
+  fill: var(--background-color);
+  width: 9px;
+  height: 16px;
+  &:nth-child(1) {
+    margin-right: 4px;
+  }
+  &:nth-child(3) {
+    margin-left: 4px;
+  }
 }

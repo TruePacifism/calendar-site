@@ -19,6 +19,8 @@ export default function PillarsInfo({ pillars, currentPillar }: propsType) {
             animal={pillar.animal}
             element={pillar.element}
             isCurrentPillar={currentPillar.ageYear === pillar.ageYear}
+            title={`${pillar.year},${pillar.month}\n
+            ${pillar.ageYear},${pillar.ageMonth}`}
           />
         ))}
       </div>

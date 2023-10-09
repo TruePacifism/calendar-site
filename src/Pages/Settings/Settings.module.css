@@ -1,0 +1,18 @@
+.menuItemContainer {
+  padding: 13px;
+  background-color: var(--light-accent-color);
+  &:nth-child(1) {
+    padding-top: 26px;
+  }
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--background-color);
+  }
+}
+.profileInfo {
+  display: block;
+  padding: 4px;
+  border-radius: 5px;
+  text-align: left;
+  line-height: normal;
+  color: var(--main-text-color);
+}

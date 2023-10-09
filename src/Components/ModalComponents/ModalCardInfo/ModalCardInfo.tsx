@@ -41,24 +41,28 @@ export default function ModalCardInfo({ cardInfo }: propsType) {
           key={keys[0]}
           animal={cardInfo.year.animal}
           element={cardInfo.year.element}
+          title={cardInfo.birthdate.year}
         />
         <CardColumn
           doneFor="Calculator"
           key={keys[1]}
           animal={cardInfo.month.animal}
           element={cardInfo.month.element}
+          title={cardInfo.birthdate.month}
         />
         <CardColumn
           doneFor="Calculator"
           key={keys[2]}
           animal={cardInfo.day.animal}
           element={cardInfo.day.element}
+          title={cardInfo.birthdate.day}
         />
         <CardColumn
           doneFor="Calculator"
           key={keys[3]}
           animal={cardInfo.hour.animal}
           element={cardInfo.hour.element}
+          title={`${cardInfo.birthdate.hour}:${cardInfo.birthdate.minute}`}
         />
         <div></div>
         <CardColumn
@@ -66,6 +70,7 @@ export default function ModalCardInfo({ cardInfo }: propsType) {
           key={keys[4]}
           animal={cardInfo.currentPillar.animal}
           element={cardInfo.currentPillar.element}
+          title="такт"
         />
       </ul>
       <ul className={styles.collisionsList}>

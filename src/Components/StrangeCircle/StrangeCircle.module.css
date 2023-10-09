@@ -1,9 +1,30 @@
 .container {
-  padding: 13px;
-
-  border-top: 1px solid var(--background-color);
-
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+.circle {
+  width: 222px;
+  height: 201px;
+}
+.linesContainer {
+  top: 17%;
+  left: 22.3%;
+  /* padding-top: 60px;
+  padding-bottom: 30px; */
+  position: absolute;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 56%;
+  height: 64%;
+  overflow: hidden;
+  border-radius: 50%;
+  z-index: 3;
+}
+.line {
+  background-color: var(--purple-color);
+  font-size: 13px;
+  width: 100%;
 }

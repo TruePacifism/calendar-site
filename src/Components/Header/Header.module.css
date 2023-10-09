@@ -14,6 +14,10 @@
   padding-right: 25px;
 
   background-color: #5767a0;
+
+  & > a {
+    display: contents;
+  }
 }
 .heading {
   font-family: Roboto Slab;
@@ -34,4 +38,17 @@
   width: 43px;
   height: 43px;
   fill: white;
+}
+.modalContainer {
+  padding-top: 60px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 26px;
+}
+.searchModalIcon {
+  fill: white;
+  width: 26px;
+  height: 26px;
+  transform: translate(-2px, -2px);
 }

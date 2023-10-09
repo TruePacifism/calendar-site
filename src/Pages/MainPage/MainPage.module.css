@@ -1,0 +1,18 @@
+.circleInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 13px;
+}
+.addIcon {
+  fill: var(--background-color);
+  width: 40px;
+  height: 40px;
+  transform: translateY(-20px);
+}
+.starIcon {
+  fill: var(--background-color);
+  width: 42px;
+  height: 40px;
+  transform: translateY(-20px);
+}

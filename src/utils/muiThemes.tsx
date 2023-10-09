@@ -1,5 +1,10 @@
 import { createTheme } from "@mui/material";
-import { accentColor, basicButtonBorderColor, hiddenTextColor } from "./vars";
+import {
+  accentColor,
+  basicButtonBorderColor,
+  hiddenTextColor,
+  mainTextColor,
+} from "./vars";
 import { hexToRgba } from "./hexToRgba";
 
 export const buttonTheme = createTheme({
@@ -37,6 +42,24 @@ export const modalTheme = createTheme({
       styleOverrides: {
         container: {
           backgroundColor: hexToRgba(accentColor, 90),
+        },
+        paper: {},
+      },
+    },
+  },
+});
+export const searchModalTheme = createTheme({
+  components: {
+    MuiDialog: {
+      styleOverrides: {
+        container: {
+          backgroundColor: hexToRgba(accentColor, 90),
+        },
+        root: {},
+        paper: {
+          backgroundColor: "transparent",
+          transform: "translate(0, -50vh)",
+          margin: 0,
         },
       },
     },
@@ -232,6 +255,22 @@ export const birthtimeTheme = createTheme({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+        },
+      },
+    },
+  },
+});
+export const settingsAccordionTheme = createTheme({
+  components: {
+    MuiAccordion: {
+      styleOverrides: {
+        rounded: {
+          backgroundColor: "white",
+          color: hiddenTextColor,
+        },
+        expanded: {
+          color: mainTextColor,
+          backgroundColor: "red",
         },
       },
     },
