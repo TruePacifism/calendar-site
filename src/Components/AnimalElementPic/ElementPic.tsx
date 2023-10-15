@@ -99,7 +99,7 @@ export default function ElementPic({ element, doneFor }: propsType) {
       initClassNames.push(styles.bad);
     }
     setClassName(initClassNames.join(" "));
-  }, [element.isBlack, element.isGood]);
+  }, [element.isBlack, element.isGood, styles.image, styles.black, styles.bad]);
 
   return (
     styles && (

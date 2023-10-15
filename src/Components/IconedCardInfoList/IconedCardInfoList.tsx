@@ -56,30 +56,33 @@ export default function IconedCardInfoList({
   const [values, setValues]: [
     valueInfo[],
     Dispatch<SetStateAction<valueInfo[]>>
-  ] = useState([
-    doneFor === "HomePage"
-      ? undefined
-      : {
-          Icon: AgeIcon,
-          value: "39,10",
-        },
-    {
-      Icon: BirthSideIcon,
-      value: "ЮВ",
-    },
-    {
-      Icon: GenderIcon,
-      value: 100,
-    },
-    {
-      Icon: PowerIcon,
-      value: 100,
-    },
-    {
-      Icon: LivingsideIcon,
-      value: "ЮВ",
-    },
-  ]);
+  ] = useState();
+  useEffect(() => {
+    setValues([
+      doneFor === "HomePage"
+        ? undefined
+        : {
+            Icon: AgeIcon,
+            value: "39,10",
+          },
+      {
+        Icon: BirthSideIcon,
+        value: "ЮВ",
+      },
+      {
+        Icon: GenderIcon,
+        value: 100,
+      },
+      {
+        Icon: PowerIcon,
+        value: 100,
+      },
+      {
+        Icon: LivingsideIcon,
+        value: "ЮВ",
+      },
+    ]);
+  }, [doneFor]);
   const [styles, setStyles]: [
     stylesType,
     Dispatch<SetStateAction<stylesType>>

@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Calculator.module.css";
 import { months } from "../../enums";
-import { genderType, monthType } from "../../utils/types";
+import { monthType } from "../../utils/types";
 import Container from "../../Components/Container/Container";
 import { Select, MenuItem, Input, Button } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";

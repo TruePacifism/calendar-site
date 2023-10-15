@@ -40,7 +40,7 @@ export default function IconedCardInfoListItem({
   //УДАЛИТЬ В КОНЦЕ !!!!!!
   useEffect(() => {
     setStyles(getStyles(doneFor));
-  });
+  }, []);
 
   return (
     <li className={styles.container}>
