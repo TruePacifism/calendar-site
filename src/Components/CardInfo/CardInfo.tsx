@@ -36,38 +36,42 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
   }, [doneFor]);
   return styles ? (
     <ul className={styles.container}>
-      <CardColumn
-        doneFor={doneFor}
-        animal={cardInfo.year.animal}
-        element={cardInfo.year.element}
-        title={cardInfo.birthdate.year}
-      />
-      <CardColumn
-        doneFor={doneFor}
-        animal={cardInfo.month.animal}
-        element={cardInfo.month.element}
-        title={cardInfo.birthdate.month}
-      />
-      <CardColumn
-        doneFor={doneFor}
-        animal={cardInfo.day.animal}
-        element={cardInfo.day.element}
-        title={cardInfo.birthdate.day}
-      />
-      <CardColumn
-        doneFor={doneFor}
-        animal={cardInfo.hour.animal}
-        element={cardInfo.hour.element}
-        title={`${cardInfo.birthdate.hour}:${cardInfo.birthdate.minute}`}
-      />
-      <div className={styles.separator}></div>
-      {doneFor !== "HomePage" && (
-        <CardColumn
-          animal={cardInfo.currentPillar.animal}
-          doneFor={doneFor}
-          element={cardInfo.currentPillar.element}
-          title="такт"
-        />
+      {cardInfo && (
+        <>
+          <CardColumn
+            doneFor={doneFor}
+            animal={cardInfo.year.animal}
+            element={cardInfo.year.element}
+            title={cardInfo.birthdate.year}
+          />
+          <CardColumn
+            doneFor={doneFor}
+            animal={cardInfo.month.animal}
+            element={cardInfo.month.element}
+            title={cardInfo.birthdate.month}
+          />
+          <CardColumn
+            doneFor={doneFor}
+            animal={cardInfo.day.animal}
+            element={cardInfo.day.element}
+            title={cardInfo.birthdate.day}
+          />
+          <CardColumn
+            doneFor={doneFor}
+            animal={cardInfo.hour.animal}
+            element={cardInfo.hour.element}
+            title={`${cardInfo.birthdate.hour}:${cardInfo.birthdate.minute}`}
+          />
+          <div className={styles.separator}></div>
+          {doneFor !== "HomePage" && (
+            <CardColumn
+              animal={cardInfo.currentPillar.animal}
+              doneFor={doneFor}
+              element={cardInfo.currentPillar.element}
+              title="такт"
+            />
+          )}
+        </>
       )}
     </ul>
   ) : (

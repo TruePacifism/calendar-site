@@ -93,17 +93,18 @@ export default function IconedCardInfoList({
 
   return (
     <ul className={styles.list} onClick={onClick}>
-      {values.map(
-        (value, idx) =>
-          value && (
-            <IconedCardInfoListItem
-              doneFor={doneFor}
-              Icon={value.Icon}
-              value={value.value}
-              key={idx}
-            />
-          )
-      )}
+      {values &&
+        values.map(
+          (value, idx) =>
+            value && (
+              <IconedCardInfoListItem
+                doneFor={doneFor}
+                Icon={value.Icon}
+                value={value.value}
+                key={idx}
+              />
+            )
+        )}
     </ul>
   );
 }
