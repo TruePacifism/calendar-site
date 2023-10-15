@@ -1,6 +1,6 @@
 {
   "homepage": "https://truepacifism.github.io/calendar-site/",
-  "name": "my-app",
+  "name": "calendar-site",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
