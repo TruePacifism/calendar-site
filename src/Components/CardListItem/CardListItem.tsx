@@ -12,7 +12,7 @@ export default function CardListItem({ cardInfo }: propsType) {
     useState();
   useEffect(() => {
     setColor(getColorByAnimal(cardInfo.year.animal));
-  }, []);
+  }, [cardInfo.year.animal]);
   return (
     <li className={styles.section}>
       <div

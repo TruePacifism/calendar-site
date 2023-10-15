@@ -42,7 +42,7 @@ export default function ElementPic({ element, doneFor }: propsType) {
   //УДАЛИТЬ В КОНЦЕ
   useEffect(() => {
     setStyles(getStyles(doneFor));
-  });
+  }, [doneFor]);
 
   const [src, setSrc]: [string, Dispatch<SetStateAction<string>>] =
     useState("");
@@ -105,7 +105,7 @@ export default function ElementPic({ element, doneFor }: propsType) {
     styles && (
       <>
         <div className={styles.imageWrapper}>
-          <img src={src} alt="" className={styles.image} />
+          <img src={src} alt="" className={className} />
         </div>
         <span className={styles.name}>{element.name.split(" ")[0]}</span>
       </>

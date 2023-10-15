@@ -17,6 +17,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
     useState(pfpPlaceholder);
   useEffect(() => {
     setColor(getColorByAnimal(cardInfo.year.animal));
+    setPfpUrl(pfpPlaceholder);
   }, []);
   return (
     <li className={styles.section}>

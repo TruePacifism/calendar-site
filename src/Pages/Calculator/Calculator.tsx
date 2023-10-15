@@ -46,10 +46,10 @@ export default function Calculator() {
     Dispatch<SetStateAction<monthType>>
   ] = useState(months[0]);
 
-  const [selectedGender, setSelectedGender]: [
-    genderType,
-    Dispatch<SetStateAction<genderType>>
-  ] = useState("Мужской");
+  // const [selectedGender, setSelectedGender]: [
+  //   genderType,
+  //   Dispatch<SetStateAction<genderType>>
+  // ] = useState("Мужской");
 
   const onSubmit = (
     e: React.FormEvent<HTMLFormElement> & {

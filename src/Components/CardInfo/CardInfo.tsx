@@ -33,7 +33,7 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
   //УДАЛИТЬ В КОНЦЕ
   useEffect(() => {
     setStyles(getStyles(doneFor));
-  }, []);
+  }, [doneFor]);
   return styles ? (
     <ul className={styles.container}>
       <CardColumn

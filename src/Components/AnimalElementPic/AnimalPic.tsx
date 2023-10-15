@@ -45,7 +45,7 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
   //УДАЛИТЬ В КОНЦЕ
   useEffect(() => {
     setStyles(getStyles(doneFor));
-  });
+  }, [doneFor]);
 
   const [src, setSrc]: [string, Dispatch<SetStateAction<string>>] =
     useState("");
@@ -98,18 +98,6 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
     }
   }, [animal, animal.isBlack, animal.isGood]);
 
-  const [className, setClassName]: [string, Dispatch<SetStateAction<string>>] =
-    useState(styles.image);
-  useEffect(() => {
-    let initClassNames = [styles.image];
-    if (animal.isBlack) {
-      initClassNames.push(styles.black);
-    }
-    if (!animal.isGood) {
-      initClassNames.push(styles.bad);
-    }
-    setClassName(initClassNames.join(" "));
-  }, [animal.isBlack, animal.isGood]);
   return (
     styles && (
       <>

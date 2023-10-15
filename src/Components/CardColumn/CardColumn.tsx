@@ -45,7 +45,7 @@ export default function CardColumn({
   //УДАЛИТЬ В КОНЦЕ
   useEffect(() => {
     setStyles(getStyles(doneFor));
-  });
+  }, [doneFor]);
   return (
     styles && (
       <li

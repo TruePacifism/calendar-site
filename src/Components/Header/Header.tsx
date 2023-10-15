@@ -6,7 +6,7 @@ import { ReactComponent as Logo } from "../../images/logo.svg";
 import { ReactComponent as SearchIcon } from "../../images/search-header-icon.svg";
 import { Link } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
-import { modalTheme, searchModalTheme } from "../../utils/muiThemes";
+import { searchModalTheme } from "../../utils/muiThemes";
 import { Dialog, Input } from "@mui/material";
 
 type propsType = {

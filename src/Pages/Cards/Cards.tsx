@@ -1,10 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./Cards.module.css";
 import FiltersList from "../../Components/FiltersList/FiltersList";
 import { ReactComponent as ListIcon } from "../../images/list-icon.svg";
 import { ReactComponent as GridIcon } from "../../images/grid-icon.svg";
 import { ReactComponent as SortingIcon } from "../../images/sorting-icon.svg";
-import { ReactComponent as SearchIcon } from "../../images/search-icon.svg";
 import CardGridItem from "../../Components/CardGridItem/CardGridItem";
 import { cardInfoType } from "../../utils/types";
 import cardInfoPlaceholder from "../../utils/cardPlaceholder";
@@ -30,12 +29,15 @@ export default function Cards() {
   const [cardsInfo, setCardsInfo]: [
     cardInfoType[],
     Dispatch<SetStateAction<cardInfoType[]>>
-  ] = useState([
-    cardInfoPlaceholder,
-    cardInfoPlaceholder,
-    cardInfoPlaceholder,
-    cardInfoPlaceholder,
-  ]);
+  ] = useState();
+  useEffect(() => {
+    setCardsInfo([
+      cardInfoPlaceholder,
+      cardInfoPlaceholder,
+      cardInfoPlaceholder,
+      cardInfoPlaceholder,
+    ]);
+  });
 
   return (
     <>
@@ -53,7 +55,14 @@ export default function Cards() {
             ) : (
               <GridIcon className={styles.gridIcon} onClick={switchCardView} />
             )}
-            <div className={styles.sortingContainer}>
+            <div
+              className={styles.sortingContainer}
+              onClick={() => {
+                setSortingOrder(
+                  sortingOrder === "newFirst" ? "oldFirst" : "newFirst"
+                );
+              }}
+            >
               <SortingIcon className={styles.sortingIcon} />
               {sortingOrder === "newFirst" ? (
                 <span className={styles.sortingName}>new</span>

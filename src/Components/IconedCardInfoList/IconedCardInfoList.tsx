@@ -2,6 +2,7 @@ import React, {
   Dispatch,
   MouseEventHandler,
   SetStateAction,
+  useEffect,
   useState,
 } from "react";
 
@@ -83,6 +84,10 @@ export default function IconedCardInfoList({
     stylesType,
     Dispatch<SetStateAction<stylesType>>
   ] = useState(getStyles(doneFor));
+  useEffect(() => {
+    setStyles(getStyles(doneFor));
+  }, [doneFor]);
+
   return (
     <ul className={styles.list} onClick={onClick}>
       {values.map(

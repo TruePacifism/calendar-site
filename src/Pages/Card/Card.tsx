@@ -25,6 +25,9 @@ export default function Card(): React.JSX.Element {
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
   ] = useState(cardInfoPlaceholder);
+  useEffect(() => {
+    setCardInfo(cardInfoPlaceholder);
+  }, []);
   const [isOpenModal, setIsOpenModal]: [
     boolean,
     Dispatch<SetStateAction<boolean>>
