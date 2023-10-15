@@ -22,7 +22,11 @@ export default function MainPage() {
     <>
       <DaysLine />
       <section
-        style={{ backgroundColor: getColorByAnimal(cardInfo.year.animal).hex }}
+        style={{
+          backgroundColor: cardInfo
+            ? getColorByAnimal(cardInfo.year.animal).hex
+            : "#FFFFFF",
+        }}
       >
         <IconedCardInfoList doneFor="HomePage" cardInfo={cardInfo} />
         <CardInfo doneFor="HomePage" cardInfo={cardInfo} />
