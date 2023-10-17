@@ -63,7 +63,7 @@ export default function IconedCardInfoList({
         ? undefined
         : {
             Icon: AgeIcon,
-            value: "39,10",
+            value: `${cardInfo.age.year},${cardInfo.age.month}`,
           },
       {
         Icon: BirthSideIcon,
@@ -71,11 +71,16 @@ export default function IconedCardInfoList({
       },
       {
         Icon: GenderIcon,
-        value: 100,
+        value: `${Math.max(
+          cardInfo.genderCount.female,
+          cardInfo.genderCount.male
+        )}`,
       },
       {
         Icon: PowerIcon,
-        value: 100,
+        value: `${Math.round(
+          (cardInfo.cardStrength.power / cardInfo.cardStrength.maxPower) * 100
+        )}`,
       },
       {
         Icon: LivingsideIcon,

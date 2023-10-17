@@ -4,31 +4,42 @@ import { PolarArea } from "react-chartjs-2";
 import { ChartData, RadialLinearScale } from "chart.js";
 import { Point } from "chart.js/dist/core/core.controller";
 import { Chart as ChartJS } from "chart.js";
+import { Colors } from "../../utils/enums";
+import { chartDataType } from "../../utils/types";
 ChartJS.register(RadialLinearScale);
 
-type chartDataType = ChartData<"polarArea", (number | Point)[], unknown>;
+type propsType = {
+  chartData: chartDataType;
+};
+
+type dataType = ChartData<"polarArea", (number | Point)[], unknown>;
 
 const labels = ["Red", "Orange", "Yellow", "Green", "Blue"];
-export default function AnimalChart() {
-  const [data, setData]: [
-    chartDataType,
-    Dispatch<SetStateAction<chartDataType>>
-  ] = useState();
+export default function AnimalChart({ chartData }: propsType) {
+  const [data, setData]: [dataType, Dispatch<SetStateAction<dataType>>] =
+    useState();
   useEffect(() => {
-    const randomData = [1, 2, 3, 4, 5].map((number) => Math.random() * 1000);
+    const data = Object.values(chartData);
     setData({
       labels: labels,
       datasets: [
         {
           label: "Dataset 1",
-          data: randomData,
-          borderWidth: 0,
+          data: data,
+          borderWidth: 1,
           backgroundColor: [
-            "rgba(255,0,255, 1)",
-            "rgba(0,0,255, 1)",
-            "rgba(255,0,0, 1)",
-            "rgba(255,133,255, 1)",
-            "rgba(133,133,255, 1)",
+            Colors.LIGHT_BLUE.hex,
+            Colors.LIGHT_BLUE.hex,
+            Colors.LIGHT_GREEN.hex,
+            Colors.LIGHT_GREEN.hex,
+            Colors.LIGHT_GREEN.hex,
+            Colors.RED.hex,
+            Colors.YELLOW.hex,
+            Colors.YELLOW.hex,
+            Colors.PINK.hex,
+            Colors.PURPLE.hex,
+            Colors.LIGHT_BLUE.hex,
+            Colors.LIGHT_BLUE.hex,
           ],
         },
       ],

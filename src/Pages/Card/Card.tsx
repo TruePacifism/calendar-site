@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./Card.module.css";
 import IconedCardInfoList from "../../Components/IconedCardInfoList/IconedCardInfoList";
 import CustomCheckBoxGroup from "../../Components/CustomCheckBoxGroup";
-import { cardInfoType } from "../../utils/types";
+import { cardInfoType, inputDataType } from "../../utils/types";
 import CardInfo from "../../Components/CardInfo/CardInfo";
 import MainElementStar from "../../Components/MainElementStar/MainElementStar";
 import FallingStarsField from "../../Components/FallingStarsField/FallingStarsField";
@@ -19,15 +19,13 @@ import ModalFallingStars from "../../Components/ModalComponents/ModalFallingStar
 import ModalAnimalChart from "../../Components/ModalComponents/ModalAnimalChart/ModalAnimalChart";
 import ModalPillars from "../../Components/ModalComponents/ModalPillars/ModalPillars";
 import cardInfoPlaceholder from "../../utils/cardPlaceholder";
+import countCard from "../../api/countCard";
 
 export default function Card(): React.JSX.Element {
   const [cardInfo, setCardInfo]: [
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
-  ] = useState(cardInfoPlaceholder);
-  useEffect(() => {
-    setCardInfo(cardInfoPlaceholder);
-  }, []);
+  ] = useState();
   const [isOpenModal, setIsOpenModal]: [
     boolean,
     Dispatch<SetStateAction<boolean>>
@@ -43,114 +41,124 @@ export default function Card(): React.JSX.Element {
   const closeModal = () => {
     setIsOpenModal(false);
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const getCard = async (inputData: inputDataType) => {
+      const data = await countCard({ inputData });
+      setCardInfo(data);
+    };
+    const { name, birthcity, birthdate, livingcity, gender } =
+      cardInfoPlaceholder;
+    getCard({ name, birthcity, birthdate, livingcity, gender });
+  }, []);
 
   return (
-    <>
-      <ThemeProvider theme={modalTheme}>
-        <Dialog fullWidth open={isOpenModal} onClose={closeModal}>
-          {modalContent}
-        </Dialog>
-      </ThemeProvider>
-      <div className={styles.nameContainer}>
-        <h1 className={styles.name}>{cardInfo.name}</h1>
-      </div>
-      <IconedCardInfoList
-        doneFor="Calculator"
-        cardInfo={cardInfo}
-        onClick={() => {
-          openModal(<ModalIconedInfo cardInfo={cardInfo} />);
-        }}
-      />
-      <div className={styles.cardHeadingContainer}>
-        <h2 className={styles.cardHeading}>Карта</h2>
-      </div>
-      <div
-        onClick={() => {
-          openModal(<ModalCardInfo cardInfo={cardInfo} />);
-        }}
-      >
-        <CardInfo doneFor="Calculator" cardInfo={cardInfo} />
-      </div>
-      <ul className={styles.otherInfoNamesList}>
-        <h2 className={styles.otherInfoNamesItem}>Элементы</h2>
-        <h2 className={styles.otherInfoNamesItem}>Летящие звезды</h2>
-        <h2 className={styles.otherInfoNamesItem}>Животные</h2>
-      </ul>
+    cardInfo && (
+      <>
+        <ThemeProvider theme={modalTheme}>
+          <Dialog fullWidth open={isOpenModal} onClose={closeModal}>
+            {modalContent}
+          </Dialog>
+        </ThemeProvider>
+        <div className={styles.nameContainer}>
+          <h1 className={styles.name}>{cardInfo.name}</h1>
+        </div>
+        <IconedCardInfoList
+          doneFor="Calculator"
+          cardInfo={cardInfo}
+          onClick={() => {
+            openModal(<ModalIconedInfo cardInfo={cardInfo} />);
+          }}
+        />
+        <div className={styles.cardHeadingContainer}>
+          <h2 className={styles.cardHeading}>Карта</h2>
+        </div>
+        <div
+          onClick={() => {
+            openModal(<ModalCardInfo cardInfo={cardInfo} />);
+          }}
+        >
+          <CardInfo doneFor="Calculator" cardInfo={cardInfo} />
+        </div>
+        <ul className={styles.otherInfoNamesList}>
+          <h2 className={styles.otherInfoNamesItem}>Элементы</h2>
+          <h2 className={styles.otherInfoNamesItem}>Летящие звезды</h2>
+          <h2 className={styles.otherInfoNamesItem}>Животные</h2>
+        </ul>
 
-      <ul className={styles.otherInfoList}>
-        <li
-          className={styles.otherInfoListItem}
+        <ul className={styles.otherInfoList}>
+          <li
+            className={styles.otherInfoListItem}
+            onClick={() => {
+              openModal(
+                <ModalMainElementStar mainElement={cardInfo.mainElement} />
+              );
+            }}
+          >
+            <MainElementStar mainElement={cardInfo.mainElement} />
+          </li>
+          <li
+            className={styles.otherInfoListItem}
+            onClick={() => {
+              openModal(
+                <ModalFallingStars fallingStars={cardInfo.fallingStars} />
+              );
+            }}
+          >
+            <FallingStarsField stars={cardInfo.fallingStars} />
+          </li>
+          <li
+            className={styles.otherInfoListItem}
+            onClick={() => {
+              openModal(<ModalAnimalChart />);
+            }}
+          >
+            <AnimalChart chartData={cardInfo.chartData} />
+          </li>
+        </ul>
+        <div>
+          <div className={styles.chartTitleBox}>
+            <span className={styles.chartTitle}>ГРАФИК</span>
+            <CustomCheckBoxGroup
+              checkboxesInfo={[
+                { title: "Неделя", value: "Неделя" },
+                { title: "Месяц", value: "Месяц" },
+                { title: "Год", value: "Год" },
+              ]}
+              onChange={() => {}}
+              className={styles.chartCheckboxes}
+            />
+          </div>
+          <CardLineChart />
+        </div>
+        <div className={styles.cardHeadingContainer}>
+          <h2 className={styles.cardHeading}>Такты</h2>
+        </div>
+        <div
           onClick={() => {
             openModal(
-              <ModalMainElementStar mainElement={cardInfo.mainElement} />
+              <ModalPillars
+                pillars={cardInfo.pillars}
+                currentPillar={cardInfo.currentPillar}
+              />
             );
           }}
         >
-          <MainElementStar mainElement={cardInfo.mainElement} />
-        </li>
-        <li
-          className={styles.otherInfoListItem}
-          onClick={() => {
-            openModal(
-              <ModalFallingStars fallingStars={cardInfo.fallingStars} />
-            );
-          }}
-        >
-          <FallingStarsField stars={cardInfo.fallingStars} />
-        </li>
-        <li
-          className={styles.otherInfoListItem}
-          onClick={() => {
-            openModal(<ModalAnimalChart />);
-          }}
-        >
-          <AnimalChart />
-        </li>
-      </ul>
-      <div>
-        <div className={styles.chartTitleBox}>
-          <span className={styles.chartTitle}>ГРАФИК</span>
-          <CustomCheckBoxGroup
-            checkboxesInfo={[
-              { title: "Неделя", value: "Неделя" },
-              { title: "Месяц", value: "Месяц" },
-              { title: "Год", value: "Год" },
-            ]}
-            onChange={() => {}}
-            className={styles.chartCheckboxes}
+          <PillarsInfo
+            pillars={cardInfo.pillars}
+            currentPillar={cardInfo.currentPillar}
           />
         </div>
-        <CardLineChart />
-      </div>
-      <div className={styles.cardHeadingContainer}>
-        <h2 className={styles.cardHeading}>Такты</h2>
-      </div>
-      <div
-        onClick={() => {
-          openModal(
-            <ModalPillars
-              pillars={cardInfo.pillars}
-              currentPillar={cardInfo.currentPillar}
-            />
-          );
-        }}
-      >
-        <PillarsInfo
-          pillars={cardInfo.pillars}
-          currentPillar={cardInfo.currentPillar}
-        />
-      </div>
 
-      <div className={styles.saveContainer}>
-        <ThemeProvider theme={buttonTheme}>
-          <Button>СОХРАНИТЬ</Button>
-          <p className={styles.saveText}>
-            Рассчитать совместимость с другой картой, генеалогическое древо
-            можно построить, если зайти на полную версию сайта с компьютера.
-          </p>
-        </ThemeProvider>
-      </div>
-    </>
+        <div className={styles.saveContainer}>
+          <ThemeProvider theme={buttonTheme}>
+            <Button>СОХРАНИТЬ</Button>
+            <p className={styles.saveText}>
+              Рассчитать совместимость с другой картой, генеалогическое древо
+              можно построить, если зайти на полную версию сайта с компьютера.
+            </p>
+          </ThemeProvider>
+        </div>
+      </>
+    )
   );
 }

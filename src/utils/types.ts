@@ -31,6 +31,14 @@ export type monthListType = [
   monthType
 ];
 
+export type dateType = {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+};
+
 export type colorType = {
   hex: string;
   backgroundClassName: string;
@@ -110,18 +118,34 @@ export type fallingStarType = {
   direction: string;
 };
 
+export type ageType = {
+  year: number;
+  month: number;
+};
+
+export type chartDataType = {
+  BULL: number;
+  TIGER: number;
+  RABBIT: number;
+  MONKEY: number;
+  DRAGON: number;
+  RAT: number;
+  DOG: number;
+  ROOSTER: number;
+  PIG: number;
+  HORSE: number;
+  SNAKE: number;
+  GOAT: number;
+};
+
 export type cardInfoType = {
   id: string;
   name: string;
   gender: "Мужской" | "Женский";
-  birthdate: {
-    year: number;
-    month: number;
-    day?: number;
-    hour?: number;
-    minute?: number;
-  };
+  birthdate: dateType;
   birthcity: string;
+  livingcity: string;
+  age: ageType;
   year: {
     animal: animalType;
     element: elementType;
@@ -143,10 +167,23 @@ export type cardInfoType = {
   mainElement: mainElementType;
   cardStrength: cardStrengthType;
   fallingStars: fallingStarType[];
-  momCard?: cardInfoType;
-  dadCard?: cardInfoType;
+  chartData: chartDataType;
+  genderCount: {
+    male: number;
+    female: number;
+  };
+  momCard?: string;
+  dadCard?: string;
 };
 
 export type stylesType = {
   readonly [key: string]: string;
+};
+
+export type inputDataType = {
+  name: string;
+  birthdate: dateType;
+  birthcity: string;
+  gender: genderType;
+  livingcity: string;
 };
