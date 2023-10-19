@@ -48,7 +48,7 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             doneFor={doneFor}
             animal={cardInfo.month.animal}
             element={cardInfo.month.element}
-            title={cardInfo.birthdate.month}
+            title={cardInfo.birthdate.month + 1}
           />
           <CardColumn
             doneFor={doneFor}

@@ -137,6 +137,10 @@ export type chartDataType = {
   SNAKE: number;
   GOAT: number;
 };
+export type directionType = {
+  shortName: string;
+  fullName: string;
+};
 
 export type cardInfoType = {
   id: string;
@@ -166,8 +170,10 @@ export type cardInfoType = {
   pillars: pillarType[];
   mainElement: mainElementType;
   cardStrength: cardStrengthType;
+  movedDirection: directionType;
   fallingStars: fallingStarType[];
   chartData: chartDataType;
+  direction: directionType;
   genderCount: {
     male: number;
     female: number;

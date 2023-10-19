@@ -7,6 +7,14 @@ const cardInfoPlaceholder: cardInfoType = {
     year: 20,
     month: 10,
   },
+  direction: {
+    fullName: "Северо-запад",
+    shortName: "СЗ",
+  },
+  movedDirection: {
+    fullName: "Северо-запад",
+    shortName: "СЗ",
+  },
   gender: "Мужской",
   genderCount: {
     male: 55,

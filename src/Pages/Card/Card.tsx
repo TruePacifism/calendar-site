@@ -20,8 +20,10 @@ import ModalAnimalChart from "../../Components/ModalComponents/ModalAnimalChart/
 import ModalPillars from "../../Components/ModalComponents/ModalPillars/ModalPillars";
 import cardInfoPlaceholder from "../../utils/cardPlaceholder";
 import countCard from "../../api/countCard";
+import { useParams } from "react-router-dom";
 
 export default function Card(): React.JSX.Element {
+  const params = useParams();
   const [cardInfo, setCardInfo]: [
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
@@ -42,13 +44,17 @@ export default function Card(): React.JSX.Element {
     setIsOpenModal(false);
   };
   useEffect(() => {
-    const getCard = async (inputData: inputDataType) => {
-      const data = await countCard({ inputData });
-      setCardInfo(data);
-    };
-    const { name, birthcity, birthdate, livingcity, gender } =
-      cardInfoPlaceholder;
-    getCard({ name, birthcity, birthdate, livingcity, gender });
+    if (params) {
+      console.log("params:", params);
+    } else {
+      const getCard = async (inputData: inputDataType) => {
+        const data = await countCard({ inputData });
+        setCardInfo(data);
+      };
+      const { name, birthcity, birthdate, livingcity, gender } =
+        cardInfoPlaceholder;
+      getCard({ name, birthcity, birthdate, livingcity, gender });
+    }
   }, []);
 
   return (
@@ -109,7 +115,7 @@ export default function Card(): React.JSX.Element {
           <li
             className={styles.otherInfoListItem}
             onClick={() => {
-              openModal(<ModalAnimalChart />);
+              openModal(<ModalAnimalChart chartData={cardInfo.chartData} />);
             }}
           >
             <AnimalChart chartData={cardInfo.chartData} />

@@ -67,7 +67,7 @@ export default function IconedCardInfoList({
           },
       {
         Icon: BirthSideIcon,
-        value: "ЮВ",
+        value: cardInfo.direction.shortName,
       },
       {
         Icon: GenderIcon,
@@ -84,7 +84,7 @@ export default function IconedCardInfoList({
       },
       {
         Icon: LivingsideIcon,
-        value: "ЮВ",
+        value: cardInfo.movedDirection.shortName,
       },
     ]);
   }, [doneFor]);

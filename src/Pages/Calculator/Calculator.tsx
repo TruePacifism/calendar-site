@@ -8,6 +8,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { ReactComponent as DownArrowIcon } from "../../images/down-arrow.svg";
 import CustomCheckBoxGroup from "../../Components/CustomCheckBoxGroup";
 import { birthtimeTheme, mainTheme } from "../../utils/muiThemes";
+import { useNavigate } from "react-router-dom";
 
 const getPreetyNumber = (number: number): string => {
   let formattedNum: string = String(number); // Преобразовываем число в строку
@@ -41,6 +42,7 @@ for (let i = 1; i < 61; i++) {
 }
 
 export default function Calculator() {
+  const navigate = useNavigate();
   const [selectedMonth, setSelectedMonth]: [
     monthType,
     Dispatch<SetStateAction<monthType>>
@@ -76,6 +78,9 @@ export default function Calculator() {
           birthcity: {
             value: string;
           };
+          livingcity: {
+            value: string;
+          };
           gender: any[];
         };
       };
@@ -93,8 +98,17 @@ export default function Calculator() {
         minute: Number(e.target.elements.minute.value),
       },
       gender: e.target.elements.gender[0].checked ? "Мужской" : "Женский",
+      birthcity: e.target.elements.birthcity.value,
+      livingcity: e.target.elements.livingcity.value,
     };
     console.log(data);
+    const params = new URLSearchParams();
+    Object.entries(data).forEach(([name, value]) => {
+      params.set(name, value.toString());
+    });
+    console.log(params);
+
+    navigate("/card");
   };
 
   return (
@@ -221,7 +235,7 @@ export default function Calculator() {
               required
               disableUnderline
               type="text"
-              name="livecity"
+              name="livingcity"
               placeholder="населенный пункт"
             />
           </label>

@@ -2,9 +2,12 @@
   background-color: aqua;
   color: var(--dark-blue-color);
   position: relative;
+  font-family: "Lilita One", cursive;
+  border-radius: 5px;
 }
 .white {
   background-color: white;
+  border: 1px solid black;
 }
 .yellow {
   background-color: var(--yellow-color);

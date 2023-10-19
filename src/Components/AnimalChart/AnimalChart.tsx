@@ -14,7 +14,20 @@ type propsType = {
 
 type dataType = ChartData<"polarArea", (number | Point)[], unknown>;
 
-const labels = ["Red", "Orange", "Yellow", "Green", "Blue"];
+const labels = [
+  "Бык",
+  "Тигр",
+  "Кролик",
+  "Дракон",
+  "Змея",
+  "Лошадь",
+  "Коза",
+  "Обезьяна",
+  "Петух",
+  "Собака",
+  "Свинья",
+  "Крыса",
+];
 export default function AnimalChart({ chartData }: propsType) {
   const [data, setData]: [dataType, Dispatch<SetStateAction<dataType>>] =
     useState();

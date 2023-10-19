@@ -48,7 +48,7 @@ export default function ModalCardInfo({ cardInfo }: propsType) {
           key={keys[1]}
           animal={cardInfo.month.animal}
           element={cardInfo.month.element}
-          title={cardInfo.birthdate.month}
+          title={cardInfo.birthdate.month + 1}
         />
         <CardColumn
           doneFor="Calculator"
