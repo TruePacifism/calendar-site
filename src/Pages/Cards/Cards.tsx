@@ -76,18 +76,22 @@ export default function Cards() {
             {/* <SearchIcon className={styles.searchIcon} /> */}
           </div>
         </div>
-        {isFullCards ? (
-          <ul className={styles.cardsGrid}>
-            {cardsInfo.map((cardInfo) => (
-              <CardGridItem cardInfo={cardInfo} />
-            ))}
-          </ul>
-        ) : (
-          <ul className={styles.cardList}>
-            {cardsInfo.map((cardInfo) => (
-              <CardListItem cardInfo={cardInfo} />
-            ))}
-          </ul>
+        {cardsInfo && (
+          <>
+            {isFullCards ? (
+              <ul className={styles.cardsGrid}>
+                {cardsInfo.map((cardInfo) => (
+                  <CardGridItem cardInfo={cardInfo} />
+                ))}
+              </ul>
+            ) : (
+              <ul className={styles.cardList}>
+                {cardsInfo.map((cardInfo) => (
+                  <CardListItem cardInfo={cardInfo} />
+                ))}
+              </ul>
+            )}
+          </>
         )}
       </div>
     </>

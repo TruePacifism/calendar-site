@@ -42,7 +42,6 @@ function App() {
       <Routes>
         <Route Component={MainPage} path="/" />
         <Route Component={Calculator} path="/calculator" />
-        <Route Component={Card} path="/card" />
         <Route Component={Cards} path="/cards" />
         <Route Component={Settings} path="/settings" />
       </Routes>
