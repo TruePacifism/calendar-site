@@ -1,6 +1,5 @@
-import axios from "axios";
 import { cardInfoType, inputDataType } from "../utils/types";
-import { apiClient, uri } from "./apiVars";
+import { apiClient } from "./apiVars";
 
 type propsType = {
   inputData: inputDataType;

@@ -4,7 +4,6 @@ import Header from "./Components/Header/Header";
 import Calculator from "./Pages/Calculator/Calculator";
 import Footer from "./Components/Footer/Footer";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Card from "./Pages/Card/Card";
 import MainPage from "./Pages/MainPage/MainPage";
 import Cards from "./Pages/Cards/Cards";
 import Settings from "./Pages/Settings/Settings";
