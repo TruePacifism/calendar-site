@@ -64,7 +64,7 @@ export default function ModalIconedInfo({ cardInfo }: propsType) {
         description: `Перемещение от места рождения: ${cardInfo.movedDirection.fullName}`,
       },
     ]);
-  }, []);
+  }, [cardInfo]);
 
   return (
     <div className={styles.container}>

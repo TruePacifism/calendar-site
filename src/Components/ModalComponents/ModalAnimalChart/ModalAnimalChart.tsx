@@ -134,7 +134,7 @@ export default function ModalAnimalChart({ chartData }: propsType) {
         },
       ],
     });
-  }, []);
+  }, [chartData]);
   return (
     <div className={styles.container}>
       <ModalHeading text="ЖИВОТНЫЕ" />{" "}

@@ -4,12 +4,7 @@ import { ReactComponent as BackIcon } from "../../images/back-icon.svg";
 import { ReactComponent as BurgerIcon } from "../../images/burger-icon.svg";
 import { ReactComponent as Logo } from "../../images/logo.svg";
 import { ReactComponent as SearchIcon } from "../../images/search-header-icon.svg";
-import {
-  Link,
-  useLocation,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import { searchModalTheme } from "../../utils/muiThemes";
 import { Dialog, Input } from "@mui/material";
@@ -30,7 +25,6 @@ export default function Header({ heading }: propsType) {
     setIsSearching(true);
   };
   const location = useLocation();
-  const [params, setParams] = useSearchParams();
   return (
     <>
       <ThemeProvider theme={searchModalTheme}>

@@ -91,7 +91,7 @@ export default function AnimalChart({ chartData }: propsType) {
         },
       ],
     });
-  }, []);
+  }, [chartData]);
   return (
     <div className={styles.container}>
       {data && (
