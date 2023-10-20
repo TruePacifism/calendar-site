@@ -45,11 +45,13 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
     setIsOpenModal(false);
   };
   useEffect(() => {
-    const getCard = async (inputData: inputDataType) => {
-      const data = await countCard({ inputData });
-      setCardInfo(data);
-    };
-    getCard(inputData);
+    if (inputData) {
+      const getCard = async (inputData: inputDataType) => {
+        const data = await countCard({ inputData });
+        setCardInfo(data);
+      };
+      getCard(inputData);
+    }
   }, [inputData]);
 
   return (
