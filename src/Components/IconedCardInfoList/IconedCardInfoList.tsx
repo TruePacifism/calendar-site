@@ -87,7 +87,7 @@ export default function IconedCardInfoList({
         value: cardInfo.movedDirection.shortName,
       },
     ]);
-  }, [doneFor]);
+  }, [doneFor, cardInfo]);
   const [styles, setStyles]: [
     stylesType,
     Dispatch<SetStateAction<stylesType>>
