@@ -18,12 +18,13 @@ import ModalMainElementStar from "../../Components/ModalComponents/ModalMainElem
 import ModalFallingStars from "../../Components/ModalComponents/ModalFallingStars/ModalFallingStars";
 import ModalAnimalChart from "../../Components/ModalComponents/ModalAnimalChart/ModalAnimalChart";
 import ModalPillars from "../../Components/ModalComponents/ModalPillars/ModalPillars";
-import cardInfoPlaceholder from "../../utils/cardPlaceholder";
 import countCard from "../../api/countCard";
-import { useParams } from "react-router-dom";
 
-export default function Card(): React.JSX.Element {
-  const params = useParams();
+type propsType = {
+  inputData: inputDataType;
+};
+
+export default function Card({ inputData }: propsType): React.JSX.Element {
   const [cardInfo, setCardInfo]: [
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
@@ -44,18 +45,12 @@ export default function Card(): React.JSX.Element {
     setIsOpenModal(false);
   };
   useEffect(() => {
-    if (params) {
-      console.log("params:", params);
-    } else {
-      const getCard = async (inputData: inputDataType) => {
-        const data = await countCard({ inputData });
-        setCardInfo(data);
-      };
-      const { name, birthcity, birthdate, livingcity, gender } =
-        cardInfoPlaceholder;
-      getCard({ name, birthcity, birthdate, livingcity, gender });
-    }
-  }, []);
+    const getCard = async (inputData: inputDataType) => {
+      const data = await countCard({ inputData });
+      setCardInfo(data);
+    };
+    getCard(inputData);
+  }, [inputData]);
 
   return (
     cardInfo && (

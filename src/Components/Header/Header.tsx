@@ -4,7 +4,12 @@ import { ReactComponent as BackIcon } from "../../images/back-icon.svg";
 import { ReactComponent as BurgerIcon } from "../../images/burger-icon.svg";
 import { ReactComponent as Logo } from "../../images/logo.svg";
 import { ReactComponent as SearchIcon } from "../../images/search-header-icon.svg";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import { searchModalTheme } from "../../utils/muiThemes";
 import { Dialog, Input } from "@mui/material";
@@ -24,6 +29,8 @@ export default function Header({ heading }: propsType) {
   const openModal = () => {
     setIsSearching(true);
   };
+  const location = useLocation();
+  const [params, setParams] = useSearchParams();
   return (
     <>
       <ThemeProvider theme={searchModalTheme}>
@@ -42,7 +49,13 @@ export default function Header({ heading }: propsType) {
         {heading === "Мой феншуй" ? (
           <SearchIcon className={styles.backIcon} onClick={openModal} />
         ) : (
-          <Link to={"/"}>
+          <Link
+            to={
+              location.pathname === "/calculator" && location.search
+                ? "/calculator"
+                : "/"
+            }
+          >
             <BackIcon className={styles.backIcon} />
           </Link>
         )}

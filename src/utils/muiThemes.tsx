@@ -100,9 +100,11 @@ export const mainTheme = createTheme({
           paddingLeft: "2px",
           paddingRight: "11px",
           fontFamily: "Roboto Slab",
-          fontSize: "15px",
+          fontSize: "13px",
           fontWeight: "400",
           letterSpacing: "0em",
+          minWidth: "56px",
+          maxWidth: "67px",
           color: hiddenTextColor,
           textAlign: "left",
 

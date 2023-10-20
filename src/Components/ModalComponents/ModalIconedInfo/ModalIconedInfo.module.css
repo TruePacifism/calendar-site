@@ -14,7 +14,7 @@
 .listItem {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   &:not(:last-child) {
     margin-bottom: 28px;
   }
@@ -30,6 +30,8 @@
 .value {
   font-size: 20px;
   font-weight: 400;
+  min-width: 47px;
+  text-align: left;
   margin-right: 3px;
 }
 .description {

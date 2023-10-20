@@ -74,7 +74,7 @@ export default function ModalIconedInfo({ cardInfo }: propsType) {
             <li className={styles.listItem}>
               <value.Icon className={styles.icon} />
               <span className={styles.value}>{value.value}</span>
-              <p className={styles.description}>Возраст: 39 лет и 10 месяцев</p>
+              <p className={styles.description}>{value.description}</p>
             </li>
           ))}
       </ul>

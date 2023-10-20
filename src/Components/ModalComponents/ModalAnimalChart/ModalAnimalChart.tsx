@@ -104,7 +104,12 @@ export default function ModalAnimalChart({ chartData }: propsType) {
   const [data, setData]: [dataType, Dispatch<SetStateAction<dataType>>] =
     useState();
   useEffect(() => {
-    const data = Object.values(chartData);
+    const data = labels.map(
+      (label) =>
+        Object.entries(chartData).find(
+          ([key, value]) => getAnimalName(key) === label
+        )[1]
+    );
     setData({
       labels: labels,
       datasets: [

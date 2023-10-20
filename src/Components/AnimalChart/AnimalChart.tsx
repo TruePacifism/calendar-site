@@ -28,11 +28,45 @@ const labels = [
   "Свинья",
   "Крыса",
 ];
+const getAnimalName = (animal: string): string => {
+  switch (animal) {
+    case "BULL":
+      return "Бык";
+    case "TIGER":
+      return "Тигр";
+    case "RABBIT":
+      return "Кролик";
+    case "DRAGON":
+      return "Дракон";
+    case "SNAKE":
+      return "Змея";
+    case "HORSE":
+      return "Лошадь";
+    case "GOAT":
+      return "Коза";
+    case "MONKEY":
+      return "Обезьяна";
+    case "ROOSTER":
+      return "Петух";
+    case "DOG":
+      return "Собака";
+    case "PIG":
+      return "Свинья";
+    case "RAT":
+      return "Крыса";
+  }
+};
+
 export default function AnimalChart({ chartData }: propsType) {
   const [data, setData]: [dataType, Dispatch<SetStateAction<dataType>>] =
     useState();
   useEffect(() => {
-    const data = Object.values(chartData);
+    const data = labels.map(
+      (label) =>
+        Object.entries(chartData).find(
+          ([key, value]) => getAnimalName(key) === label
+        )[1]
+    );
     setData({
       labels: labels,
       datasets: [

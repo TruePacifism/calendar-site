@@ -6,7 +6,7 @@
 .formFieldContainer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-bottom: 26px;
 }
 .label {
@@ -18,6 +18,8 @@
   line-height: 15px;
   letter-spacing: 0em;
   text-align: left;
+  min-width: calc((100vw - 26px * 2) / 4);
+  max-width: calc((100vw - 26px * 2) / 4);
 
   color: #02081e;
 }

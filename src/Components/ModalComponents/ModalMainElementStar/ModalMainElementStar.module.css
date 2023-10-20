@@ -1,11 +1,17 @@
-.container {
+.section {
   background-color: var(--accent-color);
+}
+.container {
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 27px;
   padding-right: 27px;
+  margin-right: auto;
+  margin-left: auto;
 }
 .image {
+  margin-right: auto;
+  margin-left: auto;
   width: 218px;
   height: 226px;
 }

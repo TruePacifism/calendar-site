@@ -19,30 +19,32 @@ export default function MainPage() {
     setCardInfo(cardInfoPlaceholder);
   }, []);
   return (
-    <>
-      <DaysLine />
-      <section
-        style={{
-          backgroundColor: cardInfo
-            ? getColorByAnimal(cardInfo.year.animal).hex
-            : "#FFFFFF",
-        }}
-      >
-        <IconedCardInfoList doneFor="HomePage" cardInfo={cardInfo} />
-        <CardInfo doneFor="HomePage" cardInfo={cardInfo} />
-        <div className={styles.circleInfo}>
-          <StarIcon className={styles.starIcon} />
-          <StrangeCircle
-            cardInfos={[
-              cardInfoPlaceholder,
-              cardInfoPlaceholder,
-              cardInfoPlaceholder,
-              cardInfoPlaceholder,
-            ]}
-          />
-          <AddIcon className={styles.addIcon} />
-        </div>
-      </section>
-    </>
+    cardInfo && (
+      <>
+        <DaysLine />
+        <section
+          style={{
+            backgroundColor: cardInfo
+              ? getColorByAnimal(cardInfo.year.animal).hex
+              : "#FFFFFF",
+          }}
+        >
+          <IconedCardInfoList doneFor="HomePage" cardInfo={cardInfo} />
+          <CardInfo doneFor="HomePage" cardInfo={cardInfo} />
+          <div className={styles.circleInfo}>
+            <StarIcon className={styles.starIcon} />
+            <StrangeCircle
+              cardInfos={[
+                cardInfoPlaceholder,
+                cardInfoPlaceholder,
+                cardInfoPlaceholder,
+                cardInfoPlaceholder,
+              ]}
+            />
+            <AddIcon className={styles.addIcon} />
+          </div>
+        </section>
+      </>
+    )
   );
 }

@@ -1,14 +1,15 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./Calculator.module.css";
 import { months } from "../../enums";
-import { monthType } from "../../utils/types";
+import { inputDataType, monthType } from "../../utils/types";
 import Container from "../../Components/Container/Container";
 import { Select, MenuItem, Input, Button } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { ReactComponent as DownArrowIcon } from "../../images/down-arrow.svg";
 import CustomCheckBoxGroup from "../../Components/CustomCheckBoxGroup";
 import { birthtimeTheme, mainTheme } from "../../utils/muiThemes";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import Card from "../Card/Card";
 
 const getPreetyNumber = (number: number): string => {
   let formattedNum: string = String(number); // Преобразовываем число в строку
@@ -42,16 +43,11 @@ for (let i = 1; i < 61; i++) {
 }
 
 export default function Calculator() {
-  const navigate = useNavigate();
+  const [params, setParams] = useSearchParams();
   const [selectedMonth, setSelectedMonth]: [
     monthType,
     Dispatch<SetStateAction<monthType>>
   ] = useState(months[0]);
-
-  // const [selectedGender, setSelectedGender]: [
-  //   genderType,
-  //   Dispatch<SetStateAction<genderType>>
-  // ] = useState("Мужской");
 
   const onSubmit = (
     e: React.FormEvent<HTMLFormElement> & {
@@ -101,17 +97,25 @@ export default function Calculator() {
       birthcity: e.target.elements.birthcity.value,
       livingcity: e.target.elements.livingcity.value,
     };
-    console.log(data);
-    const params = new URLSearchParams();
-    Object.entries(data).forEach(([name, value]) => {
-      params.set(name, value.toString());
-    });
-    console.log(params);
-
-    navigate("/card");
+    params.set("inputData", JSON.stringify(data));
+    setParams(params);
   };
 
-  return (
+  const [inputData, setInputData]: [
+    inputDataType,
+    Dispatch<SetStateAction<inputDataType>>
+  ] = useState();
+  useEffect(() => {
+    const data = params.get("inputData");
+    if (data) {
+      setInputData(JSON.parse(data));
+    } else {
+      setInputData(null);
+    }
+  }, [params]);
+  return inputData ? (
+    <Card inputData={inputData} />
+  ) : (
     <ThemeProvider theme={mainTheme}>
       <Container paddingLeftRight={26} paddingTopBottom={26}>
         <form
@@ -139,9 +143,7 @@ export default function Calculator() {
                 name="day"
                 defaultValue="ДД"
                 IconComponent={DownArrowIcon}
-                onChange={(e) => {
-                  console.log(e.target.value);
-                }}
+                onChange={(e) => {}}
               >
                 <MenuItem value={"ДД"}>ДД</MenuItem>
                 {getMonthDaysArray(selectedMonth).map((day) => (
@@ -171,9 +173,7 @@ export default function Calculator() {
                 name="year"
                 defaultValue="ГГГГ"
                 IconComponent={DownArrowIcon}
-                onChange={(e) => {
-                  console.log(e.target.value);
-                }}
+                onChange={(e) => {}}
               >
                 <MenuItem value={"ГГГГ"}>ГГГГ</MenuItem>
                 {yearsArray.map((year) => (
