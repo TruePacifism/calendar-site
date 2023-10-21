@@ -51,7 +51,7 @@ export type CustomEnum<T> = {
 
 export type genderType = "Мужской" | "Женский";
 
-export type collisionTimeType = "День" | "Месяц" | "Год" | "Час";
+export type collisionTimeType = "день" | "месяц" | "год" | "час" | "такт";
 
 export type collisionTargetType = {
   target: string;
@@ -65,15 +65,17 @@ export type collisionTargetType = {
       end: number;
     };
   };
-  time: collisionTimeType;
+  targetTime: collisionTimeType;
 };
 
 export type collisionType = {
+  id: number;
   secondTarget: collisionTargetType;
   thirdTarget?: collisionTargetType;
   shape: string;
   color: string;
   kind: string;
+  targetName: collisionTimeType;
   description: string;
 };
 

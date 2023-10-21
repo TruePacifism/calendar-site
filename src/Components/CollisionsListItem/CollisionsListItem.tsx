@@ -12,13 +12,13 @@ type propsType = {
 
 const getShape = (shape: string, color: string) => {
   switch (shape) {
-    case "Полукруг":
+    case "half":
       return <Cloud className={getColorClassName(color)} />;
-    case "Круг":
+    case "circle":
       return <Circle className={getColorClassName(color)} />;
-    case "Квадрат":
+    case "rectangle":
       return <Rectangle className={getColorClassName(color)} />;
-    case "Сердце":
+    case "heart":
       return <Heart className={getColorClassName(color)} />;
     default:
       return <Heart className={getColorClassName(color)} />;
@@ -27,23 +27,23 @@ const getShape = (shape: string, color: string) => {
 
 const getColorClassName = (color: string) => {
   switch (color) {
-    case "Красный":
+    case "red":
       return styles.red;
-    case "Светло-Зеленый":
+    case "lightGreen":
       return styles.lightGreen;
-    case "Голубой":
+    case "lightBlue":
       return styles.lightBlue;
-    case "Коричневый":
+    case "brown":
       return styles.brown;
-    case "Оранжевый":
+    case "orange":
       return styles.orange;
-    case "Розовый":
+    case "pink":
       return styles.pink;
-    case "Фиолетовый":
+    case "purple":
       return styles.purple;
-    case "Темно-зеленый":
+    case "darkGreen":
       return styles.darkGreen;
-    case "Желтый":
+    case "yellow":
       return styles.yellow;
     default:
       break;

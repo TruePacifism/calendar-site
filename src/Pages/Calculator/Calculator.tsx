@@ -93,7 +93,7 @@ export default function Calculator() {
         hour: Number(e.target.elements.hour.value),
         minute: Number(e.target.elements.minute.value),
       },
-      gender: e.target.elements.gender[0].checked ? "Мужской" : "Женский",
+      gender: e.target.elements.gender[0].checked ? "male" : "female",
       birthcity: e.target.elements.birthcity.value,
       livingcity: e.target.elements.livingcity.value,
     };

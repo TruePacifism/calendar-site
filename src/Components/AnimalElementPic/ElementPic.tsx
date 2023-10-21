@@ -86,20 +86,24 @@ export default function ElementPic({ element, doneFor }: propsType) {
         setSrc(NoElement);
         break;
     }
-  }, [element, element.isBlack, element.isGood]);
+  }, [element]);
 
   const [className, setClassName]: [string, Dispatch<SetStateAction<string>>] =
     useState(styles.image);
   useEffect(() => {
     let initClassNames = [styles.image];
-    if (element.isBlack) {
+    if (!element) {
+      setClassName(initClassNames.join(" "));
+      return;
+    }
+    if (element && element.isBlack) {
       initClassNames.push(styles.black);
     }
-    if (!element.isGood) {
+    if (element && !element.isGood) {
       initClassNames.push(styles.bad);
     }
     setClassName(initClassNames.join(" "));
-  }, [element.isBlack, element.isGood, styles.image, styles.black, styles.bad]);
+  }, [element, styles.image, styles.black, styles.bad]);
 
   return (
     styles && (
@@ -107,7 +111,9 @@ export default function ElementPic({ element, doneFor }: propsType) {
         <div className={styles.imageWrapper}>
           <img src={src} alt="" className={className} />
         </div>
-        <span className={styles.name}>{element.name.split(" ")[0]}</span>
+        <span className={styles.name}>
+          {element ? element.name.split(" ")[0] : "Нет"}
+        </span>
       </>
     )
   );

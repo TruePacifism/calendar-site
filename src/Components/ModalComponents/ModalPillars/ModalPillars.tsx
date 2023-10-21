@@ -32,7 +32,9 @@ export default function ModalPillars({ pillars, currentPillar }: propsType) {
               key={pillar.year}
               animal={pillar.animal}
               element={pillar.element}
-              isCurrentPillar={currentPillar.ageYear === pillar.ageYear}
+              isCurrentPillar={
+                currentPillar && currentPillar.ageYear === pillar.ageYear
+              }
               title={`${pillar.year},${pillar.month}\n${pillar.ageYear},${pillar.ageMonth}`}
             />
           ))}

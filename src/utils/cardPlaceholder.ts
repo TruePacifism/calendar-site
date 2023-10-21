@@ -74,6 +74,7 @@ const cardInfoPlaceholder: cardInfoType = {
       name: "Змея",
       collisions: [
         {
+          id: 1,
           secondTarget: {
             target: "рождения",
             animal: {
@@ -86,13 +87,14 @@ const cardInfoPlaceholder: cardInfoType = {
                 end: 340,
               },
             },
-            time: "Час",
+            targetTime: "час",
           },
           shape: "Полукруг",
           color: "Светло-Зеленый",
           kind: "Столкновение",
           description:
             "Столкновение: Змея (День рождения) - Свинья (Час рождения)",
+          targetName: "день",
         },
       ],
       isGood: true,
@@ -109,6 +111,7 @@ const cardInfoPlaceholder: cardInfoType = {
       name: "Свинья",
       collisions: [
         {
+          id: 1,
           secondTarget: {
             target: "рождения",
             animal: {
@@ -121,13 +124,14 @@ const cardInfoPlaceholder: cardInfoType = {
                 end: 156,
               },
             },
-            time: "День",
+            targetTime: "день",
           },
           shape: "Полукруг",
           color: "Светло-Зеленый",
           kind: "Столкновение",
           description:
             "Столкновение: Свинья (Час рождения) - Змея (День рождения)",
+          targetName: "час",
         },
       ],
       isGood: false,

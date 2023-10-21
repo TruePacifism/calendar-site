@@ -96,26 +96,32 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
         setSrc(NoAnimal);
         break;
     }
-  }, [animal, animal.isBlack, animal.isGood]);
+  }, [animal]);
 
   return (
     styles && (
       <>
         <div
-          className={[
-            styles.imageWrapper,
-            animal.isGood ? styles.whiteBorder : styles.grayBorder,
-          ].join(" ")}
+          className={
+            animal
+              ? [
+                  styles.imageWrapper,
+                  animal.isGood ? styles.whiteBorder : styles.grayBorder,
+                ].join(" ")
+              : styles.imageWrapper
+          }
         >
           <div
             className={
-              animal.isBlack ? styles.blackBorder : styles.noBlackBorder
+              animal && animal.isBlack
+                ? styles.blackBorder
+                : styles.noBlackBorder
             }
           >
             <img src={src} alt="" className={styles.image} />
           </div>
         </div>
-        <span className={styles.name}>{animal.name}</span>
+        <span className={styles.name}>{animal ? animal.name : "Нет"}</span>
       </>
     )
   );
