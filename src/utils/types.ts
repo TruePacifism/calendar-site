@@ -195,3 +195,11 @@ export type inputDataType = {
   gender: genderType;
   livingcity: string;
 };
+
+export type cityInfoType = {
+  name: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+};

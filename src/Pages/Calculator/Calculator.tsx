@@ -7,9 +7,14 @@ import { Select, MenuItem, Input, Button } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { ReactComponent as DownArrowIcon } from "../../images/down-arrow.svg";
 import CustomCheckBoxGroup from "../../Components/CustomCheckBoxGroup";
-import { birthtimeTheme, mainTheme } from "../../utils/muiThemes";
+import {
+  birthtimeTheme,
+  dateInputTheme,
+  mainTheme,
+} from "../../utils/muiThemes";
 import { useSearchParams } from "react-router-dom";
 import Card from "../Card/Card";
+import CityInput from "../../Components/CityInput/CityInput";
 
 const getPreetyNumber = (number: number): string => {
   let formattedNum: string = String(number); // Преобразовываем число в строку
@@ -138,37 +143,44 @@ export default function Calculator() {
           <label className={styles.formFieldContainer}>
             <span className={styles.label}>Дата рождения</span>
             <div className={styles.dateInputBox}>
-              <Select
-                variant="outlined"
-                name="day"
-                defaultValue="ДД"
-                IconComponent={DownArrowIcon}
-                onChange={(e) => {}}
-              >
-                <MenuItem value={"ДД"}>ДД</MenuItem>
-                {getMonthDaysArray(selectedMonth).map((day) => (
-                  <MenuItem value={day}>{getPreetyNumber(day)}</MenuItem>
-                ))}
-              </Select>
-              <Select
-                variant="outlined"
-                name="month"
-                defaultValue="ММ"
-                IconComponent={DownArrowIcon}
-                onChange={(e) => {
-                  setSelectedMonth(months[Number(e.target.value)]);
-                }}
-              >
-                <MenuItem value={"ММ"}>ММ</MenuItem>
-                {Object.values(months).map((month) => {
-                  return (
-                    <MenuItem value={month.orderNumber}>
-                      {getPreetyNumber(month.orderNumber + 1)}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-              <Select
+              <ThemeProvider theme={dateInputTheme}>
+                <Select
+                  variant="outlined"
+                  name="day"
+                  defaultValue="ДД"
+                  IconComponent={DownArrowIcon}
+                  onChange={(e) => {}}
+                >
+                  <MenuItem value={"ДД"}>ДД</MenuItem>
+                  {getMonthDaysArray(selectedMonth).map((day) => (
+                    <MenuItem value={day}>{getPreetyNumber(day)}</MenuItem>
+                  ))}
+                </Select>
+                <Select
+                  variant="outlined"
+                  name="month"
+                  defaultValue="ММ"
+                  IconComponent={DownArrowIcon}
+                  onChange={(e) => {
+                    setSelectedMonth(months[Number(e.target.value)]);
+                  }}
+                >
+                  <MenuItem value={"ММ"}>ММ</MenuItem>
+                  {Object.values(months).map((month) => {
+                    return (
+                      <MenuItem value={month.orderNumber}>
+                        {getPreetyNumber(month.orderNumber + 1)}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                <Input
+                  disableUnderline
+                  type="text"
+                  name="year"
+                  placeholder="ГГГГ"
+                />
+                {/* <Select
                 variant="outlined"
                 name="year"
                 defaultValue="ГГГГ"
@@ -179,7 +191,8 @@ export default function Calculator() {
                 {yearsArray.map((year) => (
                   <MenuItem value={year}>{year}</MenuItem>
                 ))}
-              </Select>
+              </Select> */}
+              </ThemeProvider>
             </div>
           </label>
           <div className={styles.formFieldContainer}>
@@ -219,16 +232,11 @@ export default function Calculator() {
               </ThemeProvider>
             </div>
           </div>
-          <label className={styles.formFieldContainer}>
-            <span className={styles.label}>Место рождения</span>
-            <Input
-              required
-              disableUnderline
-              type="text"
-              name="birthcity"
-              placeholder="населенный пункт"
-            />
-          </label>{" "}
+          <CityInput
+            name="birthcity"
+            title="Место рождения"
+            placeholder="населенный пункт"
+          />
           <label className={styles.formFieldContainer}>
             <span className={styles.label}>Место жительства</span>
             <Input

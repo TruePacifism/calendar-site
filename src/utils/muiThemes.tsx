@@ -66,6 +66,139 @@ export const searchModalTheme = createTheme({
   },
 });
 
+export const cityInputTheme = createTheme({
+  components: {
+    MuiAutocomplete: {
+      styleOverrides: {
+        inputRoot: {
+          height: "26px",
+        },
+        root: {
+          height: "26px",
+        },
+      },
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          top: 0,
+        },
+      },
+    },
+    // MuiFormControl: {
+    //   styleOverrides: {
+    //     root: {
+    //       boxSizing: "border-box",
+    //       border: `1px solid ${basicButtonBorderColor}`,
+    //       borderRadius: "5px",
+    //       height: "26px",
+    //       paddingTop: "0",
+    //       paddingLeft: "2px",
+    //       paddingRight: "11px",
+    //       fontFamily: "Roboto Slab",
+    //       fontSize: "15px",
+    //       fontWeight: "400",
+    //       letterSpacing: "0em",
+    //       color: hiddenTextColor,
+    //       textAlign: "left",
+    //       paddingBottom: "0",
+    //     },
+    //   },
+    // },
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          height: "26px",
+        },
+      },
+    },
+  },
+});
+
+export const dateInputTheme = createTheme({
+  components: {
+    MuiSelect: {
+      styleOverrides: {
+        outlined: {
+          border: `1px solid ${basicButtonBorderColor}`,
+        },
+        select: {
+          boxSizing: "border-box",
+          border: `1px solid ${basicButtonBorderColor}`,
+          borderRadius: "5px",
+          height: "26px",
+          paddingTop: "0",
+          paddingLeft: "2px",
+          paddingRight: "11px",
+          fontFamily: "Roboto Slab",
+          fontSize: "13px",
+          fontWeight: "400",
+          letterSpacing: "0em",
+          minWidth: "56px",
+          maxWidth: "67px",
+          color: hiddenTextColor,
+          textAlign: "left",
+
+          paddingBottom: "0",
+          ":not": {
+            ":last-child": {
+              marginRight: "5px",
+            },
+          },
+        },
+        icon: {
+          fill: hiddenTextColor,
+          opacity: 1,
+          width: "17px",
+          height: "17px",
+        },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          border: `0px`,
+        },
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          boxSizing: "border-box",
+          border: `1px solid ${basicButtonBorderColor}`,
+          borderRadius: "5px",
+          height: "26px",
+          paddingTop: "0",
+          paddingLeft: "2px",
+          paddingRight: "11px",
+          fontFamily: "Roboto Slab",
+          fontSize: "13px",
+          fontWeight: "400",
+          letterSpacing: "0em",
+          minWidth: "56px",
+          maxWidth: "67px",
+          color: hiddenTextColor,
+          textAlign: "left",
+
+          paddingBottom: "0",
+          ":not": {
+            ":last-child": {
+              marginRight: "5px",
+            },
+          },
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          minHeight: "26px",
+        },
+      },
+    },
+  },
+});
+
 export const mainTheme = createTheme({
   components: {
     MuiInput: {
