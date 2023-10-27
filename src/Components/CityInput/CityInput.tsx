@@ -2,10 +2,9 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./CityInput.module.css";
 import { ThemeProvider } from "@emotion/react";
 import { cityInputTheme } from "../../utils/muiThemes";
-import { Autocomplete, TextField, debounce } from "@mui/material";
+import { Autocomplete, TextField } from "@mui/material";
 import { cityInfoType } from "../../utils/types";
 import getCities from "../../api/getCities";
-import { useThrottle } from "@react-hooks-hub/use-throttle";
 
 type propsType = {
   title: string;
@@ -34,6 +33,7 @@ export default function CityInput({ title, name, placeholder }: propsType) {
       return;
     }
     updateCitiesList();
+    // eslint-disable-next-line
   }, [inputValue]);
   return (
     <ThemeProvider theme={cityInputTheme}>

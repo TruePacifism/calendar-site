@@ -237,16 +237,11 @@ export default function Calculator() {
             title="Место рождения"
             placeholder="населенный пункт"
           />
-          <label className={styles.formFieldContainer}>
-            <span className={styles.label}>Место жительства</span>
-            <Input
-              required
-              disableUnderline
-              type="text"
-              name="livingcity"
-              placeholder="населенный пункт"
-            />
-          </label>
+          <CityInput
+            name="livingcity"
+            title="Место жительства"
+            placeholder="населенный пункт"
+          />
           <Button type="submit">РАССЧИТАТЬ</Button>
         </form>
       </Container>
