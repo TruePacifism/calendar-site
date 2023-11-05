@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./CityInput.module.css";
 import { ThemeProvider } from "@emotion/react";
 import { cityInputTheme } from "../../utils/muiThemes";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, debounce } from "@mui/material";
 import { cityInfoType } from "../../utils/types";
 import getCities from "../../api/getCities";
 
@@ -21,6 +21,13 @@ export default function CityInput({ title, name, placeholder }: propsType) {
     string,
     Dispatch<SetStateAction<string>>
   ] = useState("");
+  // const updateInputDebounced = debounce(updateInput, 2000)
+  const updateInput = debounce(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setInputValue(e.target.value);
+    },
+    1250
+  );
   const updateCitiesList = async () => {
     const cities: cityInfoType[] = await getCities({
       query: inputValue,
@@ -30,6 +37,7 @@ export default function CityInput({ title, name, placeholder }: propsType) {
   };
   useEffect(() => {
     if (!inputValue || inputValue.length < 5) {
+      setCitiesList([]);
       return;
     }
     updateCitiesList();
@@ -41,19 +49,19 @@ export default function CityInput({ title, name, placeholder }: propsType) {
         <span className={styles.label}>{title}</span>
         <Autocomplete
           id={name}
+          // renderOption={(props, option) => {
+          //   console.log(props);
+
+          //   return (
+          //     <li {...props} key={option}>
+          //       {option}
+          //     </li>
+          //   );
+          // }}
           renderInput={(params) => (
-            <TextField
-              {...params}
-              onChange={(e) => {
-                setInputValue(e.target.value);
-              }}
-              label={placeholder}
-            />
+            <TextField {...params} onChange={updateInput} label={placeholder} />
           )}
           freeSolo
-          onChange={(e) => {
-            console.dir(e.target);
-          }}
           sx={{ width: "203.4px", height: "26px" }}
           options={citiesList.map((city) => city.name)}
         />

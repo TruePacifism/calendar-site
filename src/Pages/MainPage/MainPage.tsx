@@ -9,28 +9,33 @@ import CardInfo from "../../Components/CardInfo/CardInfo";
 import StrangeCircle from "../../Components/StrangeCircle/StrangeCircle";
 import { ReactComponent as StarIcon } from "../../images/star-icon.svg";
 import { ReactComponent as AddIcon } from "../../images/add-home.svg";
+import getToday from "../../api/getToday";
 
 export default function MainPage() {
-  const [cardInfo, setCardInfo]: [
+  const [todayInfo, setTodayInfo]: [
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
   ] = useState();
   useEffect(() => {
-    setCardInfo(cardInfoPlaceholder);
+    const fetchInfo = async () => {
+      const newTodayInfo = await getToday();
+      setTodayInfo(newTodayInfo);
+    };
+    fetchInfo();
   }, []);
   return (
-    cardInfo && (
+    todayInfo && (
       <>
         <DaysLine />
         <section
           style={{
-            backgroundColor: cardInfo
-              ? getColorByAnimal(cardInfo.year.animal).hex
+            backgroundColor: todayInfo
+              ? getColorByAnimal(todayInfo.year.animal).hex
               : "#FFFFFF",
           }}
         >
-          <IconedCardInfoList doneFor="HomePage" cardInfo={cardInfo} />
-          <CardInfo doneFor="HomePage" cardInfo={cardInfo} />
+          <IconedCardInfoList doneFor="HomePage" cardInfo={todayInfo} />
+          <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
           <div className={styles.circleInfo}>
             <StarIcon className={styles.starIcon} />
             <StrangeCircle

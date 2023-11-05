@@ -198,8 +198,8 @@ export type inputDataType = {
 
 export type cityInfoType = {
   name: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
+  // coordinates: {
+  //   lat: number;
+  //   lng: number;
+  // };
 };
