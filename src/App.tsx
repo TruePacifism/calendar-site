@@ -7,6 +7,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import MainPage from "./Pages/MainPage/MainPage";
 import Cards from "./Pages/Cards/Cards";
 import Settings from "./Pages/Settings/Settings";
+import LoginPage from "./Pages/LoginPage/LoginPage";
 
 const getHeadingText = (path: string): string => {
   switch (path) {
@@ -43,6 +44,7 @@ function App() {
         <Route Component={Calculator} path="/calculator" />
         <Route Component={Cards} path="/cards" />
         <Route Component={Settings} path="/settings" />
+        <Route Component={LoginPage} path="/login" />
       </Routes>
       <Footer />
     </>

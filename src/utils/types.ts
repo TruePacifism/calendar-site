@@ -203,3 +203,9 @@ export type cityInfoType = {
   //   lng: number;
   // };
 };
+
+export type userInput = {
+  token: string;
+  name: string;
+  mail: string;
+};
