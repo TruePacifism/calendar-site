@@ -89,16 +89,27 @@ export default function Calculator() {
   ) => {
     console.dir(e.target.elements);
 
+    const { year, month, day, hour, minute } = e.target.elements;
+
+    let gender: string;
+
+    if (e.target.elements.gender[0].checked) {
+      gender = "male";
+    } else if (e.target.elements.gender[1].checked) {
+      gender = "female";
+    } else {
+      gender = "";
+    }
     const data = {
       name: e.target.elements.name.value,
       birthdate: {
-        year: Number(e.target.elements.year.value),
-        month: Number(e.target.elements.month.value),
-        day: Number(e.target.elements.day.value),
-        hour: Number(e.target.elements.hour.value),
-        minute: Number(e.target.elements.minute.value),
+        year: year.value ? Number(year.value) : -1,
+        month: Number(month.value) ? Number(month.value) : -1,
+        day: Number(day.value) ? Number(day.value) : -1,
+        hour: hour.value ? Number(hour.value) : -1,
+        minute: minute.value ? Number(minute.value) : -1,
       },
-      gender: e.target.elements.gender[0].checked ? "male" : "female",
+      gender: gender,
       birthcity: e.target.elements.birthcity.value,
       livingcity: e.target.elements.livingcity.value,
     };
@@ -132,13 +143,7 @@ export default function Calculator() {
         >
           <label className={styles.formFieldContainer}>
             <span className={styles.label}>ФИО</span>
-            <Input
-              required
-              disableUnderline
-              type="text"
-              name="name"
-              placeholder="имя"
-            />
+            <Input disableUnderline type="text" name="name" placeholder="имя" />
           </label>
           <label className={styles.formFieldContainer}>
             <span className={styles.label}>Дата рождения</span>
@@ -176,6 +181,7 @@ export default function Calculator() {
                 </Select>
                 <Input
                   disableUnderline
+                  required
                   type="text"
                   name="year"
                   placeholder="ГГГГ"

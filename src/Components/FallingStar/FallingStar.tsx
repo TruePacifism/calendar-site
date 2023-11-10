@@ -32,7 +32,9 @@ export default function FallingStar({ star }: propsType) {
   return (
     <li className={getClassName(star.yearNumber)}>
       <span className={styles.year}>{star.yearNumber}</span>
-      <span className={styles.month}>{star.monthNumber}</span>
+      <span className={styles.month}>
+        {star.monthNumber === -1 ? "" : star.monthNumber}
+      </span>
     </li>
   );
 }
