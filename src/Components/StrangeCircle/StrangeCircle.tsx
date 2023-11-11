@@ -3,7 +3,7 @@ import { ReactComponent as Circle } from "../../images/cycle-circle.svg";
 
 import styles from "./StrangeCircle.module.css";
 import { cardInfoType } from "../../utils/types";
-import getColorByAnimal from "../../utils/getColorByAnimal";
+import getColorByAnimalElement from "../../utils/getColorByAnimal";
 
 type propsType = {
   cardInfos: cardInfoType[];
@@ -18,7 +18,8 @@ export default function StrangeCircle({ cardInfos }: propsType) {
           <div
             className={styles.line}
             style={{
-              backgroundColor: getColorByAnimal(cardInfo.year.animal).hex,
+              backgroundColor: getColorByAnimalElement(cardInfo.year.animal)
+                .hex,
             }}
           >
             {cardInfo.name}

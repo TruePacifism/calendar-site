@@ -7,8 +7,20 @@ import {
   signOut,
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import { ReactComponent as GoogleIcon } from "../../images/in-yan-icon.svg";
 import signUp from "../../api/signUp";
 import { userInput } from "../../utils/types";
+import {
+  Button,
+  FormControl,
+  FormGroup,
+  Input,
+  ThemeProvider,
+} from "@mui/material";
+import { mainTheme } from "../../utils/muiThemes";
+import CityInput from "../../Components/CityInput/CityInput";
+import authUser from "../../api/authUser";
+import { useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB_eoV10ywFfBnJ3RsXSUAPd-IFZ6oboTY",
@@ -27,7 +39,16 @@ auth.languageCode = "ru";
 
 type propsType = {};
 
+type userInfoType = {
+  token: string;
+  name: string;
+  mail: string;
+  livingcity: string;
+  birthcity: string;
+};
+
 export default function LoginPage(props: propsType) {
+  const navigate = useNavigate();
   const [token, setToken]: [string, Dispatch<SetStateAction<string>>] =
     useState();
   useEffect(() => {
@@ -37,6 +58,10 @@ export default function LoginPage(props: propsType) {
       localStorage.removeItem("token");
     }
   }, [token]);
+  const [userInfo, setUserInfo]: [
+    userInfoType,
+    Dispatch<SetStateAction<userInfoType>>
+  ] = useState();
   const googleSignIn = () => {
     signInWithPopup(auth, provider).then(async (result) => {
       const token: string = result.user.uid;
@@ -47,33 +72,105 @@ export default function LoginPage(props: propsType) {
         name: result.user.displayName,
         mail: result.user.email,
       };
-      if (result.operationType === "signIn") {
-        const verifiedToken = await signUp({ user });
-        setToken(token);
-        console.log(verifiedToken);
-      } else {
-        const token = await signUp({ user });
-        setToken(token);
-        console.log(token);
-      }
+      setUserInfo({
+        ...user,
+        livingcity: "",
+        birthcity: "",
+      });
     });
+  };
+  const fetchUser = async (user: userInfoType) => {
+    const token = await authUser({ user });
+    console.log(token);
+    localStorage.setItem("token", token);
+    navigate("/");
   };
   const googleLogOut = () => {
     signOut(auth).then((result) => {
+      console.log(result);
       setToken("");
+      setUserInfo(null);
       console.log("Выход успешен");
     });
   };
 
   return (
-    <div>
-      <h1 className={styles.heading}>"Регистрация / Авторизация"</h1>
-      {token ? (
-        <button onClick={googleLogOut}>Выйти</button>
+    <div className={styles.container}>
+      <h1 className={styles.heading}>Регистрация / Авторизация</h1>
+      {userInfo ? (
+        <ThemeProvider theme={mainTheme}>
+          <form
+            onSubmit={(
+              e: React.FormEvent<HTMLFormElement> & {
+                target: {
+                  elements?: {
+                    name: {
+                      value: string;
+                    };
+                    mail: {
+                      value: string;
+                    };
+                    birthcity: {
+                      value: string;
+                    };
+                    livingcity: {
+                      value: string;
+                    };
+                  };
+                };
+              }
+            ) => {
+              e.preventDefault();
+              const { name, livingcity, birthcity } = e.target.elements;
+              console.dir(e.target.elements);
+              const user: userInfoType = {
+                ...userInfo,
+                name: name.value,
+                livingcity: livingcity.value,
+                birthcity: birthcity.value,
+              };
+              fetchUser(user);
+            }}
+          >
+            <label className={styles.formFieldContainer}>
+              <span className={styles.label}>Имя</span>
+              <Input
+                disableUnderline
+                type="text"
+                name="name"
+                defaultValue={userInfo.name}
+                placeholder="имя"
+              />
+            </label>
+            <label className={styles.formFieldContainer}>
+              <span className={styles.label}>Почта</span>
+              <Input
+                disabled
+                disableUnderline
+                type="email"
+                name="mail"
+                defaultValue={userInfo.mail}
+                placeholder="почта"
+              />
+            </label>
+            <CityInput
+              name="birthcity"
+              title="Место рождения"
+              placeholder="населенный пункт"
+            />
+            <CityInput
+              name="livingcity"
+              title="Место жительства"
+              placeholder="населенный пункт"
+            />
+            <Button type="submit">Зарегистрироваться</Button>
+          </form>
+        </ThemeProvider>
       ) : (
-        <button className={styles.button} onClick={googleSignIn}>
-          Войти
-        </button>
+        <GoogleIcon
+          className={styles.icon}
+          onClick={token ? googleLogOut : googleSignIn}
+        />
       )}
     </div>
   );

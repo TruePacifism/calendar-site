@@ -26,7 +26,7 @@ export default function CityInput({ title, name, placeholder }: propsType) {
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setInputValue(e.target.value);
     },
-    1250
+    250
   );
   const updateCitiesList = async () => {
     const cities: cityInfoType[] = await getCities({
@@ -59,7 +59,12 @@ export default function CityInput({ title, name, placeholder }: propsType) {
           //   );
           // }}
           renderInput={(params) => (
-            <TextField {...params} onChange={updateInput} label={placeholder} />
+            <TextField
+              {...params}
+              name={name}
+              onChange={updateInput}
+              label={placeholder}
+            />
           )}
           freeSolo
           sx={{ width: "203.4px", height: "26px" }}

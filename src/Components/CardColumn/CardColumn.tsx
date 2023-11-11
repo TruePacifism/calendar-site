@@ -30,6 +30,8 @@ const getStyles = (doneFor: doneForType): stylesType => {
   }
 };
 
+const badNames = ["-1:-1", "-1", "0"];
+
 export default function CardColumn({
   element,
   animal,
@@ -57,7 +59,9 @@ export default function CardColumn({
       >
         <div className={styles.headingContainer}>
           {doneFor === "HomePage" && <ArrowLeft className={styles.arrow} />}
-          <h3 className={styles.heading}>{title}</h3>
+          <h3 className={styles.heading}>
+            {badNames.includes(title.toString()) ? "N/A" : title}
+          </h3>
           {doneFor === "HomePage" && <ArrowRight className={styles.arrow} />}
         </div>
         <ElementPic element={element} doneFor={doneFor} />

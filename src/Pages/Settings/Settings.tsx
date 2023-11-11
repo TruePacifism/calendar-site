@@ -7,7 +7,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { settingsAccordionTheme } from "../../utils/muiThemes";
-import getColorByAnimal from "../../utils/getColorByAnimal";
+import getColorByAnimalElement from "../../utils/getColorByAnimal";
 
 export default function Settings() {
   return (
@@ -19,7 +19,7 @@ export default function Settings() {
             <AccordionDetails>
               <span
                 style={{
-                  backgroundColor: getColorByAnimal({
+                  backgroundColor: getColorByAnimalElement({
                     name: "Коза",
                     isBlack: false,
                     isGood: true,
@@ -40,7 +40,7 @@ export default function Settings() {
             <AccordionDetails>
               <span
                 style={{
-                  backgroundColor: getColorByAnimal({
+                  backgroundColor: getColorByAnimalElement({
                     name: "Коза",
                     isBlack: false,
                     isGood: true,
@@ -61,7 +61,7 @@ export default function Settings() {
             <AccordionDetails>
               <span
                 style={{
-                  backgroundColor: getColorByAnimal({
+                  backgroundColor: getColorByAnimalElement({
                     name: "Коза",
                     isBlack: false,
                     isGood: true,
@@ -82,7 +82,7 @@ export default function Settings() {
             <AccordionDetails>
               <span
                 style={{
-                  backgroundColor: getColorByAnimal({
+                  backgroundColor: getColorByAnimalElement({
                     name: "Коза",
                     isBlack: false,
                     isGood: true,

@@ -3,7 +3,7 @@ import styles from "./MainPage.module.css";
 import DaysLine from "../../Components/DaysLine/DaysLine";
 import IconedCardInfoList from "../../Components/IconedCardInfoList/IconedCardInfoList";
 import { cardInfoType } from "../../utils/types";
-import getColorByAnimal from "../../utils/getColorByAnimal";
+import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import cardInfoPlaceholder from "../../utils/cardPlaceholder";
 import CardInfo from "../../Components/CardInfo/CardInfo";
 import StrangeCircle from "../../Components/StrangeCircle/StrangeCircle";
@@ -30,7 +30,7 @@ export default function MainPage() {
         <section
           style={{
             backgroundColor: todayInfo
-              ? getColorByAnimal(todayInfo.year.animal).hex
+              ? getColorByAnimalElement(todayInfo.day.element).hex
               : "#FFFFFF",
           }}
         >

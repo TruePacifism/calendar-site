@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./CardListItem.module.css";
 import { cardInfoType, colorType } from "../../utils/types";
-import getColorByAnimal from "../../utils/getColorByAnimal";
+import getColorByAnimalElement from "../../utils/getColorByAnimal";
 
 type propsType = {
   cardInfo: cardInfoType;
@@ -11,7 +11,7 @@ export default function CardListItem({ cardInfo }: propsType) {
   const [color, setColor]: [colorType, Dispatch<SetStateAction<colorType>>] =
     useState();
   useEffect(() => {
-    setColor(getColorByAnimal(cardInfo.year.animal));
+    setColor(getColorByAnimalElement(cardInfo.year.animal));
   }, [cardInfo.year.animal]);
   return (
     <li className={styles.section}>

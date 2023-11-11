@@ -3,7 +3,7 @@ import styles from "./CardGridItem.module.css";
 import IconedCardInfoList from "../IconedCardInfoList/IconedCardInfoList";
 import { cardInfoType, colorType } from "../../utils/types";
 import CardInfo from "../CardInfo/CardInfo";
-import getColorByAnimal from "../../utils/getColorByAnimal";
+import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import pfpPlaceholder from "../../images/pfpPlaceholder.png";
 
 type propsType = {
@@ -16,7 +16,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
   const [pfpUrl, setPfpUrl]: [string, Dispatch<SetStateAction<string>>] =
     useState(pfpPlaceholder);
   useEffect(() => {
-    setColor(getColorByAnimal(cardInfo.year.animal));
+    setColor(getColorByAnimalElement(cardInfo.year.animal));
     setPfpUrl(pfpPlaceholder);
   }, [cardInfo.year.animal]);
   return (

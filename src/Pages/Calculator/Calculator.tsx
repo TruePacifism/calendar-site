@@ -104,8 +104,8 @@ export default function Calculator() {
       name: e.target.elements.name.value,
       birthdate: {
         year: year.value ? Number(year.value) : -1,
-        month: Number(month.value) ? Number(month.value) : -1,
-        day: Number(day.value) ? Number(day.value) : -1,
+        month: month.value !== "ММ" ? Number(month.value) : -1,
+        day: day.value !== "ДД" ? Number(day.value) : -1,
         hour: hour.value ? Number(hour.value) : -1,
         minute: minute.value ? Number(minute.value) : -1,
       },
