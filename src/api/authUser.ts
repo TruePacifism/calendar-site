@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import { userInput } from "../utils/types";
 import { apiClient } from "./apiVars";
 

@@ -8,12 +8,9 @@ import {
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { ReactComponent as GoogleIcon } from "../../images/in-yan-icon.svg";
-import signUp from "../../api/signUp";
 import { userInput } from "../../utils/types";
 import {
   Button,
-  FormControl,
-  FormGroup,
   Input,
   ThemeProvider,
 } from "@mui/material";
