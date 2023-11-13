@@ -221,7 +221,7 @@ export default function Calculator() {
           </div>
           <div className={styles.formFieldContainer}>
             <span className={styles.label}>Время рождения</span>
-            <div className={styles.dateInputBox}>
+            <div className={styles.hourInputBox}>
               <ThemeProvider theme={birthtimeTheme}>
                 <Input
                   disableUnderline

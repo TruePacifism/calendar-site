@@ -62,46 +62,50 @@ export default function ModalCardInfo({ cardInfo }: propsType) {
   return (
     <div className={styles.container}>
       <ModalHeading text="КАРТА" />
-      <ul className={styles.list}>
-        <CardColumn
-          doneFor="Calculator"
-          key={keys[3]}
-          animal={cardInfo.hour.animal}
-          element={cardInfo.hour.element}
-          title={`${cardInfo.birthdate.hour}:${cardInfo.birthdate.minute}`}
-        />
-        <CardColumn
-          doneFor="Calculator"
-          key={keys[2]}
-          animal={cardInfo.day.animal}
-          element={cardInfo.day.element}
-          title={cardInfo.birthdate.day}
-        />
-        <CardColumn
-          doneFor="Calculator"
-          key={keys[1]}
-          animal={cardInfo.month.animal}
-          element={cardInfo.month.element}
-          title={cardInfo.birthdate.month + 1}
-        />
-        <CardColumn
-          doneFor="Calculator"
-          key={keys[0]}
-          animal={cardInfo.year.animal}
-          element={cardInfo.year.element}
-          title={cardInfo.birthdate.year}
-        />
-        <div></div>
-        <CardColumn
-          doneFor="Calculator"
-          key={keys[4]}
-          animal={cardInfo.currentPillar ? cardInfo.currentPillar.animal : null}
-          element={
-            cardInfo.currentPillar ? cardInfo.currentPillar.element : null
-          }
-          title="такт"
-        />
-      </ul>
+      <div className={styles.listContainer}>
+        <ul className={styles.list}>
+          <CardColumn
+            doneFor="Calculator"
+            key={keys[3]}
+            animal={cardInfo.hour.animal}
+            element={cardInfo.hour.element}
+            title={`${cardInfo.birthdate.hour}:${cardInfo.birthdate.minute}`}
+          />
+          <CardColumn
+            doneFor="Calculator"
+            key={keys[2]}
+            animal={cardInfo.day.animal}
+            element={cardInfo.day.element}
+            title={cardInfo.birthdate.day}
+          />
+          <CardColumn
+            doneFor="Calculator"
+            key={keys[1]}
+            animal={cardInfo.month.animal}
+            element={cardInfo.month.element}
+            title={cardInfo.birthdate.month + 1}
+          />
+          <CardColumn
+            doneFor="Calculator"
+            key={keys[0]}
+            animal={cardInfo.year.animal}
+            element={cardInfo.year.element}
+            title={cardInfo.birthdate.year}
+          />
+          <div></div>
+          <CardColumn
+            doneFor="Calculator"
+            key={keys[4]}
+            animal={
+              cardInfo.currentPillar ? cardInfo.currentPillar.animal : null
+            }
+            element={
+              cardInfo.currentPillar ? cardInfo.currentPillar.element : null
+            }
+            title="такт"
+          />
+        </ul>
+      </div>
       <ul className={styles.collisionsList}>
         {getAllCollisions(cardInfo).map((collision, idx) => (
           <>

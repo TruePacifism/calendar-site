@@ -32,7 +32,6 @@ function App() {
     Dispatch<SetStateAction<string>>
   ] = useState();
   useEffect(() => {
-    console.log(location.pathname);
     const actualHeadingText = getHeadingText(location.pathname);
     setHeaderText(actualHeadingText);
   }, [location]);

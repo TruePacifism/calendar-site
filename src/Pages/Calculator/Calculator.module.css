@@ -18,19 +18,29 @@
   line-height: 15px;
   letter-spacing: 0em;
   text-align: left;
-  min-width: calc((100vw - 26px * 2) / 4);
-  max-width: calc((100vw - 26px * 2) / 4);
+  min-width: 104px;
+  max-width: 104px;
 
   color: #02081e;
 }
 .simpleInput,
-.dateInput {
+.dateInput,
+.hourInputBox {
   box-sizing: border-box;
-  border: 1px solid green;
   border-radius: 5px;
   min-height: 26px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.hourInputBox {
+  width: 195px;
+  text-align: left;
+  & > *:not(:last-child) {
+    margin-right: 5px;
+  }
+  & > :last-child {
+    margin-right: auto;
+  }
 }
 .simpleInput {
   min-width: 195px;
@@ -39,7 +49,8 @@
 .simpleInput::placeholder {
   color: #8894bf;
 }
-.dateInputBox {
+.dateInputBox,
+.hourInputBox {
   min-width: 195px;
 }
 .dateInputBox > *:not(:last-child) {

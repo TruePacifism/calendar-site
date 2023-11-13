@@ -5,8 +5,11 @@
   padding-right: 26px;
   padding-bottom: 23px;
 }
+.listContainer {
+}
 .list {
   display: flex;
+  overflow: scroll;
   align-items: flex-start;
   justify-content: space-between;
 }

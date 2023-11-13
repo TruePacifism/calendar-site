@@ -26,17 +26,20 @@ export default function CityInput({ title, name, placeholder }: propsType) {
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setInputValue(e.target.value);
     },
-    250
+    300
   );
   const updateCitiesList = async () => {
     const cities: cityInfoType[] = await getCities({
       query: inputValue,
     });
-    console.log(inputValue);
+    if (!cities[0].name) {
+      return;
+    }
+    console.log(cities);
     setCitiesList(cities);
   };
   useEffect(() => {
-    if (!inputValue || inputValue.length < 5) {
+    if (!inputValue) {
       setCitiesList([]);
       return;
     }
@@ -58,16 +61,21 @@ export default function CityInput({ title, name, placeholder }: propsType) {
           //     </li>
           //   );
           // }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              name={name}
-              onChange={updateInput}
-              label={placeholder}
-            />
-          )}
+          renderInput={(params) =>
+            citiesList ? (
+              <TextField
+                {...params}
+                name={name}
+                onChange={updateInput}
+                label={placeholder}
+                sx={{ height: "26px" }}
+              />
+            ) : (
+              <></>
+            )
+          }
           freeSolo
-          sx={{ width: "203.4px", height: "26px" }}
+          sx={{ width: "203.4px", height: "100%" }}
           options={citiesList.map((city) => city.name)}
         />
         {/* <Input

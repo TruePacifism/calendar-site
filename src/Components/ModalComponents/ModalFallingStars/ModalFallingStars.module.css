@@ -5,6 +5,7 @@
 .starsList {
   width: 171px;
   height: 171px;
+  aspect-ratio: 1 / 1;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr; /* Задает три колонки равной ширины */
   gap: 10px; /* Задает промежуток между элементами */

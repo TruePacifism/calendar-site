@@ -1,10 +1,5 @@
 import { createTheme } from "@mui/material";
-import {
-  accentColor,
-  basicButtonBorderColor,
-  hiddenTextColor,
-  mainTextColor,
-} from "./vars";
+import { accentColor, basicButtonBorderColor, hiddenTextColor } from "./vars";
 import { hexToRgba } from "./hexToRgba";
 
 export const buttonTheme = createTheme({
@@ -43,7 +38,10 @@ export const modalTheme = createTheme({
         container: {
           backgroundColor: hexToRgba(accentColor, 90),
         },
-        paper: {},
+        paper: {
+          width: "100vw",
+          margin: 0,
+        },
       },
     },
   },
@@ -70,11 +68,34 @@ export const cityInputTheme = createTheme({
   components: {
     MuiAutocomplete: {
       styleOverrides: {
-        inputRoot: {
+        focused: {
+          flexWrap: "nowrap",
           height: "26px",
+          width: "195px",
+        },
+        inputRoot: { flexWrap: "nowrap", height: "26px", width: "195px" },
+        input: {
+          "&:not(.Mui-focused)": {
+            flexWrap: "nowrap",
+          },
+          height: "26px",
+          width: "195px",
+          fontSize: "11px",
         },
         root: {
+          "&:not(.Mui-focused)": {
+            flexWrap: "nowrap",
+          },
           height: "26px",
+          width: "195px",
+        },
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        input: {
+          height: "26px",
+          display: "block",
         },
       },
     },
@@ -82,6 +103,17 @@ export const cityInputTheme = createTheme({
       styleOverrides: {
         root: {
           top: 0,
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        shrink: {
+          top: 0,
+        },
+        root: {
+          top: "-13px",
+          fontSize: "0.85rem",
         },
       },
     },
@@ -207,6 +239,7 @@ export const mainTheme = createTheme({
           boxSizing: "border-box",
           border: `1px solid ${basicButtonBorderColor}`,
           borderRadius: "5px",
+          width: "195px",
           height: "26px",
           paddingTop: "0",
           paddingLeft: "2px",
@@ -381,7 +414,7 @@ export const birthtimeTheme = createTheme({
           fontFamily: "Roboto Slab",
           fontSize: "15px",
           fontWeight: "400",
-          width: 52,
+          width: 60,
           paddingLeft: 10,
           paddingRight: 10,
           letterSpacing: "0em",
@@ -399,13 +432,13 @@ export const settingsAccordionTheme = createTheme({
   components: {
     MuiAccordion: {
       styleOverrides: {
-        rounded: {
-          backgroundColor: "white",
-          color: hiddenTextColor,
-        },
-        expanded: {
-          color: mainTextColor,
-          backgroundColor: "red",
+        root: {
+          root: {
+            "&.Mui-expanded": {
+              color: "#02081E",
+              backgroundColor: "red",
+            },
+          },
         },
       },
     },

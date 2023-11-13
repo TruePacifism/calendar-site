@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Header.module.css";
 import { ReactComponent as BackIcon } from "../../images/back-icon.svg";
 import { ReactComponent as BurgerIcon } from "../../images/burger-icon.svg";
-import { ReactComponent as Logo } from "../../images/logo.svg";
 import { ReactComponent as SearchIcon } from "../../images/search-header-icon.svg";
 import { Link, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
@@ -53,15 +52,7 @@ export default function Header({ heading }: propsType) {
             <BackIcon className={styles.backIcon} />
           </Link>
         )}
-        {heading === "Мой феншуй" ? (
-          <>
-            <span className={styles.heading}>Мой</span>
-            <Logo className={styles.centerIcon} />
-            <span className={styles.heading}>феншуй</span>
-          </>
-        ) : (
-          <span className={styles.heading}>{heading}</span>
-        )}
+        <span className={styles.heading}>{heading}</span>
         <BurgerIcon className={styles.burgerIcon} />
       </div>
     </>

@@ -13,8 +13,8 @@
   line-height: 15px;
   letter-spacing: 0em;
   text-align: left;
-  min-width: calc((100vw - 26px * 2) / 4);
-  max-width: calc((100vw - 26px * 2) / 4);
+  min-width: 104px;
+  max-width: 104px;
 
   color: #02081e;
 }

@@ -4,6 +4,11 @@
   padding-left: 26px;
   padding-right: 26px;
 
+  @media screen and (max-width: 340px) {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
   position: relative;
 
   box-shadow: var(--top-shadow);

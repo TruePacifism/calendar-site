@@ -4,6 +4,7 @@ import cardGridItemStyles from "./CardInfo-CardGridItem.module.css";
 import homePageStyles from "./CardInfo-HomePage.module.css";
 import CardColumn from "../CardColumn/CardColumn";
 import { cardInfoType, stylesType } from "../../utils/types";
+import { useMediaQuery } from "@mui/material";
 
 type propsType = {
   cardInfo: cardInfoType;
@@ -28,7 +29,8 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
     stylesType,
     Dispatch<SetStateAction<stylesType>>
   ] = useState({ container: "" });
-  console.log(styles);
+
+  const smallMobile = useMediaQuery("(min-width: 345px)");
 
   //УДАЛИТЬ В КОНЦЕ
   useEffect(() => {
@@ -62,7 +64,7 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             element={cardInfo.year.element}
             title={cardInfo.birthdate.year}
           />
-          <div className={styles.separator}></div>
+          {smallMobile && <div className={styles.separator}></div>}
           {doneFor !== "HomePage" && (
             <CardColumn
               animal={

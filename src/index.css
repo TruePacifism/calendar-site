@@ -56,6 +56,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.brownBackground {
+.MuiAutocomplete-inputRoot {
+  flex-wrap: no wrap !important;
 }
