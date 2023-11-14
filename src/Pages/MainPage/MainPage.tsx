@@ -10,6 +10,7 @@ import StrangeCircle from "../../Components/StrangeCircle/StrangeCircle";
 import { ReactComponent as StarIcon } from "../../images/star-icon.svg";
 import { ReactComponent as AddIcon } from "../../images/add-home.svg";
 import getToday from "../../api/getToday";
+import Loading from "../../Components/Loading/Loading";
 
 export default function MainPage() {
   const [todayInfo, setTodayInfo]: [
@@ -23,6 +24,16 @@ export default function MainPage() {
     };
     fetchInfo();
   }, []);
+  useEffect(() => {
+    if (!todayInfo) {
+      return;
+    }
+    console.log("loading");
+    return () => {
+      console.log("loaded");
+    };
+  }, [todayInfo]);
+
   // This will run one time after the component mounts
   useEffect(() => {
     console.log("start");
@@ -44,32 +55,36 @@ export default function MainPage() {
   }, []);
 
   return (
-    todayInfo && (
-      <>
-        <DaysLine />
-        <section
-          style={{
-            backgroundColor: todayInfo
-              ? getColorByAnimalElement(todayInfo.day.element).hex
-              : "#FFFFFF",
-          }}
-        >
-          <IconedCardInfoList doneFor="HomePage" cardInfo={todayInfo} />
-          <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
-          <div className={styles.circleInfo}>
-            <StarIcon className={styles.starIcon} />
-            <StrangeCircle
-              cardInfos={[
-                cardInfoPlaceholder,
-                cardInfoPlaceholder,
-                cardInfoPlaceholder,
-                cardInfoPlaceholder,
-              ]}
-            />
-            <AddIcon className={styles.addIcon} />
-          </div>
-        </section>
-      </>
-    )
+    <>
+      <Loading isShowing={todayInfo ? false : true} />
+
+      {todayInfo && (
+        <>
+          <DaysLine />
+          <section
+            style={{
+              backgroundColor: todayInfo
+                ? getColorByAnimalElement(todayInfo.day.element).hex
+                : "#FFFFFF",
+            }}
+          >
+            <IconedCardInfoList doneFor="HomePage" cardInfo={todayInfo} />
+            <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
+            <div className={styles.circleInfo}>
+              <StarIcon className={styles.starIcon} />
+              <StrangeCircle
+                cardInfos={[
+                  cardInfoPlaceholder,
+                  cardInfoPlaceholder,
+                  cardInfoPlaceholder,
+                  cardInfoPlaceholder,
+                ]}
+              />
+              <AddIcon className={styles.addIcon} />
+            </div>
+          </section>
+        </>
+      )}
+    </>
   );
 }

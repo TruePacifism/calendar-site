@@ -59,3 +59,9 @@ code {
 .MuiAutocomplete-inputRoot {
   flex-wrap: no wrap !important;
 }
+::-webkit-scrollbar {
+  display: none;
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
+}

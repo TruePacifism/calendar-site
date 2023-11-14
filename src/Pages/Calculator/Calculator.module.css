@@ -21,6 +21,11 @@
   min-width: 104px;
   max-width: 104px;
 
+  @media screen and (max-width: 360px) {
+    min-width: 90px;
+    max-width: 90px;
+  }
+
   color: #02081e;
 }
 .simpleInput,

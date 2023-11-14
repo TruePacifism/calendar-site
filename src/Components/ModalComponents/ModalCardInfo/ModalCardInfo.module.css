@@ -1,13 +1,13 @@
 .container {
   background-color: var(--background-color);
   padding-top: 16px;
-  padding-left: 26px;
-  padding-right: 26px;
   padding-bottom: 23px;
 }
 .listContainer {
 }
 .list {
+  padding-left: 26px;
+  padding-right: 26px;
   display: flex;
   overflow: scroll;
   align-items: flex-start;

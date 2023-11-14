@@ -25,20 +25,18 @@ export default function ModalPillars({ pillars, currentPillar }: propsType) {
     <div className={styles.container}>
       <ModalHeading text="ТАКТЫ" />
       <div className={styles.pillarsContainer}>
-        <div className={styles.pillarsInnerContainer}>
-          {pillars.map((pillar) => (
-            <CardColumn
-              doneFor="Calculator"
-              key={pillar.year}
-              animal={pillar.animal}
-              element={pillar.element}
-              isCurrentPillar={
-                currentPillar && currentPillar.ageYear === pillar.ageYear
-              }
-              title={`${pillar.year},${pillar.month}\n${pillar.ageYear},${pillar.ageMonth}`}
-            />
-          ))}
-        </div>
+        {pillars.map((pillar) => (
+          <CardColumn
+            doneFor="Calculator"
+            key={pillar.year}
+            animal={pillar.animal}
+            element={pillar.element}
+            isCurrentPillar={
+              currentPillar && currentPillar.ageYear === pillar.ageYear
+            }
+            title={`${pillar.year},${pillar.month}\n${pillar.ageYear},${pillar.ageMonth}`}
+          />
+        ))}
       </div>
       <ul className={styles.collisionsList}>
         {getAllCollisions(pillars).map((collision, idx) => (

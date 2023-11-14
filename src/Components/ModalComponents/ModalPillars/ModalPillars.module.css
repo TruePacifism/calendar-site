@@ -1,13 +1,18 @@
 .container {
   background-color: var(--main-background-color);
-  padding: 13px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left: 13px;
+  padding-right: 13px;
 }
 .pillarsContainer {
   background-color: var(--main-background-color);
   /* padding-left: 11px;
   padding-right: 11px; */
-}
-.pillarsInnerContainer {
+  padding-left: -13px;
+  padding-right: -13px;
   display: flex;
   overflow: scroll;
+}
+.pillarsInnerContainer {
 }

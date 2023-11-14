@@ -129,6 +129,7 @@ export default function Calculator() {
       setInputData(null);
     }
   }, [params]);
+
   return inputData ? (
     <Card inputData={inputData} />
   ) : (

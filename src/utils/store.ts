@@ -1,26 +1,23 @@
-import { configureStore } from "@reduxjs/toolkit";
-import getUserInfo from "../api/getUserInfo";
-// ...
+// import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
+// import getUserInfo from "../api/getUserInfo";
+// // ...
 
-type stateType = {
-  user: {
-    name: string;
-    mail: string;
-    livingcity: string;
-    birthcity: string;
-  };
-};
+// type stateType = {
+//   user: {
+//     name: string;
+//     mail: string;
+//     livingcity: string;
+//     birthcity: string;
+//   };
+// };
 
-const initialState: stateType = {
-  user: null,
-};
+// const initialState: stateType = {
+//   user: null,
+// };
+// const authAction = createAction("AUTH");
 
-export const store = configureStore({
-  reducer: {
-    user: async (state) => {
-      const token = localStorage.getItem("token");
-      const user = getUserInfo({ token });
-      return { ...state, user };
-    },
-  },
-});
+// export const store = configureStore({
+//   reducer: createReducer(initialState, (builder) => {
+//     builder.addCase(authAction, (state, action) => {});
+//   }),
+// });

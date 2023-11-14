@@ -9,6 +9,7 @@ import { cardInfoType } from "../../utils/types";
 import cardInfoPlaceholder from "../../utils/cardPlaceholder";
 import { Input } from "@mui/material";
 import CardListItem from "../../Components/CardListItem/CardListItem";
+import Loading from "../../Components/Loading/Loading";
 
 export default function Cards() {
   const [filter, setFilter]: [string, Dispatch<SetStateAction<string>>] =
@@ -41,6 +42,7 @@ export default function Cards() {
 
   return (
     <>
+      <Loading isShowing={cardsInfo ? false : true} />
       <FiltersList
         onChange={(e) => {
           setFilter(e.target.value);

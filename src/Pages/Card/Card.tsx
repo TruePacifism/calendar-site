@@ -19,6 +19,7 @@ import ModalFallingStars from "../../Components/ModalComponents/ModalFallingStar
 import ModalAnimalChart from "../../Components/ModalComponents/ModalAnimalChart/ModalAnimalChart";
 import ModalPillars from "../../Components/ModalComponents/ModalPillars/ModalPillars";
 import countCard from "../../api/countCard";
+import Loading from "../../Components/Loading/Loading";
 
 type propsType = {
   inputData: inputDataType;
@@ -54,9 +55,19 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
     }
   }, [inputData]);
 
+  useEffect(() => {
+    if (isOpenModal) {
+      window.addEventListener("popstate", closeModal);
+    } else {
+      window.removeEventListener("popstate", closeModal);
+    }
+  }, [isOpenModal]);
+  console.log(cardInfo);
+
   return (
     cardInfo && (
       <>
+        <Loading isShowing={cardInfo ? false : true} />
         <ThemeProvider theme={modalTheme}>
           <Dialog fullWidth open={isOpenModal} onClose={closeModal}>
             {modalContent}
