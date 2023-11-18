@@ -26,6 +26,8 @@ const getShape = (shape: string, color: string) => {
 };
 
 const getColorClassName = (color: string) => {
+  console.log("color", color);
+
   switch (color) {
     case "red":
       return styles.red;
@@ -33,6 +35,8 @@ const getColorClassName = (color: string) => {
       return styles.lightGreen;
     case "lightBlue":
       return styles.lightBlue;
+    case "blue":
+      return styles.darkBlue;
     case "brown":
       return styles.brown;
     case "orange":

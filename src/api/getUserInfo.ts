@@ -1,4 +1,3 @@
-import { userInput } from "../utils/types";
 import { apiClient } from "./apiVars";
 
 type propsType = {

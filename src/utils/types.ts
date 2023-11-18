@@ -72,6 +72,16 @@ export type collisionType = {
   id: number;
   secondTarget: collisionTargetType;
   thirdTarget?: collisionTargetType;
+  animal: {
+    name: string;
+    element: {
+      name: string;
+    };
+    monthBounds: {
+      start: number;
+      end: number;
+    };
+  };
   shape: string;
   color: string;
   kind: string;
@@ -208,4 +218,17 @@ export type userInput = {
   token: string;
   name: string;
   mail: string;
+};
+
+export type stateType = {
+  user: userType;
+  token: string;
+};
+
+export type userType = {
+  name: string;
+  mail: string;
+  livingcity: string;
+  birthcity: string;
+  cards: cardInfoType[];
 };

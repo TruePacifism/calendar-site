@@ -10,6 +10,7 @@
 .orange,
 .lightBlue,
 .yellow,
+.darkBlue,
 .pink {
   min-width: 26px;
   max-width: 26px;
@@ -41,7 +42,9 @@
 .lightBlue {
   fill: var(--light-blue-color);
 }
-
+.darkBlue {
+  fill: var(--dark-blue-color);
+}
 .yellow {
   fill: var(--yellow-color);
 }

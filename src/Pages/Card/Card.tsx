@@ -2,7 +2,12 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./Card.module.css";
 import IconedCardInfoList from "../../Components/IconedCardInfoList/IconedCardInfoList";
 import CustomCheckBoxGroup from "../../Components/CustomCheckBoxGroup";
-import { cardInfoType, inputDataType } from "../../utils/types";
+import {
+  cardInfoType,
+  inputDataType,
+  stateType,
+  userType,
+} from "../../utils/types";
 import CardInfo from "../../Components/CardInfo/CardInfo";
 import MainElementStar from "../../Components/MainElementStar/MainElementStar";
 import FallingStarsField from "../../Components/FallingStarsField/FallingStarsField";
@@ -20,6 +25,9 @@ import ModalAnimalChart from "../../Components/ModalComponents/ModalAnimalChart/
 import ModalPillars from "../../Components/ModalComponents/ModalPillars/ModalPillars";
 import countCard from "../../api/countCard";
 import Loading from "../../Components/Loading/Loading";
+import { useSelector, useDispatch } from "react-redux";
+import addCard from "../../api/addCard";
+import { addCardAction } from "../../utils/store";
 
 type propsType = {
   inputData: inputDataType;
@@ -63,6 +71,21 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
     }
   }, [isOpenModal]);
   console.log(cardInfo);
+
+  const userInfo = useSelector<stateType, userType>((state) => state.user);
+  const token = useSelector<stateType, string>((state) => state.token);
+  const dispatch = useDispatch();
+  const fetchAddCard = async () => {
+    console.log(userInfo);
+
+    const result = await addCard({ card: cardInfo, token });
+    if (result.status / 100 === 2) {
+      console.log("Карта добавлена успешно");
+      dispatch(addCardAction(cardInfo));
+    } else {
+      console.log("Проблемы с добавлением карты");
+    }
+  };
 
   return (
     cardInfo && (
@@ -165,7 +188,13 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
 
         <div className={styles.saveContainer}>
           <ThemeProvider theme={buttonTheme}>
-            <Button>СОХРАНИТЬ</Button>
+            <Button
+              onClick={() => {
+                fetchAddCard();
+              }}
+            >
+              СОХРАНИТЬ
+            </Button>
             <p className={styles.saveText}>
               Рассчитать совместимость с другой картой, генеалогическое древо
               можно построить, если зайти на полную версию сайта с компьютера.

@@ -89,6 +89,17 @@ const cardInfoPlaceholder: cardInfoType = {
             },
             targetTime: "час",
           },
+          animal: {
+            name: "Змея",
+            element: {
+              name: "Дерево Инь",
+            },
+            monthBounds: {
+              start: 126,
+              end: 156,
+            },
+          },
+
           shape: "Полукруг",
           color: "Светло-Зеленый",
           kind: "Столкновение",
@@ -125,6 +136,16 @@ const cardInfoPlaceholder: cardInfoType = {
               },
             },
             targetTime: "день",
+          },
+          animal: {
+            name: "Свинья",
+            element: {
+              name: "Вода Инь",
+            },
+            monthBounds: {
+              start: 126,
+              end: 156,
+            },
           },
           shape: "Полукруг",
           color: "Светло-Зеленый",

@@ -33,6 +33,8 @@ const getColorClassName = (color: string) => {
       return styles.lightGreen;
     case "lightBlue":
       return styles.lightBlue;
+    case "blue":
+      return styles.darkBlue;
     case "brown":
       return styles.brown;
     case "orange":
@@ -57,9 +59,9 @@ export default function ModalCollision({ collision }: propsType) {
     <li className={styles.container}>
       {getShape(collision.shape, collision.color)}
       <p className={styles.description}>{`${collision.kind}: ${
-        collision.targetName
-      } - ${collision.secondTarget.targetTime} ${
-        collision.thirdTarget ? `- ${collision.thirdTarget.targetTime}` : ""
+        collision.animal.name
+      } - ${collision.secondTarget.animal.name} ${
+        collision.thirdTarget ? `- ${collision.thirdTarget.animal.name}` : ""
       }`}</p>
     </li>
   );

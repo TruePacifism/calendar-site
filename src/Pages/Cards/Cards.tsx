@@ -5,11 +5,11 @@ import { ReactComponent as ListIcon } from "../../images/list-icon.svg";
 import { ReactComponent as GridIcon } from "../../images/grid-icon.svg";
 import { ReactComponent as SortingIcon } from "../../images/sorting-icon.svg";
 import CardGridItem from "../../Components/CardGridItem/CardGridItem";
-import { cardInfoType } from "../../utils/types";
-import cardInfoPlaceholder from "../../utils/cardPlaceholder";
+import { cardInfoType, stateType } from "../../utils/types";
 import { Input } from "@mui/material";
 import CardListItem from "../../Components/CardListItem/CardListItem";
 import Loading from "../../Components/Loading/Loading";
+import { useSelector } from "react-redux";
 
 export default function Cards() {
   const [filter, setFilter]: [string, Dispatch<SetStateAction<string>>] =
@@ -27,18 +27,10 @@ export default function Cards() {
     setIsFullCards(!isFullCards);
   };
 
-  const [cardsInfo, setCardsInfo]: [
-    cardInfoType[],
-    Dispatch<SetStateAction<cardInfoType[]>>
-  ] = useState();
-  useEffect(() => {
-    setCardsInfo([
-      cardInfoPlaceholder,
-      cardInfoPlaceholder,
-      cardInfoPlaceholder,
-      cardInfoPlaceholder,
-    ]);
-  }, []);
+  const cardsInfo = useSelector<stateType, cardInfoType[]>(
+    (state) => state.user.cards
+  );
+  console.log(cardsInfo);
 
   return (
     <>

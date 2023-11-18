@@ -5,6 +5,7 @@
 .purple,
 .orange,
 .lightBlue,
+.darkBlue,
 .yellow,
 .pink {
   min-width: 12px;
@@ -38,6 +39,9 @@
 
 .lightBlue {
   fill: var(--light-blue-color);
+}
+.darkBlue {
+  fill: var(--dark-blue-color);
 }
 
 .yellow {
