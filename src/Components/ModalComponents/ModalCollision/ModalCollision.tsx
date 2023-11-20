@@ -53,8 +53,6 @@ const getColorClassName = (color: string) => {
 };
 
 export default function ModalCollision({ collision }: propsType) {
-  console.log(collision);
-
   return (
     <li className={styles.container}>
       {getShape(collision.shape, collision.color)}

@@ -68,26 +68,12 @@ export const cityInputTheme = createTheme({
   components: {
     MuiAutocomplete: {
       styleOverrides: {
-        focused: {
-          flexWrap: "nowrap",
-          height: "26px",
-          width: "195px",
-        },
-        inputRoot: { flexWrap: "nowrap", height: "26px", width: "195px" },
-        input: {
-          "&:not(.Mui-focused)": {
-            flexWrap: "nowrap",
-          },
-          height: "26px",
-          width: "195px",
-          fontSize: "11px",
-        },
         root: {
-          "&:not(.Mui-focused)": {
+          "&.Mui-focused": {
             flexWrap: "nowrap",
+            height: "26px",
+            width: "195px",
           },
-          height: "26px",
-          width: "195px",
         },
       },
     },

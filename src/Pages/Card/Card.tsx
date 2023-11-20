@@ -2,12 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./Card.module.css";
 import IconedCardInfoList from "../../Components/IconedCardInfoList/IconedCardInfoList";
 import CustomCheckBoxGroup from "../../Components/CustomCheckBoxGroup";
-import {
-  cardInfoType,
-  inputDataType,
-  stateType,
-  userType,
-} from "../../utils/types";
+import { cardInfoType, inputDataType, stateType } from "../../utils/types";
 import CardInfo from "../../Components/CardInfo/CardInfo";
 import MainElementStar from "../../Components/MainElementStar/MainElementStar";
 import FallingStarsField from "../../Components/FallingStarsField/FallingStarsField";
@@ -70,14 +65,10 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
       window.removeEventListener("popstate", closeModal);
     }
   }, [isOpenModal]);
-  console.log(cardInfo);
 
-  const userInfo = useSelector<stateType, userType>((state) => state.user);
   const token = useSelector<stateType, string>((state) => state.token);
   const dispatch = useDispatch();
   const fetchAddCard = async () => {
-    console.log(userInfo);
-
     const result = await addCard({ card: cardInfo, token });
     if (result.status / 100 === 2) {
       console.log("Карта добавлена успешно");

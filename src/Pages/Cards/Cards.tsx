@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Cards.module.css";
 import FiltersList from "../../Components/FiltersList/FiltersList";
 import { ReactComponent as ListIcon } from "../../images/list-icon.svg";
@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 export default function Cards() {
   const [filter, setFilter]: [string, Dispatch<SetStateAction<string>>] =
     useState("all");
+  console.log(filter);
   const [isFullCards, setIsFullCards]: [
     boolean,
     Dispatch<SetStateAction<boolean>>
@@ -30,7 +31,6 @@ export default function Cards() {
   const cardsInfo = useSelector<stateType, cardInfoType[]>(
     (state) => state.user.cards
   );
-  console.log(cardsInfo);
 
   return (
     <>
@@ -38,7 +38,6 @@ export default function Cards() {
       <FiltersList
         onChange={(e) => {
           setFilter(e.target.value);
-          console.log(filter);
         }}
       />
       <div className={styles.cardsInfoContainer}>

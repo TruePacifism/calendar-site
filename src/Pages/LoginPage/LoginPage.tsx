@@ -9,15 +9,14 @@ import {
 import { initializeApp } from "firebase/app";
 import { ReactComponent as GoogleIcon } from "../../images/in-yan-icon.svg";
 import { userInput } from "../../utils/types";
-import {
-  Button,
-  Input,
-  ThemeProvider,
-} from "@mui/material";
+import { Button, Input, ThemeProvider } from "@mui/material";
 import { mainTheme } from "../../utils/muiThemes";
 import CityInput from "../../Components/CityInput/CityInput";
 import authUser from "../../api/authUser";
 import { useNavigate } from "react-router-dom";
+import getUserInfo from "../../api/getUserInfo";
+import { useDispatch } from "react-redux";
+import { setUserAction } from "../../utils/store";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB_eoV10ywFfBnJ3RsXSUAPd-IFZ6oboTY",
@@ -46,6 +45,7 @@ type userInfoType = {
 
 export default function LoginPage(props: propsType) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [token, setToken]: [string, Dispatch<SetStateAction<string>>] =
     useState();
   useEffect(() => {
@@ -62,18 +62,25 @@ export default function LoginPage(props: propsType) {
   const googleSignIn = () => {
     signInWithPopup(auth, provider).then(async (result) => {
       const token: string = result.user.uid;
-      console.log(result);
-
-      const user: userInput = {
-        token: token,
-        name: result.user.displayName,
-        mail: result.user.email,
-      };
-      setUserInfo({
-        ...user,
-        livingcity: "",
-        birthcity: "",
-      });
+      const user = await getUserInfo({ token });
+      if (user) {
+        console.log(user);
+        localStorage.setItem("token", user.token);
+        dispatch(setUserAction(user));
+        navigate("/");
+        return;
+      } else {
+        const user: userInput = {
+          token: token,
+          name: result.user.displayName,
+          mail: result.user.email,
+        };
+        setUserInfo({
+          ...user,
+          livingcity: "",
+          birthcity: "",
+        });
+      }
     });
   };
   const fetchUser = async (user: userInfoType) => {

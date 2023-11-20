@@ -32,7 +32,7 @@ export default function CityInput({ title, name, placeholder }: propsType) {
     const cities: cityInfoType[] = await getCities({
       query: inputValue,
     });
-    if (!cities[0].name) {
+    if (cities.length === 0) {
       return;
     }
     console.log(cities);

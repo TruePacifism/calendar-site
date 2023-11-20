@@ -8,8 +8,6 @@ type propsType = {
 };
 
 export default function CollisionsList({ collisions }: propsType) {
-  console.log("collisions", collisions);
-
   return (
     <ul className={styles.list}>
       {collisions &&

@@ -12,7 +12,7 @@ import {
   dateInputTheme,
   mainTheme,
 } from "../../utils/muiThemes";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import Card from "../Card/Card";
 import CityInput from "../../Components/CityInput/CityInput";
 
@@ -121,14 +121,26 @@ export default function Calculator() {
     inputDataType,
     Dispatch<SetStateAction<inputDataType>>
   ] = useState();
+  const location = useLocation();
+  useEffect(() => {
+    if (!location.state || !location.state.inputData || params.get("data")) {
+      return;
+    }
+    const { inputData } = location.state;
+    params.set("inputData", JSON.stringify(inputData));
+    setParams(params);
+  }, [location, params, setParams]);
   useEffect(() => {
     const data = params.get("inputData");
+    console.log("data", JSON.parse(data));
+
     if (data) {
       setInputData(JSON.parse(data));
     } else {
       setInputData(null);
     }
   }, [params]);
+  console.log(inputData);
 
   return inputData ? (
     <Card inputData={inputData} />
