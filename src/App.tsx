@@ -58,6 +58,13 @@ function App() {
         return;
       }
       const user = await getUserInfo({ token });
+      console.log(user);
+      if (!user) {
+        navigate("/login");
+        localStorage.removeItem("token");
+        setIsLoading(false);
+        return;
+      }
       dispatch(setUserAction(user));
       setIsLoading(false);
     };

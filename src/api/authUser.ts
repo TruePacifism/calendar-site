@@ -9,5 +9,5 @@ export default async function authUser({ user }: propsType) {
   const response = await apiClient.post(`/login`, {
     ...user,
   });
-  return response.data.token;
+  return response.data;
 }
