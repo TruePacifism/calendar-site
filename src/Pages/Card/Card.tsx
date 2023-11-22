@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./Card.module.css";
 import IconedCardInfoList from "../../Components/IconedCardInfoList/IconedCardInfoList";
-import CustomCheckBoxGroup from "../../Components/CustomCheckBoxGroup";
 import { cardInfoType, inputDataType, stateType } from "../../utils/types";
 import CardInfo from "../../Components/CardInfo/CardInfo";
 import MainElementStar from "../../Components/MainElementStar/MainElementStar";

@@ -22,14 +22,14 @@
   }
 }
 .icon {
-  width: 50px;
-  height: 50px;
+  width: 70vmin;
+  height: 70vmin;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-200%, -200%);
+  border-radius: 50%;
+  border-width: 0px;
+  top: calc(50% - 70vmin / 2);
+  left: calc(50% - 70vmin / 2);
+  animation: rotate 5s linear infinite;
   fill: var(--accent-color);
   background-color: white;
-  overflow: hidden;
-  animation: rotate 5s linear infinite; /* Здесь 5s - время одного оборота, infinite - бесконечное воспроизведение */
 }

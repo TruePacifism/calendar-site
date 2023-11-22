@@ -55,7 +55,6 @@ export default function CardLineChart({ chartData }: propsType) {
   useEffect(() => {
     let data: number[] = [];
     let labels: string[] = [];
-    console.log(view);
     if (!view) {
       setView("Год");
     }
@@ -89,7 +88,7 @@ export default function CardLineChart({ chartData }: propsType) {
     });
     console.log(labels);
     console.log(data);
-  }, [view]);
+  }, [view, chartData.day, chartData.month, chartData.year]);
   return (
     <>
       <div className={styles.chartTitleBox}>
