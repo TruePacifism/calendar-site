@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Loading.module.css";
-import { ReactComponent as LoadingSpinner } from "../../images/logo.svg";
+import { ReactComponent as LoadingSpinner } from "../../images/in-yan-icon.svg";
 
 type propsType = {
   isShowing: boolean;

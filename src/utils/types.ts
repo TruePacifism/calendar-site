@@ -153,6 +153,15 @@ export type directionType = {
   shortName: string;
   fullName: string;
 };
+export type lineChartDataPartType = {
+  date: number;
+  value: number;
+};
+export type lineChartDataType = {
+  year: lineChartDataPartType[];
+  month: lineChartDataPartType[];
+  day: lineChartDataPartType[];
+};
 
 export type cardInfoType = {
   id: string;
@@ -184,6 +193,7 @@ export type cardInfoType = {
   cardStrength: cardStrengthType;
   movedDirection: directionType;
   fallingStars: fallingStarType[];
+  lineChartData: lineChartDataType;
   chartData: chartDataType;
   direction: directionType;
   genderCount: {

@@ -73,8 +73,8 @@ const selectedRadioTheme = createTheme({
           fontFamily: "Roboto Slab",
           fontSize: "15px",
           fontWeight: "400",
-          paddingLeft: 10,
-          paddingRight: 10,
+          paddingLeft: 5,
+          paddingRight: 5,
           letterSpacing: "0em",
           color: "white",
           textAlign: "center",
@@ -96,17 +96,21 @@ type propsType = {
   checkboxesInfo: checkboxInfoType[];
   onChange: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
   className?: string;
+  defaultCheckedIndex?: number;
 };
 
 export default function CustomCheckBoxGroup({
   checkboxesInfo,
   onChange,
   className,
+  defaultCheckedIndex,
 }: propsType) {
   const [selectedCheckbox, setSelectedCheckbox]: [
     string,
     Dispatch<SetStateAction<string>>
-  ] = useState();
+  ] = useState(
+    defaultCheckedIndex ? checkboxesInfo[defaultCheckedIndex].value : null
+  );
 
   return (
     <ThemeProvider theme={radioTheme}>
@@ -130,7 +134,7 @@ export default function CustomCheckBoxGroup({
             <InputLabel>
               {checkboxInfo.title}
               <Radio
-                defaultChecked={idx === 1}
+                defaultChecked={checkboxInfo.value === selectedCheckbox}
                 value={checkboxInfo.value}
                 title={checkboxInfo.title}
                 hidden

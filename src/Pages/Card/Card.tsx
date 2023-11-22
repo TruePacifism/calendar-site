@@ -53,6 +53,7 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
       const getCard = async (inputData: inputDataType) => {
         const data = await countCard({ inputData });
         setCardInfo(data);
+        console.log(data);
       };
       getCard(inputData);
     }
@@ -71,10 +72,8 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
   const fetchAddCard = async () => {
     const result = await addCard({ card: cardInfo, token });
     if (result.status / 100 === 2) {
-      console.log("Карта добавлена успешно");
       dispatch(addCardAction(cardInfo));
     } else {
-      console.log("Проблемы с добавлением карты");
     }
   };
 
@@ -144,19 +143,7 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
           </li>
         </ul>
         <div>
-          <div className={styles.chartTitleBox}>
-            <span className={styles.chartTitle}>ГРАФИК</span>
-            <CustomCheckBoxGroup
-              checkboxesInfo={[
-                { title: "Неделя", value: "Неделя" },
-                { title: "Месяц", value: "Месяц" },
-                { title: "Год", value: "Год" },
-              ]}
-              onChange={() => {}}
-              className={styles.chartCheckboxes}
-            />
-          </div>
-          <CardLineChart />
+          <CardLineChart chartData={cardInfo.lineChartData} />
         </div>
         <div className={styles.cardHeadingContainer}>
           <h2 className={styles.cardHeading}>Такты</h2>

@@ -132,7 +132,6 @@ export default function Calculator() {
   }, [location, params, setParams]);
   useEffect(() => {
     const data = params.get("inputData");
-    console.log("data", JSON.parse(data));
 
     if (data) {
       setInputData(JSON.parse(data));
@@ -140,7 +139,6 @@ export default function Calculator() {
       setInputData(null);
     }
   }, [params]);
-  console.log(inputData);
 
   return inputData ? (
     <Card inputData={inputData} />

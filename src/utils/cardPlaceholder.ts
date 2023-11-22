@@ -358,6 +358,11 @@ const cardInfoPlaceholder: cardInfoType = {
       ageMonth: 1,
     },
   ],
+  lineChartData: {
+    year: [],
+    month: [],
+    day: [],
+  },
   mainElement: {
     name: "Вода",
     animals: [

@@ -11,6 +11,8 @@ import {
 import { Point } from "chart.js/dist/core/core.controller";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { chartBackgroundColor, miniAccentColor } from "../../utils/vars";
+import { lineChartDataType } from "../../utils/types";
+import CustomCheckBoxGroup from "../CustomCheckBoxGroup";
 ChartJS.register(
   ArcElement,
   Tooltip,
@@ -37,37 +39,47 @@ const customBackgroundPlugin = {
   },
 };
 type chartDataType = ChartData<"line", (number | Point)[], unknown>;
-const labels = [
-  "1",
-  "2",
-  "1",
-  "2",
-  "1",
-  "2",
-  "1",
-  "1",
-  "2",
-  "1",
-  "2",
-  "1",
-  "2",
-  "1",
-];
+type propsType = {
+  chartData: lineChartDataType;
+};
+type viewType = "Неделя" | "Месяц" | "Год";
 
-export default function CardLineChart() {
+export default function CardLineChart({ chartData }: propsType) {
   const [data, setData]: [
     chartDataType,
     Dispatch<SetStateAction<chartDataType>>
   ] = useState();
+  const [view, setView]: [viewType, Dispatch<SetStateAction<viewType>>] =
+    useState();
+  useState();
   useEffect(() => {
-    const randomData = [
-      1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6,
-    ].map((number) => Math.random() * 1000);
+    let data: number[] = [];
+    let labels: string[] = [];
+    console.log(view);
+    if (!view) {
+      setView("Год");
+    }
+    switch (view) {
+      case "Год":
+        labels = chartData.year.map((data) => data.date.toString());
+        data = chartData.year.map((data) => data.value);
+        break;
+      case "Месяц":
+        labels = chartData.month.map((data) => data.date.toString());
+        data = chartData.month.map((data) => data.value);
+        break;
+      case "Неделя":
+        labels = chartData.day.map((data) => data.date.toString());
+        data = chartData.day.map((data) => data.value);
+        break;
+      default:
+        return;
+    }
     setData({
       labels: labels,
       datasets: [
         {
-          data: randomData,
+          data,
           fill: false,
           borderColor: "#FFFFFF",
           tension: 0.5,
@@ -75,53 +87,75 @@ export default function CardLineChart() {
         },
       ],
     });
-  }, []);
+    console.log(labels);
+    console.log(data);
+  }, [view]);
   return (
-    <div className={styles.container}>
-      {data && (
-        <Line
-          data={data}
-          className={styles.chart}
-          width="auto"
-          options={{
-            backgroundColor: chartBackgroundColor,
-            plugins: {
-              colors: {},
-              legend: {
-                display: false,
-              },
-            },
-            elements: {
-              point: {
-                radius: 0,
-              },
-            },
-            maintainAspectRatio: false,
-            responsive: true,
-            scales: {
-              y: {
-                display: false,
-              },
-              x: {
-                offset: true,
-                title: {
-                  padding: 10,
-                },
-                max: 7,
-
-                backgroundColor: miniAccentColor,
-                clip: true,
-                grid: {
-                  drawTicks: false,
-
-                  color: "#FFFFFF",
-                },
-              },
-            },
+    <>
+      <div className={styles.chartTitleBox}>
+        <span className={styles.chartTitle}>ГРАФИК</span>
+        <CustomCheckBoxGroup
+          checkboxesInfo={[
+            { title: "Неделя", value: "Неделя" },
+            { title: "Месяц", value: "Месяц" },
+            { title: "Год", value: "Год" },
+          ]}
+          onChange={(e) => {
+            const { value } = e.target;
+            if (value === "Неделя" || value === "Месяц" || value === "Год") {
+              setView(value);
+            }
           }}
-          plugins={[customBackgroundPlugin]}
+          className={styles.chartCheckboxes}
+          defaultCheckedIndex={2}
         />
-      )}
-    </div>
+      </div>
+      <div className={styles.container}>
+        {data && (
+          <Line
+            data={data}
+            className={styles.chart}
+            width="auto"
+            options={{
+              backgroundColor: chartBackgroundColor,
+              plugins: {
+                colors: {},
+                legend: {
+                  display: false,
+                },
+              },
+              elements: {
+                point: {
+                  radius: 0,
+                },
+              },
+              maintainAspectRatio: false,
+              responsive: true,
+              scales: {
+                y: {
+                  display: false,
+                },
+                x: {
+                  offset: true,
+                  title: {
+                    padding: 10,
+                  },
+                  max: 7,
+
+                  backgroundColor: miniAccentColor,
+                  clip: true,
+                  grid: {
+                    drawTicks: false,
+
+                    color: "#FFFFFF",
+                  },
+                },
+              },
+            }}
+            plugins={[customBackgroundPlugin]}
+          />
+        )}
+      </div>
+    </>
   );
 }

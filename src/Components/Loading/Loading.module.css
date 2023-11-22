@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   z-index: 10000;
-  transition: opacity 250ms ease;
+  transition: opacity 1000ms ease;
 }
 .hidden {
   opacity: 0;
@@ -29,5 +29,7 @@
   left: 50%;
   transform: translate(-200%, -200%);
   fill: var(--accent-color);
+  background-color: white;
+  overflow: hidden;
   animation: rotate 5s linear infinite; /* Здесь 5s - время одного оборота, infinite - бесконечное воспроизведение */
 }
