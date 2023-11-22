@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/calendar-site/static/css/main.9cb298c3.css",
-    "main.js": "/calendar-site/static/js/main.6391d826.js",
+    "main.css": "/calendar-site/static/css/main.496f0ae5.css",
+    "main.js": "/calendar-site/static/js/main.146254e2.js",
     "static/js/787.8858620f.chunk.js": "/calendar-site/static/js/787.8858620f.chunk.js",
     "static/media/t-.png": "/calendar-site/static/media/t-.20549e7169f6fb7990c5.png",
     "static/media/f+.png": "/calendar-site/static/media/f+.07982ccb8f68ebfeb3d2.png",
@@ -44,7 +44,6 @@
     "static/media/sin+.jpg": "/calendar-site/static/media/sin+.30de75d7582ba24377cb.jpg",
     "static/media/fin+.jpg": "/calendar-site/static/media/fin+.22ab0de101e07e039d21.jpg",
     "static/media/snake+.jpg": "/calendar-site/static/media/snake+.a9226f59337f8d9c552e.jpg",
-    "static/media/logo.svg": "/calendar-site/static/media/logo.4d625357c3c993bd05d6a35555e6132a.svg",
     "static/media/cycle-circle.svg": "/calendar-site/static/media/cycle-circle.8015a82a1c98d490f9af9751369576b7.svg",
     "static/media/age-icon.svg": "/calendar-site/static/media/age-icon.e527e30e32449ffe2da8bd7fa65eca45.svg",
     "index.html": "/calendar-site/index.html",
@@ -71,12 +70,12 @@
     "static/media/grid-icon.svg": "/calendar-site/static/media/grid-icon.103b22f0b42daaf529767400450cb653.svg",
     "static/media/rectangle.svg": "/calendar-site/static/media/rectangle.7686c50d5d527ae3f736d85fe19e5c6d.svg",
     "static/media/circle.svg": "/calendar-site/static/media/circle.efab4e7e6e5891f7939c0e97140b2c12.svg",
-    "main.9cb298c3.css.map": "/calendar-site/static/css/main.9cb298c3.css.map",
-    "main.6391d826.js.map": "/calendar-site/static/js/main.6391d826.js.map",
+    "main.496f0ae5.css.map": "/calendar-site/static/css/main.496f0ae5.css.map",
+    "main.146254e2.js.map": "/calendar-site/static/js/main.146254e2.js.map",
     "787.8858620f.chunk.js.map": "/calendar-site/static/js/787.8858620f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9cb298c3.css",
-    "static/js/main.6391d826.js"
+    "static/css/main.496f0ae5.css",
+    "static/js/main.146254e2.js"
   ]
 }
