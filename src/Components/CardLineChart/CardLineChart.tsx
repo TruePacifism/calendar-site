@@ -132,7 +132,19 @@ export default function CardLineChart({ chartData }: propsType) {
               responsive: true,
               scales: {
                 y: {
-                  display: false,
+                  display: true,
+                  suggestedMin: -6,
+                  suggestedMax: 6,
+                  grid: {
+                    drawOnChartArea: true,
+                    color(ctx, options) {
+                      if (ctx.tick.value === 0) {
+                        return "white";
+                      } else {
+                        return "";
+                      }
+                    },
+                  },
                 },
                 x: {
                   offset: true,
