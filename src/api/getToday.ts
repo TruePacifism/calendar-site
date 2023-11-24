@@ -10,7 +10,10 @@ export default async function getToday({
 }: propsType): Promise<cardInfoType> {
   const response = await apiClient.get(`/today`, {
     params: {
-      user,
+      user: {
+        ...user,
+        cards: [],
+      },
     },
   });
   return response.data;
