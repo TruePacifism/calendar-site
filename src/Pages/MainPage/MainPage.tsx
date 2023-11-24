@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./MainPage.module.css";
 import DaysLine from "../../Components/DaysLine/DaysLine";
 import IconedCardInfoList from "../../Components/IconedCardInfoList/IconedCardInfoList";
-import { cardInfoType } from "../../utils/types";
+import { cardInfoType, stateType, userType } from "../../utils/types";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import cardInfoPlaceholder from "../../utils/cardPlaceholder";
 import CardInfo from "../../Components/CardInfo/CardInfo";
@@ -11,19 +11,22 @@ import { ReactComponent as StarIcon } from "../../images/star-icon.svg";
 import { ReactComponent as AddIcon } from "../../images/add-home.svg";
 import getToday from "../../api/getToday";
 import Loading from "../../Components/Loading/Loading";
+import { useSelector } from "react-redux";
 
 export default function MainPage() {
   const [todayInfo, setTodayInfo]: [
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
   ] = useState();
+  const user = useSelector<stateType, userType>((store) => store.user);
   useEffect(() => {
     const fetchInfo = async () => {
-      const newTodayInfo = await getToday();
+      const newTodayInfo = await getToday({ user });
       setTodayInfo(newTodayInfo);
+      console.log(newTodayInfo);
     };
     fetchInfo();
-  }, []);
+  }, [user]);
   useEffect(() => {
     if (!todayInfo) {
       return;

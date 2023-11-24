@@ -228,6 +228,8 @@ export type userInput = {
   token: string;
   name: string;
   mail: string;
+  livingcity: string;
+  birthcity: string;
 };
 
 export type stateType = {
@@ -240,5 +242,6 @@ export type userType = {
   mail: string;
   livingcity: string;
   birthcity: string;
+  UTC: number;
   cards: cardInfoType[];
 };

@@ -74,6 +74,8 @@ export default function LoginPage(props: propsType) {
           token: token,
           name: result.user.displayName,
           mail: result.user.email,
+          livingcity: "",
+          birthcity: "",
         };
         setUserInfo({
           ...user,
@@ -133,6 +135,8 @@ export default function LoginPage(props: propsType) {
                 livingcity: livingcity.value,
                 birthcity: birthcity.value,
               };
+              console.log(user);
+
               fetchUser(user);
             }}
           >
