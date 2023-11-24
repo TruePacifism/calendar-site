@@ -45,6 +45,10 @@ function App() {
     boolean,
     Dispatch<SetStateAction<boolean>>
   ] = useState(true);
+  const [isLoadingRendering, setIsLoadingRendering]: [
+    boolean,
+    Dispatch<SetStateAction<boolean>>
+  ] = useState(true);
   const dispatch = useDispatch();
   const currentUser: userType = useSelector<stateType, userType>(
     (store) => store.user
@@ -67,6 +71,9 @@ function App() {
       }
       dispatch(setUserAction(user));
       setIsLoading(false);
+      setTimeout(() => {
+        setIsLoadingRendering(false);
+      }, 1000);
     };
     fetchUser();
   }, [dispatch, navigate]);
@@ -76,7 +83,7 @@ function App() {
 
   return (
     <>
-      <Loading isShowing={isLoading} />
+      <Loading isShowing={isLoading} isRendering={isLoadingRendering} />
 
       {!isLoading && (
         <>

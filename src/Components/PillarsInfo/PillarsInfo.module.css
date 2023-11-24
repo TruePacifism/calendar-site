@@ -2,8 +2,8 @@
   background-color: var(--light-accent-color);
   padding-left: 23px;
   padding-right: 23px;
-  display: flex;
-  overflow: scroll;
 }
 .innerContainer {
+  display: flex;
+  overflow: scroll;
 }

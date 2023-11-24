@@ -4,12 +4,15 @@ import { ReactComponent as LoadingSpinner } from "../../images/in-yan-icon.svg";
 
 type propsType = {
   isShowing: boolean;
+  isRendering?: boolean;
 };
 
-export default function Loading({ isShowing }: propsType) {
+export default function Loading({ isShowing, isRendering }: propsType) {
   return (
-    <div className={isShowing ? styles.showed : styles.hidden}>
-      <LoadingSpinner className={styles.icon} />
-    </div>
+    isRendering && (
+      <div className={isShowing ? styles.showed : styles.hidden}>
+        <LoadingSpinner className={styles.icon} />
+      </div>
+    )
   );
 }

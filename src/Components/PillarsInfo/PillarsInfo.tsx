@@ -11,19 +11,21 @@ type propsType = {
 export default function PillarsInfo({ pillars, currentPillar }: propsType) {
   return (
     <div className={styles.container}>
-      {pillars.map((pillar, idx) => (
-        <CardColumn
-          doneFor="Calculator"
-          key={idx}
-          animal={pillar.animal}
-          element={pillar.element}
-          isCurrentPillar={
-            currentPillar && currentPillar.ageYear === pillar.ageYear
-          }
-          title={`${pillar.year},${pillar.month}\n
+      <div className={styles.innerContainer}>
+        {pillars.map((pillar, idx) => (
+          <CardColumn
+            doneFor="Calculator"
+            key={idx}
+            animal={pillar.animal}
+            element={pillar.element}
+            isCurrentPillar={
+              currentPillar && currentPillar.ageYear === pillar.ageYear
+            }
+            title={`${pillar.year},${pillar.month}\n
             ${pillar.ageYear},${pillar.ageMonth}`}
-        />
-      ))}
+          />
+        ))}
+      </div>
     </div>
   );
 }

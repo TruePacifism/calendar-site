@@ -4,3 +4,19 @@
 .chart {
   overflow: scroll;
 }
+
+.chartTitleBox {
+  padding-left: 22px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.chartTitle {
+}
+.chartCheckboxes {
+  width: 60vw;
+}
