@@ -6,8 +6,6 @@ import { animalType, elementType, stylesType } from "../../utils/types";
 import AnimalPic from "../AnimalElementPic/AnimalPic";
 import ElementPic from "../AnimalElementPic/ElementPic";
 import CollisionsList from "../CollisionsList/CollisionsList";
-import { ReactComponent as ArrowLeft } from "../../images/arrow-left.svg";
-import { ReactComponent as ArrowRight } from "../../images/arrow-right.svg";
 
 type propsType = {
   animal: animalType;
@@ -58,11 +56,11 @@ export default function CardColumn({
         }
       >
         <div className={styles.headingContainer}>
-          {doneFor === "HomePage" && <ArrowLeft className={styles.arrow} />}
+          {/* {doneFor === "HomePage" && <ArrowLeft className={styles.arrow} />} */}
           <h3 className={styles.heading}>
             {badNames.includes(title.toString()) ? "N/A" : title}
           </h3>
-          {doneFor === "HomePage" && <ArrowRight className={styles.arrow} />}
+          {/* {doneFor === "HomePage" && <ArrowRight className={styles.arrow} />} */}
         </div>
         <ElementPic element={element} doneFor={doneFor} />
         <AnimalPic animal={animal} doneFor={doneFor} />

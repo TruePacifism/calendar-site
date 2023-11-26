@@ -11,6 +11,30 @@
   --top-shadow: 0 4px 4px 0 inset rgba(0, 0, 0, 0.25);
   --bottom-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 
+  /* цвета для значков */
+  --main-purple: #88385b;
+  --main-dark-blue: #314b70;
+  --main-dark-green: #278926;
+  --main-red: #d12a21;
+  --main-brown: #7c5037;
+  --main-pink: #f475a2;
+  --main-light-blue: #94b7d5;
+  --main-light-green: #a6bf3f;
+  --main-orange: #ff7510;
+  --main-yellow: #e9d621;
+
+  /* цвета для фона дней и карт */
+  --background-purple: #cc8ca8;
+  --background-dark-blue: #8ea2be;
+  --background-dark-green: #75c574;
+  --background-red: #ee7872;
+  --background-brown: #ba917a;
+  --background-pink: #ffbad2;
+  --background-light-blue: #d0d6ec;
+  --background-light-green: #c5da6f;
+  --background-orange: #ffad72;
+  --background-yellow: #f5eb89;
+
   --light-green-color: #a6bf3f;
   --brown-color: #7c5037;
   --dark-green-color: #278926;

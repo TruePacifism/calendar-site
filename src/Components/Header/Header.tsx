@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Header.module.css";
 import { ReactComponent as BackIcon } from "../../images/back-icon.svg";
-import { ReactComponent as BurgerIcon } from "../../images/burger-icon.svg";
+import { ReactComponent as LogoIcon } from "../../images/logo-another-icon.svg";
 import { ReactComponent as SearchIcon } from "../../images/search-header-icon.svg";
 import { Link, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
@@ -39,7 +39,7 @@ export default function Header({ heading }: propsType) {
         </Dialog>
       </ThemeProvider>
       <div className={styles.container}>
-        {heading === "Мой феншуй" ? (
+        {heading === "СИСТЕМА ФЕНШУЙ" ? (
           <SearchIcon className={styles.backIcon} onClick={openModal} />
         ) : (
           <Link
@@ -53,7 +53,7 @@ export default function Header({ heading }: propsType) {
           </Link>
         )}
         <span className={styles.heading}>{heading}</span>
-        <BurgerIcon className={styles.burgerIcon} />
+        <LogoIcon className={styles.burgerIcon} />
       </div>
     </>
   );

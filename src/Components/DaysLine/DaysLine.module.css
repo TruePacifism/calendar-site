@@ -5,9 +5,25 @@
   padding-right: 11px;
 
   height: 52px;
-
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+}
+.arrow {
+  height: 1em;
+  width: auto;
+  margin-top: 4px;
+  fill: var(--accent-color);
+  &:first-child {
+    margin-right: 3px;
+  }
+  &:last-child {
+    margin-left: 3px;
+  }
+}
+.daysContainer {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
   justify-content: space-between;
 }
 .dayItem {

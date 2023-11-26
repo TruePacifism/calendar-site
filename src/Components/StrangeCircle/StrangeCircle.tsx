@@ -12,20 +12,22 @@ type propsType = {
 export default function StrangeCircle({ cardInfos }: propsType) {
   return (
     <div className={styles.container}>
-      <Circle className={styles.circle} />
-      <div className={styles.linesContainer}>
+      <div className={styles.circleContainer}>
+        <Circle className={styles.circle} />
+      </div>
+      <ul className={styles.lines}>
         {cardInfos.map((cardInfo) => (
-          <div
-            className={styles.line}
+          <li
+            className={styles.lineContainer}
             style={{
-              backgroundColor: getColorByAnimalElement(cardInfo.year.animal)
-                .hex,
+              backgroundColor: getColorByAnimalElement(cardInfo.year.element)
+                .backgroundHex,
             }}
           >
-            {cardInfo.name}
-          </div>
+            <span className={styles.lineText}>{cardInfo.name}</span>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

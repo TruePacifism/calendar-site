@@ -7,8 +7,6 @@ import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import cardInfoPlaceholder from "../../utils/cardPlaceholder";
 import CardInfo from "../../Components/CardInfo/CardInfo";
 import StrangeCircle from "../../Components/StrangeCircle/StrangeCircle";
-import { ReactComponent as StarIcon } from "../../images/star-icon.svg";
-import { ReactComponent as AddIcon } from "../../images/add-home.svg";
 import getToday from "../../api/getToday";
 import Loading from "../../Components/Loading/Loading";
 import { useSelector } from "react-redux";
@@ -47,14 +45,13 @@ export default function MainPage() {
           <section
             style={{
               backgroundColor: todayInfo
-                ? getColorByAnimalElement(todayInfo.day.element).hex
+                ? getColorByAnimalElement(todayInfo.day.element).backgroundHex
                 : "#FFFFFF",
             }}
           >
             <IconedCardInfoList doneFor="HomePage" cardInfo={todayInfo} />
             <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
             <div className={styles.circleInfo}>
-              <StarIcon className={styles.starIcon} />
               <StrangeCircle
                 cardInfos={[
                   cardInfoPlaceholder,
@@ -63,7 +60,6 @@ export default function MainPage() {
                   cardInfoPlaceholder,
                 ]}
               />
-              <AddIcon className={styles.addIcon} />
             </div>
           </section>
         </>

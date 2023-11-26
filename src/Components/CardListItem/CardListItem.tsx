@@ -17,7 +17,7 @@ export default function CardListItem({ cardInfo }: propsType) {
     <li className={styles.section}>
       <div
         className={styles.container}
-        style={{ backgroundColor: color ? color.hex : "transparent" }}
+        style={{ backgroundColor: color ? color.backgroundHex : "transparent" }}
       >
         <span className={styles.name}>{cardInfo.name}</span>
         <span

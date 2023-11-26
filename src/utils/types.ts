@@ -40,7 +40,8 @@ export type dateType = {
 };
 
 export type colorType = {
-  hex: string;
+  mainHex: string;
+  backgroundHex: string;
   backgroundClassName: string;
   name: string;
 };

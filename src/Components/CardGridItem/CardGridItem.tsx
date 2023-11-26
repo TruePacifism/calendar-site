@@ -37,7 +37,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
     <li className={styles.section} onClick={handleCardClick}>
       <div
         className={styles.container}
-        style={{ backgroundColor: color ? color.hex : "#FFFFFF" }}
+        style={{ backgroundColor: color ? color.backgroundHex : "#FFFFFF" }}
       >
         <span className={styles.name}>{cardInfo.name}</span>
         <div className={styles.mainInfoContainer}>

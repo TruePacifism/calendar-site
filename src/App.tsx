@@ -21,7 +21,7 @@ const getHeadingText = (path: string): string => {
     case "/card":
       return "Карта";
     case "/":
-      return "Мой феншуй";
+      return "СИСТЕМА ФЕНШУЙ";
     case "/cards":
       return "Картотека";
     default:

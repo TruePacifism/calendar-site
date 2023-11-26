@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./DaysLine.module.css";
 import date from "date-and-time";
+import { ReactComponent as ArrowLeft } from "../../images/arrow-left.svg";
+import { ReactComponent as ArrowRight } from "../../images/arrow-right.svg";
 
 const getStringDate = (objectDate: Date) => {
   return date.format(objectDate, "DD.MM.YYYY");
@@ -31,27 +33,31 @@ export default function DaysLine() {
   const now = new Date();
 
   return (
-    <ul className={styles.container}>
-      <li className={styles.dayItem}>
-        <span className={styles.date}>
-          {getStringDate(date.addDays(now, -1))}
-        </span>
-        <span className={styles.dayOfWeek}>
-          {getDayOfWeek(date.addDays(now, -1))}
-        </span>
-      </li>
-      <li className={`${styles.dayItem} ${styles.currentDayItem}`}>
-        <span className={styles.date}>{getStringDate(now)}</span>
-        <span className={styles.dayOfWeek}>{getDayOfWeek(now)}</span>
-      </li>
-      <li className={styles.dayItem}>
-        <span className={styles.date}>
-          {getStringDate(date.addDays(now, 1))}
-        </span>
-        <span className={styles.dayOfWeek}>
-          {getDayOfWeek(date.addDays(now, 1))}
-        </span>
-      </li>
-    </ul>
+    <div className={styles.container}>
+      <ArrowLeft className={styles.arrow} />
+      <ul className={styles.daysContainer}>
+        <li className={styles.dayItem}>
+          <span className={styles.date}>
+            {getStringDate(date.addDays(now, -1))}
+          </span>
+          <span className={styles.dayOfWeek}>
+            {getDayOfWeek(date.addDays(now, -1))}
+          </span>
+        </li>
+        <li className={`${styles.dayItem} ${styles.currentDayItem}`}>
+          <span className={styles.date}>{getStringDate(now)}</span>
+          <span className={styles.dayOfWeek}>{getDayOfWeek(now)}</span>
+        </li>
+        <li className={styles.dayItem}>
+          <span className={styles.date}>
+            {getStringDate(date.addDays(now, 1))}
+          </span>
+          <span className={styles.dayOfWeek}>
+            {getDayOfWeek(date.addDays(now, 1))}
+          </span>
+        </li>
+      </ul>
+      <ArrowRight className={styles.arrow} />
+    </div>
   );
 }

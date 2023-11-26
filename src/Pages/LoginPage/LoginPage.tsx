@@ -6,7 +6,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { initializeApp } from "firebase/app";
+import { FirebaseOptions, initializeApp } from "firebase/app";
 import { ReactComponent as GoogleIcon } from "../../images/in-yan-icon.svg";
 import { userInput } from "../../utils/types";
 import { Button, Input, ThemeProvider } from "@mui/material";
@@ -18,7 +18,7 @@ import getUserInfo from "../../api/getUserInfo";
 import { useDispatch } from "react-redux";
 import { setUserAction } from "../../utils/store";
 
-const firebaseConfig = {
+const firebaseConfig: FirebaseOptions = {
   apiKey: "AIzaSyB_eoV10ywFfBnJ3RsXSUAPd-IFZ6oboTY",
   authDomain: "ordinal-link-384308.firebaseapp.com",
   projectId: "ordinal-link-384308",
@@ -32,6 +32,7 @@ const provider = new GoogleAuthProvider();
 
 const auth = getAuth();
 auth.languageCode = "ru";
+console.log(auth);
 
 type propsType = {};
 

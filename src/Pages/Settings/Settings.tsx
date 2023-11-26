@@ -23,7 +23,7 @@ export default function Settings() {
                     name: "Коза",
                     isBlack: false,
                     isGood: true,
-                  }).hex,
+                  }).mainHex,
                 }}
                 className={styles.profileInfo}
               >
@@ -44,7 +44,7 @@ export default function Settings() {
                     name: "Коза",
                     isBlack: false,
                     isGood: true,
-                  }).hex,
+                  }).mainHex,
                 }}
                 className={styles.profileInfo}
               >
@@ -65,7 +65,7 @@ export default function Settings() {
                     name: "Коза",
                     isBlack: false,
                     isGood: true,
-                  }).hex,
+                  }).mainHex,
                 }}
                 className={styles.profileInfo}
               >
@@ -86,7 +86,7 @@ export default function Settings() {
                     name: "Коза",
                     isBlack: false,
                     isGood: true,
-                  }).hex,
+                  }).mainHex,
                 }}
                 className={styles.profileInfo}
               >
