@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/calendar-site/static/css/main.88ce8b83.css",
-    "main.js": "/calendar-site/static/js/main.bf46af25.js",
+    "main.css": "/calendar-site/static/css/main.11aa23d2.css",
+    "main.js": "/calendar-site/static/js/main.ed939f1a.js",
     "static/js/787.8858620f.chunk.js": "/calendar-site/static/js/787.8858620f.chunk.js",
     "static/media/t-.png": "/calendar-site/static/media/t-.20549e7169f6fb7990c5.png",
     "static/media/f+.png": "/calendar-site/static/media/f+.07982ccb8f68ebfeb3d2.png",
@@ -44,10 +44,10 @@
     "static/media/sin+.jpg": "/calendar-site/static/media/sin+.30de75d7582ba24377cb.jpg",
     "static/media/fin+.jpg": "/calendar-site/static/media/fin+.22ab0de101e07e039d21.jpg",
     "static/media/snake+.jpg": "/calendar-site/static/media/snake+.a9226f59337f8d9c552e.jpg",
+    "static/media/logo-another-icon.svg": "/calendar-site/static/media/logo-another-icon.6baa82f2384e16a18633c4dc659678a0.svg",
     "static/media/cycle-circle.svg": "/calendar-site/static/media/cycle-circle.8015a82a1c98d490f9af9751369576b7.svg",
     "static/media/age-icon.svg": "/calendar-site/static/media/age-icon.e527e30e32449ffe2da8bd7fa65eca45.svg",
     "index.html": "/calendar-site/index.html",
-    "static/media/add-home.svg": "/calendar-site/static/media/add-home.c6997de46b149f502859016d65c42b84.svg",
     "static/media/gender-icon.svg": "/calendar-site/static/media/gender-icon.19bcd5f9056dffa006a7dbd8b9a08be4.svg",
     "static/media/living-side-icon.svg": "/calendar-site/static/media/living-side-icon.d192fa51367e28b596637620ddb2e8fb.svg",
     "static/media/add-icon.svg": "/calendar-site/static/media/add-icon.8f5430681872e08f29058371ff3bb7b3.svg",
@@ -57,11 +57,9 @@
     "static/media/birth-side-icon.svg": "/calendar-site/static/media/birth-side-icon.5bd27c365358720a342e746e7de28e20.svg",
     "static/media/search-header-icon.svg": "/calendar-site/static/media/search-header-icon.637a55f583a9a897d80498bf5ab7326c.svg",
     "static/media/heart.svg": "/calendar-site/static/media/heart.7655892f9c177a001f2b0f1142f4ef09.svg",
-    "static/media/star-icon.svg": "/calendar-site/static/media/star-icon.12934f6b47cfe58be711ff59d93ddbc6.svg",
     "static/media/back-icon.svg": "/calendar-site/static/media/back-icon.6c55b4edd7af168a9146d004ad495c4c.svg",
     "static/media/down-arrow.svg": "/calendar-site/static/media/down-arrow.b80553a43069f6b3b94ef87481f265ff.svg",
     "static/media/power-icon.svg": "/calendar-site/static/media/power-icon.30eeb21f749ac9a87713225abac52a1e.svg",
-    "static/media/burger-icon.svg": "/calendar-site/static/media/burger-icon.9272a79812b498b0a64e567e435c4dd4.svg",
     "static/media/arrow-right.svg": "/calendar-site/static/media/arrow-right.36e8284f36c674203d3f0691f6327aac.svg",
     "static/media/arrow-left.svg": "/calendar-site/static/media/arrow-left.32c9d7ca12c4188df12792f2e2a23155.svg",
     "static/media/cloud.svg": "/calendar-site/static/media/cloud.d28fdf7d601c91e1b084414ccd907faa.svg",
@@ -70,12 +68,12 @@
     "static/media/grid-icon.svg": "/calendar-site/static/media/grid-icon.103b22f0b42daaf529767400450cb653.svg",
     "static/media/rectangle.svg": "/calendar-site/static/media/rectangle.7686c50d5d527ae3f736d85fe19e5c6d.svg",
     "static/media/circle.svg": "/calendar-site/static/media/circle.efab4e7e6e5891f7939c0e97140b2c12.svg",
-    "main.88ce8b83.css.map": "/calendar-site/static/css/main.88ce8b83.css.map",
-    "main.bf46af25.js.map": "/calendar-site/static/js/main.bf46af25.js.map",
+    "main.11aa23d2.css.map": "/calendar-site/static/css/main.11aa23d2.css.map",
+    "main.ed939f1a.js.map": "/calendar-site/static/js/main.ed939f1a.js.map",
     "787.8858620f.chunk.js.map": "/calendar-site/static/js/787.8858620f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.88ce8b83.css",
-    "static/js/main.bf46af25.js"
+    "static/css/main.11aa23d2.css",
+    "static/js/main.ed939f1a.js"
   ]
 }
