@@ -18,7 +18,6 @@ import ModalFallingStars from "../../Components/ModalComponents/ModalFallingStar
 import ModalAnimalChart from "../../Components/ModalComponents/ModalAnimalChart/ModalAnimalChart";
 import ModalPillars from "../../Components/ModalComponents/ModalPillars/ModalPillars";
 import countCard from "../../api/countCard";
-import Loading from "../../Components/Loading/Loading";
 import { useSelector, useDispatch } from "react-redux";
 import addCard from "../../api/addCard";
 import { addCardAction } from "../../utils/store";
@@ -79,7 +78,6 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
   return (
     cardInfo && (
       <>
-        <Loading isShowing={cardInfo ? false : true} />
         <ThemeProvider theme={modalTheme}>
           <Dialog fullWidth open={isOpenModal} onClose={closeModal}>
             {modalContent}

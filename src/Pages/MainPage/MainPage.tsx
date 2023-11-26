@@ -8,23 +8,26 @@ import cardInfoPlaceholder from "../../utils/cardPlaceholder";
 import CardInfo from "../../Components/CardInfo/CardInfo";
 import StrangeCircle from "../../Components/StrangeCircle/StrangeCircle";
 import getToday from "../../api/getToday";
-import Loading from "../../Components/Loading/Loading";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoadingAction } from "../../utils/store";
 
 export default function MainPage() {
   const [todayInfo, setTodayInfo]: [
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
   ] = useState();
+  const dispatch = useDispatch();
   const user = useSelector<stateType, userType>((store) => store.user);
   useEffect(() => {
     const fetchInfo = async () => {
+      dispatch(setLoadingAction(true));
       const newTodayInfo = await getToday({ user });
       setTodayInfo(newTodayInfo);
       console.log(newTodayInfo);
+      dispatch(setLoadingAction(false));
     };
     fetchInfo();
-  }, [user]);
+  }, [user, dispatch]);
   useEffect(() => {
     if (!todayInfo) {
       return;
@@ -34,11 +37,8 @@ export default function MainPage() {
       console.log("loaded");
     };
   }, [todayInfo]);
-
   return (
     <>
-      <Loading isShowing={todayInfo ? false : true} />
-
       {todayInfo && (
         <>
           <DaysLine />

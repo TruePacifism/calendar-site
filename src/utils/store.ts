@@ -11,9 +11,13 @@ const token = localStorage.getItem("token");
 const initialState: stateType = {
   user: null,
   token,
+  isLoading: true,
 };
 export const setUserAction = createAction<userType, "SET_USER">("SET_USER");
 export const addCardAction = createAction<cardInfoType, "ADD_CARD">("ADD_CARD");
+export const setLoadingAction = createAction<boolean, "SET_LOADING">(
+  "SET_LOADING"
+);
 
 export const store = configureStore({
   reducer: createReducer(initialState, (builder) => {
@@ -26,6 +30,12 @@ export const store = configureStore({
       })
       .addCase(addCardAction, (state, action: PayloadAction<cardInfoType>) => {
         state.user.cards.push(action.payload);
+      })
+      .addCase(setLoadingAction, (state, action: PayloadAction<boolean>) => {
+        return {
+          ...state,
+          isLoading: action.payload,
+        };
       });
   }),
 });

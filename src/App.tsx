@@ -9,7 +9,7 @@ import Cards from "./Pages/Cards/Cards";
 import Settings from "./Pages/Settings/Settings";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserAction } from "./utils/store";
+import { setLoadingAction, setUserAction } from "./utils/store";
 import getUserInfo from "./api/getUserInfo";
 import { stateType, userType } from "./utils/types";
 import Loading from "./Components/Loading/Loading";
@@ -41,14 +41,6 @@ function App() {
     const actualHeadingText = getHeadingText(location.pathname);
     setHeaderText(actualHeadingText);
   }, [location]);
-  const [isLoading, setIsLoading]: [
-    boolean,
-    Dispatch<SetStateAction<boolean>>
-  ] = useState(true);
-  const [isLoadingRendering, setIsLoadingRendering]: [
-    boolean,
-    Dispatch<SetStateAction<boolean>>
-  ] = useState(true);
   const dispatch = useDispatch();
   const currentUser: userType = useSelector<stateType, userType>(
     (store) => store.user
@@ -58,7 +50,6 @@ function App() {
       const token = localStorage.getItem("token");
       if (!token) {
         navigate("/login");
-        setIsLoading(false);
         return;
       }
       const user = await getUserInfo({ token });
@@ -66,14 +57,9 @@ function App() {
       if (!user) {
         navigate("/login");
         localStorage.removeItem("token");
-        setIsLoading(false);
         return;
       }
       dispatch(setUserAction(user));
-      setIsLoading(false);
-      setTimeout(() => {
-        setIsLoadingRendering(false);
-      }, 1000);
     };
     fetchUser();
   }, [dispatch, navigate]);
@@ -83,10 +69,14 @@ function App() {
 
   return (
     <>
-      <Loading isShowing={isLoading} isRendering={isLoadingRendering} />
+      <Loading />
 
-      {!isLoading && (
-        <>
+      {currentUser && (
+        <div
+          onLoad={() => {
+            dispatch(setLoadingAction(false));
+          }}
+        >
           <Header heading={headerText} />
           <Routes>
             <Route Component={MainPage} path="/" />
@@ -96,7 +86,7 @@ function App() {
             <Route Component={LoginPage} path="/login" />
           </Routes>
           <Footer />
-        </>
+        </div>
       )}
     </>
   );

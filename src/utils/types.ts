@@ -236,6 +236,7 @@ export type userInput = {
 export type stateType = {
   user: userType;
   token: string;
+  isLoading: boolean;
 };
 
 export type userType = {

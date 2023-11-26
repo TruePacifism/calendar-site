@@ -8,13 +8,14 @@ import CardGridItem from "../../Components/CardGridItem/CardGridItem";
 import { cardInfoType, stateType } from "../../utils/types";
 import { Input } from "@mui/material";
 import CardListItem from "../../Components/CardListItem/CardListItem";
-import Loading from "../../Components/Loading/Loading";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoadingAction } from "../../utils/store";
 
 export default function Cards() {
   const [filter, setFilter]: [string, Dispatch<SetStateAction<string>>] =
     useState("all");
   console.log(filter);
+  const dispatch = useDispatch();
   const [isFullCards, setIsFullCards]: [
     boolean,
     Dispatch<SetStateAction<boolean>>
@@ -34,13 +35,20 @@ export default function Cards() {
 
   return (
     <>
-      <Loading isShowing={cardsInfo ? false : true} />
       <FiltersList
         onChange={(e) => {
           setFilter(e.target.value);
         }}
       />
-      <div className={styles.cardsInfoContainer}>
+      <div
+        className={styles.cardsInfoContainer}
+        onLoadStart={() => {
+          dispatch(setLoadingAction(true));
+        }}
+        onLoad={() => {
+          dispatch(setLoadingAction(false));
+        }}
+      >
         <div className={styles.topContainer}>
           <div className={styles.viewSettings}>
             {isFullCards ? (
