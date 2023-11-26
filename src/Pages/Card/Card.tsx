@@ -20,13 +20,14 @@ import ModalPillars from "../../Components/ModalComponents/ModalPillars/ModalPil
 import countCard from "../../api/countCard";
 import { useSelector, useDispatch } from "react-redux";
 import addCard from "../../api/addCard";
-import { addCardAction } from "../../utils/store";
+import { addCardAction, setLoadingAction } from "../../utils/store";
 
 type propsType = {
   inputData: inputDataType;
 };
 
 export default function Card({ inputData }: propsType): React.JSX.Element {
+  const dispatch = useDispatch();
   const [cardInfo, setCardInfo]: [
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
@@ -51,11 +52,11 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
       const getCard = async (inputData: inputDataType) => {
         const data = await countCard({ inputData });
         setCardInfo(data);
-        console.log(data);
+        dispatch(setLoadingAction(false));
       };
       getCard(inputData);
     }
-  }, [inputData]);
+  }, [inputData, dispatch]);
 
   useEffect(() => {
     if (isOpenModal) {
@@ -66,7 +67,6 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
   }, [isOpenModal]);
 
   const token = useSelector<stateType, string>((state) => state.token);
-  const dispatch = useDispatch();
   const fetchAddCard = async () => {
     const result = await addCard({ card: cardInfo, token });
     if (result.status / 100 === 2) {

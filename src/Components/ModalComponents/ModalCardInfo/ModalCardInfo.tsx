@@ -51,7 +51,6 @@ const getAllCollisions = (cardInfo: cardInfoType): collisionType[] => {
       )
     );
   }
-  console.log("collisions", result);
 
   return result;
 };

@@ -32,7 +32,6 @@ const provider = new GoogleAuthProvider();
 
 const auth = getAuth();
 auth.languageCode = "ru";
-console.log(auth);
 
 type propsType = {};
 
@@ -65,7 +64,6 @@ export default function LoginPage(props: propsType) {
       const token: string = result.user.uid;
       const user = await getUserInfo({ token });
       if (user) {
-        console.log(user);
         localStorage.setItem("token", user.token);
         dispatch(setUserAction(user));
         navigate("/");
@@ -88,16 +86,13 @@ export default function LoginPage(props: propsType) {
   };
   const fetchUser = async (user: userInfoType) => {
     const token = await authUser({ user });
-    console.log(token);
     localStorage.setItem("token", token);
     navigate("/");
   };
   const googleLogOut = () => {
     signOut(auth).then((result) => {
-      console.log(result);
       setToken("");
       setUserInfo(null);
-      console.log("Выход успешен");
     });
   };
 
@@ -136,7 +131,6 @@ export default function LoginPage(props: propsType) {
                 livingcity: livingcity.value,
                 birthcity: birthcity.value,
               };
-              console.log(user);
 
               fetchUser(user);
             }}

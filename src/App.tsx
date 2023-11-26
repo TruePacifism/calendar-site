@@ -32,16 +32,17 @@ const getHeadingText = (path: string): string => {
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [headerText, setHeaderText]: [
     string,
     Dispatch<SetStateAction<string>>
   ] = useState();
   useEffect(() => {
+    dispatch(setLoadingAction(true));
     const actualHeadingText = getHeadingText(location.pathname);
     setHeaderText(actualHeadingText);
-  }, [location]);
-  const dispatch = useDispatch();
+  }, [location, dispatch]);
   const currentUser: userType = useSelector<stateType, userType>(
     (store) => store.user
   );
@@ -53,7 +54,6 @@ function App() {
         return;
       }
       const user = await getUserInfo({ token });
-      console.log(user);
       if (!user) {
         navigate("/login");
         localStorage.removeItem("token");
@@ -63,9 +63,6 @@ function App() {
     };
     fetchUser();
   }, [dispatch, navigate]);
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
 
   return (
     <>

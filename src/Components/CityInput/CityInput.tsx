@@ -35,7 +35,6 @@ export default function CityInput({ title, name, placeholder }: propsType) {
     if (cities.length === 0) {
       return;
     }
-    console.log(cities);
     setCitiesList(cities);
   };
   useEffect(() => {

@@ -12,9 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoadingAction } from "../../utils/store";
 
 export default function Cards() {
+  // eslint-disable-next-line
   const [filter, setFilter]: [string, Dispatch<SetStateAction<string>>] =
     useState("all");
-  console.log(filter);
   const dispatch = useDispatch();
   const [isFullCards, setIsFullCards]: [
     boolean,

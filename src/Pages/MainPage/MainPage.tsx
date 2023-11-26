@@ -23,7 +23,6 @@ export default function MainPage() {
       dispatch(setLoadingAction(true));
       const newTodayInfo = await getToday({ user });
       setTodayInfo(newTodayInfo);
-      console.log(newTodayInfo);
       dispatch(setLoadingAction(false));
     };
     fetchInfo();
@@ -32,9 +31,7 @@ export default function MainPage() {
     if (!todayInfo) {
       return;
     }
-    console.log("loading");
     return () => {
-      console.log("loaded");
     };
   }, [todayInfo]);
   return (

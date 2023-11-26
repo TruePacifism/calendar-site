@@ -86,8 +86,6 @@ export default function CardLineChart({ chartData }: propsType) {
         },
       ],
     });
-    console.log(labels);
-    console.log(data);
   }, [view, chartData.day, chartData.month, chartData.year]);
   return (
     <>

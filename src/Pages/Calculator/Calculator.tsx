@@ -15,6 +15,8 @@ import {
 import { useLocation, useSearchParams } from "react-router-dom";
 import Card from "../Card/Card";
 import CityInput from "../../Components/CityInput/CityInput";
+import { useDispatch } from "react-redux";
+import { setLoadingAction } from "../../utils/store";
 
 const getPreetyNumber = (number: number): string => {
   let formattedNum: string = String(number); // Преобразовываем число в строку
@@ -49,6 +51,7 @@ for (let i = 1; i < 61; i++) {
 
 export default function Calculator() {
   const [params, setParams] = useSearchParams();
+  const dispatch = useDispatch();
   const [selectedMonth, setSelectedMonth]: [
     monthType,
     Dispatch<SetStateAction<monthType>>
@@ -87,6 +90,7 @@ export default function Calculator() {
       };
     }
   ) => {
+    dispatch(setLoadingAction(true));
     console.dir(e.target.elements);
 
     const { year, month, day, hour, minute } = e.target.elements;
@@ -126,19 +130,21 @@ export default function Calculator() {
     if (!location.state || !location.state.inputData || params.get("data")) {
       return;
     }
+    dispatch(setLoadingAction(true));
     const { inputData } = location.state;
     params.set("inputData", JSON.stringify(inputData));
     setParams(params);
-  }, [location, params, setParams]);
+  }, [location, params, setParams, dispatch]);
   useEffect(() => {
     const data = params.get("inputData");
 
     if (data) {
       setInputData(JSON.parse(data));
     } else {
+      dispatch(setLoadingAction(false));
       setInputData(null);
     }
-  }, [params]);
+  }, [params, dispatch]);
 
   return inputData ? (
     <Card inputData={inputData} />
