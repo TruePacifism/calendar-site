@@ -57,7 +57,7 @@ export default function LoginPage(props: propsType) {
   }, [token]);
   useEffect(() => {
     dispatch(setLoadingAction({ value: false, from: "loaded Login Page" }));
-  }, []);
+  }, [dispatch]);
   const [userInfo, setUserInfo]: [
     userInfoType,
     Dispatch<SetStateAction<userInfoType>>
