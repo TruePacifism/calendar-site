@@ -8,14 +8,12 @@ import CardGridItem from "../../Components/CardGridItem/CardGridItem";
 import { cardInfoType, stateType } from "../../utils/types";
 import { Input } from "@mui/material";
 import CardListItem from "../../Components/CardListItem/CardListItem";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoadingAction } from "../../utils/store";
+import { useSelector } from "react-redux";
 
 export default function Cards() {
   // eslint-disable-next-line
   const [filter, setFilter]: [string, Dispatch<SetStateAction<string>>] =
     useState("all");
-  const dispatch = useDispatch();
   const [isFullCards, setIsFullCards]: [
     boolean,
     Dispatch<SetStateAction<boolean>>
