@@ -1,9 +1,24 @@
+.container {
+  margin-top: 52px;
+  position: relative;
+}
 .nameContainer {
   padding-top: 16px;
   padding-bottom: 10px;
   padding-left: 42px;
   padding-right: 42px;
+
   height: 52px;
+  width: 100%;
+
+  position: fixed;
+  top: 52px;
+  left: 0;
+  z-index: 1000;
+
+  box-shadow: var(--bottom-shadow);
+
+  background-color: var(--background-color);
 }
 
 .name {
@@ -19,6 +34,7 @@
   padding-right: 26px;
   padding-left: 26px;
   background-color: white;
+
   height: 39px;
 }
 .cardHeading {

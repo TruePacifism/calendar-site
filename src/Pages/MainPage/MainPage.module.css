@@ -1,3 +1,6 @@
+.section {
+  min-height: calc(100vh - 52px - 52px - 60px);
+}
 .circleInfo {
   display: flex;
   justify-content: space-between;

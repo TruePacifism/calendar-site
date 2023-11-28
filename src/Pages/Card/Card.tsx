@@ -52,7 +52,9 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
       const getCard = async (inputData: inputDataType) => {
         const data = await countCard({ inputData });
         setCardInfo(data);
-        dispatch(setLoadingAction(false));
+        dispatch(
+          setLoadingAction({ value: false, from: "fetched counted card info" })
+        );
       };
       getCard(inputData);
     }
@@ -77,7 +79,7 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
 
   return (
     cardInfo && (
-      <>
+      <div className={styles.container}>
         <ThemeProvider theme={modalTheme}>
           <Dialog fullWidth open={isOpenModal} onClose={closeModal}>
             {modalContent}
@@ -176,7 +178,7 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
             </p>
           </ThemeProvider>
         </div>
-      </>
+      </div>
     )
   );
 }

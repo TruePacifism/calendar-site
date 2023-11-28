@@ -7,18 +7,21 @@
   top: 0;
   left: 0;
   z-index: 10000;
+}
+.showed {
   transition: opacity 1000ms ease;
 }
 .hidden {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 1000ms ease;
 }
 @keyframes rotate {
   from {
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(-360deg);
   }
 }
 .icon {

@@ -16,7 +16,7 @@ import authUser from "../../api/authUser";
 import { useNavigate } from "react-router-dom";
 import getUserInfo from "../../api/getUserInfo";
 import { useDispatch } from "react-redux";
-import { setUserAction } from "../../utils/store";
+import { setLoadingAction, setUserAction } from "../../utils/store";
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: "AIzaSyB_eoV10ywFfBnJ3RsXSUAPd-IFZ6oboTY",
@@ -55,6 +55,9 @@ export default function LoginPage(props: propsType) {
       localStorage.removeItem("token");
     }
   }, [token]);
+  useEffect(() => {
+    dispatch(setLoadingAction({ value: false, from: "loaded Login Page" }));
+  }, []);
   const [userInfo, setUserInfo]: [
     userInfoType,
     Dispatch<SetStateAction<userInfoType>>

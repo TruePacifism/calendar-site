@@ -20,12 +20,10 @@ const getHeadingText = (path: string): string => {
       return "Калькулятор";
     case "/card":
       return "Карта";
-    case "/":
-      return "СИСТЕМА ФЕНШУЙ";
     case "/cards":
       return "Картотека";
     default:
-      return "Калькулятор";
+      return "СИСТЕМА ФЕНШУЙ";
   }
 };
 
@@ -39,13 +37,21 @@ function App() {
     Dispatch<SetStateAction<string>>
   ] = useState();
   useEffect(() => {
-    dispatch(setLoadingAction(true));
+    dispatch(setLoadingAction({ value: true, from: "changed location" }));
+    console.log("Перенаправление");
     const actualHeadingText = getHeadingText(location.pathname);
-    setHeaderText(actualHeadingText);
-  }, [location, dispatch]);
+    if (headerText !== actualHeadingText) {
+      setHeaderText(actualHeadingText);
+    } else {
+      dispatch(
+        setLoadingAction({ value: false, from: "WRONG changed location" })
+      );
+    }
+  }, [location, dispatch, headerText]);
   const currentUser: userType = useSelector<stateType, userType>(
     (store) => store.user
   );
+  const token = localStorage.getItem("token");
   useEffect(() => {
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
@@ -68,11 +74,13 @@ function App() {
     <>
       <Loading />
 
-      {currentUser && (
+      {(currentUser || !token) && (
         <div
-          onLoad={() => {
-            dispatch(setLoadingAction(false));
-          }}
+        // onLoad={() => {
+        //   dispatch(
+        //     setLoadingAction({ value: false, from: "loaded app div" })
+        //   );
+        // }}
         >
           <Header heading={headerText} />
           <Routes>

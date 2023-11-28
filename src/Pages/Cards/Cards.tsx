@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./Cards.module.css";
 import FiltersList from "../../Components/FiltersList/FiltersList";
 import { ReactComponent as ListIcon } from "../../images/list-icon.svg";
@@ -32,6 +32,7 @@ export default function Cards() {
   const cardsInfo = useSelector<stateType, cardInfoType[]>(
     (state) => state.user.cards
   );
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -40,15 +41,7 @@ export default function Cards() {
           setFilter(e.target.value);
         }}
       />
-      <div
-        className={styles.cardsInfoContainer}
-        onLoadStart={() => {
-          dispatch(setLoadingAction(true));
-        }}
-        onLoad={() => {
-          dispatch(setLoadingAction(false));
-        }}
-      >
+      <div className={styles.cardsInfoContainer}>
         <div className={styles.topContainer}>
           <div className={styles.viewSettings}>
             {isFullCards ? (

@@ -90,7 +90,9 @@ export default function Calculator() {
       };
     }
   ) => {
-    dispatch(setLoadingAction(true));
+    dispatch(
+      setLoadingAction({ value: true, from: "inputed data from calculator" })
+    );
     console.dir(e.target.elements);
 
     const { year, month, day, hour, minute } = e.target.elements;
@@ -130,7 +132,7 @@ export default function Calculator() {
     if (!location.state || !location.state.inputData || params.get("data")) {
       return;
     }
-    dispatch(setLoadingAction(true));
+    dispatch(setLoadingAction({ value: true, from: "card loaded from cards" }));
     const { inputData } = location.state;
     params.set("inputData", JSON.stringify(inputData));
     setParams(params);
@@ -141,7 +143,9 @@ export default function Calculator() {
     if (data) {
       setInputData(JSON.parse(data));
     } else {
-      dispatch(setLoadingAction(false));
+      dispatch(
+        setLoadingAction({ value: false, from: "empty params on calculator" })
+      );
       setInputData(null);
     }
   }, [params, dispatch]);

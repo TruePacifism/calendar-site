@@ -13,11 +13,18 @@ const initialState: stateType = {
   token,
   isLoading: true,
 };
+
+type setLoadingPayloadType = {
+  value: boolean;
+  from: string;
+};
+
 export const setUserAction = createAction<userType, "SET_USER">("SET_USER");
 export const addCardAction = createAction<cardInfoType, "ADD_CARD">("ADD_CARD");
-export const setLoadingAction = createAction<boolean, "SET_LOADING">(
+export const setLoadingAction = createAction<
+  setLoadingPayloadType,
   "SET_LOADING"
-);
+>("SET_LOADING");
 
 export const store = configureStore({
   reducer: createReducer(initialState, (builder) => {
@@ -31,11 +38,18 @@ export const store = configureStore({
       .addCase(addCardAction, (state, action: PayloadAction<cardInfoType>) => {
         state.user.cards.push(action.payload);
       })
-      .addCase(setLoadingAction, (state, action: PayloadAction<boolean>) => {
-        return {
-          ...state,
-          isLoading: action.payload,
-        };
-      });
+      .addCase(
+        setLoadingAction,
+        (state, action: PayloadAction<setLoadingPayloadType>) => {
+          console.log(`Состояние загрузки изменилось
+          Причина: ${action.payload.from}
+          Новое значение: ${action.payload.value}`);
+
+          return {
+            ...state,
+            isLoading: action.payload.value,
+          };
+        }
+      );
   }),
 });

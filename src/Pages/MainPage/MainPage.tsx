@@ -16,51 +16,60 @@ export default function MainPage() {
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
   ] = useState();
+  const [dayOffset, setDayOffset]: [number, Dispatch<SetStateAction<number>>] =
+    useState(0);
   const dispatch = useDispatch();
   const user = useSelector<stateType, userType>((store) => store.user);
   useEffect(() => {
     const fetchInfo = async () => {
-      dispatch(setLoadingAction(true));
-      const newTodayInfo = await getToday({ user });
+      const newTodayInfo = await getToday({ user, dayOffset });
       setTodayInfo(newTodayInfo);
-      dispatch(setLoadingAction(false));
+      console.log(user);
+      console.log(dispatch);
+
+      dispatch(setLoadingAction({ value: false, from: "fetched today info" }));
     };
     fetchInfo();
-  }, [user, dispatch]);
+  }, [user, dispatch, dayOffset]);
   useEffect(() => {
     if (!todayInfo) {
       return;
     }
-    return () => {
-    };
+    return () => {};
   }, [todayInfo]);
   return (
-    <>
-      {todayInfo && (
-        <>
-          <DaysLine />
-          <section
-            style={{
-              backgroundColor: todayInfo
-                ? getColorByAnimalElement(todayInfo.day.element).backgroundHex
-                : "#FFFFFF",
-            }}
-          >
-            <IconedCardInfoList doneFor="HomePage" cardInfo={todayInfo} />
-            <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
-            <div className={styles.circleInfo}>
-              <StrangeCircle
-                cardInfos={[
-                  cardInfoPlaceholder,
-                  cardInfoPlaceholder,
-                  cardInfoPlaceholder,
-                  cardInfoPlaceholder,
-                ]}
-              />
-            </div>
-          </section>
-        </>
-      )}
-    </>
+    todayInfo && (
+      <>
+        <DaysLine
+          onIncrement={() => {
+            setDayOffset((lastDayOffset) => lastDayOffset + 1);
+          }}
+          onDecrement={() => {
+            setDayOffset((lastDayOffset) => lastDayOffset - 1);
+          }}
+        />
+        <section
+          style={{
+            backgroundColor: todayInfo
+              ? getColorByAnimalElement(todayInfo.day.element).backgroundHex
+              : "#FFFFFF",
+          }}
+          className={styles.section}
+        >
+          <IconedCardInfoList doneFor="HomePage" cardInfo={todayInfo} />
+          <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
+          <div className={styles.circleInfo}>
+            <StrangeCircle
+              cardInfos={[
+                cardInfoPlaceholder,
+                cardInfoPlaceholder,
+                cardInfoPlaceholder,
+                cardInfoPlaceholder,
+              ]}
+            />
+          </div>
+        </section>
+      </>
+    )
   );
 }

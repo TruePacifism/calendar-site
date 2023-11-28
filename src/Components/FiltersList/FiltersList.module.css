@@ -4,7 +4,12 @@
   padding-left: 26px;
   padding-right: 26px;
 
-  position: relative;
+  position: fixed;
+  top: 52px;
+  left: 0;
+  z-index: 1000;
+
+  width: 100%;
 
   background-color: var(--background-color);
 }

@@ -6,8 +6,6 @@
 
   background-color: var(--light-accent-color);
 
-  box-shadow: var(--top-shadow);
-
   display: flex;
   justify-content: space-between;
   align-items: center;
