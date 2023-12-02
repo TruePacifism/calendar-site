@@ -12,6 +12,7 @@ const initialState: stateType = {
   user: null,
   token,
   isLoading: true,
+  loadingImages: [],
 };
 
 type setLoadingPayloadType = {
@@ -19,12 +20,20 @@ type setLoadingPayloadType = {
   from: string;
 };
 
+const usedImages: string[] = [];
+
 export const setUserAction = createAction<userType, "SET_USER">("SET_USER");
 export const addCardAction = createAction<cardInfoType, "ADD_CARD">("ADD_CARD");
 export const setLoadingAction = createAction<
   setLoadingPayloadType,
   "SET_LOADING"
 >("SET_LOADING");
+export const addLoadingImage = createAction<string, "ADD_LOADING_IMAGE">(
+  "ADD_LOADING_IMAGE"
+);
+export const removeLoadingImage = createAction<string, "REMOVE_LOADING_IMAGE">(
+  "REMOVE_LOADING_IMAGE"
+);
 
 export const store = configureStore({
   reducer: createReducer(initialState, (builder) => {
@@ -50,6 +59,31 @@ export const store = configureStore({
             isLoading: action.payload.value,
           };
         }
-      );
+      )
+      .addCase(addLoadingImage, (state, action) => {
+        if (
+          !state.loadingImages.includes(action.payload) &&
+          !usedImages.includes(action.payload)
+        ) {
+          state.loadingImages.push(action.payload);
+          usedImages.push(action.payload);
+          console.log("usedImages", usedImages);
+
+          state.isLoading = true;
+        }
+        console.log(state.loadingImages);
+        console.log(state.loadingImages.length);
+      })
+      .addCase(removeLoadingImage, (state, action) => {
+        state.loadingImages = state.loadingImages.filter(
+          (image) => image !== action.payload
+        );
+        console.log(state.loadingImages);
+        console.log(state.loadingImages.length);
+
+        if (state.loadingImages.length === 0) {
+          state.isLoading = false;
+        }
+      });
   }),
 });

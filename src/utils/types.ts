@@ -237,6 +237,7 @@ export type stateType = {
   user: userType;
   token: string;
   isLoading: boolean;
+  loadingImages: string[];
 };
 
 export type userType = {

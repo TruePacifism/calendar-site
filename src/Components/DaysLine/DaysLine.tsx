@@ -38,17 +38,20 @@ export default function DaysLine({ onDecrement, onIncrement }: propsType) {
   const [showingDate, setShowingDate]: [Date, Dispatch<SetStateAction<Date>>] =
     useState(new Date());
 
+  const incrementDay = () => {
+    onIncrement();
+    setShowingDate((currentDate) => date.addDays(currentDate, 1));
+  };
+  const decrementDay = () => {
+    onDecrement();
+    setShowingDate((currentDate) => date.addDays(currentDate, -1));
+  };
+
   return (
     <div className={styles.container}>
-      <ArrowLeft
-        className={styles.arrow}
-        onClick={() => {
-          onDecrement();
-          setShowingDate((currentDate) => date.addDays(currentDate, -1));
-        }}
-      />
+      <ArrowLeft className={styles.arrow} onClick={decrementDay} />
       <ul className={styles.daysContainer}>
-        <li className={styles.dayItem}>
+        <li className={styles.dayItem} onClick={decrementDay}>
           <span className={styles.date}>
             {getStringDate(date.addDays(showingDate, -1))}
           </span>
@@ -60,7 +63,7 @@ export default function DaysLine({ onDecrement, onIncrement }: propsType) {
           <span className={styles.date}>{getStringDate(showingDate)}</span>
           <span className={styles.dayOfWeek}>{getDayOfWeek(showingDate)}</span>
         </li>
-        <li className={styles.dayItem}>
+        <li className={styles.dayItem} onClick={incrementDay}>
           <span className={styles.date}>
             {getStringDate(date.addDays(showingDate, 1))}
           </span>
@@ -69,13 +72,7 @@ export default function DaysLine({ onDecrement, onIncrement }: propsType) {
           </span>
         </li>
       </ul>
-      <ArrowRight
-        className={styles.arrow}
-        onClick={() => {
-          onIncrement();
-          setShowingDate((currentDate) => date.addDays(currentDate, 1));
-        }}
-      />
+      <ArrowRight className={styles.arrow} onClick={incrementDay} />
     </div>
   );
 }

@@ -9,7 +9,7 @@ import Cards from "./Pages/Cards/Cards";
 import Settings from "./Pages/Settings/Settings";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoadingAction, setUserAction } from "./utils/store";
+import { setUserAction } from "./utils/store";
 import getUserInfo from "./api/getUserInfo";
 import { stateType, userType } from "./utils/types";
 import Loading from "./Components/Loading/Loading";
@@ -37,15 +37,11 @@ function App() {
     Dispatch<SetStateAction<string>>
   ] = useState();
   useEffect(() => {
-    dispatch(setLoadingAction({ value: true, from: "changed location" }));
     console.log("Перенаправление");
     const actualHeadingText = getHeadingText(location.pathname);
     if (headerText !== actualHeadingText) {
       setHeaderText(actualHeadingText);
     } else {
-      dispatch(
-        setLoadingAction({ value: false, from: "WRONG changed location" })
-      );
     }
   }, [location, dispatch, headerText]);
   const currentUser: userType = useSelector<stateType, userType>(

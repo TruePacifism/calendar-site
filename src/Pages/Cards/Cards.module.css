@@ -48,5 +48,3 @@
   display: grid;
   grid-template-columns: 1fr 1fr; /* Задает две колонки равной ширины */
 }
-.cardList {
-}

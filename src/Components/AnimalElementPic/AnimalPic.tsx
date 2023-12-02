@@ -18,6 +18,9 @@ import Rat from "../../images/animals/rat+.jpg";
 import Rooster from "../../images/animals/rooster+.jpg";
 import Snake from "../../images/animals/snake+.jpg";
 import NoAnimal from "../../images/animals/no.png";
+import { useDispatch } from "react-redux";
+import { addLoadingImage, removeLoadingImage } from "../../utils/store";
+import uniqid from "uniqid";
 
 type propsType = {
   animal: animalType;
@@ -97,6 +100,19 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
         break;
     }
   }, [animal]);
+  const dispatch = useDispatch();
+  const [code, setCode]: [string, Dispatch<SetStateAction<string>>] = useState(
+    uniqid(animal ? animal.name + "-" : "null-")
+  );
+  useEffect(() => {
+    if (animal && animal.name !== " ") {
+      console.log(code);
+      dispatch(addLoadingImage(code));
+    }
+    return () => {
+      dispatch(removeLoadingImage(code));
+    };
+  }, [animal, code, dispatch]);
 
   return (
     styles && (
@@ -118,7 +134,19 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
                 : styles.noBlackBorder
             }
           >
-            <img src={src} alt="" className={styles.image} />
+            <img
+              src={src}
+              alt=""
+              className={styles.image}
+              onLoad={() => {
+                console.log("exiting", code);
+
+                dispatch(removeLoadingImage(code));
+              }}
+              // onLoadStart={() => {
+              //   dispatch(addLoadingImage(code));
+              // }}
+            />
           </div>
         </div>
         <span className={styles.name}>{animal ? animal.name : "Нет"}</span>

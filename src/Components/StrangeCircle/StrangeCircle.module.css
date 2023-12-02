@@ -19,6 +19,7 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
+  box-shadow: var(--bottom-shadow);
 
   &:not(:last-child) {
     margin-bottom: 5px;

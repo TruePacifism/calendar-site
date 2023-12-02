@@ -11,13 +11,13 @@ export default function Loading() {
     Dispatch<SetStateAction<boolean>>
   ] = useState(true);
   useEffect(() => {
-    if (isLoading) {
-      setIsRendering(true);
-    } else {
-      setTimeout(() => {
-        setIsRendering(false);
-      }, 1000);
-    }
+    // if (isLoading) {
+    //   setIsRendering(true);
+    // } else {
+    //   setTimeout(() => {
+    //     setIsRendering(false);
+    //   }, 1000);
+    // }
   }, [isLoading]);
   return (
     isRendering && (

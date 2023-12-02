@@ -9,7 +9,6 @@ import CardInfo from "../../Components/CardInfo/CardInfo";
 import StrangeCircle from "../../Components/StrangeCircle/StrangeCircle";
 import getToday from "../../api/getToday";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoadingAction } from "../../utils/store";
 
 export default function MainPage() {
   const [todayInfo, setTodayInfo]: [
@@ -26,8 +25,6 @@ export default function MainPage() {
       setTodayInfo(newTodayInfo);
       console.log(user);
       console.log(dispatch);
-
-      dispatch(setLoadingAction({ value: false, from: "fetched today info" }));
     };
     fetchInfo();
   }, [user, dispatch, dayOffset]);
