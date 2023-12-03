@@ -2,8 +2,11 @@
 .hidden {
   background-color: var(--accent-color);
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 0;
   left: 0;
   z-index: 10000;
@@ -14,7 +17,7 @@
 .hidden {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1000ms ease;
+  transition: none;
 }
 @keyframes rotate {
   from {
@@ -25,13 +28,9 @@
   }
 }
 .icon {
-  width: 70vmin;
-  height: 70vmin;
-  position: absolute;
+  width: 70%;
   border-radius: 50%;
   border-width: 0px;
-  top: calc(50% - 70vmin / 2);
-  left: calc(50% - 70vmin / 2);
   animation: rotate 5s linear infinite;
   fill: var(--accent-color);
   background-color: white;

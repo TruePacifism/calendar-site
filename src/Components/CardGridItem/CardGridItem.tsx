@@ -19,9 +19,9 @@ export default function CardGridItem({ cardInfo }: propsType) {
   const [pfpUrl, setPfpUrl]: [string, Dispatch<SetStateAction<string>>] =
     useState(pfpPlaceholder);
   useEffect(() => {
-    setColor(getColorByAnimalElement(cardInfo.year.animal));
+    setColor(getColorByAnimalElement(cardInfo.year.element));
     setPfpUrl(pfpPlaceholder);
-  }, [cardInfo.year.animal]);
+  }, [cardInfo.year.element]);
   const handleCardClick = () => {
     const { name, birthdate, gender, birthcity, livingcity } = cardInfo;
     const inputData = {

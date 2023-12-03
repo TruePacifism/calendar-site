@@ -4,8 +4,8 @@
   padding-left: 26px;
   padding-right: 26px;
 
-  position: fixed;
-  top: 52px;
+  position: sticky;
+  top: 0;
   left: 0;
   z-index: 1000;
 

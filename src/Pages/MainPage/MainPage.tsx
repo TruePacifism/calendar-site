@@ -9,6 +9,7 @@ import CardInfo from "../../Components/CardInfo/CardInfo";
 import StrangeCircle from "../../Components/StrangeCircle/StrangeCircle";
 import getToday from "../../api/getToday";
 import { useDispatch, useSelector } from "react-redux";
+import { clearLoadingImages } from "../../utils/store";
 
 export default function MainPage() {
   const [todayInfo, setTodayInfo]: [
@@ -34,6 +35,11 @@ export default function MainPage() {
     }
     return () => {};
   }, [todayInfo]);
+  useEffect(() => {
+    return () => {
+      dispatch(clearLoadingImages());
+    };
+  }, [dispatch]);
   return (
     todayInfo && (
       <>

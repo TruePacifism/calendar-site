@@ -20,7 +20,11 @@ import ModalPillars from "../../Components/ModalComponents/ModalPillars/ModalPil
 import countCard from "../../api/countCard";
 import { useSelector, useDispatch } from "react-redux";
 import addCard from "../../api/addCard";
-import { addCardAction, setLoadingAction } from "../../utils/store";
+import {
+  addCardAction,
+  clearLoadingImages,
+  setLoadingAction,
+} from "../../utils/store";
 
 type propsType = {
   inputData: inputDataType;
@@ -76,6 +80,11 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
     } else {
     }
   };
+  useEffect(() => {
+    return () => {
+      dispatch(clearLoadingImages());
+    };
+  }, [dispatch]);
 
   return (
     cardInfo && (

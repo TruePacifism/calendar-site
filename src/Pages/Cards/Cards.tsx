@@ -8,9 +8,11 @@ import CardGridItem from "../../Components/CardGridItem/CardGridItem";
 import { cardInfoType, stateType } from "../../utils/types";
 import { Input } from "@mui/material";
 import CardListItem from "../../Components/CardListItem/CardListItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearLoadingImages } from "../../utils/store";
 
 export default function Cards() {
+  const dispatch = useDispatch();
   // eslint-disable-next-line
   const [filter, setFilter]: [string, Dispatch<SetStateAction<string>>] =
     useState("all");
@@ -30,10 +32,14 @@ export default function Cards() {
   const cardsInfo = useSelector<stateType, cardInfoType[]>(
     (state) => state.user.cards
   );
-  useEffect(() => {}, []);
+  useEffect(() => {
+    return () => {
+      dispatch(clearLoadingImages());
+    };
+  }, [dispatch]);
 
   return (
-    <>
+    <div>
       <FiltersList
         onChange={(e) => {
           setFilter(e.target.value);
@@ -86,6 +92,6 @@ export default function Cards() {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }

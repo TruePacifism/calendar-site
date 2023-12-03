@@ -20,7 +20,7 @@ type setLoadingPayloadType = {
   from: string;
 };
 
-const usedImages: string[] = [];
+var usedImages: string[] = [];
 
 export const setUserAction = createAction<userType, "SET_USER">("SET_USER");
 export const addCardAction = createAction<cardInfoType, "ADD_CARD">("ADD_CARD");
@@ -33,6 +33,9 @@ export const addLoadingImage = createAction<string, "ADD_LOADING_IMAGE">(
 );
 export const removeLoadingImage = createAction<string, "REMOVE_LOADING_IMAGE">(
   "REMOVE_LOADING_IMAGE"
+);
+export const clearLoadingImages = createAction<null, "CLEAR_LOADING_IMAGE">(
+  "CLEAR_LOADING_IMAGE"
 );
 
 export const store = configureStore({
@@ -50,10 +53,6 @@ export const store = configureStore({
       .addCase(
         setLoadingAction,
         (state, action: PayloadAction<setLoadingPayloadType>) => {
-          console.log(`Состояние загрузки изменилось
-          Причина: ${action.payload.from}
-          Новое значение: ${action.payload.value}`);
-
           return {
             ...state,
             isLoading: action.payload.value,
@@ -61,29 +60,30 @@ export const store = configureStore({
         }
       )
       .addCase(addLoadingImage, (state, action) => {
+        // console.log("usedImages", usedImages);
+
         if (
           !state.loadingImages.includes(action.payload) &&
           !usedImages.includes(action.payload)
         ) {
           state.loadingImages.push(action.payload);
           usedImages.push(action.payload);
-          console.log("usedImages", usedImages);
 
           state.isLoading = true;
         }
-        console.log(state.loadingImages);
-        console.log(state.loadingImages.length);
       })
       .addCase(removeLoadingImage, (state, action) => {
         state.loadingImages = state.loadingImages.filter(
           (image) => image !== action.payload
         );
-        console.log(state.loadingImages);
-        console.log(state.loadingImages.length);
 
         if (state.loadingImages.length === 0) {
           state.isLoading = false;
         }
+      })
+      .addCase(clearLoadingImages, (state, action) => {
+        usedImages = [];
+        // console.log("cleared cash");
       });
   }),
 });

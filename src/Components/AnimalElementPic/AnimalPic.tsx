@@ -101,6 +101,7 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
     }
   }, [animal]);
   const dispatch = useDispatch();
+  // eslint-disable-next-line
   const [code, setCode]: [string, Dispatch<SetStateAction<string>>] = useState(
     uniqid(animal ? animal.name + "-" : "null-")
   );
@@ -137,6 +138,7 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
             <img
               src={src}
               alt=""
+              placeholder={NoAnimal}
               className={styles.image}
               onLoad={() => {
                 console.log("exiting", code);

@@ -11,8 +11,8 @@ export default function CardListItem({ cardInfo }: propsType) {
   const [color, setColor]: [colorType, Dispatch<SetStateAction<colorType>>] =
     useState();
   useEffect(() => {
-    setColor(getColorByAnimalElement(cardInfo.year.animal));
-  }, [cardInfo.year.animal]);
+    setColor(getColorByAnimalElement(cardInfo.year.element));
+  }, [cardInfo.year.element]);
   return (
     <li className={styles.section}>
       <div

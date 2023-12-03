@@ -3,6 +3,9 @@
   justify-content: space-between;
   align-items: center;
   width: calc((100vw - 13px * 4 - 1px) / 2 - 13px);
+  @media screen and (min-width: 400px) {
+    width: calc((400px - 13px * 4 - 1px) / 2 - 13px);
+  }
 }
 .separator {
   display: none;

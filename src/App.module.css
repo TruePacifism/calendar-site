@@ -1,6 +1,12 @@
 .App {
   text-align: center;
 }
+.wrapper {
+  max-width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
+}
 
 .App-logo {
   height: 40vmin;

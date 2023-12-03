@@ -109,7 +109,7 @@ export default function ElementPic({ element, doneFor }: propsType) {
     styles && (
       <>
         <div className={styles.imageWrapper}>
-          <img src={src} alt="" className={className} />
+          <img src={src} alt="" className={className} placeholder={NoElement} />
         </div>
         <span className={styles.name}>
           {element ? element.name.split(" ")[0] : "Нет"}
