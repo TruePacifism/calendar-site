@@ -12,6 +12,7 @@
   height: 1em;
   width: auto;
   margin-top: 4px;
+  cursor: pointer;
   fill: var(--accent-color);
   &:first-child {
     margin-right: 3px;
@@ -32,8 +33,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 }
 .currentDayItem {
+  cursor: auto;
   color: var(--main-text-color);
 }
 .date {
