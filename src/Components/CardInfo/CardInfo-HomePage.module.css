@@ -1,8 +1,8 @@
 .container {
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: calc((100vw - 52px * 4) / 7);
-  padding-right: calc((100vw - 52px * 4) / 7);
+  padding-left: calc((100% - 52px * 4) / 7);
+  padding-right: calc((100% - 52px * 4) / 7);
 
   position: relative;
 
