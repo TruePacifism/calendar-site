@@ -6,6 +6,7 @@ import { stateType } from "../../utils/types";
 
 export default function Loading() {
   const { isLoading } = useSelector<stateType, stateType>((store) => store);
+  // eslint-disable-next-line
   const [isRendering, setIsRendering]: [
     boolean,
     Dispatch<SetStateAction<boolean>>
