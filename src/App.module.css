@@ -9,8 +9,8 @@
   min-height: 100vh;
 }
 .container {
-    min-height: 100vh;
-  &:nth-child(2) {
+  min-height: 100vh;
+  & > :nth-child(2) {
     min-height: calc(100vh - 52px - 60px);
   }
 }

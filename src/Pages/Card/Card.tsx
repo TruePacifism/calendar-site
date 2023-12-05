@@ -25,6 +25,7 @@ import {
   clearLoadingImages,
   setLoadingAction,
 } from "../../utils/store";
+import getColorByAnimalElement from "../../utils/getColorByAnimal";
 
 type propsType = {
   inputData: inputDataType;
@@ -98,6 +99,7 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
           <h1 className={styles.name}>{cardInfo.name}</h1>
         </div>
         <IconedCardInfoList
+          backgroundColor={getColorByAnimalElement(cardInfo.year.element)}
           doneFor="Calculator"
           cardInfo={cardInfo}
           onClick={() => {
@@ -128,6 +130,10 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
                 <ModalMainElementStar mainElement={cardInfo.mainElement} />
               );
             }}
+            style={{
+              backgroundColor: getColorByAnimalElement(cardInfo.year.element)
+                .backgroundHex,
+            }}
           >
             <MainElementStar mainElement={cardInfo.mainElement} />
           </li>
@@ -138,6 +144,10 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
                 <ModalFallingStars fallingStars={cardInfo.fallingStars} />
               );
             }}
+            style={{
+              backgroundColor: getColorByAnimalElement(cardInfo.year.element)
+                .backgroundHex,
+            }}
           >
             <FallingStarsField stars={cardInfo.fallingStars} />
           </li>
@@ -146,12 +156,21 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
             onClick={() => {
               openModal(<ModalAnimalChart chartData={cardInfo.chartData} />);
             }}
+            style={{
+              backgroundColor: getColorByAnimalElement(cardInfo.year.element)
+                .backgroundHex,
+            }}
           >
             <AnimalChart chartData={cardInfo.chartData} />
           </li>
         </ul>
         <div>
-          <CardLineChart chartData={cardInfo.lineChartData} />
+          <CardLineChart
+            backgroundColor={
+              getColorByAnimalElement(cardInfo.year.element).backgroundHex
+            }
+            chartData={cardInfo.lineChartData}
+          />
         </div>
         <div className={styles.cardHeadingContainer}>
           <h2 className={styles.cardHeading}>Такты</h2>
@@ -169,6 +188,9 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
           <PillarsInfo
             pillars={cardInfo.pillars}
             currentPillar={cardInfo.currentPillar}
+            backgroundColor={
+              getColorByAnimalElement(cardInfo.year.element).backgroundHex
+            }
           />
         </div>
 

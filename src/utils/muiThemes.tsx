@@ -68,12 +68,26 @@ export const cityInputTheme = createTheme({
   components: {
     MuiAutocomplete: {
       styleOverrides: {
-        root: {
-          "&.Mui-focused": {
+        focused: {
+          flexWrap: "nowrap",
+          height: "26px",
+          width: "195px",
+        },
+        inputRoot: { flexWrap: "nowrap", height: "26px", width: "195px" },
+        input: {
+          "&:not(.Mui-focused)": {
             flexWrap: "nowrap",
-            height: "26px",
-            width: "195px",
           },
+          height: "26px",
+          width: "195px",
+          fontSize: "11px",
+        },
+        root: {
+          "&:not(.Mui-focused)": {
+            flexWrap: "nowrap",
+          },
+          height: "26px",
+          width: "195px",
         },
       },
     },
@@ -85,13 +99,6 @@ export const cityInputTheme = createTheme({
         },
       },
     },
-    MuiFormLabel: {
-      styleOverrides: {
-        root: {
-          top: 0,
-        },
-      },
-    },
     MuiInputLabel: {
       styleOverrides: {
         shrink: {
@@ -100,33 +107,6 @@ export const cityInputTheme = createTheme({
         root: {
           top: "-13px",
           fontSize: "0.85rem",
-        },
-      },
-    },
-    // MuiFormControl: {
-    //   styleOverrides: {
-    //     root: {
-    //       boxSizing: "border-box",
-    //       border: `1px solid ${basicButtonBorderColor}`,
-    //       borderRadius: "5px",
-    //       height: "26px",
-    //       paddingTop: "0",
-    //       paddingLeft: "2px",
-    //       paddingRight: "11px",
-    //       fontFamily: "Roboto Slab",
-    //       fontSize: "15px",
-    //       fontWeight: "400",
-    //       letterSpacing: "0em",
-    //       color: hiddenTextColor,
-    //       textAlign: "left",
-    //       paddingBottom: "0",
-    //     },
-    //   },
-    // },
-    MuiInputBase: {
-      styleOverrides: {
-        root: {
-          height: "26px",
         },
       },
     },

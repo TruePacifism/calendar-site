@@ -5,6 +5,7 @@ import homePageStyles from "./CardInfo-HomePage.module.css";
 import CardColumn from "../CardColumn/CardColumn";
 import { cardInfoType, stylesType } from "../../utils/types";
 import { useMediaQuery } from "@mui/material";
+import getColorByAnimalElement from "../../utils/getColorByAnimal";
 
 type propsType = {
   cardInfo: cardInfoType;
@@ -37,7 +38,15 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
     setStyles(getStyles(doneFor));
   }, [doneFor]);
   return styles ? (
-    <ul className={styles.container}>
+    <ul
+      className={styles.container}
+      style={{
+        backgroundColor:
+          doneFor === "Calculator"
+            ? getColorByAnimalElement(cardInfo.year.element).backgroundHex
+            : null,
+      }}
+    >
       {cardInfo && (
         <>
           <CardColumn

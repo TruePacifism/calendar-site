@@ -1,5 +1,4 @@
 .container {
-  margin-top: 52px;
   position: relative;
 }
 .nameContainer {
@@ -11,7 +10,7 @@
   height: 52px;
   width: 100%;
 
-  position: fixed;
+  position: sticky;
   top: 52px;
   left: 0;
   z-index: 1000;
@@ -65,7 +64,7 @@
 .otherInfoList {
   display: flex;
   align-items: center;
-  width: 100vw;
+  width: 100%;
 }
 
 .otherInfoListItem {

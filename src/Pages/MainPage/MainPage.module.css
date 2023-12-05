@@ -1,5 +1,8 @@
+.wrapper {
+  min-height: 100%;
+}
 .section {
-  min-height: calc(100vh - 52px - 52px - 60px);
+  height: 100%;
 }
 .circleInfo {
   display: flex;

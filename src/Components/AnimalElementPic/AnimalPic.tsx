@@ -107,7 +107,6 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
   );
   useEffect(() => {
     if (animal && animal.name !== " ") {
-      console.log(code);
       dispatch(addLoadingImage(code));
     }
     return () => {
@@ -141,8 +140,6 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
               placeholder={NoAnimal}
               className={styles.image}
               onLoad={() => {
-                console.log("exiting", code);
-
                 dispatch(removeLoadingImage(code));
               }}
               // onLoadStart={() => {

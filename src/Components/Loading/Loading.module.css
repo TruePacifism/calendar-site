@@ -4,6 +4,7 @@
   height: 100vh;
   width: 100%;
   position: absolute;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,12 +13,12 @@
   z-index: 10000;
 }
 .showed {
-  transition: opacity 1000ms ease;
+  transition: none;
 }
 .hidden {
   opacity: 0;
   pointer-events: none;
-  transition: none;
+  transition: opacity 1000ms ease;
 }
 @keyframes rotate {
   from {

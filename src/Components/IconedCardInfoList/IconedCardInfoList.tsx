@@ -16,7 +16,7 @@ import { ReactComponent as BirthSideIcon } from "../../images/birth-side-icon.sv
 import { ReactComponent as GenderIcon } from "../../images/gender-icon.svg";
 import { ReactComponent as PowerIcon } from "../../images/power-icon.svg";
 import { ReactComponent as LivingsideIcon } from "../../images/living-side-icon.svg";
-import { cardInfoType, stylesType } from "../../utils/types";
+import { cardInfoType, colorType, stylesType } from "../../utils/types";
 
 type valueInfo = {
   Icon: React.FunctionComponent<
@@ -31,6 +31,7 @@ type propsType = {
   cardInfo: cardInfoType;
   onClick?: MouseEventHandler<HTMLUListElement>;
   doneFor: doneForType;
+  backgroundColor?: colorType;
 };
 
 type doneForType = "CardGridItem" | "Calculator" | "HomePage";
@@ -52,6 +53,7 @@ export default function IconedCardInfoList({
   cardInfo,
   onClick,
   doneFor,
+  backgroundColor,
 }: propsType) {
   const [values, setValues]: [
     valueInfo[],
@@ -97,7 +99,14 @@ export default function IconedCardInfoList({
   }, [doneFor]);
 
   return (
-    <ul className={styles.list} onClick={onClick}>
+    <ul
+      className={styles.list}
+      onClick={onClick}
+      style={{
+        backgroundColor:
+          doneFor === "Calculator" ? backgroundColor.backgroundHex : null,
+      }}
+    >
       {values &&
         values.map(
           (value, idx) =>

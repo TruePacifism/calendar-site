@@ -2,12 +2,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .icon {
   width: 26px;
   height: 26px;
   fill: white;
-  margin-right: 2px;
+  /* margin-right: 2px; */
   border-radius: 50%;
   box-shadow: var(--bottom-shadow);
+}
+.value {
+  position: absolute;
+  top: 0;
+  left: 28px;
 }

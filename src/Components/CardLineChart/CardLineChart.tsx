@@ -23,34 +23,38 @@ ChartJS.register(
   LineElement
 );
 
-const customBackgroundPlugin = {
-  id: "customCanvasBackgroundColor",
-  beforeDraw: (
-    chart: { width?: any; height?: any; ctx?: any },
-    args: any,
-    options: { color: string }
-  ) => {
-    const { ctx } = chart;
-    ctx.save();
-    ctx.globalCompositeOperation = "destination-over";
-    ctx.fillStyle = chartBackgroundColor;
-    ctx.fillRect(0, 0, chart.width, chart.height);
-    ctx.restore();
-  },
-};
 type chartDataType = ChartData<"line", (number | Point)[], unknown>;
 type propsType = {
   chartData: lineChartDataType;
+  backgroundColor: string;
 };
 type viewType = "Неделя" | "Месяц" | "Год";
 
-export default function CardLineChart({ chartData }: propsType) {
+export default function CardLineChart({
+  chartData,
+  backgroundColor,
+}: propsType) {
   const [data, setData]: [
     chartDataType,
     Dispatch<SetStateAction<chartDataType>>
   ] = useState();
   const [view, setView]: [viewType, Dispatch<SetStateAction<viewType>>] =
     useState();
+  const customBackgroundPlugin = {
+    id: "customCanvasBackgroundColor",
+    beforeDraw: (
+      chart: { width?: any; height?: any; ctx?: any },
+      args: any,
+      options: { color: string }
+    ) => {
+      const { ctx } = chart;
+      ctx.save();
+      ctx.globalCompositeOperation = "destination-over";
+      ctx.fillStyle = backgroundColor;
+      ctx.fillRect(0, 0, chart.width, chart.height);
+      ctx.restore();
+    },
+  };
   useState();
   useEffect(() => {
     let data: number[] = [];
@@ -82,11 +86,11 @@ export default function CardLineChart({ chartData }: propsType) {
           fill: false,
           borderColor: "#FFFFFF",
           tension: 0.5,
-          backgroundColor: chartBackgroundColor,
+          backgroundColor,
         },
       ],
     });
-  }, [view, chartData.day, chartData.month, chartData.year]);
+  }, [view, chartData.day, chartData.month, chartData.year, backgroundColor]);
   return (
     <>
       <div className={styles.chartTitleBox}>

@@ -9,7 +9,7 @@ import CardInfo from "../../Components/CardInfo/CardInfo";
 import StrangeCircle from "../../Components/StrangeCircle/StrangeCircle";
 import getToday from "../../api/getToday";
 import { useDispatch, useSelector } from "react-redux";
-import { clearLoadingImages } from "../../utils/store";
+import { clearLoadingImages, setLoadingAction } from "../../utils/store";
 
 export default function MainPage() {
   const [todayInfo, setTodayInfo]: [
@@ -22,10 +22,9 @@ export default function MainPage() {
   const user = useSelector<stateType, userType>((store) => store.user);
   useEffect(() => {
     const fetchInfo = async () => {
+      dispatch(setLoadingAction({ from: "fetch user", value: true }));
       const newTodayInfo = await getToday({ user, dayOffset });
       setTodayInfo(newTodayInfo);
-      console.log(user);
-      console.log(dispatch);
     };
     fetchInfo();
   }, [user, dispatch, dayOffset]);
@@ -42,7 +41,14 @@ export default function MainPage() {
   }, [dispatch]);
   return (
     todayInfo && (
-      <>
+      <div
+        className={styles.wrapper}
+        style={{
+          backgroundColor: todayInfo
+            ? getColorByAnimalElement(todayInfo.day.element).backgroundHex
+            : "#FFFFFF",
+        }}
+      >
         <DaysLine
           onIncrement={() => {
             setDayOffset((lastDayOffset) => lastDayOffset + 1);
@@ -51,14 +57,7 @@ export default function MainPage() {
             setDayOffset((lastDayOffset) => lastDayOffset - 1);
           }}
         />
-        <section
-          style={{
-            backgroundColor: todayInfo
-              ? getColorByAnimalElement(todayInfo.day.element).backgroundHex
-              : "#FFFFFF",
-          }}
-          className={styles.section}
-        >
+        <section className={styles.section}>
           <IconedCardInfoList doneFor="HomePage" cardInfo={todayInfo} />
           <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
           <div className={styles.circleInfo}>
@@ -72,7 +71,7 @@ export default function MainPage() {
             />
           </div>
         </section>
-      </>
+      </div>
     )
   );
 }

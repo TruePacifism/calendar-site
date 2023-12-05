@@ -6,11 +6,16 @@ import CardColumn from "../CardColumn/CardColumn";
 type propsType = {
   pillars: pillarType[];
   currentPillar: pillarType;
+  backgroundColor?: string;
 };
 
-export default function PillarsInfo({ pillars, currentPillar }: propsType) {
+export default function PillarsInfo({
+  pillars,
+  currentPillar,
+  backgroundColor,
+}: propsType) {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ backgroundColor }}>
       <div className={styles.innerContainer}>
         {pillars.map((pillar, idx) => (
           <CardColumn

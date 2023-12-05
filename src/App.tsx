@@ -6,10 +6,14 @@ import Footer from "./Components/Footer/Footer";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import MainPage from "./Pages/MainPage/MainPage";
 import Cards from "./Pages/Cards/Cards";
-import Settings from "./Pages/Settings/Settings";
+import SettingsPage from "./Pages/Settings/Settings";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import { useDispatch, useSelector } from "react-redux";
-import { clearLoadingImages, setUserAction } from "./utils/store";
+import {
+  clearLoadingImages,
+  setLoadingAction,
+  setUserAction,
+} from "./utils/store";
 import getUserInfo from "./api/getUserInfo";
 import { stateType, userType } from "./utils/types";
 import Loading from "./Components/Loading/Loading";
@@ -45,6 +49,10 @@ function App() {
     } else {
     }
   }, [location, dispatch, headerText]);
+  document.getElementById("root").onloadeddata = () => {
+    dispatch(setLoadingAction({ value: false, from: "document" }));
+    console.log("loaded");
+  };
   const currentUser: userType = useSelector<stateType, userType>(
     (store) => store.user
   );
@@ -78,8 +86,9 @@ function App() {
             <Route Component={MainPage} path="/" />
             <Route Component={Calculator} path="/calculator" />
             <Route Component={Cards} path="/cards" />
-            <Route Component={Settings} path="/settings" />
+            <Route Component={SettingsPage} path="/settings" />
             <Route Component={LoginPage} path="/login" />
+            <Route Component={SettingsPage} path="*" />
           </Routes>
           <Footer />
         </div>

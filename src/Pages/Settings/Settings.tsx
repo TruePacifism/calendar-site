@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Settings.module.css";
 import {
   Accordion,
@@ -8,8 +8,14 @@ import {
 } from "@mui/material";
 import { settingsAccordionTheme } from "../../utils/muiThemes";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
+import { useDispatch } from "react-redux";
+import { setLoadingAction } from "../../utils/store";
 
-export default function Settings() {
+export default function SettingsPage() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setLoadingAction({ from: "settings loaded", value: false }));
+  }, [dispatch]);
   return (
     <>
       <ThemeProvider theme={settingsAccordionTheme}>
