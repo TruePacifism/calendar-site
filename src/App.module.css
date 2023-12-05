@@ -9,8 +9,7 @@
   min-height: 100vh;
 }
 .container {
-    min-height: 100vh;
-
+    min-height: calc(100vh - 60px - 52px);
 }
 .App-logo {
   height: 40vmin;
