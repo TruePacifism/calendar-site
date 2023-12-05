@@ -72,7 +72,7 @@ function App() {
       <Loading />
 
       {(currentUser || !token) && (
-        <>
+        <div className={styles.container}>
           <Header heading={headerText} />
           <Routes>
             <Route Component={MainPage} path="/" />
@@ -82,7 +82,7 @@ function App() {
             <Route Component={LoginPage} path="/login" />
           </Routes>
           <Footer />
-        </>
+        </div>
       )}
     </div>
   );
