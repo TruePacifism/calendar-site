@@ -53,13 +53,11 @@ export const store = configureStore({
       .addCase(
         setLoadingAction,
         (state, action: PayloadAction<setLoadingPayloadType>) => {
-          if (action.payload.value) {
-            document.body.classList.add("no-scroll");
-          } else {
-            setTimeout(() => {
-              document.body.classList.remove("no-scroll");
-            }, 1000);
-          }
+          // if (action.payload.value) {
+          //   document.body.classList.add("no-scroll");
+          // } else {
+          //   document.body.classList.remove("no-scroll");
+          // }
           return {
             ...state,
             isLoading: action.payload.value,

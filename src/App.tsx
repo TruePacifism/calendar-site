@@ -17,6 +17,7 @@ import {
 import getUserInfo from "./api/getUserInfo";
 import { stateType, userType } from "./utils/types";
 import Loading from "./Components/Loading/Loading";
+import Page404 from "./Pages/404Page/404Page";
 
 const getHeadingText = (path: string): string => {
   switch (path) {
@@ -88,7 +89,7 @@ function App() {
             <Route Component={Cards} path="/cards" />
             <Route Component={SettingsPage} path="/settings" />
             <Route Component={LoginPage} path="/login" />
-            <Route Component={SettingsPage} path="*" />
+            <Route Component={Page404} path="*" />
           </Routes>
           <Footer />
         </div>

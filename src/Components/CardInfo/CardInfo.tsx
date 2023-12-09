@@ -73,7 +73,9 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             element={cardInfo.year.element}
             title={cardInfo.birthdate.year}
           />
-          {smallMobile && <div className={styles.separator}></div>}
+          {smallMobile && doneFor !== "HomePage" && (
+            <div className={styles.separator}></div>
+          )}
           {doneFor !== "HomePage" && (
             <CardColumn
               animal={
