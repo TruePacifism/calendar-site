@@ -142,14 +142,18 @@ export const cityInputTheme = createTheme({
 
 export const dateInputTheme = createTheme({
   components: {
-    MuiSelect: {
+    MuiOutlinedInput: {
       styleOverrides: {
-        outlined: {
+        notchedOutline: {
           border: `1px solid ${basicButtonBorderColor}`,
         },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        outlined: {},
         select: {
           boxSizing: "border-box",
-          border: `1px solid ${basicButtonBorderColor}`,
           borderRadius: "5px",
           height: "26px",
           paddingTop: "0",
@@ -185,7 +189,8 @@ export const dateInputTheme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
-          border: `0px`,
+          borderWidth: "0px",
+          borderRadius: "5px",
           "::placeholder": {
             opacity: 1,
           },
@@ -197,7 +202,6 @@ export const dateInputTheme = createTheme({
         root: {
           boxSizing: "border-box",
           border: `1px solid ${basicButtonBorderColor}`,
-          borderRadius: "5px",
           height: "26px",
           paddingTop: "0",
           paddingLeft: "2px",
