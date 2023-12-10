@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Header.module.css";
 import { ReactComponent as BackIcon } from "../../images/back-icon.svg";
 import { ReactComponent as LogoIcon } from "../../images/logo-another-icon.svg";
-import { ReactComponent as SearchIcon } from "../../images/search-header-icon.svg";
+import { ReactComponent as HelpIcon } from "../../images/help-icon.svg";
 import { Link, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import { searchModalTheme } from "../../utils/muiThemes";
@@ -33,14 +33,14 @@ export default function Header({ heading }: propsType) {
           onClose={closeModal}
         >
           <div className={styles.modalContainer}>
-            <SearchIcon className={styles.searchModalIcon} />
+            <HelpIcon className={styles.searchModalIcon} />
             <Input />
           </div>
         </Dialog>
       </ThemeProvider>
       <div className={styles.container}>
         {heading === "СИСТЕМА ФЕНШУЙ" ? (
-          <SearchIcon className={styles.backIcon} onClick={openModal} />
+          <HelpIcon className={styles.backIcon} onClick={openModal} />
         ) : (
           <Link
             to={
@@ -53,7 +53,7 @@ export default function Header({ heading }: propsType) {
           </Link>
         )}
         <span className={styles.heading}>{heading}</span>
-        <LogoIcon className={styles.burgerIcon} />
+        <LogoIcon className={styles.logoIcon} />
       </div>
     </>
   );

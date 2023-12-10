@@ -58,6 +58,11 @@
 .hourInputBox {
   min-width: 195px;
 }
+.dateInputBox {
+  display: flex;
+  align-items: center;
+  height: 26px;
+}
 .dateInputBox > *:not(:last-child) {
   margin-right: 5px;
 }
@@ -66,4 +71,8 @@
 }
 .dateInput:not(:last-child) {
   margin-right: 5px;
+}
+.genderInputBox {
+  min-width: 195px;
+  height: 26px;
 }

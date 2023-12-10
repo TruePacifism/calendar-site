@@ -72,22 +72,35 @@ export const cityInputTheme = createTheme({
           flexWrap: "nowrap",
           height: "26px",
           width: "195px",
+          color: hiddenTextColor,
+          fontSize: "15px",
         },
-        inputRoot: { flexWrap: "nowrap", height: "26px", width: "195px" },
+        inputRoot: {
+          flexWrap: "nowrap",
+          height: "26px",
+          width: "195px",
+          color: hiddenTextColor,
+          fontSize: "15px",
+        },
         input: {
           "&:not(.Mui-focused)": {
             flexWrap: "nowrap",
           },
           height: "26px",
           width: "195px",
-          fontSize: "11px",
+          fontSize: "15px",
+          "::placeholder": {
+            opacity: 1,
+          },
+          color: hiddenTextColor,
         },
         root: {
           "&:not(.Mui-focused)": {
             flexWrap: "nowrap",
           },
           height: "26px",
-          width: "195px",
+          width: "195px !important",
+          color: hiddenTextColor,
         },
       },
     },
@@ -96,6 +109,11 @@ export const cityInputTheme = createTheme({
         input: {
           height: "26px",
           display: "block",
+          "::placeholder": {
+            opacity: 1,
+          },
+          color: hiddenTextColor,
+          fontSize: "15px",
         },
       },
     },
@@ -103,10 +121,19 @@ export const cityInputTheme = createTheme({
       styleOverrides: {
         shrink: {
           top: 0,
+          color: hiddenTextColor,
         },
         root: {
           top: "-13px",
-          fontSize: "0.85rem",
+          fontSize: "15px",
+          color: hiddenTextColor,
+        },
+      },
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          width: "195px",
         },
       },
     },
@@ -143,6 +170,9 @@ export const dateInputTheme = createTheme({
               marginRight: "5px",
             },
           },
+          "::placeholder": {
+            opacity: 1,
+          },
         },
         icon: {
           fill: hiddenTextColor,
@@ -156,6 +186,9 @@ export const dateInputTheme = createTheme({
       styleOverrides: {
         root: {
           border: `0px`,
+          "::placeholder": {
+            opacity: 1,
+          },
         },
       },
     },
@@ -183,6 +216,13 @@ export const dateInputTheme = createTheme({
             ":last-child": {
               marginRight: "5px",
             },
+          },
+        },
+        input: {
+          height: "26px",
+          boxSizing: "border-box",
+          "::placeholder": {
+            opacity: 1,
           },
         },
       },
@@ -218,6 +258,9 @@ export const mainTheme = createTheme({
           textAlign: "left",
 
           paddingBottom: "0",
+          "::placeholder": {
+            opacity: 1,
+          },
         },
       },
     },
@@ -389,6 +432,9 @@ export const birthtimeTheme = createTheme({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          "::placeholder": {
+            opacity: 1,
+          },
         },
       },
     },

@@ -224,15 +224,15 @@ export default function Calculator() {
           </label>
           <div className={styles.formFieldContainer}>
             <span className={styles.label}>Пол</span>
-            <div className={styles.dateInputBox}>
+            <div className={styles.genderInputBox}>
               <CustomCheckBoxGroup
                 checkboxesInfo={[
                   {
-                    title: "Мужской",
+                    title: "мужской",
                     value: "male",
                   },
                   {
-                    title: "Женский",
+                    title: "женский",
                     value: "female",
                   },
                 ]}

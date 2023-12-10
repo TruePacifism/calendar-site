@@ -29,10 +29,13 @@
   color: white;
 }
 .backIcon,
-.burgerIcon {
+.logoIcon {
   fill: white;
   width: 26px;
   height: 26px;
+}
+.logoIcon {
+  transform: rotate(-60deg);
 }
 .centerIcon {
   width: 43px;
