@@ -139,9 +139,15 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
               alt=""
               placeholder={NoAnimal}
               className={styles.image}
-              onLoad={() => {
-                dispatch(removeLoadingImage(code));
-              }}
+              // onLoadStartCapture={() => {
+              //   dispatch(addLoadingImage(code));
+              // }}
+              // onLoadStart={() => {
+              //   dispatch(addLoadingImage(code));
+              // }}
+              // onLoad={() => {
+              //   dispatch(removeLoadingImage(code));
+              // }}
               // onLoadStart={() => {
               //   dispatch(addLoadingImage(code));
               // }}

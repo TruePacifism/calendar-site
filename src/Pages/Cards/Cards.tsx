@@ -9,7 +9,7 @@ import { cardInfoType, stateType } from "../../utils/types";
 import { Input } from "@mui/material";
 import CardListItem from "../../Components/CardListItem/CardListItem";
 import { useDispatch, useSelector } from "react-redux";
-import { clearLoadingImages } from "../../utils/store";
+import { clearLoadingImages, setLoadingAction } from "../../utils/store";
 
 export default function Cards() {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export default function Cards() {
     (state) => state.user.cards
   );
   useEffect(() => {
-    dispatch(clearLoadingImages());
+    dispatch(setLoadingAction({ value: true, from: "loaded cards page" }));
     return () => {
       dispatch(clearLoadingImages());
     };
