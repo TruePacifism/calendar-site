@@ -65,7 +65,8 @@ export const store = configureStore({
         }
       )
       .addCase(addLoadingImage, (state, action) => {
-        // console.log("usedImages", usedImages);
+        console.log("usedImages", usedImages.length);
+        console.log("loadingImages", state.loadingImages.length);
 
         if (
           !state.loadingImages.includes(action.payload) &&
@@ -78,6 +79,8 @@ export const store = configureStore({
         }
       })
       .addCase(removeLoadingImage, (state, action) => {
+        console.log("usedImages", usedImages.length);
+        console.log("loadingImages", state.loadingImages.length);
         state.loadingImages = state.loadingImages.filter(
           (image) => image !== action.payload
         );
@@ -88,6 +91,8 @@ export const store = configureStore({
       })
       .addCase(clearLoadingImages, (state, action) => {
         usedImages = [];
+        console.log("usedImages", usedImages.length);
+        console.log("loadingImages", state.loadingImages.length);
         // console.log("cleared cash");
       });
   }),
