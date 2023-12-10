@@ -27,6 +27,13 @@ const cardInfoPlaceholder: cardInfoType = {
     hour: 21,
     minute: 31,
   },
+  trueBirthdate: {
+    year: 2003,
+    month: 0,
+    day: 8,
+    hour: 21,
+    minute: 31,
+  },
   chartData: {
     BULL: 0,
     TIGER: 0,

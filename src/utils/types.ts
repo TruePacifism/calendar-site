@@ -169,6 +169,7 @@ export type cardInfoType = {
   name: string;
   gender: "Мужской" | "Женский";
   birthdate: dateType;
+  trueBirthdate: dateType;
   birthcity: string;
   livingcity: string;
   age: ageType;

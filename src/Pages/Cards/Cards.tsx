@@ -33,6 +33,7 @@ export default function Cards() {
     (state) => state.user.cards
   );
   useEffect(() => {
+    dispatch(clearLoadingImages());
     return () => {
       dispatch(clearLoadingImages());
     };
