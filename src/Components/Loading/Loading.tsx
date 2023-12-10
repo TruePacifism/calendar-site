@@ -5,19 +5,19 @@ import { useSelector } from "react-redux";
 import { stateType } from "../../utils/types";
 
 export default function Loading() {
-  const { isLoading } = useSelector<stateType, stateType>((store) => store);
+  const isLoading = useSelector<stateType, boolean>((store) => store.isLoading);
   //useEffect(() => {
-    // if (isLoading) {
-    //   setIsRendering(true);
-    // } else {
-    //   setTimeout(() => {
-    //     setIsRendering(false);
-    //   }, 1000);
-    // }
+  // if (isLoading) {
+  //   setIsRendering(true);
+  // } else {
+  //   setTimeout(() => {
+  //     setIsRendering(false);
+  //   }, 1000);
+  // }
   //}, [isLoading]);
   return (
-      <div className={isLoading ? styles.showed : styles.hidden}>
-        <LoadingSpinner className={styles.icon} />
-      </div>
+    <div className={isLoading ? styles.showed : styles.hidden}>
+      <LoadingSpinner className={styles.icon} />
+    </div>
   );
 }
