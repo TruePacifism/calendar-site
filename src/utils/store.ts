@@ -53,6 +53,8 @@ export const store = configureStore({
       .addCase(
         setLoadingAction,
         (state, action: PayloadAction<setLoadingPayloadType>) => {
+          console.log(action.payload);
+
           // if (action.payload.value) {
           //   document.body.classList.add("no-scroll");
           // } else {
@@ -74,8 +76,6 @@ export const store = configureStore({
         ) {
           state.loadingImages.push(action.payload);
           usedImages.push(action.payload);
-
-          state.isLoading = true;
         }
       })
       .addCase(removeLoadingImage, (state, action) => {

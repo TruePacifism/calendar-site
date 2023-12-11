@@ -130,7 +130,12 @@ export default function Calculator() {
   const location = useLocation();
   useEffect(() => {
     if (!location.state || !location.state.inputData || params.get("data")) {
+      console.log(location.state);
+      console.log(params.get("data"));
       return;
+    }
+    if (params.get("data")) {
+      dispatch(setLoadingAction({ value: false, from: "just calculator" }));
     }
     dispatch(setLoadingAction({ value: true, from: "card loaded from cards" }));
     const { inputData } = location.state;

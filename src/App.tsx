@@ -45,15 +45,14 @@ function App() {
     console.log("Перенаправление");
     const actualHeadingText = getHeadingText(location.pathname);
     dispatch(clearLoadingImages());
+    if (location.pathname !== "/calculator") {
+      dispatch(setLoadingAction({ from: "Перенаправление", value: true }));
+    }
     if (headerText !== actualHeadingText) {
       setHeaderText(actualHeadingText);
     } else {
     }
   }, [location, dispatch, headerText]);
-  document.getElementById("root").onloadeddata = () => {
-    dispatch(setLoadingAction({ value: false, from: "document" }));
-    console.log("loaded");
-  };
   const currentUser: userType = useSelector<stateType, userType>(
     (store) => store.user
   );
