@@ -7,6 +7,8 @@ import { Link, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import { searchModalTheme } from "../../utils/muiThemes";
 import { Dialog, Input } from "@mui/material";
+import { useSelector } from "react-redux";
+import { stateType } from "../../utils/types";
 
 type propsType = {
   heading: string;
@@ -17,6 +19,9 @@ export default function Header({ heading }: propsType) {
     boolean,
     Dispatch<SetStateAction<boolean>>
   ] = useState(false);
+  const isErrorPage = useSelector<stateType, boolean>(
+    (state) => state.isErrorPage
+  );
   const closeModal = () => {
     setIsSearching(false);
   };
@@ -25,36 +30,38 @@ export default function Header({ heading }: propsType) {
   };
   const location = useLocation();
   return (
-    <>
-      <ThemeProvider theme={searchModalTheme}>
-        <Dialog
-          style={{ backgroundColor: "transparent !important" }}
-          open={isSearching}
-          onClose={closeModal}
-        >
-          <div className={styles.modalContainer}>
-            <HelpIcon className={styles.searchModalIcon} />
-            <Input />
-          </div>
-        </Dialog>
-      </ThemeProvider>
-      <div className={styles.container}>
-        {heading === "СИСТЕМА ФЕНШУЙ" ? (
-          <HelpIcon className={styles.backIcon} onClick={openModal} />
-        ) : (
-          <Link
-            to={
-              location.pathname === "/calculator" && location.search
-                ? "/calculator"
-                : "/"
-            }
+    !isErrorPage && (
+      <>
+        <ThemeProvider theme={searchModalTheme}>
+          <Dialog
+            style={{ backgroundColor: "transparent !important" }}
+            open={isSearching}
+            onClose={closeModal}
           >
-            <BackIcon className={styles.backIcon} />
-          </Link>
-        )}
-        <span className={styles.heading}>{heading}</span>
-        <LogoIcon className={styles.logoIcon} />
-      </div>
-    </>
+            <div className={styles.modalContainer}>
+              <HelpIcon className={styles.searchModalIcon} />
+              <Input />
+            </div>
+          </Dialog>
+        </ThemeProvider>
+        <div className={styles.container}>
+          {heading === "СИСТЕМА ФЕНШУЙ" ? (
+            <HelpIcon className={styles.backIcon} onClick={openModal} />
+          ) : (
+            <Link
+              to={
+                location.pathname === "/calculator" && location.search
+                  ? "/calculator"
+                  : "/"
+              }
+            >
+              <BackIcon className={styles.backIcon} />
+            </Link>
+          )}
+          <span className={styles.heading}>{heading}</span>
+          <LogoIcon className={styles.logoIcon} />
+        </div>
+      </>
+    )
   );
 }

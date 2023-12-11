@@ -7,16 +7,17 @@ import {
   signOut,
 } from "firebase/auth";
 import { FirebaseOptions, initializeApp } from "firebase/app";
-import { ReactComponent as GoogleIcon } from "../../images/in-yan-icon.svg";
+import { ReactComponent as GoogleIcon } from "../../images/google-icon.svg";
 import { userInput } from "../../utils/types";
 import { Button, Input, ThemeProvider } from "@mui/material";
-import { mainTheme } from "../../utils/muiThemes";
+import { googleAuthButton, mainTheme } from "../../utils/muiThemes";
 import CityInput from "../../Components/CityInput/CityInput";
 import authUser from "../../api/authUser";
 import { useNavigate } from "react-router-dom";
 import getUserInfo from "../../api/getUserInfo";
 import { useDispatch } from "react-redux";
 import { setLoadingAction, setUserAction } from "../../utils/store";
+import NameHeading from "../../Components/NameHeading/NameHeading";
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: "AIzaSyB_eoV10ywFfBnJ3RsXSUAPd-IFZ6oboTY",
@@ -101,7 +102,6 @@ export default function LoginPage(props: propsType) {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>Регистрация / Авторизация</h1>
       {userInfo ? (
         <ThemeProvider theme={mainTheme}>
           <form
@@ -173,10 +173,19 @@ export default function LoginPage(props: propsType) {
           </form>
         </ThemeProvider>
       ) : (
-        <GoogleIcon
-          className={styles.icon}
-          onClick={token ? googleLogOut : googleSignIn}
-        />
+        <>
+          <NameHeading />
+          <h1 className={styles.beforeHeading}>СИСТЕМА ФЕНШУЙ</h1>
+          <ThemeProvider theme={googleAuthButton}>
+            <Button
+              onClick={token ? googleLogOut : googleSignIn}
+              className={styles.beforeButton}
+            >
+              <GoogleIcon className={styles.googleIcon} />
+              Войти с Google
+            </Button>
+          </ThemeProvider>
+        </>
       )}
     </div>
   );

@@ -4,11 +4,14 @@
 .heading {
   margin-bottom: 30px;
 }
-.icon {
-  width: 50px;
-  height: 50px;
+.googleIcon {
+  width: 53px;
+  height: 53px;
   fill: var(--accent-color);
   cursor: pointer;
+  background-color: white;
+  overflow: hidden;
+  display: block;
 }
 .formFieldContainer {
   display: flex;

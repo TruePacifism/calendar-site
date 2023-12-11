@@ -1,3 +1,36 @@
 .container {
   display: block;
+  background-color: var(--404-background-color);
+  padding-top: 60px;
+  padding-left: 59px;
+  padding-right: 59px;
+  height: 100vh;
+}
+.heading {
+  color: var(--accent-color);
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 27px;
+}
+.error {
+  margin-top: 15px;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.description {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-bottom: 60px;
+}
+.button {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }

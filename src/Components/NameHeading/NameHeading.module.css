@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  letter-spacing: 0.1 em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.logo {
+  margin-left: 10px;
+  margin-right: 10px;
+  max-width: 52px;
+  max-height: 52px;
+  background-color: white;
+  overflow: hidden;
+  border-width: -20px;
+  border-radius: 50%;
+  transform: rotate(115deg);
+  fill: var(--accent-color);
+}

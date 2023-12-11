@@ -335,7 +335,27 @@ export const mainTheme = createTheme({
     },
   },
 });
-
+export const googleAuthButton = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: accentColor,
+          fontSize: "20px",
+          fontWeight: 700,
+          letterSpacing: "0em",
+          color: "white",
+          textTransform: "none",
+          padding: 0,
+          width: "250px",
+          height: "57px",
+          display: "flex",
+          justifyContent: "space-between",
+        },
+      },
+    },
+  },
+});
 export const radioTheme = createTheme({
   components: {
     MuiFormGroup: {

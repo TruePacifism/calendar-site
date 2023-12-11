@@ -13,6 +13,7 @@ const initialState: stateType = {
   token,
   isLoading: true,
   loadingImages: [],
+  isErrorPage: false,
 };
 
 type setLoadingPayloadType = {
@@ -36,6 +37,9 @@ export const removeLoadingImage = createAction<string, "REMOVE_LOADING_IMAGE">(
 );
 export const clearLoadingImages = createAction<null, "CLEAR_LOADING_IMAGE">(
   "CLEAR_LOADING_IMAGE"
+);
+export const setIsErrorPageAction = createAction<boolean, "SET_IS_ERROR_PAGE">(
+  "SET_IS_ERROR_PAGE"
 );
 
 export const store = configureStore({
@@ -94,6 +98,9 @@ export const store = configureStore({
         console.log("usedImages", usedImages.length);
         console.log("loadingImages", state.loadingImages.length);
         // console.log("cleared cash");
+      })
+      .addCase(setIsErrorPageAction, (state, action) => {
+        state.isErrorPage = action.payload;
       });
   }),
 });
