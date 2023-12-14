@@ -71,33 +71,35 @@ export const store = configureStore({
         }
       )
       .addCase(addLoadingImage, (state, action) => {
-        console.log("usedImages", usedImages.length);
-        console.log("loadingImages", state.loadingImages.length);
+        // console.log("usedImages", usedImages.length);
+        // console.log("loadingImages", state.loadingImages.length);
 
         if (
           !state.loadingImages.includes(action.payload) &&
           !usedImages.includes(action.payload)
         ) {
+          console.log("start loading images");
           state.loadingImages.push(action.payload);
           usedImages.push(action.payload);
         }
       })
       .addCase(removeLoadingImage, (state, action) => {
-        console.log("usedImages", usedImages.length);
-        console.log("loadingImages", state.loadingImages.length);
+        // console.log("usedImages", usedImages.length);
+        // console.log("loadingImages", state.loadingImages.length);
         state.loadingImages = state.loadingImages.filter(
           (image) => image !== action.payload
         );
 
         if (state.loadingImages.length === 0) {
           state.isLoading = false;
+          console.log("loaded all images");
         }
       })
       .addCase(clearLoadingImages, (state, action) => {
         usedImages = [];
-        console.log("usedImages", usedImages.length);
-        console.log("loadingImages", state.loadingImages.length);
-        // console.log("cleared cash");
+        // console.log("usedImages", usedImages.length);
+        // console.log("loadingImages", state.loadingImages.length);
+        console.log("cleared cash");
       })
       .addCase(setIsErrorPageAction, (state, action) => {
         state.isErrorPage = action.payload;

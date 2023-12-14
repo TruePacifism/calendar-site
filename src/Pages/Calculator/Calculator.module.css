@@ -7,7 +7,8 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  margin-bottom: 26px;
+  height: 30px;
+  margin-bottom: 35px;
 }
 .label {
   margin-right: 9px;
@@ -75,4 +76,10 @@
 .genderInputBox {
   min-width: 195px;
   height: 26px;
+}
+.genderInputBox > * {
+  justify-content: flex-start !important;
+}
+.genderInputBox > * > *:not(:last-child) {
+  margin-right: 5px;
 }

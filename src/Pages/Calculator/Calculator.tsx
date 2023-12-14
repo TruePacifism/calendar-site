@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Calculator.module.css";
 import { months } from "../../enums";
-import { inputDataType, monthType } from "../../utils/types";
+import { monthType } from "../../utils/types";
 import Container from "../../Components/Container/Container";
 import { Select, MenuItem, Input, Button } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
@@ -12,8 +12,7 @@ import {
   dateInputTheme,
   mainTheme,
 } from "../../utils/muiThemes";
-import { useLocation, useSearchParams } from "react-router-dom";
-import Card from "../Card/Card";
+import { useNavigate } from "react-router-dom";
 import CityInput from "../../Components/CityInput/CityInput";
 import { useDispatch } from "react-redux";
 import { setLoadingAction } from "../../utils/store";
@@ -50,7 +49,7 @@ for (let i = 1; i < 61; i++) {
 }
 
 export default function Calculator() {
-  const [params, setParams] = useSearchParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [selectedMonth, setSelectedMonth]: [
     monthType,
@@ -106,7 +105,7 @@ export default function Calculator() {
     } else {
       gender = "";
     }
-    const data = {
+    const inputData = {
       name: e.target.elements.name.value,
       birthdate: {
         year: year.value ? Number(year.value) : -1,
@@ -119,45 +118,10 @@ export default function Calculator() {
       birthcity: e.target.elements.birthcity.value,
       livingcity: e.target.elements.livingcity.value,
     };
-    params.set("inputData", JSON.stringify(data));
-    setParams(params);
+    navigate(`/cards`, { state: { inputData } });
   };
 
-  const [inputData, setInputData]: [
-    inputDataType,
-    Dispatch<SetStateAction<inputDataType>>
-  ] = useState();
-  const location = useLocation();
-  useEffect(() => {
-    if (!location.state || !location.state.inputData || params.get("data")) {
-      console.log(location.state);
-      console.log(params.get("data"));
-      return;
-    }
-    if (params.get("data")) {
-      dispatch(setLoadingAction({ value: false, from: "just calculator" }));
-    }
-    dispatch(setLoadingAction({ value: true, from: "card loaded from cards" }));
-    const { inputData } = location.state;
-    params.set("inputData", JSON.stringify(inputData));
-    setParams(params);
-  }, [location, params, setParams, dispatch]);
-  useEffect(() => {
-    const data = params.get("inputData");
-
-    if (data) {
-      setInputData(JSON.parse(data));
-    } else {
-      dispatch(
-        setLoadingAction({ value: false, from: "empty params on calculator" })
-      );
-      setInputData(null);
-    }
-  }, [params, dispatch]);
-
-  return inputData ? (
-    <Card inputData={inputData} />
-  ) : (
+  return (
     <ThemeProvider theme={mainTheme}>
       <Container paddingLeftRight={26} paddingTopBottom={26}>
         <form

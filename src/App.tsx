@@ -45,7 +45,11 @@ function App() {
     console.log("Перенаправление");
     const actualHeadingText = getHeadingText(location.pathname);
     dispatch(clearLoadingImages());
-    if (location.pathname !== "/calculator") {
+
+    if (
+      location.pathname !== "/calculator" &&
+      headerText !== actualHeadingText
+    ) {
       dispatch(setLoadingAction({ from: "Перенаправление", value: true }));
     }
     if (headerText !== actualHeadingText) {

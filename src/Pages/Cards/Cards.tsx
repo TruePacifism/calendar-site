@@ -5,14 +5,17 @@ import { ReactComponent as ListIcon } from "../../images/list-icon.svg";
 import { ReactComponent as GridIcon } from "../../images/grid-icon.svg";
 import { ReactComponent as SortingIcon } from "../../images/sorting-icon.svg";
 import CardGridItem from "../../Components/CardGridItem/CardGridItem";
-import { cardInfoType, stateType } from "../../utils/types";
+import { cardInfoType, inputDataType, stateType } from "../../utils/types";
 import { Input } from "@mui/material";
 import CardListItem from "../../Components/CardListItem/CardListItem";
 import { useDispatch, useSelector } from "react-redux";
 import { clearLoadingImages, setLoadingAction } from "../../utils/store";
+import { useLocation, useSearchParams } from "react-router-dom";
+import Card from "../Card/Card";
 
 export default function Cards() {
   const dispatch = useDispatch();
+  const [params, setParams] = useSearchParams();
   // eslint-disable-next-line
   const [filter, setFilter]: [string, Dispatch<SetStateAction<string>>] =
     useState("all");
@@ -39,7 +42,38 @@ export default function Cards() {
     };
   }, [dispatch]);
 
-  return (
+  const [inputData, setInputData]: [
+    inputDataType,
+    Dispatch<SetStateAction<inputDataType>>
+  ] = useState();
+  const location = useLocation();
+  useEffect(() => {
+    if (!location.state || !location.state.inputData || params.get("data")) {
+      console.log(location.state);
+      console.log(params.get("data"));
+      return;
+    }
+    if (params.get("data")) {
+      dispatch(setLoadingAction({ value: false, from: "just calculator" }));
+    }
+    dispatch(setLoadingAction({ value: true, from: "card loaded from cards" }));
+    const { inputData } = location.state;
+    params.set("inputData", JSON.stringify(inputData));
+    setParams(params);
+  }, [location, params, setParams, dispatch]);
+  useEffect(() => {
+    const data = params.get("inputData");
+
+    if (data) {
+      setInputData(JSON.parse(data));
+    } else {
+      setInputData(null);
+    }
+  }, [params, dispatch]);
+
+  return inputData ? (
+    <Card inputData={inputData} />
+  ) : (
     <div>
       <FiltersList
         onChange={(e) => {

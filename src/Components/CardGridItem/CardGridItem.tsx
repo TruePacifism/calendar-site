@@ -31,7 +31,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
       birthcity,
       livingcity,
     };
-    navigate(`/calculator`, { state: { inputData } });
+    navigate(`/cards`, { state: { inputData } });
   };
   return (
     <li className={styles.section} onClick={handleCardClick}>

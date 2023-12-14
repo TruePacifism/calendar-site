@@ -4,8 +4,6 @@
   position: relative;
   font-family: "Lilita One", cursive;
   border-radius: 5px;
-  height: calc((100%-20px) / 3);
-  width: calc((100%-20px) / 3);
 }
 .white {
   background-color: white;

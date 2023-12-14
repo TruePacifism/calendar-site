@@ -55,6 +55,12 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
   useEffect(() => {
     if (inputData) {
       const getCard = async (inputData: inputDataType) => {
+        dispatch(
+          setLoadingAction({
+            value: true,
+            from: "start fetched counted card info",
+          })
+        );
         const data = await countCard({ inputData });
         setCardInfo(data);
         dispatch(
@@ -84,6 +90,12 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
   useEffect(() => {
     return () => {
       dispatch(clearLoadingImages());
+      dispatch(
+        setLoadingAction({
+          value: true,
+          from: "exited counted card info",
+        })
+      );
     };
   }, [dispatch]);
 
