@@ -66,6 +66,13 @@ export const searchModalTheme = createTheme({
 
 export const cityInputTheme = createTheme({
   components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+          border: `1px solid ${basicButtonBorderColor}`,
+        },
+      },
+    },
     MuiAutocomplete: {
       styleOverrides: {
         focused: {
