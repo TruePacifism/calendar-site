@@ -25,6 +25,9 @@ var usedImages: string[] = [];
 
 export const setUserAction = createAction<userType, "SET_USER">("SET_USER");
 export const addCardAction = createAction<cardInfoType, "ADD_CARD">("ADD_CARD");
+export const deleteCardAction = createAction<cardInfoType, "DELETE_CARD">(
+  "DELETE_CARD"
+);
 export const setLoadingAction = createAction<
   setLoadingPayloadType,
   "SET_LOADING"

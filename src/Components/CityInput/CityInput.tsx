@@ -30,7 +30,7 @@ export default function CityInput({ title, name, placeholder }: propsType) {
   );
   const updateCitiesList = async () => {
     const cities: cityInfoType[] = await getCities({
-      query: inputValue,
+      query: inputValue.trim(),
     });
     if (cities.length === 0) {
       return;

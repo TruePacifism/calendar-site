@@ -83,6 +83,7 @@ export const cityInputTheme = createTheme({
           fontSize: "15px",
         },
         inputRoot: {
+          fontFamily: "Roboto Slab",
           flexWrap: "nowrap",
           height: "26px",
           width: "195px",
@@ -131,6 +132,7 @@ export const cityInputTheme = createTheme({
           color: hiddenTextColor,
         },
         root: {
+          fontFamily: "Roboto Slab",
           top: "-13px",
           fontSize: "15px",
           color: hiddenTextColor,

@@ -23,7 +23,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
     setPfpUrl(pfpPlaceholder);
   }, [cardInfo.year.element]);
   const handleCardClick = () => {
-    const { name, birthdate, gender, birthcity, livingcity } = cardInfo;
+    const { name, birthdate, gender, birthcity, livingcity, id } = cardInfo;
     const inputData = {
       name,
       birthdate,
@@ -31,7 +31,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
       birthcity,
       livingcity,
     };
-    navigate(`/cards`, { state: { inputData } });
+    navigate(`/cards`, { state: { inputData, id } });
   };
   return (
     <li className={styles.section} onClick={handleCardClick}>

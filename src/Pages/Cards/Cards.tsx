@@ -23,6 +23,7 @@ export default function Cards() {
     boolean,
     Dispatch<SetStateAction<boolean>>
   ] = useState(true);
+  const [id, setId]: [string, Dispatch<SetStateAction<string>>] = useState();
   const [sortingOrder, setSortingOrder]: [
     "newFirst" | "oldFirst",
     Dispatch<SetStateAction<"newFirst" | "oldFirst">>
@@ -36,11 +37,13 @@ export default function Cards() {
     (state) => state.user.cards
   );
   useEffect(() => {
-    dispatch(setLoadingAction({ value: true, from: "loaded cards page" }));
+    if (!cardsInfo || cardsInfo.length === 0) {
+      dispatch(setLoadingAction({ value: true, from: "loaded cards page" }));
+    }
     return () => {
       dispatch(clearLoadingImages());
     };
-  }, [dispatch]);
+  }, [dispatch, cardsInfo]);
 
   const [inputData, setInputData]: [
     inputDataType,
@@ -57,9 +60,10 @@ export default function Cards() {
       dispatch(setLoadingAction({ value: false, from: "just calculator" }));
     }
     dispatch(setLoadingAction({ value: true, from: "card loaded from cards" }));
-    const { inputData } = location.state;
+    const { inputData, id } = location.state;
     params.set("inputData", JSON.stringify(inputData));
     setParams(params);
+    setId(id);
   }, [location, params, setParams, dispatch]);
   useEffect(() => {
     const data = params.get("inputData");
@@ -72,7 +76,7 @@ export default function Cards() {
   }, [params, dispatch]);
 
   return inputData ? (
-    <Card inputData={inputData} />
+    <Card id={id} inputData={inputData} />
   ) : (
     <div>
       <FiltersList

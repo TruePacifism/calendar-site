@@ -26,13 +26,17 @@ import {
   setLoadingAction,
 } from "../../utils/store";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
+import deleteCard from "../../api/deleteCard";
+import { useNavigate } from "react-router-dom";
 
 type propsType = {
   inputData: inputDataType;
+  id?: string;
 };
 
-export default function Card({ inputData }: propsType): React.JSX.Element {
+export default function Card({ inputData, id }: propsType): React.JSX.Element {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [cardInfo, setCardInfo]: [
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
@@ -80,6 +84,11 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
   }, [isOpenModal]);
 
   const token = useSelector<stateType, string>((state) => state.token);
+  const fetchDeleteCard = async () => {
+    const result = await deleteCard({ id, token });
+    console.log(result);
+    navigate("/cards");
+  };
   const fetchAddCard = async () => {
     const result = await addCard({ card: cardInfo, token });
     if (result.status / 100 === 2) {
@@ -208,13 +217,23 @@ export default function Card({ inputData }: propsType): React.JSX.Element {
 
         <div className={styles.saveContainer}>
           <ThemeProvider theme={buttonTheme}>
-            <Button
-              onClick={() => {
-                fetchAddCard();
-              }}
-            >
-              СОХРАНИТЬ
-            </Button>
+            {id ? (
+              <Button
+                onClick={() => {
+                  fetchDeleteCard();
+                }}
+              >
+                УДАЛИТЬ
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  fetchAddCard();
+                }}
+              >
+                СОХРАНИТЬ
+              </Button>
+            )}
             <p className={styles.saveText}>
               Рассчитать совместимость с другой картой, генеалогическое древо
               можно построить, если зайти на полную версию сайта с компьютера.
