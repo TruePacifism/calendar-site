@@ -4,17 +4,20 @@ import cardGridItemStyles from "./Pic-CardGridItem.module.css";
 import homePageStyles from "./Pic-HomePage.module.css";
 import { elementType, stylesType } from "../../utils/types";
 
-import WoodIn from "../../images/elements/din+.jpg";
-import WoodYan from "../../images/elements/djan+.jpg";
-import WaterIn from "../../images/elements/win+.jpg";
-import WaterYan from "../../images/elements/wjan+.jpg";
-import FireIn from "../../images/elements/fin+.jpg";
-import FireYan from "../../images/elements/fjan+.jpg";
-import MetalIn from "../../images/elements/min+.jpg";
-import MetalYan from "../../images/elements/mjan+.jpg";
-import EarthIn from "../../images/elements/sin+.jpg";
-import EarthYan from "../../images/elements/sjan+.jpg";
+import WoodIn from "../../images/elements/tin.png";
+import WoodYan from "../../images/elements/tjan.png";
+import WaterIn from "../../images/elements/win.png";
+import WaterYan from "../../images/elements/wjan.png";
+import FireIn from "../../images/elements/fin.png";
+import FireYan from "../../images/elements/fjan.png";
+import MetalIn from "../../images/elements/min.png";
+import MetalYan from "../../images/elements/mjan.png";
+import EarthIn from "../../images/elements/sin.png";
+import EarthYan from "../../images/elements/sjan.png";
 import NoElement from "../../images/animals/no.png";
+import { useDispatch } from "react-redux";
+import { removeLoadingImage } from "../../utils/store";
+import uniqid from "uniqid";
 
 type propsType = {
   element: elementType;
@@ -35,6 +38,7 @@ const getStyles = (doneFor: doneForType): stylesType => {
 };
 
 export default function ElementPic({ element, doneFor }: propsType) {
+  const dispatch = useDispatch();
   const [styles, setStyles]: [
     stylesType,
     Dispatch<SetStateAction<stylesType>>
@@ -88,6 +92,7 @@ export default function ElementPic({ element, doneFor }: propsType) {
     }
   }, [element]);
 
+  // eslint-disable-next-line
   const [className, setClassName]: [string, Dispatch<SetStateAction<string>>] =
     useState(styles.image);
   useEffect(() => {
@@ -104,12 +109,50 @@ export default function ElementPic({ element, doneFor }: propsType) {
     }
     setClassName(initClassNames.join(" "));
   }, [element, styles.image, styles.black, styles.bad]);
+  // eslint-disable-next-line
+  const [code, setCode]: [string, Dispatch<SetStateAction<string>>] = useState(
+    uniqid(element ? element.name + "-" : "null-")
+  );
 
   return (
     styles && (
       <>
-        <div className={styles.imageWrapper}>
-          <img src={src} alt="" className={className} placeholder={NoElement} />
+        <div
+          className={
+            element
+              ? [
+                  styles.imageWrapper,
+                  element.isGood ? styles.whiteBorder : styles.grayBorder,
+                ].join(" ")
+              : styles.imageWrapper
+          }
+        >
+          <div
+            className={
+              element && element.isBlack
+                ? styles.blackBorder
+                : styles.noBlackBorder
+            }
+          >
+            <img
+              src={src}
+              alt=""
+              placeholder={NoElement}
+              className={styles.image}
+              // onLoadStartCapture={() => {
+              //   dispatch(addLoadingImage(code));
+              // }}
+              // onLoadStart={() => {
+              //   dispatch(addLoadingImage(code));
+              // }}
+              onLoad={() => {
+                dispatch(removeLoadingImage(code));
+              }}
+              // onLoadStart={() => {
+              //   dispatch(addLoadingImage(code));
+              // }}
+            />
+          </div>
         </div>
         <span className={styles.name}>
           {element ? element.name.split(" ")[0] : "Нет"}
@@ -117,4 +160,17 @@ export default function ElementPic({ element, doneFor }: propsType) {
       </>
     )
   );
+
+  // return (
+  //   styles && (
+  //     <>
+  //       <div className={styles.imageWrapper}>
+  //         <img src={src} alt="" className={className} placeholder={NoElement} />
+  //       </div>
+  //       <span className={styles.name}>
+  //         {element ? element.name.split(" ")[0] : "Нет"}
+  //       </span>
+  //     </>
+  //   )
+  // );
 }

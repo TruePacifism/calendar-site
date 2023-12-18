@@ -232,11 +232,13 @@ export default function Calculator() {
             name="birthcity"
             title="Место рождения"
             placeholder="населенный пункт"
+            doneFor="calculator"
           />
           <CityInput
             name="livingcity"
             title="Место жительства"
             placeholder="населенный пункт"
+            doneFor="calculator"
           />
           <Button type="submit">РАССЧИТАТЬ</Button>
         </form>

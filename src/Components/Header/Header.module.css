@@ -33,9 +33,12 @@
   fill: white;
   width: 26px;
   height: 26px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: var(--bottom-shadow);
 }
 .logoIcon {
-  transform: rotate(115deg);
+  /* transform: rotate(115deg); */
 }
 .centerIcon {
   width: 43px;

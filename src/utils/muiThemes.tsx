@@ -33,14 +33,40 @@ export const buttonTheme = createTheme({
 
 export const modalTheme = createTheme({
   components: {
-    MuiDialog: {
+    MuiBackdrop: {
       styleOverrides: {
-        container: {
+        root: {
+          maxWidth:
+            document.getElementById("root").clientWidth > 400
+              ? 400
+              : document.getElementById("root").clientWidth,
+          marginRight: "auto",
+          marginLeft: "auto",
           backgroundColor: hexToRgba(accentColor, 90),
         },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        root: {
+          maxWidth:
+            document.getElementById("root").clientWidth > 400
+              ? 400
+              : document.getElementById("root").clientWidth,
+          marginRight: "auto",
+          marginLeft: "auto",
+        },
+        container: { width: "100%", height: "100%" },
         paper: {
-          width: "100vw",
           margin: 0,
+          width: "100%",
+          minHeight: "100vh",
+          backgroundColor: "transparent",
+          pointerEvents: "none",
+          "& > *": {
+            pointerEvents: "all",
+          },
+          boxShadow: "none",
         },
       },
     },
@@ -89,6 +115,7 @@ export const cityInputTheme = createTheme({
           width: "195px",
           color: hiddenTextColor,
           fontSize: "15px",
+          backgroundColor: "white",
         },
         input: {
           "&:not(.Mui-focused)": {
@@ -143,6 +170,37 @@ export const cityInputTheme = createTheme({
       styleOverrides: {
         root: {
           width: "195px",
+        },
+      },
+    },
+  },
+});
+
+export const homePageInput = createTheme({
+  components: {
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "white",
+          color: accentColor,
+          width: "57px",
+          height: "39px",
+          fontFamily: "Roboto Slab",
+          fontWeight: 400,
+          fontSize: "20px",
+          textAlign: "center",
+          borderRadius: "5px",
+          border: `1px solid ${basicButtonBorderColor}`,
+          "::after": {
+            display: "none",
+          },
+          "::before": {
+            display: "none",
+          },
+          marginBottom: "12px",
+        },
+        input: {
+          textAlign: "center",
         },
       },
     },

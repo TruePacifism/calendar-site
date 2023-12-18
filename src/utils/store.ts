@@ -5,12 +5,14 @@ import {
   createReducer,
 } from "@reduxjs/toolkit";
 import { cardInfoType, stateType, userType } from "./types";
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 
 const token = localStorage.getItem("token");
 
 const initialState: stateType = {
   user: null,
   token,
+  modalContent: null,
   isLoading: true,
   loadingImages: [],
   isErrorPage: false,
@@ -43,6 +45,12 @@ export const clearLoadingImages = createAction<null, "CLEAR_LOADING_IMAGE">(
 );
 export const setIsErrorPageAction = createAction<boolean, "SET_IS_ERROR_PAGE">(
   "SET_IS_ERROR_PAGE"
+);
+export const openModalAction = createAction<ReactJSXElement, "OPEN_MODAL">(
+  "OPEN_MODAL"
+);
+export const closeModalAction = createAction<null, "CLOSE_MODAL">(
+  "CLOSE_MODAL"
 );
 
 export const store = configureStore({
@@ -106,6 +114,32 @@ export const store = configureStore({
       })
       .addCase(setIsErrorPageAction, (state, action) => {
         state.isErrorPage = action.payload;
+      })
+      .addCase(
+        openModalAction,
+        (state, action: PayloadAction<ReactJSXElement>) => {
+          return {
+            ...state,
+            modalContent: action.payload,
+          };
+        }
+      )
+      .addCase(closeModalAction, (state, action: PayloadAction<null>) => {
+        return {
+          ...state,
+          modalContent: null,
+        };
       });
   }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these action types
+        ignoredActions: ["OPEN_MODAL"],
+        // Ignore these field paths in all actions
+        ignoredActionPaths: ["meta.arg", "payload.timestamp"],
+        // Ignore these paths in the state
+        ignoredPaths: ["items.dates"],
+      },
+    }),
 });

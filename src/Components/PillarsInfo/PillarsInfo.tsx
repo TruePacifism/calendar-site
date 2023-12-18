@@ -28,6 +28,7 @@ export default function PillarsInfo({
             }
             title={`${pillar.year},${pillar.month}\n
             ${pillar.ageYear},${pillar.ageMonth}`}
+            name={idx}
           />
         ))}
       </div>

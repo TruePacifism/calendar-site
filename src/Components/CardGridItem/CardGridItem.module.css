@@ -15,10 +15,19 @@
   }
 }
 .container {
+  position: relative;
   padding-left: 7px;
   padding-top: 7px;
   padding-right: 7px;
   padding-bottom: 18px;
+}
+.threePointsIcon {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  fill: white;
+  width: 5px;
+  height: auto;
 }
 .name {
   display: flex;
@@ -42,7 +51,8 @@
 }
 .birthdate {
   color: var(--main-text-color);
-  text-align: left;
+  text-align: center;
+  font-weight: 400;
   font-size: 15px;
   display: block;
   margin-bottom: 4px;

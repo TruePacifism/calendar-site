@@ -1,8 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./DaysLine.module.css";
 import date from "date-and-time";
-import { ReactComponent as ArrowLeft } from "../../images/arrow-left.svg";
-import { ReactComponent as ArrowRight } from "../../images/arrow-right.svg";
 
 const getStringDate = (objectDate: Date) => {
   return date.format(objectDate, "DD.MM.YYYY");
@@ -49,7 +47,6 @@ export default function DaysLine({ onDecrement, onIncrement }: propsType) {
 
   return (
     <div className={styles.container}>
-      <ArrowLeft className={styles.arrow} onClick={decrementDay} />
       <ul className={styles.daysContainer}>
         <li className={styles.dayItem} onClick={decrementDay}>
           <span className={styles.date}>
@@ -72,7 +69,6 @@ export default function DaysLine({ onDecrement, onIncrement }: propsType) {
           </span>
         </li>
       </ul>
-      <ArrowRight className={styles.arrow} onClick={incrementDay} />
     </div>
   );
 }

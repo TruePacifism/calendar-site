@@ -4,12 +4,11 @@ import DaysLine from "../../Components/DaysLine/DaysLine";
 import IconedCardInfoList from "../../Components/IconedCardInfoList/IconedCardInfoList";
 import { cardInfoType, stateType, userType } from "../../utils/types";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
-import cardInfoPlaceholder from "../../utils/cardPlaceholder";
 import CardInfo from "../../Components/CardInfo/CardInfo";
-import StrangeCircle from "../../Components/StrangeCircle/StrangeCircle";
 import getToday from "../../api/getToday";
 import { useDispatch, useSelector } from "react-redux";
 import { clearLoadingImages, setLoadingAction } from "../../utils/store";
+import AnimalLogo from "../../Components/AnimalLogo/AnimalLogo";
 
 export default function MainPage() {
   const [todayInfo, setTodayInfo]: [
@@ -60,7 +59,10 @@ export default function MainPage() {
         <section className={styles.section}>
           <IconedCardInfoList doneFor="HomePage" cardInfo={todayInfo} />
           <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
-          <div className={styles.circleInfo}>
+          <div className={styles.animalLogoContainer}>
+            <AnimalLogo animal={todayInfo.day.animal} />
+          </div>
+          {/* <div className={styles.circleInfo}>
             <StrangeCircle
               cardInfos={[
                 cardInfoPlaceholder,
@@ -69,7 +71,7 @@ export default function MainPage() {
                 cardInfoPlaceholder,
               ]}
             />
-          </div>
+          </div> */}
         </section>
       </div>
     )

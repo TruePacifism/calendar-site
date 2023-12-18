@@ -2,19 +2,21 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Header.module.css";
 import { ReactComponent as BackIcon } from "../../images/back-icon.svg";
 import { ReactComponent as LogoIcon } from "../../images/logo-another-icon.svg";
-import { ReactComponent as HelpIcon } from "../../images/help-icon.svg";
+import { ReactComponent as InfoIcon } from "../../images/info-icon.svg";
 import { Link, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import { searchModalTheme } from "../../utils/muiThemes";
 import { Dialog, Input } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { stateType } from "../../utils/types";
+import { closeModalAction, openModalAction } from "../../utils/store";
 
 type propsType = {
   heading: string;
 };
 
 export default function Header({ heading }: propsType) {
+  const dispatch = useDispatch();
   const [isSearching, setIsSearching]: [
     boolean,
     Dispatch<SetStateAction<boolean>>
@@ -23,10 +25,16 @@ export default function Header({ heading }: propsType) {
     (state) => state.isErrorPage
   );
   const closeModal = () => {
-    setIsSearching(false);
+    dispatch(closeModalAction());
   };
   const openModal = () => {
-    setIsSearching(true);
+    dispatch(
+      openModalAction(
+        <div>
+          <h1>Это модальное окно</h1>
+        </div>
+      )
+    );
   };
   const location = useLocation();
   return (
@@ -39,14 +47,14 @@ export default function Header({ heading }: propsType) {
             onClose={closeModal}
           >
             <div className={styles.modalContainer}>
-              <HelpIcon className={styles.searchModalIcon} />
+              <InfoIcon className={styles.searchModalIcon} />
               <Input />
             </div>
           </Dialog>
         </ThemeProvider>
         <div className={styles.container}>
           {heading === "СИСТЕМА ФЕНШУЙ" ? (
-            <HelpIcon className={styles.backIcon} onClick={openModal} />
+            <InfoIcon className={styles.backIcon} onClick={openModal} />
           ) : (
             <Link
               to={

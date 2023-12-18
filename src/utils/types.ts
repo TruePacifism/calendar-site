@@ -1,3 +1,6 @@
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
+import { JsxElement } from "typescript";
+
 export type monthNameType =
   | "Январь"
   | "Февраль"
@@ -237,6 +240,7 @@ export type userInput = {
 export type stateType = {
   user: userType;
   token: string;
+  modalContent: ReactJSXElement;
   isLoading: boolean;
   loadingImages: string[];
   isErrorPage: boolean;

@@ -163,11 +163,13 @@ export default function LoginPage(props: propsType) {
               name="birthcity"
               title="Место рождения"
               placeholder="населенный пункт"
-            />
+              doneFor="loginPage"
+              />
             <CityInput
               name="livingcity"
               title="Место жительства"
               placeholder="населенный пункт"
+              doneFor="loginPage"
             />
             <Button type="submit">Зарегистрироваться</Button>
           </form>

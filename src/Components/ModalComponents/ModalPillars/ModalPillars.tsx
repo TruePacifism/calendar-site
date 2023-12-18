@@ -25,7 +25,7 @@ export default function ModalPillars({ pillars, currentPillar }: propsType) {
     <div className={styles.container}>
       <ModalHeading text="ТАКТЫ" />
       <div className={styles.pillarsContainer}>
-        {pillars.map((pillar) => (
+        {pillars.map((pillar, idx) => (
           <CardColumn
             doneFor="Calculator"
             key={pillar.year}
@@ -35,6 +35,7 @@ export default function ModalPillars({ pillars, currentPillar }: propsType) {
               currentPillar && currentPillar.ageYear === pillar.ageYear
             }
             title={`${pillar.year},${pillar.month}\n${pillar.ageYear},${pillar.ageMonth}`}
+            name={idx}
           />
         ))}
       </div>

@@ -18,15 +18,16 @@ import getUserInfo from "./api/getUserInfo";
 import { stateType, userType } from "./utils/types";
 import Loading from "./Components/Loading/Loading";
 import Page404 from "./Pages/404Page/404Page";
+import MyModal from "./Components/MyModal/MyModal";
 
 const getHeadingText = (path: string): string => {
   switch (path) {
     case "/calculator":
-      return "Калькулятор";
+      return "СИСТЕМА ФЕНШУЙ";
     case "/card":
       return "Карта";
     case "/cards":
-      return "Картотека";
+      return "СИСТЕМА ФЕНШУЙ";
     default:
       return "СИСТЕМА ФЕНШУЙ";
   }
@@ -82,6 +83,7 @@ function App() {
   return (
     <div className={styles.wrapper}>
       <Loading />
+      <MyModal />
 
       {(currentUser || !token) && (
         <div className={styles.container}>

@@ -54,24 +54,28 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             animal={cardInfo.hour.animal}
             element={cardInfo.hour.element}
             title={`${cardInfo.birthdate.hour}:${cardInfo.birthdate.minute}`}
+            name={"hour"}
           />
           <CardColumn
             doneFor={doneFor}
             animal={cardInfo.day.animal}
             element={cardInfo.day.element}
             title={cardInfo.birthdate.day}
+            name={"day"}
           />
           <CardColumn
             doneFor={doneFor}
             animal={cardInfo.month.animal}
             element={cardInfo.month.element}
             title={cardInfo.birthdate.month + 1}
+            name={"month"}
           />
           <CardColumn
             doneFor={doneFor}
             animal={cardInfo.year.animal}
             element={cardInfo.year.element}
             title={cardInfo.birthdate.year}
+            name={"year"}
           />
           {smallMobile && doneFor !== "HomePage" && (
             <div className={styles.separator}></div>
@@ -86,6 +90,7 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
                 cardInfo.currentPillar ? cardInfo.currentPillar.element : null
               }
               title="такт"
+              name={"currentPillar"}
             />
           )}
         </>

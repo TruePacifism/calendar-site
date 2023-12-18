@@ -1,15 +1,26 @@
 import React from "react";
-import styles from "./Modal.module.css";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
-import { Modal } from "@mui/material";
+import { Dialog, ThemeProvider } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { stateType } from "../../utils/types";
+import { modalTheme } from "../../utils/muiThemes";
+import { closeModalAction } from "../../utils/store";
 
-type propsType = {
-  content: ReactJSXElement;
-  //   onClose: () => {};
-  //   onOpen: () => {};
-  //   onChange: () => {};
-};
-
-export default function MyModal({ content }: propsType) {
-  return <Modal open>{content}</Modal>;
+export default function MyModal() {
+  const dispatch = useDispatch();
+  const modalContent = useSelector<stateType, ReactJSXElement>(
+    (store) => store.modalContent
+  );
+  return (
+    <ThemeProvider theme={modalTheme}>
+      <Dialog
+        open={!!modalContent}
+        onClose={() => {
+          dispatch(closeModalAction());
+        }}
+      >
+        {modalContent ? modalContent : <></>}
+      </Dialog>
+    </ThemeProvider>
+  );
 }

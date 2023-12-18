@@ -6,13 +6,21 @@ import { Autocomplete, TextField, debounce } from "@mui/material";
 import { cityInfoType } from "../../utils/types";
 import getCities from "../../api/getCities";
 
+type doneForType = "calculator" | "homeModal" | "loginPage";
+
 type propsType = {
   title: string;
   name: string;
   placeholder: string;
+  doneFor: doneForType;
 };
 
-export default function CityInput({ title, name, placeholder }: propsType) {
+export default function CityInput({
+  title,
+  name,
+  placeholder,
+  doneFor,
+}: propsType) {
   const [citiesList, setCitiesList]: [
     cityInfoType[],
     Dispatch<SetStateAction<cityInfoType[]>>
@@ -48,7 +56,12 @@ export default function CityInput({ title, name, placeholder }: propsType) {
   return (
     <ThemeProvider theme={cityInputTheme}>
       <label className={styles.formFieldContainer}>
-        <span className={styles.label}>{title}</span>
+        <span
+          className={styles.label}
+          style={{ color: doneFor === "homeModal" ? "white" : "#02081e" }}
+        >
+          {title}
+        </span>
         <Autocomplete
           id={name}
           // renderOption={(props, option) => {

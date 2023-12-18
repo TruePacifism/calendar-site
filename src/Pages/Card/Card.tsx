@@ -93,6 +93,7 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
     const result = await addCard({ card: cardInfo, token });
     if (result.status / 100 === 2) {
       dispatch(addCardAction(cardInfo));
+      navigate("/cards");
     } else {
     }
   };
@@ -226,13 +227,7 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
                 УДАЛИТЬ
               </Button>
             ) : (
-              <Button
-                onClick={() => {
-                  fetchAddCard();
-                }}
-              >
-                СОХРАНИТЬ
-              </Button>
+              <Button onClick={fetchAddCard}>СОХРАНИТЬ</Button>
             )}
             <p className={styles.saveText}>
               Рассчитать совместимость с другой картой, генеалогическое древо

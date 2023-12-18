@@ -22,3 +22,8 @@
   height: 40px;
   transform: translateY(-20px);
 }
+.animalLogoContainer {
+  border-top: 1px solid var(--background-color);
+  padding-top: 16px;
+  padding-bottom: 16px;
+}

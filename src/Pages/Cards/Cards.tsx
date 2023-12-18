@@ -37,8 +37,16 @@ export default function Cards() {
     (state) => state.user.cards
   );
   useEffect(() => {
-    if (!cardsInfo || cardsInfo.length === 0) {
+    console.log(cardsInfo);
+    console.log(cardsInfo.length === 0);
+    console.log(!cardsInfo);
+    console.log(!cardsInfo || cardsInfo.length === 0);
+    if (cardsInfo && cardsInfo.length !== 0) {
       dispatch(setLoadingAction({ value: true, from: "loaded cards page" }));
+    } else {
+      dispatch(
+        setLoadingAction({ value: false, from: "loaded empty cards page" })
+      );
     }
     return () => {
       dispatch(clearLoadingImages());
