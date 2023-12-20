@@ -90,18 +90,7 @@ export default function CardColumn({
   // eslint-disable-next-line
   const onClickHandle: MouseEventHandler<HTMLInputElement> = useCallback(
     (e) => {
-      dispatch(
-        openModalAction(
-          <InputTodayModal
-            inputBefore={{
-              year: sessionStorage.getItem("year"),
-              month: sessionStorage.getItem("month"),
-              day: sessionStorage.getItem("day"),
-              hour: sessionStorage.getItem("hour"),
-            }}
-          />
-        )
-      );
+      dispatch(openModalAction(<InputTodayModal />));
     },
     [dispatch]
   );
@@ -124,12 +113,16 @@ export default function CardColumn({
             <Input
               defaultValue={title}
               disableUnderline
-              onClick={onClickHandle}
               inputRef={inputRef}
+              onClick={onClickHandle}
               id={(function getId(): string {
                 switch (name) {
                   case "year":
                     return "yearInput";
+                  case "month":
+                    return "monthInput";
+                  case "day":
+                    return "dayInput";
                   case "hour":
                     return "hourInput";
                   default:

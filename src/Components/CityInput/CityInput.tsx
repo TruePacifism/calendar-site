@@ -13,6 +13,7 @@ type propsType = {
   name: string;
   placeholder: string;
   doneFor: doneForType;
+  defaultValue?: string;
 };
 
 export default function CityInput({
@@ -20,6 +21,7 @@ export default function CityInput({
   name,
   placeholder,
   doneFor,
+  defaultValue,
 }: propsType) {
   const [citiesList, setCitiesList]: [
     cityInfoType[],
@@ -73,6 +75,7 @@ export default function CityInput({
           //     </li>
           //   );
           // }}
+          defaultValue={defaultValue}
           renderInput={(params) =>
             citiesList ? (
               <TextField
@@ -81,6 +84,7 @@ export default function CityInput({
                 onChange={updateInput}
                 label={placeholder}
                 sx={{ height: "26px" }}
+                defaultValue={defaultValue}
               />
             ) : (
               <></>

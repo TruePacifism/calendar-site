@@ -11,3 +11,8 @@
   padding-right: calc((100% - 26px - 52px * 4) / 7);
   margin-bottom: 26px;
 }
+.buttonList {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

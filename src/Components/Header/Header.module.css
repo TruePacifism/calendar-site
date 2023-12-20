@@ -37,9 +37,6 @@
   overflow: hidden;
   box-shadow: var(--bottom-shadow);
 }
-.logoIcon {
-  /* transform: rotate(115deg); */
-}
 .centerIcon {
   width: 43px;
   height: 43px;

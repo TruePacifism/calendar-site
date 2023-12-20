@@ -90,6 +90,28 @@ export const searchModalTheme = createTheme({
   },
 });
 
+export const darkButtonTheme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          border: "1px solid white",
+          borderRadius: "5px",
+          backgroundColor: accentColor,
+          width: "131px",
+          height: "51px",
+          color: "white",
+          fontWeight: 400,
+          fontSize: "15px",
+          fontFamily: "Roboto Slab",
+          textAlign: "center",
+          textTransform: "uppercase",
+        },
+      },
+    },
+  },
+});
+
 export const cityInputTheme = createTheme({
   components: {
     MuiOutlinedInput: {
