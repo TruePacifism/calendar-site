@@ -34,7 +34,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
     navigate(`/cards`, { state: { inputData, id } });
   };
   return (
-    <li className={styles.section}>
+    <li className={styles.section} onClick={handleCardClick}>
       <div
         className={styles.container}
         style={{ backgroundColor: color ? color.backgroundHex : "#FFFFFF" }}
