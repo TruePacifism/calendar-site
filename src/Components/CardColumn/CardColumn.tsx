@@ -140,7 +140,7 @@ export default function CardColumn({
         )}
         <ElementPic element={element} doneFor={doneFor} />
         <AnimalPic animal={animal} doneFor={doneFor} />
-        {doneFor === "Calculator" && animal && (
+        {(doneFor === "Calculator" || doneFor === "HomePage") && animal && (
           <CollisionsList collisions={animal.collisions} />
         )}
       </li>
