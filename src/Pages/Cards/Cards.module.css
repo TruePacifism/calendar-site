@@ -1,3 +1,6 @@
+.mainContainer {
+  background-color: var(--accent-color);
+}
 .cardsInfoContainer {
   background-color: var(--accent-color);
   padding-top: 13px;
@@ -23,6 +26,9 @@
 .gridIcon {
   fill: var(--background-color);
   width: 26px;
+}
+.searchContainer {
+  display: none
 }
 .sortingContainer {
   margin-left: 6px;
