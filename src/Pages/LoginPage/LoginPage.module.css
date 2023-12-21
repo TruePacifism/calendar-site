@@ -1,17 +1,37 @@
 .container {
   padding: 26px;
+  min-height: 100vh;
+  background-color: var(--404-background-color);
+}
+.beforeHeading {
+  margin-top: 12px;
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--accent-color);
+  margin-bottom: 110px;
+  line-height: 42px;
 }
 .heading {
   margin-bottom: 30px;
 }
+.beforeButton {
+  overflow: hidden;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
 .googleIcon {
-  width: 53px;
-  height: 53px;
+  width: auto;
+  height: 100%;
   fill: var(--accent-color);
   cursor: pointer;
   background-color: white;
   overflow: hidden;
   display: block;
+}
+.googleText {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .formFieldContainer {
   display: flex;

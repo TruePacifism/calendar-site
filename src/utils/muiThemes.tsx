@@ -58,6 +58,8 @@ export const modalTheme = createTheme({
         },
         container: { width: "100%", height: "100%" },
         paper: {
+          alignItems: "center",
+          justifyContent: "center",
           margin: 0,
           width: "100%",
           minHeight: "100vh",

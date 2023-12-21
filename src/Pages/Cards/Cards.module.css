@@ -9,9 +9,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-    padding-top: 13px;
+  padding-top: 13px;
   padding-bottom: 13px;
-padding-left: 13px;
+  padding-left: 13px;
   padding-right: 13px;
 }
 .viewSettings {
@@ -21,29 +21,29 @@ padding-left: 13px;
 }
 .listIcon {
   fill: var(--background-color);
-  width: 26px;
+  width: 36px;
 }
 .gridIcon {
   fill: var(--background-color);
-  width: 26px;
+  width: 36px;
 }
 .searchContainer {
-  display: none
+  display: none;
 }
 .sortingContainer {
-  margin-left: 6px;
+  margin-left: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .sortingIcon {
   fill: var(--background-color);
-  width: 24px;
+  width: 36px;
   margin-right: 2px;
 }
 .sortingName {
   color: var(--background-color);
-  font-size: 15px;
+  font-size: 20px;
   font-weight: bold;
   text-align: left;
 }

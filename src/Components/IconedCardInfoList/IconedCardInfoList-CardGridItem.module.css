@@ -3,4 +3,5 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  margin-left: 10px;
 }

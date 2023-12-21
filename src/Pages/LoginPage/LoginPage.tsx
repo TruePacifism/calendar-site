@@ -16,7 +16,11 @@ import authUser from "../../api/authUser";
 import { useNavigate } from "react-router-dom";
 import getUserInfo from "../../api/getUserInfo";
 import { useDispatch } from "react-redux";
-import { setLoadingAction, setUserAction } from "../../utils/store";
+import {
+  setIsErrorPageAction,
+  setLoadingAction,
+  setUserAction,
+} from "../../utils/store";
 import NameHeading from "../../Components/NameHeading/NameHeading";
 
 const firebaseConfig: FirebaseOptions = {
@@ -47,6 +51,13 @@ type userInfoType = {
 export default function LoginPage(props: propsType) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setLoadingAction({ value: false, from: "loaded Login Page" }));
+    dispatch(setIsErrorPageAction(true));
+    return () => {
+      dispatch(setIsErrorPageAction(false));
+    };
+  }, [dispatch]);
   const [token, setToken]: [string, Dispatch<SetStateAction<string>>] =
     useState();
   useEffect(() => {
@@ -56,9 +67,6 @@ export default function LoginPage(props: propsType) {
       localStorage.removeItem("token");
     }
   }, [token]);
-  useEffect(() => {
-    dispatch(setLoadingAction({ value: false, from: "loaded Login Page" }));
-  }, [dispatch]);
   const [userInfo, setUserInfo]: [
     userInfoType,
     Dispatch<SetStateAction<userInfoType>>
@@ -164,7 +172,7 @@ export default function LoginPage(props: propsType) {
               title="Место рождения"
               placeholder="населенный пункт"
               doneFor="loginPage"
-              />
+            />
             <CityInput
               name="livingcity"
               title="Место жительства"
@@ -184,7 +192,7 @@ export default function LoginPage(props: propsType) {
               className={styles.beforeButton}
             >
               <GoogleIcon className={styles.googleIcon} />
-              Войти с Google
+              <span className={styles.googleText}>Войти с Google</span>
             </Button>
           </ThemeProvider>
         </>

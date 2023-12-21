@@ -5,11 +5,21 @@ import { ReactComponent as ListIcon } from "../../images/list-icon.svg";
 import { ReactComponent as GridIcon } from "../../images/grid-icon.svg";
 import { ReactComponent as SortingIcon } from "../../images/sorting-icon.svg";
 import CardGridItem from "../../Components/CardGridItem/CardGridItem";
-import { cardInfoType, inputDataType, stateType } from "../../utils/types";
+import {
+  cardInfoType,
+  inputDataType,
+  sortingType,
+  stateType,
+} from "../../utils/types";
 import { Input } from "@mui/material";
 import CardListItem from "../../Components/CardListItem/CardListItem";
 import { useDispatch, useSelector } from "react-redux";
-import { clearLoadingImages, setLoadingAction } from "../../utils/store";
+import {
+  clearLoadingImages,
+  setLoadingAction,
+  sortCardsAction,
+  usedImages,
+} from "../../utils/store";
 import { useLocation, useSearchParams } from "react-router-dom";
 import Card from "../Card/Card";
 
@@ -25,8 +35,8 @@ export default function Cards() {
   ] = useState(true);
   const [id, setId]: [string, Dispatch<SetStateAction<string>>] = useState();
   const [sortingOrder, setSortingOrder]: [
-    "newFirst" | "oldFirst",
-    Dispatch<SetStateAction<"newFirst" | "oldFirst">>
+    sortingType,
+    Dispatch<SetStateAction<sortingType>>
   ] = useState("newFirst");
 
   const switchCardView = () => {
@@ -37,11 +47,7 @@ export default function Cards() {
     (state) => state.user.cards
   );
   useEffect(() => {
-    console.log(cardsInfo);
-    console.log(cardsInfo.length === 0);
-    console.log(!cardsInfo);
-    console.log(!cardsInfo || cardsInfo.length === 0);
-    if (cardsInfo && cardsInfo.length !== 0) {
+    if (cardsInfo && cardsInfo.length !== 0 && usedImages.length === 0) {
       dispatch(setLoadingAction({ value: true, from: "loaded cards page" }));
     } else {
       dispatch(
@@ -60,8 +66,6 @@ export default function Cards() {
   const location = useLocation();
   useEffect(() => {
     if (!location.state || !location.state.inputData || params.get("data")) {
-      console.log(location.state);
-      console.log(params.get("data"));
       return;
     }
     if (params.get("data")) {
@@ -82,6 +86,12 @@ export default function Cards() {
       setInputData(null);
     }
   }, [params, dispatch]);
+  useEffect(() => {
+    if (!cardsInfo || cardsInfo.length < 2) {
+      return;
+    }
+    dispatch(sortCardsAction(sortingOrder));
+  }, [sortingOrder, dispatch, cardsInfo]);
 
   return inputData ? (
     <Card id={id} inputData={inputData} />
@@ -103,8 +113,8 @@ export default function Cards() {
             <div
               className={styles.sortingContainer}
               onClick={() => {
-                setSortingOrder(
-                  sortingOrder === "newFirst" ? "oldFirst" : "newFirst"
+                setSortingOrder((oldSortingOrder) =>
+                  oldSortingOrder === "newFirst" ? "oldFirst" : "newFirst"
                 );
               }}
             >

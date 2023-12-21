@@ -76,8 +76,6 @@ export default function InputTodayModal() {
   const fetchHandler = useCallback(() => {}, []);
 
   useEffect(() => {
-    console.log(inputData);
-
     return () => {};
   }, [inputData]);
   return (

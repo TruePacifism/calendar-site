@@ -4,7 +4,7 @@ import {
   createAction,
   createReducer,
 } from "@reduxjs/toolkit";
-import { cardInfoType, stateType, userType } from "./types";
+import { cardInfoType, sortingType, stateType, userType } from "./types";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 
 const token = localStorage.getItem("token");
@@ -23,7 +23,7 @@ type setLoadingPayloadType = {
   from: string;
 };
 
-var usedImages: string[] = [];
+export let usedImages: string[] = [];
 
 export const setUserAction = createAction<userType, "SET_USER">("SET_USER");
 export const addCardAction = createAction<cardInfoType, "ADD_CARD">("ADD_CARD");
@@ -52,6 +52,9 @@ export const openModalAction = createAction<ReactJSXElement, "OPEN_MODAL">(
 export const closeModalAction = createAction<null, "CLOSE_MODAL">(
   "CLOSE_MODAL"
 );
+export const sortCardsAction = createAction<sortingType, "SORT_CARDS">(
+  "SORT_CARDS"
+);
 
 export const store = configureStore({
   reducer: createReducer(initialState, (builder) => {
@@ -68,7 +71,7 @@ export const store = configureStore({
       .addCase(
         setLoadingAction,
         (state, action: PayloadAction<setLoadingPayloadType>) => {
-          console.log(action.payload);
+          // console.log(action.payload);
 
           // if (action.payload.value) {
           //   document.body.classList.add("no-scroll");
@@ -84,12 +87,13 @@ export const store = configureStore({
       .addCase(addLoadingImage, (state, action) => {
         // console.log("usedImages", usedImages.length);
         // console.log("loadingImages", state.loadingImages.length);
+        // console.log(usedImages);
 
         if (
           !state.loadingImages.includes(action.payload) &&
           !usedImages.includes(action.payload)
         ) {
-          console.log("start loading images");
+          // console.log("start loading images: ", action.payload);
           state.loadingImages.push(action.payload);
           usedImages.push(action.payload);
         }
@@ -103,14 +107,14 @@ export const store = configureStore({
 
         if (state.loadingImages.length === 0) {
           state.isLoading = false;
-          console.log("loaded all images");
+          // console.log("loaded all images");
         }
       })
       .addCase(clearLoadingImages, (state, action) => {
         usedImages = [];
         // console.log("usedImages", usedImages.length);
         // console.log("loadingImages", state.loadingImages.length);
-        console.log("cleared cash");
+        // console.log("cleared cash");
       })
       .addCase(setIsErrorPageAction, (state, action) => {
         state.isErrorPage = action.payload;
@@ -129,6 +133,20 @@ export const store = configureStore({
           ...state,
           modalContent: null,
         };
+      })
+      .addCase(sortCardsAction, (state, action: PayloadAction<sortingType>) => {
+        if (!state.user) {
+          return;
+        }
+        const { cards } = state.user;
+        if (!cards || cards.length < 2) {
+          return;
+        }
+        if (action.payload === "oldFirst") {
+          cards.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+        } else {
+          cards.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+        }
       });
   }),
   middleware: (getDefaultMiddleware) =>

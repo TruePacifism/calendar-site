@@ -66,12 +66,7 @@ export default function CardColumn({
     (store) => store.modalContent
   );
   useEffect(() => {
-    console.log("modalContent", modalContent);
-    console.log("inputRef.current", inputRef.current);
-
     if (!modalContent && inputRef.current) {
-      console.log("IS TRUE");
-
       inputRef.current.value = sessionStorage.getItem(name.toString());
     }
   }, [modalContent, inputRef, name]);
@@ -94,10 +89,6 @@ export default function CardColumn({
     },
     [dispatch]
   );
-
-  useEffect(() => {
-    console.log(inputRef);
-  }, [inputRef]);
 
   return (
     styles && (

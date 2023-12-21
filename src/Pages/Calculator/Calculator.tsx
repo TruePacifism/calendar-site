@@ -109,7 +109,11 @@ export default function Calculator() {
       name: e.target.elements.name.value,
       birthdate: {
         year: year.value ? Number(year.value) : -1,
-        month: month.value !== "ММ" ? Number(month.value) : -1,
+        month:
+          month.value !== "ММ"
+            ? months.find((thisMonth) => thisMonth.name === month.value)
+                .orderNumber
+            : -1,
         day: day.value !== "ДД" ? Number(day.value) : -1,
         hour: hour.value ? Number(hour.value) : -1,
         minute: minute.value ? Number(minute.value) : -1,
@@ -157,14 +161,17 @@ export default function Calculator() {
                   defaultValue="ММ"
                   IconComponent={DownArrowIcon}
                   onChange={(e) => {
-                    setSelectedMonth(months[Number(e.target.value)]);
+                    const month = months.find(
+                      (month) => month.name === e.target.value
+                    );
+                    setSelectedMonth(month ? month : months[0]);
                   }}
                 >
                   <MenuItem value={"ММ"}>ММ</MenuItem>
                   {Object.values(months).map((month) => {
                     return (
-                      <MenuItem value={month.orderNumber}>
-                        {getPreetyNumber(month.orderNumber + 1)}
+                      <MenuItem value={month.name}>
+                        {month.name.slice(0, 3).toLowerCase()}
                       </MenuItem>
                     );
                   })}
@@ -172,7 +179,7 @@ export default function Calculator() {
                 <Input
                   disableUnderline
                   required
-                  type="text"
+                  type="number"
                   name="year"
                   placeholder="ГГГГ"
                 />
@@ -215,13 +222,13 @@ export default function Calculator() {
               <ThemeProvider theme={birthtimeTheme}>
                 <Input
                   disableUnderline
-                  type="text"
+                  type="number"
                   name="hour"
                   placeholder="час"
                 />
                 <Input
                   disableUnderline
-                  type="text"
+                  type="number"
                   name="minute"
                   placeholder="мин"
                 />

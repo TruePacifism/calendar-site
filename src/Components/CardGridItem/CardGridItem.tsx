@@ -39,12 +39,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
         className={styles.container}
         style={{ backgroundColor: color ? color.backgroundHex : "#FFFFFF" }}
       >
-        <ThreePointsIcon
-          className={styles.threePointsIcon}
-          onClick={() => {
-            console.log("clicked");
-          }}
-        />
+        <ThreePointsIcon className={styles.threePointsIcon} />
         <span className={styles.name}>{cardInfo.name}</span>
         <div className={styles.mainInfoContainer}>
           <AnimalLogo animal={cardInfo.year.animal} />

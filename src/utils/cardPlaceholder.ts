@@ -15,6 +15,7 @@ const cardInfoPlaceholder: cardInfoType = {
     fullName: "Северо-запад",
     shortName: "СЗ",
   },
+  date: "",
   gender: "Мужской",
   genderCount: {
     male: 55,

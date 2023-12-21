@@ -167,6 +167,8 @@ export type lineChartDataType = {
   day: lineChartDataPartType[];
 };
 
+export type sortingType = "newFirst" | "oldFirst";
+
 export type cardInfoType = {
   id: string;
   name: string;
@@ -175,6 +177,7 @@ export type cardInfoType = {
   trueBirthdate: dateType;
   birthcity: string;
   livingcity: string;
+  date: string;
   age: ageType;
   year: {
     animal: animalType;

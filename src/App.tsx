@@ -37,7 +37,6 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [headerText, setHeaderText]: [
     string,
     Dispatch<SetStateAction<string>>
@@ -49,7 +48,8 @@ function App() {
 
     if (
       location.pathname !== "/calculator" &&
-      headerText !== actualHeadingText
+      headerText !== actualHeadingText &&
+      location.pathname !== "/login"
     ) {
       dispatch(setLoadingAction({ from: "Перенаправление", value: true }));
     }
