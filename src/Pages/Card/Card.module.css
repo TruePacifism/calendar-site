@@ -3,11 +3,11 @@
 }
 .nameContainer {
   padding-top: 16px;
-  padding-bottom: 10px;
+  padding-bottom: 16px;
   padding-left: 42px;
   padding-right: 42px;
 
-  height: 52px;
+  min-height: 52px;
   width: 100%;
 
   position: sticky;
