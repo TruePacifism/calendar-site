@@ -86,7 +86,7 @@ export default function Cards() {
   return inputData ? (
     <Card id={id} inputData={inputData} />
   ) : (
-    <div>
+    <div className={styles.mainContainer}>
       <FiltersList
         onChange={(e) => {
           setFilter(e.target.value);
