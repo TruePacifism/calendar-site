@@ -1,0 +1,29 @@
+.container {
+  background-color: transparent;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+.groupsList,
+.list {
+  position: absolute;
+  height: 100%;
+}
+.list {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.groupsList > :not(:last-child) {
+  margin-bottom: 22px;
+}
+.icon {
+  width: 5px;
+  height: 26px;
+  fill: white;
+  position: absolute;
+  top: 7px;
+  right: 7px;
+}

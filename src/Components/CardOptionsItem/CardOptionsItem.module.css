@@ -1,0 +1,19 @@
+.container {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+
+  width: 86%;
+  height: 14%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: backgroundColor 250ms linear, color 250ms linear;
+}
+.notOpened {
+  background-color: white;
+  color: var(--accent-color);
+}
+.opened {
+  background-color: var(--aoccent-clor);
+  color: white;
+}

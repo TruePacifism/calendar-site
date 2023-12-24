@@ -16,7 +16,7 @@ const cardInfoPlaceholder: cardInfoType = {
     shortName: "СЗ",
   },
   date: "",
-  gender: "Мужской",
+  gender: "male",
   genderCount: {
     male: 55,
     female: 45,

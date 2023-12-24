@@ -1,9 +1,7 @@
 import React, {
-  ChangeEventHandler,
   Dispatch,
   SetStateAction,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -15,13 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModalAction } from "../../utils/store";
 import { inputDataType, stateType, userType } from "../../utils/types";
 
-const onChangeValue: ChangeEventHandler<
-  HTMLInputElement | HTMLTextAreaElement
-> = (e) => {
-  sessionStorage.setItem(e.target.name, e.target.value);
-};
 export default function InputTodayModal() {
   const dispatch = useDispatch();
+  const user = useSelector<stateType, userType>((state) => state.user);
 
   // eslint-disable-next-line
   const [inputRefs, setInputRefs]: [
@@ -46,26 +40,6 @@ export default function InputTodayModal() {
     year: document.querySelector("#yearInput"),
   });
 
-  const user = useSelector<stateType, userType>((state) => state.user);
-
-  // eslint-disable-next-line
-  const [inputData, setInputData]: [
-    inputDataType,
-    Dispatch<SetStateAction<inputDataType>>
-  ] = useState({
-    birthcity: user.birthcity,
-    livingcity: user.livingcity,
-    birthdate: {
-      hour: Number.parseInt(inputRefs.hour.value.split(":")[0]),
-      minute: Number.parseInt(inputRefs.hour.value.split(":")[1]),
-      day: Number.parseInt(inputRefs.day.value),
-      month: Number.parseInt(inputRefs.month.value),
-      year: Number.parseInt(inputRefs.year.value),
-    },
-    name: "today",
-    gender: "Женский",
-  });
-
   const formRef = useRef();
 
   const cancelHandler = useCallback(() => {
@@ -73,11 +47,60 @@ export default function InputTodayModal() {
   }, [dispatch]);
 
   // eslint-disable-next-line
-  const fetchHandler = useCallback(() => {}, []);
-
-  useEffect(() => {
-    return () => {};
-  }, [inputData]);
+  const fetchHandler: React.FormEventHandler<HTMLFormElement> = (
+    e: React.FormEvent<HTMLFormElement> & {
+      target: {
+        elements?: {
+          name: {
+            value: string;
+          };
+          year: {
+            value: string;
+          };
+          month: {
+            value: string;
+          };
+          day: {
+            value: string;
+          };
+          hour: {
+            value: string;
+          };
+          minute: {
+            value: string;
+          };
+          birthcity: {
+            value: string;
+          };
+          livingcity: {
+            value: string;
+          };
+          gender: any[];
+        };
+      };
+    }
+  ) => {
+    e.preventDefault();
+    const newTodayData: inputDataType = {
+      birthdate: {
+        hour: Number.parseInt(e.target.elements.hour.value.split(":")[0]),
+        minute: Number.parseInt(e.target.elements.hour.value.split(":")[1]),
+        day: Number.parseInt(e.target.elements.day.value),
+        month: Number.parseInt(e.target.elements.month.value),
+        year: Number.parseInt(e.target.elements.year.value),
+      },
+      birthcity: e.target.elements.birthcity.value,
+      livingcity: e.target.elements.livingcity.value,
+      name: "today",
+      gender: "female",
+    };
+    sessionStorage.setItem("newTodayData", JSON.stringify(newTodayData));
+    inputRefs.year.value = e.target.elements.year.value;
+    inputRefs.month.value = e.target.elements.month.value;
+    inputRefs.day.value = e.target.elements.day.value;
+    inputRefs.hour.value = e.target.elements.hour.value;
+    dispatch(closeModalAction());
+  };
   return (
     <div
       className={styles.container}
@@ -86,31 +109,27 @@ export default function InputTodayModal() {
       }}
     >
       <ThemeProvider theme={homePageInput}>
-        <form ref={formRef}>
+        <form ref={formRef} onSubmit={fetchHandler}>
           <div className={styles.inputList}>
             <Input
               disableUnderline
               name="hour"
               defaultValue={inputRefs.hour.value}
-              onChange={onChangeValue}
             />
             <Input
               disableUnderline
               name="day"
               defaultValue={inputRefs.day.value}
-              onChange={onChangeValue}
             />
             <Input
               disableUnderline
               name="month"
               defaultValue={inputRefs.month.value}
-              onChange={onChangeValue}
             />
             <Input
               disableUnderline
               name="year"
               defaultValue={inputRefs.year.value}
-              onChange={onChangeValue}
             />
           </div>
           <CityInput
@@ -118,16 +137,18 @@ export default function InputTodayModal() {
             name="birthcity"
             placeholder="место рождения"
             doneFor="homeModal"
+            defaultValue={user.birthcity}
           />
           <CityInput
             title="Место жительства"
             name="livingcity"
             placeholder="место жительства"
             doneFor="homeModal"
+            defaultValue={user.livingcity}
           />
           <div className={styles.buttonList}>
             <ThemeProvider theme={darkButtonTheme}>
-              <Button>РАССЧИТАТЬ НОВУЮ ДАТУ</Button>
+              <Button type="submit">РАССЧИТАТЬ НОВУЮ ДАТУ</Button>
               <Button onClick={cancelHandler}>ОТМЕНА</Button>
             </ThemeProvider>
           </div>

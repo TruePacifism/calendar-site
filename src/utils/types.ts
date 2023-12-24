@@ -53,7 +53,7 @@ export type CustomEnum<T> = {
   [key: string]: T;
 };
 
-export type genderType = "Мужской" | "Женский";
+export type genderType = "male" | "female";
 
 export type collisionTimeType = "день" | "месяц" | "год" | "час" | "такт";
 
@@ -172,7 +172,7 @@ export type sortingType = "newFirst" | "oldFirst";
 export type cardInfoType = {
   id: string;
   name: string;
-  gender: "Мужской" | "Женский";
+  gender: "male" | "female";
   birthdate: dateType;
   trueBirthdate: dateType;
   birthcity: string;
@@ -220,7 +220,7 @@ export type inputDataType = {
   name: string;
   birthdate: dateType;
   birthcity: string;
-  gender: genderType;
+  gender: "male" | "female";
   livingcity: string;
 };
 

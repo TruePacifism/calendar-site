@@ -20,11 +20,12 @@ import {
   sortCardsAction,
   usedImages,
 } from "../../utils/store";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Card from "../Card/Card";
 
 export default function Cards() {
   const dispatch = useDispatch();
+  // eslint-disable-next-line
   const [params, setParams] = useSearchParams();
   // eslint-disable-next-line
   const [filter, setFilter]: [string, Dispatch<SetStateAction<string>>] =
@@ -33,7 +34,6 @@ export default function Cards() {
     boolean,
     Dispatch<SetStateAction<boolean>>
   ] = useState(true);
-  const [id, setId]: [string, Dispatch<SetStateAction<string>>] = useState();
   const [sortingOrder, setSortingOrder]: [
     sortingType,
     Dispatch<SetStateAction<sortingType>>
@@ -63,20 +63,6 @@ export default function Cards() {
     inputDataType,
     Dispatch<SetStateAction<inputDataType>>
   ] = useState();
-  const location = useLocation();
-  useEffect(() => {
-    if (!location.state || !location.state.inputData || params.get("data")) {
-      return;
-    }
-    if (params.get("data")) {
-      dispatch(setLoadingAction({ value: false, from: "just calculator" }));
-    }
-    dispatch(setLoadingAction({ value: true, from: "card loaded from cards" }));
-    const { inputData, id } = location.state;
-    params.set("inputData", JSON.stringify(inputData));
-    setParams(params);
-    setId(id);
-  }, [location, params, setParams, dispatch]);
   useEffect(() => {
     const data = params.get("inputData");
 
@@ -94,7 +80,7 @@ export default function Cards() {
   }, [sortingOrder, dispatch, cardsInfo]);
 
   return inputData ? (
-    <Card id={id} inputData={inputData} />
+    <Card inputData={inputData} />
   ) : (
     <div className={styles.mainContainer}>
       <FiltersList

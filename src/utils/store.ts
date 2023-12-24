@@ -27,7 +27,7 @@ export let usedImages: string[] = [];
 
 export const setUserAction = createAction<userType, "SET_USER">("SET_USER");
 export const addCardAction = createAction<cardInfoType, "ADD_CARD">("ADD_CARD");
-export const deleteCardAction = createAction<cardInfoType, "DELETE_CARD">(
+export const deleteCardAction = createAction<string, "DELETE_CARD">(
   "DELETE_CARD"
 );
 export const setLoadingAction = createAction<
@@ -67,6 +67,11 @@ export const store = configureStore({
       })
       .addCase(addCardAction, (state, action: PayloadAction<cardInfoType>) => {
         state.user.cards.push(action.payload);
+      })
+      .addCase(deleteCardAction, (state, action: PayloadAction<string>) => {
+        state.user.cards = state.user.cards.filter(
+          (card) => card.id !== action.payload
+        );
       })
       .addCase(
         setLoadingAction,

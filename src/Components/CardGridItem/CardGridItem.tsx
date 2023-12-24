@@ -1,20 +1,30 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  Ref,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styles from "./CardGridItem.module.css";
 import IconedCardInfoList from "../IconedCardInfoList/IconedCardInfoList";
 import { cardInfoType, colorType } from "../../utils/types";
 import CardInfo from "../CardInfo/CardInfo";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
-import { useNavigate } from "react-router-dom";
 import AnimalLogo from "../AnimalLogo/AnimalLogo";
 import getMonthName from "../../utils/getMonthName";
 import { ReactComponent as ThreePointsIcon } from "../../images/three-points-icon.svg";
+import { useDispatch } from "react-redux";
+import { openModalAction } from "../../utils/store";
+import CardOptionsModal from "../CardOptionsModal/CardOptionsModal";
 
 type propsType = {
   cardInfo: cardInfoType;
 };
 
 export default function CardGridItem({ cardInfo }: propsType) {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cardRef: Ref<HTMLDivElement> = useRef();
 
   const [color, setColor]: [colorType, Dispatch<SetStateAction<colorType>>] =
     useState();
@@ -22,24 +32,35 @@ export default function CardGridItem({ cardInfo }: propsType) {
     setColor(getColorByAnimalElement(cardInfo.year.element));
   }, [cardInfo.year.element]);
   // eslint-disable-next-line
-  const handleCardClick = () => {
-    const { name, birthdate, gender, birthcity, livingcity, id } = cardInfo;
-    const inputData = {
-      name,
-      birthdate,
-      gender,
-      birthcity,
-      livingcity,
-    };
-    navigate(`/cards`, { state: { inputData, id } });
+  const handleThreePointsClick = () => {
+    const rootWidth = document
+      .getElementById("root")
+      .getBoundingClientRect().width;
+    console.log(rootWidth);
+    const cardX = cardRef.current.getBoundingClientRect().x;
+    console.log(cardX);
+
+    dispatch(
+      openModalAction(
+        <CardOptionsModal
+          position={rootWidth / 2 > cardX ? "right" : "left"}
+          cardData={cardInfo}
+          cardRef={cardRef}
+        />
+      )
+    );
   };
   return (
-    <li className={styles.section} onClick={handleCardClick}>
+    <li className={styles.section}>
       <div
         className={styles.container}
         style={{ backgroundColor: color ? color.backgroundHex : "#FFFFFF" }}
+        ref={cardRef}
       >
-        <ThreePointsIcon className={styles.threePointsIcon} />
+        <ThreePointsIcon
+          className={styles.threePointsIcon}
+          onClick={handleThreePointsClick}
+        />
         <span className={styles.name}>{cardInfo.name}</span>
         <div className={styles.mainInfoContainer}>
           <AnimalLogo animal={cardInfo.year.animal} />

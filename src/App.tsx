@@ -81,7 +81,7 @@ function App() {
   }, [dispatch, navigate]);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} id="app">
       <Loading />
       <MyModal />
 
