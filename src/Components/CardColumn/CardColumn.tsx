@@ -102,7 +102,7 @@ export default function CardColumn({
         {doneFor === "HomePage" ? (
           <ThemeProvider theme={homePageInput}>
             <Input
-              defaultValue={title}
+              value={title}
               disableUnderline
               inputRef={inputRef}
               onClick={onClickHandle}

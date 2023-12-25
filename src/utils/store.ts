@@ -4,8 +4,16 @@ import {
   createAction,
   createReducer,
 } from "@reduxjs/toolkit";
-import { cardInfoType, sortingType, stateType, userType } from "./types";
+import {
+  cardInfoType,
+  dateType,
+  sortingType,
+  stateType,
+  userType,
+} from "./types";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
+import { dateToDateType, dateTypeToDate } from "./dateToDateType";
+import date from "date-and-time";
 
 const token = localStorage.getItem("token");
 
@@ -16,6 +24,7 @@ const initialState: stateType = {
   isLoading: true,
   loadingImages: [],
   isErrorPage: false,
+  mainPageInfo: null,
 };
 
 type setLoadingPayloadType = {
@@ -55,15 +64,26 @@ export const closeModalAction = createAction<null, "CLOSE_MODAL">(
 export const sortCardsAction = createAction<sortingType, "SORT_CARDS">(
   "SORT_CARDS"
 );
+export const setMainPageDateAction = createAction<
+  dateType,
+  "SET_MAIN_PAGE_DATE"
+>("SET_MAIN_PAGE_DATE");
+export const incrementMainPageDateAction = createAction<
+  null,
+  "INCREMENT_MAIN_PAGE_ACTION"
+>("INCREMENT_MAIN_PAGE_ACTION");
+export const decrementMainPageDateAction = createAction<
+  null,
+  "DECREMENT_MAIN_PAGE_ACTION"
+>("DECREMENT_MAIN_PAGE_ACTION");
 
 export const store = configureStore({
   reducer: createReducer(initialState, (builder) => {
     builder
       .addCase(setUserAction, (state, action: PayloadAction<userType>) => {
-        return {
-          ...state,
-          user: action.payload,
-        };
+        state.user = action.payload;
+        state.mainPageInfo.birthcity = action.payload.birthcity;
+        state.mainPageInfo.livingcity = action.payload.livingcity;
       })
       .addCase(addCardAction, (state, action: PayloadAction<cardInfoType>) => {
         state.user.cards.push(action.payload);
@@ -152,7 +172,29 @@ export const store = configureStore({
         } else {
           cards.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
         }
-      });
+      })
+      .addCase(
+        setMainPageDateAction,
+        (state, action: PayloadAction<dateType>) => {
+          state.mainPageInfo.birthdate = action.payload;
+        }
+      )
+      .addCase(
+        incrementMainPageDateAction,
+        (state, action: PayloadAction<null>) => {
+          const newDate: Date = dateTypeToDate(state.mainPageInfo.birthdate);
+          date.addDays(newDate, 1);
+          state.mainPageInfo.birthdate = dateToDateType(newDate);
+        }
+      )
+      .addCase(
+        decrementMainPageDateAction,
+        (state, action: PayloadAction<null>) => {
+          const newDate: Date = dateTypeToDate(state.mainPageInfo.birthdate);
+          date.addDays(newDate, -1);
+          state.mainPageInfo.birthdate = dateToDateType(newDate);
+        }
+      );
   }),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

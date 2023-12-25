@@ -86,7 +86,7 @@ export default function InputTodayModal() {
         hour: Number.parseInt(e.target.elements.hour.value.split(":")[0]),
         minute: Number.parseInt(e.target.elements.hour.value.split(":")[1]),
         day: Number.parseInt(e.target.elements.day.value),
-        month: Number.parseInt(e.target.elements.month.value),
+        month: Number.parseInt(e.target.elements.month.value) - 1,
         year: Number.parseInt(e.target.elements.year.value),
       },
       birthcity: e.target.elements.birthcity.value,

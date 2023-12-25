@@ -247,6 +247,7 @@ export type stateType = {
   isLoading: boolean;
   loadingImages: string[];
   isErrorPage: boolean;
+  mainPageInfo: inputDataType;
 };
 
 export type userType = {

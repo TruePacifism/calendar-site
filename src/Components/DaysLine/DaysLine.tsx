@@ -1,6 +1,19 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import styles from "./DaysLine.module.css";
 import date from "date-and-time";
+import { dateType, stateType } from "../../utils/types";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  decrementMainPageDateAction,
+  incrementMainPageDateAction,
+} from "../../utils/store";
+import { dateTypeToDate } from "../../utils/dateToDateType";
 
 const getStringDate = (objectDate: Date) => {
   return date.format(objectDate, "DD.MM.YYYY");
@@ -27,23 +40,24 @@ const getDayOfWeek = (objectDate: Date) => {
   }
 };
 
-type propsType = {
-  onIncrement: () => void;
-  onDecrement: () => void;
-};
+export default function DaysLine() {
+  const dispatch = useDispatch();
+  const mainPageDate = useSelector<stateType, dateType>(
+    (store) => store.mainPageInfo.birthdate
+  );
 
-export default function DaysLine({ onDecrement, onIncrement }: propsType) {
   const [showingDate, setShowingDate]: [Date, Dispatch<SetStateAction<Date>>] =
-    useState(new Date());
+    useState(dateTypeToDate(mainPageDate));
+  useEffect(() => {
+    setShowingDate(dateTypeToDate(mainPageDate));
+  }, [mainPageDate]);
 
-  const incrementDay = () => {
-    onIncrement();
-    setShowingDate((currentDate) => date.addDays(currentDate, 1));
-  };
-  const decrementDay = () => {
-    onDecrement();
-    setShowingDate((currentDate) => date.addDays(currentDate, -1));
-  };
+  const incrementDay = useCallback(() => {
+    dispatch(incrementMainPageDateAction());
+  }, [dispatch]);
+  const decrementDay = useCallback(() => {
+    dispatch(decrementMainPageDateAction());
+  }, [dispatch]);
 
   return (
     <div className={styles.container}>

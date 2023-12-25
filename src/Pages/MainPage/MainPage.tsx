@@ -4,6 +4,7 @@ import DaysLine from "../../Components/DaysLine/DaysLine";
 import IconedCardInfoList from "../../Components/IconedCardInfoList/IconedCardInfoList";
 import {
   cardInfoType,
+  dateType,
   inputDataType,
   stateType,
   userType,
@@ -12,7 +13,7 @@ import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import CardInfo from "../../Components/CardInfo/CardInfo";
 import getToday from "../../api/getToday";
 import { useDispatch, useSelector } from "react-redux";
-import { clearLoadingImages, setLoadingAction } from "../../utils/store";
+import { setLoadingAction } from "../../utils/store";
 import AnimalLogo from "../../Components/AnimalLogo/AnimalLogo";
 import countCard from "../../api/countCard";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
@@ -22,39 +23,25 @@ export default function MainPage() {
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
   ] = useState();
-  const [dayOffset, setDayOffset]: [number, Dispatch<SetStateAction<number>>] =
-    useState(0);
   const dispatch = useDispatch();
   const user = useSelector<stateType, userType>((store) => store.user);
-  const modalContent = useSelector<stateType, ReactJSXElement>(
-    (store) => store.modalContent
+  const date = useSelector<stateType, dateType>(
+    (store) => store.mainPageInfo.birthdate
   );
   useEffect(() => {
     const fetchInfo = async () => {
       dispatch(setLoadingAction({ from: "fetch user", value: true }));
-      const newTodayInfo = await getToday({ user, dayOffset });
+      const newTodayInfo = await getToday({ user, dayOffset: 0 });
       setTodayInfo(newTodayInfo);
     };
     fetchInfo();
-  }, [user, dispatch, dayOffset]);
+  }, [user, dispatch]);
   useEffect(() => {
-    sessionStorage.removeItem("newTodayData");
-    return () => {
-      dispatch(clearLoadingImages());
-      sessionStorage.removeItem("newTodayData");
+    const fetchNewToday = async () => {
+      await submitTodayHandler(user.);
     };
-  }, [dispatch]);
-  useEffect(() => {
-    if (!modalContent && sessionStorage.getItem("newTodayData")) {
-      const fetchNewToday = async () => {
-        const newTodayData = JSON.parse(sessionStorage.getItem("newTodayData"));
-        console.log("newTodayData", newTodayData);
-
-        await submitTodayHandler(newTodayData);
-      };
-      fetchNewToday();
-    }
-  }, [modalContent]);
+    fetchNewToday();
+  }, [user]);
 
   const submitTodayHandler = async (inputData: inputDataType) => {
     const newInfo = await countCard({ inputData });
@@ -71,14 +58,7 @@ export default function MainPage() {
             : "#FFFFFF",
         }}
       >
-        <DaysLine
-          onIncrement={() => {
-            setDayOffset((lastDayOffset) => lastDayOffset + 1);
-          }}
-          onDecrement={() => {
-            setDayOffset((lastDayOffset) => lastDayOffset - 1);
-          }}
-        />
+        <DaysLine />
         <section className={styles.section}>
           <IconedCardInfoList doneFor="HomePage" cardInfo={todayInfo} />
           <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
