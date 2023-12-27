@@ -83,13 +83,11 @@ export const store = configureStore({
       .addCase(setUserAction, (state, action: PayloadAction<userType>) => {
         const user = action.payload;
         state.user = user;
-        const birthdate = new Date();
-        console.log(birthdate.getUTCHours());
         state.mainPageInfo = {
           name: "today",
           livingcity: user.livingcity,
           birthcity: user.birthcity,
-          birthdate: dateToDateType(date.addHours(birthdate, user.UTC - 2)),
+          birthdate: dateToDateType(new Date()),
           gender: "female",
         };
       })
