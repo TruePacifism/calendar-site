@@ -24,7 +24,8 @@ type propsType = {
 
 export default function CardGridItem({ cardInfo }: propsType) {
   const dispatch = useDispatch();
-  const cardRef: Ref<HTMLDivElement> = useRef();
+  const cardRef: React.MutableRefObject<HTMLDivElement> =
+    useRef<HTMLDivElement>();
 
   const [color, setColor]: [colorType, Dispatch<SetStateAction<colorType>>] =
     useState();
