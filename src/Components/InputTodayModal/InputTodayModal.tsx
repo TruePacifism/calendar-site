@@ -10,8 +10,8 @@ import { Button, Input, ThemeProvider } from "@mui/material";
 import { darkButtonTheme, homePageInput } from "../../utils/muiThemes";
 import CityInput from "../CityInput/CityInput";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModalAction } from "../../utils/store";
-import { inputDataType, stateType, userType } from "../../utils/types";
+import { closeModalAction, setMainPageDateAction } from "../../utils/store";
+import { stateType, userType } from "../../utils/types";
 
 export default function InputTodayModal() {
   const dispatch = useDispatch();
@@ -81,24 +81,14 @@ export default function InputTodayModal() {
     }
   ) => {
     e.preventDefault();
-    const newTodayData: inputDataType = {
-      birthdate: {
-        hour: Number.parseInt(e.target.elements.hour.value.split(":")[0]),
-        minute: Number.parseInt(e.target.elements.hour.value.split(":")[1]),
-        day: Number.parseInt(e.target.elements.day.value),
-        month: Number.parseInt(e.target.elements.month.value) - 1,
-        year: Number.parseInt(e.target.elements.year.value),
-      },
-      birthcity: e.target.elements.birthcity.value,
-      livingcity: e.target.elements.livingcity.value,
-      name: "today",
-      gender: "female",
+    const newTodayDatabirthdate = {
+      hour: Number.parseInt(e.target.elements.hour.value.split(":")[0]),
+      minute: Number.parseInt(e.target.elements.hour.value.split(":")[1]),
+      day: Number.parseInt(e.target.elements.day.value),
+      month: Number.parseInt(e.target.elements.month.value) - 1,
+      year: Number.parseInt(e.target.elements.year.value),
     };
-    sessionStorage.setItem("newTodayData", JSON.stringify(newTodayData));
-    inputRefs.year.value = e.target.elements.year.value;
-    inputRefs.month.value = e.target.elements.month.value;
-    inputRefs.day.value = e.target.elements.day.value;
-    inputRefs.hour.value = e.target.elements.hour.value;
+    dispatch(setMainPageDateAction(newTodayDatabirthdate));
     dispatch(closeModalAction());
   };
   return (

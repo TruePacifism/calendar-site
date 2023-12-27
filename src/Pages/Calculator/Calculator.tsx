@@ -12,7 +12,7 @@ import {
   dateInputTheme,
   mainTheme,
 } from "../../utils/muiThemes";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import CityInput from "../../Components/CityInput/CityInput";
 import { useDispatch } from "react-redux";
 import { setLoadingAction } from "../../utils/store";
@@ -122,7 +122,12 @@ export default function Calculator() {
       birthcity: e.target.elements.birthcity.value,
       livingcity: e.target.elements.livingcity.value,
     };
-    navigate(`/cards`, { state: { inputData } });
+    navigate({
+      pathname: "/cards",
+      search: createSearchParams({
+        inputData: JSON.stringify(inputData),
+      }).toString(),
+    });
   };
 
   return (

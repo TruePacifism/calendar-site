@@ -4,19 +4,19 @@ import DaysLine from "../../Components/DaysLine/DaysLine";
 import IconedCardInfoList from "../../Components/IconedCardInfoList/IconedCardInfoList";
 import {
   cardInfoType,
-  dateType,
   inputDataType,
   stateType,
   userType,
 } from "../../utils/types";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import CardInfo from "../../Components/CardInfo/CardInfo";
-import getToday from "../../api/getToday";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingAction } from "../../utils/store";
 import AnimalLogo from "../../Components/AnimalLogo/AnimalLogo";
 import countCard from "../../api/countCard";
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
+
+let hashUser: userType = null;
+let hashMainPageInfo: inputDataType = null;
 
 export default function MainPage() {
   const [todayInfo, setTodayInfo]: [
@@ -25,28 +25,38 @@ export default function MainPage() {
   ] = useState();
   const dispatch = useDispatch();
   const user = useSelector<stateType, userType>((store) => store.user);
-  const date = useSelector<stateType, dateType>(
-    (store) => store.mainPageInfo.birthdate
+  const mainPageInfo = useSelector<stateType, inputDataType>(
+    (store) => store.mainPageInfo
   );
   useEffect(() => {
+    console.log(hashMainPageInfo === mainPageInfo);
+    console.log(hashUser === user);
+
+    hashMainPageInfo = mainPageInfo;
+    hashUser = user;
+
     const fetchInfo = async () => {
       dispatch(setLoadingAction({ from: "fetch user", value: true }));
-      const newTodayInfo = await getToday({ user, dayOffset: 0 });
+      const newTodayInfo = await countCard({ inputData: mainPageInfo });
+      console.log(newTodayInfo);
       setTodayInfo(newTodayInfo);
     };
-    fetchInfo();
-  }, [user, dispatch]);
-  useEffect(() => {
-    const fetchNewToday = async () => {
-      await submitTodayHandler(user.);
-    };
-    fetchNewToday();
-  }, [user]);
 
-  const submitTodayHandler = async (inputData: inputDataType) => {
-    const newInfo = await countCard({ inputData });
-    setTodayInfo(newInfo);
-  };
+    fetchInfo();
+  }, [user, mainPageInfo, dispatch]);
+  // useEffect(() => {
+  //   const fetchNewToday = async () => {
+  //     await submitTodayHandler(mainPageInfo);
+  //   };
+  //   fetchNewToday();
+  // }, [user, mainPageInfo]);
+
+  // const submitTodayHandler = async (inputData: inputDataType) => {
+  //   const newInfo = await countCard({ inputData });
+  //   console.log(newInfo);
+
+  //   setTodayInfo(newInfo);
+  // };
 
   return (
     todayInfo && (

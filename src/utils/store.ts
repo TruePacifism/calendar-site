@@ -81,9 +81,17 @@ export const store = configureStore({
   reducer: createReducer(initialState, (builder) => {
     builder
       .addCase(setUserAction, (state, action: PayloadAction<userType>) => {
-        state.user = action.payload;
-        state.mainPageInfo.birthcity = action.payload.birthcity;
-        state.mainPageInfo.livingcity = action.payload.livingcity;
+        const user = action.payload;
+        state.user = user;
+        const birthdate = new Date();
+        console.log(birthdate.getUTCHours());
+        state.mainPageInfo = {
+          name: "today",
+          livingcity: user.livingcity,
+          birthcity: user.birthcity,
+          birthdate: dateToDateType(date.addHours(birthdate, user.UTC - 2)),
+          gender: "female",
+        };
       })
       .addCase(addCardAction, (state, action: PayloadAction<cardInfoType>) => {
         state.user.cards.push(action.payload);
@@ -183,16 +191,20 @@ export const store = configureStore({
         incrementMainPageDateAction,
         (state, action: PayloadAction<null>) => {
           const newDate: Date = dateTypeToDate(state.mainPageInfo.birthdate);
-          date.addDays(newDate, 1);
-          state.mainPageInfo.birthdate = dateToDateType(newDate);
+
+          state.mainPageInfo.birthdate = dateToDateType(
+            date.addDays(newDate, 1)
+          );
         }
       )
       .addCase(
         decrementMainPageDateAction,
         (state, action: PayloadAction<null>) => {
           const newDate: Date = dateTypeToDate(state.mainPageInfo.birthdate);
-          date.addDays(newDate, -1);
-          state.mainPageInfo.birthdate = dateToDateType(newDate);
+
+          state.mainPageInfo.birthdate = dateToDateType(
+            date.addDays(newDate, -1)
+          );
         }
       );
   }),
