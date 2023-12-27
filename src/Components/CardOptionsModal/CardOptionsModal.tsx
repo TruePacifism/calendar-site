@@ -44,13 +44,13 @@ export default function CardOptionsModal({
       gender,
       livingcity,
     };
+    dispatch(closeModalAction());
     navigate({
       search: createSearchParams({
         inputData: JSON.stringify(inputData),
       }).toString(),
       pathname: "/cards",
     });
-    dispatch(closeModalAction());
   }, [dispatch, navigate, cardData]);
   const handleDeleteCard = useCallback(async () => {
     const { id } = cardData;
