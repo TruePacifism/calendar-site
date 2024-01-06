@@ -109,7 +109,7 @@ const cardInfoPlaceholder: cardInfoType = {
           },
 
           shape: "Полукруг",
-          color: "Светло-Зеленый",
+          color: "blue",
           kind: "Столкновение",
           description:
             "Столкновение: Змея (День рождения) - Свинья (Час рождения)",
@@ -156,7 +156,7 @@ const cardInfoPlaceholder: cardInfoType = {
             },
           },
           shape: "Полукруг",
-          color: "Светло-Зеленый",
+          color: "blue",
           kind: "Столкновение",
           description:
             "Столкновение: Свинья (Час рождения) - Змея (День рождения)",

@@ -71,6 +71,18 @@ export type collisionTargetType = {
   };
   targetTime: collisionTimeType;
 };
+export type collisionColorType =
+  | "red"
+  | "brown"
+  | "darkGreen"
+  | "purple"
+  | "blue"
+  | "pink"
+  | "lightGreen"
+  | "orange"
+  | "lightBlue";
+
+export type collisionElementType = "Металл" | "Огонь" | "Дерево" | "Вода";
 
 export type collisionType = {
   id: number;
@@ -87,7 +99,9 @@ export type collisionType = {
     };
   };
   shape: string;
-  color: string;
+  color: collisionColorType;
+  secondColor?: collisionColorType;
+  element?: collisionElementType;
   kind: string;
   targetName: collisionTimeType;
   description: string;
