@@ -16,7 +16,13 @@ import { ReactComponent as BirthSideIcon } from "../../images/birth-side-icon.sv
 import { ReactComponent as GenderIcon } from "../../images/gender-icon.svg";
 import { ReactComponent as PowerIcon } from "../../images/power-icon.svg";
 import { ReactComponent as LivingsideIcon } from "../../images/living-side-icon.svg";
-import { cardInfoType, colorType, stylesType } from "../../utils/types";
+import {
+  cardInfoType,
+  colorType,
+  stateType,
+  stylesType,
+} from "../../utils/types";
+import { useSelector } from "react-redux";
 
 type valueInfo = {
   Icon: React.FunctionComponent<
@@ -55,6 +61,9 @@ export default function IconedCardInfoList({
   doneFor,
   backgroundColor,
 }: propsType) {
+  const livingCity = useSelector<stateType, string>(
+    (store) => store.mainPageInfo.livingcity
+  );
   const [values, setValues]: [
     valueInfo[],
     Dispatch<SetStateAction<valueInfo[]>>
@@ -99,26 +108,31 @@ export default function IconedCardInfoList({
   }, [doneFor]);
 
   return (
-    <ul
-      className={styles.list}
-      onClick={onClick}
-      style={{
-        backgroundColor:
-          doneFor === "Calculator" ? backgroundColor.backgroundHex : null,
-      }}
-    >
-      {values &&
-        values.map(
-          (value, idx) =>
-            value && (
-              <IconedCardInfoListItem
-                doneFor={doneFor}
-                Icon={value.Icon}
-                value={value.value}
-                key={idx}
-              />
-            )
-        )}
-    </ul>
+    <div className={styles.container}>
+      <ul
+        className={styles.list}
+        onClick={onClick}
+        style={{
+          backgroundColor:
+            doneFor === "Calculator" ? backgroundColor.backgroundHex : null,
+        }}
+      >
+        {values &&
+          values.map(
+            (value, idx) =>
+              value && (
+                <IconedCardInfoListItem
+                  doneFor={doneFor}
+                  Icon={value.Icon}
+                  value={value.value}
+                  key={idx}
+                />
+              )
+          )}
+      </ul>
+      {doneFor === "HomePage" && (
+        <span className={styles.city}>{livingCity}</span>
+      )}
+    </div>
   );
 }

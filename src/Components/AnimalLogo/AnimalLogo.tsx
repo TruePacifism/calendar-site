@@ -1,5 +1,12 @@
-import React, { useCallback } from "react";
-import styles from "./AnimalLogo.module.css";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import cardGridItemStyles from "./AnimalLogo-CardGridItem.module.css";
+import homePageStyles from "./AnimalLogo-HomePage.module.css";
 
 import { ReactComponent as Bull } from "../../images/animalsLogo/bull.svg";
 import { ReactComponent as Tiger } from "../../images/animalsLogo/tiger.svg";
@@ -13,13 +20,34 @@ import { ReactComponent as Goat } from "../../images/animalsLogo/goat.svg";
 import { ReactComponent as Horse } from "../../images/animalsLogo/horse.svg";
 import { ReactComponent as Snake } from "../../images/animalsLogo/snake.svg";
 import { ReactComponent as Monkey } from "../../images/animalsLogo/monkey.svg";
-import { animalType } from "../../utils/types";
+import { animalType, stylesType } from "../../utils/types";
 
 type propsType = {
   animal: animalType;
+  doneFor: doneForType;
 };
 
-export default function AnimalLogo({ animal }: propsType) {
+type doneForType = "CardGridItem" | "HomePage";
+
+const getStyles = (doneFor: doneForType): stylesType => {
+  switch (doneFor) {
+    case "CardGridItem":
+      return cardGridItemStyles;
+    case "HomePage":
+      return homePageStyles;
+  }
+};
+
+export default function AnimalLogo({ animal, doneFor }: propsType) {
+  const [styles, setStyles]: [
+    stylesType,
+    Dispatch<SetStateAction<stylesType>>
+  ] = useState();
+
+  //УДАЛИТЬ В КОНЦЕ
+  useEffect(() => {
+    setStyles(getStyles(doneFor));
+  }, [doneFor]);
   const getAnimalLogo = useCallback(() => {
     switch (animal.name) {
       case "Бык":
@@ -50,6 +78,6 @@ export default function AnimalLogo({ animal }: propsType) {
       default:
         return <div></div>;
     }
-  }, [animal]);
-  return getAnimalLogo();
+  }, [animal, styles]);
+  return styles && <>{getAnimalLogo()}</>;
 }

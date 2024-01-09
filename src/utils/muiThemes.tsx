@@ -65,6 +65,7 @@ export const modalTheme = createTheme({
           minHeight: "100vh",
           backgroundColor: "transparent",
           pointerEvents: "none",
+          borderRadius: 0,
           "& > *": {
             pointerEvents: "all",
           },

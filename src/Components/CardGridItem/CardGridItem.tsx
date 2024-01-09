@@ -63,7 +63,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
         />
         <span className={styles.name}>{cardInfo.name}</span>
         <div className={styles.mainInfoContainer}>
-          <AnimalLogo animal={cardInfo.year.animal} />
+          <AnimalLogo doneFor="CardGridItem" animal={cardInfo.year.animal} />
           {/* <img src={pfpUrl} alt="" className={styles.pfp} /> */}
           <IconedCardInfoList cardInfo={cardInfo} doneFor="CardGridItem" />
         </div>

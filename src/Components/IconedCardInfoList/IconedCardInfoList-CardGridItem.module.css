@@ -1,7 +1,9 @@
+.container {
+  margin-left: 10px;
+}
 .list {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-left: 10px;
 }

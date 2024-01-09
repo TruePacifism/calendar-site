@@ -73,7 +73,7 @@ export default function MainPage() {
           <IconedCardInfoList doneFor="HomePage" cardInfo={todayInfo} />
           <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
           <div className={styles.animalLogoContainer}>
-            <AnimalLogo animal={todayInfo.day.animal} />
+            <AnimalLogo doneFor="HomePage" animal={todayInfo.day.animal} />
           </div>
           {/* <div className={styles.circleInfo}>
             <StrangeCircle

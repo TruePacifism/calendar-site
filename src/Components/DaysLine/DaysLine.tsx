@@ -22,19 +22,19 @@ const getDayOfWeek = (objectDate: Date) => {
   const dayOfWeek = date.format(objectDate, "dddd");
   switch (dayOfWeek) {
     case "Monday":
-      return "Понедельник";
+      return "понедельник";
     case "Tuesday":
-      return "Вторник";
+      return "вторник";
     case "Wednesday":
-      return "Среда";
+      return "среда";
     case "Thursday":
-      return "Четверг";
+      return "четверг";
     case "Friday":
-      return "Пятница";
+      return "пятница";
     case "Saturday":
-      return "Суббота";
+      return "суббота";
     case "Sunday":
-      return "Воскресенье";
+      return "воскресенье";
     default:
       return "День недели не определен";
   }
@@ -45,7 +45,6 @@ export default function DaysLine() {
   const mainPageDate = useSelector<stateType, dateType>(
     (store) => store.mainPageInfo.birthdate
   );
-
   const [showingDate, setShowingDate]: [Date, Dispatch<SetStateAction<Date>>] =
     useState(dateTypeToDate(mainPageDate));
   useEffect(() => {

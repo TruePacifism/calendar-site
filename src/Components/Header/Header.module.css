@@ -19,14 +19,14 @@
     display: contents;
   }
 }
+.topHeading {
+  margin-bottom: 6px;
+}
 .heading {
-  font-family: Roboto Slab;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 26px;
-  letter-spacing: 0em;
-  text-align: center;
-  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .backIcon,
 .logoIcon {
@@ -43,11 +43,27 @@
   fill: white;
 }
 .modalContainer {
-  padding-top: 60px;
-  width: 100vw;
-  display: flex;
-  justify-content: space-between;
-  padding-left: 26px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0 !important;
+  padding: 32px;
+  width: 100%;
+  background-color: var(--background-color);
+}
+.modalText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  margin-bottom: 24px;
+  display: block;
+}
+.modalButton {
+  margin-right: auto !important;
+  margin-left: auto !important;
 }
 .searchModalIcon {
   fill: white;

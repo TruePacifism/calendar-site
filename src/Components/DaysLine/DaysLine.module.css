@@ -30,7 +30,7 @@
   justify-content: space-between;
 }
 .dayItem {
-  color: var(--hidden-text-color);
+  color: var(--inactive-text-color);
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,12 +1,24 @@
-.list {
-  padding-top: 19px;
-  padding-bottom: 19px;
+.container {
+  padding-top: 15px;
+  padding-bottom: 15px;
   padding-left: 13px;
   padding-right: calc(13px + 2rem);
 
   box-shadow: var(--top-shadow);
-
+}
+.list {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+.city {
+  display: block;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: black;
+  margin-top: 15px;
+  margin-left: 2rem;
 }
