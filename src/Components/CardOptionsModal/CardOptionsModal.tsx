@@ -3,6 +3,7 @@ import React, {
   LegacyRef,
   SetStateAction,
   useCallback,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -25,6 +26,8 @@ type propsType = {
   cardData: cardInfoType;
   position?: "left" | "right";
 };
+
+let firstResult: DOMRect = null;
 
 export default function CardOptionsModal({
   cardRef,
@@ -69,12 +72,14 @@ export default function CardOptionsModal({
   const groupButtonRef: LegacyRef<HTMLLIElement> = useRef();
   // eslint-disable-next-line
   const listRef = useRef();
-  const handleOpenGroups = useCallback(() => {
-    console.log(groupButtonRef);
-
-    setIsShowingGroups(true);
+  const handleClickGroups = useCallback(() => {
+    setIsShowingGroups((oldIsShowingGroups) => {
+      console.log(oldIsShowingGroups);
+      return !oldIsShowingGroups;
+    });
   }, []);
   const handleCancel = useCallback(() => {
+    firstResult = null;
     dispatch(closeModalAction());
   }, [dispatch]);
   // eslint-disable-next-line
@@ -82,6 +87,19 @@ export default function CardOptionsModal({
     DOMRect,
     Dispatch<SetStateAction<DOMRect>>
   ] = useState(cardRef.current.getBoundingClientRect());
+
+  const groupButtonBounds: DOMRect = useMemo(() => {
+    if (!groupButtonRef.current) {
+      return;
+    }
+    if (!firstResult) {
+      firstResult = groupButtonRef.current.getBoundingClientRect();
+    }
+    return firstResult
+      ? firstResult
+      : groupButtonRef.current.getBoundingClientRect();
+  }, [groupButtonRef.current]);
+
   return (
     <div className={styles.container}>
       <ul
@@ -105,34 +123,47 @@ export default function CardOptionsModal({
         <CardOptionsItem
           ref={groupButtonRef}
           title="ГРУППА"
-          onClick={handleOpenGroups}
+          onClick={handleClickGroups}
         />
         <CardOptionsItem title="ОТМЕНА" onClick={handleCancel} />
       </ul>
-      {isShowingGroups && groupButtonRef.current && (
-        <ul
-          className={styles.groupsList}
-          style={{
-            top: groupButtonRef.current.getBoundingClientRect().y,
-            left:
-              position === "left"
-                ? cardBounds.x - cardBounds.width - 26
-                : cardBounds.x - cardBounds.width - 26,
-            width: cardBounds.width,
-            height: cardBounds.height,
-          }}
-        >
-          <CardOptionsItem title="ОТКРЫТЬ" onClick={handleOpenCard} />
-          <CardOptionsItem title="УДАЛИТЬ" onClick={handleDeleteCard} />
-          <CardOptionsItem
-            title="ГРУППА"
-            ref={groupButtonRef}
-            onClick={() => {
-              console.log("ГРУППА");
+      {groupButtonBounds && (
+        <div style={{ opacity: isShowingGroups ? 1 : 0 }}>
+          <div
+            className={styles.connectingLine}
+            style={{
+              top: groupButtonBounds.y + groupButtonBounds.height / 2,
+              left:
+                position === "left"
+                  ? cardBounds.x - 26
+                  : cardBounds.x + cardBounds.width,
+              width: 26,
             }}
-          />
-          <CardOptionsItem title="ОТМЕНА" onClick={handleCancel} />
-        </ul>
+          ></div>
+          <ul
+            className={styles.groupsList}
+            style={{
+              top: groupButtonBounds.y - cardBounds.height / 13,
+              left:
+                position === "left"
+                  ? cardBounds.x - cardBounds.width - 26
+                  : cardBounds.x + cardBounds.width + 26,
+              width: cardBounds.width,
+              height: cardBounds.height - 20,
+            }}
+          >
+            <CardOptionsItem title="ОТКРЫТЬ" onClick={handleOpenCard} />
+            <CardOptionsItem title="УДАЛИТЬ" onClick={handleDeleteCard} />
+            <CardOptionsItem
+              title="ГРУППА"
+              ref={groupButtonRef}
+              onClick={() => {
+                console.log("ГРУППА");
+              }}
+            />
+            <CardOptionsItem title="ОТМЕНА" onClick={handleCancel} />
+          </ul>
+        </div>
       )}
     </div>
   );

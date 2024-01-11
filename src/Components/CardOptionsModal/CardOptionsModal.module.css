@@ -16,9 +16,15 @@
   align-items: center;
   justify-content: space-evenly;
 }
-.groupsList > :not(:last-child) {
-  margin-bottom: 22px;
+.groupsList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
+/* .groupsList > :not(:last-child) {
+  margin-bottom: 22px;
+} */
 .icon {
   width: 5px;
   height: 26px;
@@ -26,4 +32,9 @@
   position: absolute;
   top: 7px;
   right: 7px;
+}
+.connectingLine {
+  position: absolute;
+  height: 1px;
+  border: 1px solid var(--background-color);
 }

@@ -68,7 +68,9 @@ img {
 .no-scroll {
   overflow: hidden;
 }
-
+a {
+  text-decoration: none;
+}
 body {
   margin: 0;
   font-family: Roboto Slab;
