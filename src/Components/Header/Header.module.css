@@ -34,8 +34,7 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  overflow: hidden;
-  box-shadow: var(--bottom-shadow);
+  overflow: visible;
 }
 .centerIcon {
   width: 43px;

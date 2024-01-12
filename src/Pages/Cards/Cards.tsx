@@ -11,7 +11,6 @@ import {
   sortingType,
   stateType,
 } from "../../utils/types";
-import { Input } from "@mui/material";
 import CardListItem from "../../Components/CardListItem/CardListItem";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -22,6 +21,7 @@ import {
 } from "../../utils/store";
 import { useSearchParams } from "react-router-dom";
 import Card from "../Card/Card";
+import SearchField from "../../Components/SearchField/SearchField";
 
 export default function Cards() {
   const dispatch = useDispatch();
@@ -112,10 +112,7 @@ export default function Cards() {
               )}
             </div>
           </div>
-          <div className={styles.searchContainer}>
-            <Input />
-            {/* <SearchIcon className={styles.searchIcon} /> */}
-          </div>
+          <SearchField />
         </div>
         {cardsInfo && (
           <>

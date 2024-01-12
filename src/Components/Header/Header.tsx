@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from "react";
 import styles from "./Header.module.css";
 import { ReactComponent as BackIcon } from "../../images/back-icon.svg";
-import { ReactComponent as LogoIcon } from "../../images/logo-another-icon.svg";
+import { ReactComponent as OptionsIcon } from "../../images/options-icon.svg";
 import { ReactComponent as InfoIcon } from "../../images/info-icon.svg";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +29,9 @@ export default function Header({ heading }: propsType) {
   const closeModal = useCallback(() => {
     dispatch(closeModalAction());
   }, [dispatch]);
+  console.log("innerHeight", window.innerHeight);
+  console.log("innerWidth", window.innerWidth);
+
   const openInfoModal = useCallback(() => {
     const infoBounds = infoRef.current.getBoundingClientRect();
     dispatch(
@@ -39,7 +42,10 @@ export default function Header({ heading }: propsType) {
             style={{
               position: "absolute",
               top: infoBounds.top,
-              left: infoBounds.left,
+              left:
+                window.innerWidth > 400
+                  ? infoBounds.left - (window.innerWidth - 400) / 2
+                  : infoBounds.left,
             }}
           />
           <div className={styles.modalContainer}>
@@ -74,7 +80,10 @@ export default function Header({ heading }: propsType) {
             style={{
               position: "absolute",
               top: headingBounds.top,
-              left: headingBounds.left,
+              left:
+                window.innerWidth > 400
+                  ? headingBounds.left - (window.innerWidth - 400) / 2
+                  : headingBounds.left,
             }}
           >
             <TopHeading className={styles.topHeading} />
@@ -117,7 +126,7 @@ export default function Header({ heading }: propsType) {
             <TopHeading className={styles.topHeading} />
             <BottomHeading />
           </div>
-          <LogoIcon className={styles.logoIcon} />
+          <OptionsIcon className={styles.logoIcon} />
         </div>
       </>
     )
