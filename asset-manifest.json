@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.dc864416.css",
-    "main.js": "/static/js/main.3a34db8e.js",
+    "main.css": "/static/css/main.e4e8e7c6.css",
+    "main.js": "/static/js/main.f6e0d9e5.js",
     "static/js/787.8858620f.chunk.js": "/static/js/787.8858620f.chunk.js",
     "static/media/t-.png": "/static/media/t-.20549e7169f6fb7990c5.png",
     "static/media/f+.png": "/static/media/f+.07982ccb8f68ebfeb3d2.png",
@@ -16,8 +16,10 @@
     "static/media/goat-gb.jpg": "/static/media/goat-gb.c2a8dd246b0562ce771a.jpg",
     "static/media/bull-gb.jpg": "/static/media/bull-gb.784225ec3f8c9c2b9666.jpg",
     "static/media/dog-gn.jpg": "/static/media/dog-gn.f075e09aa29fda5c3460.jpg",
+    "static/media/bull-bn.jpg": "/static/media/bull-bn.88165d94a08e5a2fa709.jpg",
     "static/media/tiger-gb.jpg": "/static/media/tiger-gb.1e7aa57943c8e2941191.jpg",
     "static/media/dragon-gb.jpg": "/static/media/dragon-gb.a3501700672de3b5692b.jpg",
+    "static/media/bull-gn.jpg": "/static/media/bull-gn.4ca90b243fdaae1d7ea9.jpg",
     "static/media/pig+.jpg": "/static/media/pig+.72826f8e9634b6e7445c.jpg",
     "static/media/horse-gb.jpg": "/static/media/horse-gb.5b2267258d52ed5c6dd7.jpg",
     "static/media/cat-gb.jpg": "/static/media/cat-gb.b2639f2d9fa6cb37078e.jpg",
@@ -66,12 +68,12 @@
     "static/media/grid-icon.svg": "/static/media/grid-icon.103b22f0b42daaf529767400450cb653.svg",
     "static/media/circle.svg": "/static/media/circle.7df0436b5fc95fa6c2445c2000d45d7f.svg",
     "static/media/rectangle.svg": "/static/media/rectangle.7686c50d5d527ae3f736d85fe19e5c6d.svg",
-    "main.dc864416.css.map": "/static/css/main.dc864416.css.map",
-    "main.3a34db8e.js.map": "/static/js/main.3a34db8e.js.map",
+    "main.e4e8e7c6.css.map": "/static/css/main.e4e8e7c6.css.map",
+    "main.f6e0d9e5.js.map": "/static/js/main.f6e0d9e5.js.map",
     "787.8858620f.chunk.js.map": "/static/js/787.8858620f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dc864416.css",
-    "static/js/main.3a34db8e.js"
+    "static/css/main.e4e8e7c6.css",
+    "static/js/main.f6e0d9e5.js"
   ]
 }
