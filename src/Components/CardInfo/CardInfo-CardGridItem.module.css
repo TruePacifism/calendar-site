@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   width: calc((100vw - 13px * 4 - 1px) / 2 - 13px);
   @media screen and (min-width: 400px) {

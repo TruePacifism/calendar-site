@@ -12,14 +12,8 @@
   padding-top: 7px;
   padding-right: 7px;
   padding-bottom: 18px;
-}
-.threePointsIcon {
-  position: absolute;
-  top: 7px;
-  right: 7px;
-  fill: white;
-  width: 5px;
-  height: auto;
+  border-radius: 5px;
+  height: 239px;
 }
 .name {
   display: flex;
@@ -43,9 +37,12 @@
 }
 .birthdate {
   color: var(--main-text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 23px;
   text-align: center;
   font-weight: 400;
   font-size: 15px;
-  display: block;
   margin-bottom: 4px;
 }

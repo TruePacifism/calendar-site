@@ -9,7 +9,6 @@ import React, {
 } from "react";
 import styles from "./CardOptionsModal.module.css";
 import CardOptionsItem from "../CardOptionsItem/CardOptionsItem";
-import { ReactComponent as ThreePointsIcon } from "../../images/three-points-icon.svg";
 import { cardInfoType, inputDataType, stateType } from "../../utils/types";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,19 +64,18 @@ export default function CardOptionsModal({
       dispatch(closeModalAction());
     }, 1000);
   }, [dispatch, token, cardData]);
+  // eslint-disable-next-line
   const [isShowingGroups, setIsShowingGroups]: [
     boolean,
     Dispatch<SetStateAction<boolean>>
   ] = useState(false);
   const groupButtonRef: LegacyRef<HTMLLIElement> = useRef();
-  // eslint-disable-next-line
-  const listRef = useRef();
-  const handleClickGroups = useCallback(() => {
-    setIsShowingGroups((oldIsShowingGroups) => {
-      console.log(oldIsShowingGroups);
-      return !oldIsShowingGroups;
-    });
-  }, []);
+  // const handleClickGroups = useCallback(() => {
+  //   setIsShowingGroups((oldIsShowingGroups) => {
+  //     console.log(oldIsShowingGroups);
+  //     return !oldIsShowingGroups;
+  //   });
+  // }, []);
   const handleCancel = useCallback(() => {
     firstResult = null;
     dispatch(closeModalAction());
@@ -98,6 +96,7 @@ export default function CardOptionsModal({
     return firstResult
       ? firstResult
       : groupButtonRef.current.getBoundingClientRect();
+    // eslint-disable-next-line
   }, [groupButtonRef.current]);
 
   return (
@@ -105,26 +104,21 @@ export default function CardOptionsModal({
       <ul
         className={styles.list}
         style={{
-          top: cardBounds.y,
-          left:
-            document.getElementById("root").getBoundingClientRect().width > 400
-              ? cardBounds.x -
-                (document.getElementById("root").getBoundingClientRect().width -
-                  400) /
-                  2
-              : cardBounds.x,
-          width: cardBounds.width,
-          height: cardBounds.height,
+          top:
+            cardBounds.y + 239 > window.innerHeight
+              ? window.innerHeight - 239 - 5
+              : cardBounds.y,
+          left: position === "left" ? 13 : undefined,
+          right: position === "right" ? 13 : undefined,
         }}
       >
-        <ThreePointsIcon className={styles.icon} />
         <CardOptionsItem title="ОТКРЫТЬ" onClick={handleOpenCard} />
         <CardOptionsItem title="УДАЛИТЬ" onClick={handleDeleteCard} />
-        <CardOptionsItem
+        {/* <CardOptionsItem
           ref={groupButtonRef}
           title="ГРУППА"
           onClick={handleClickGroups}
-        />
+        /> */}
         <CardOptionsItem title="ОТМЕНА" onClick={handleCancel} />
       </ul>
       {groupButtonBounds && (
@@ -134,7 +128,7 @@ export default function CardOptionsModal({
             style={{
               top: groupButtonBounds.y + groupButtonBounds.height / 2,
               left:
-                position === "left"
+                position === "right"
                   ? cardBounds.x - 26
                   : cardBounds.x + cardBounds.width,
               width: 26,
@@ -145,7 +139,7 @@ export default function CardOptionsModal({
             style={{
               top: groupButtonBounds.y - cardBounds.height / 13,
               left:
-                position === "left"
+                position === "right"
                   ? cardBounds.x - cardBounds.width - 26
                   : cardBounds.x + cardBounds.width + 26,
               width: cardBounds.width,

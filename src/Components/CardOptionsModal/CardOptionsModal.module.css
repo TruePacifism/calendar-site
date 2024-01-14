@@ -6,8 +6,9 @@
 }
 .groupsList,
 .list {
+  height: 239px;
+  width: calc(50% - 13px * 2);
   position: absolute;
-  height: 100%;
 }
 .list {
   padding-top: 20px;
@@ -30,8 +31,6 @@
   height: 26px;
   fill: white;
   position: absolute;
-  top: 7px;
-  right: 7px;
 }
 .connectingLine {
   position: absolute;

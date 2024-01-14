@@ -3,9 +3,7 @@ import styles from "./SearchField.module.css";
 import { ReactComponent as SearchIcon } from "../../images/search-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { openModalAction } from "../../utils/store";
-import { ThemeProvider } from "@emotion/react";
-import { searchModalTheme } from "../../utils/muiThemes";
-import { Autocomplete, TextField, useAutocomplete } from "@mui/material";
+import { useAutocomplete } from "@mui/material";
 import { cardInfoType, stateType } from "../../utils/types";
 
 export default function SearchField() {
@@ -73,7 +71,6 @@ export default function SearchField() {
     );
   }, [
     dispatch,
-    searchRef.current,
     getRootProps,
     getInputLabelProps,
     getInputProps,

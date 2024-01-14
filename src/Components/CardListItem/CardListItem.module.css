@@ -5,6 +5,7 @@
 }
 .container {
   padding: 7px;
+  position: relative;
   border-radius: 5px;
 }
 .name,

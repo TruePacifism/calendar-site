@@ -80,7 +80,7 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
           {smallMobile && doneFor !== "HomePage" && (
             <div className={styles.separator}></div>
           )}
-          {doneFor !== "HomePage" && (
+          {doneFor !== "HomePage" && doneFor !== "CardGridItem" && (
             <CardColumn
               animal={
                 cardInfo.currentPillar ? cardInfo.currentPillar.animal : null

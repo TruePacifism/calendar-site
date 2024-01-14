@@ -12,17 +12,13 @@ import CardInfo from "../CardInfo/CardInfo";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import AnimalLogo from "../AnimalLogo/AnimalLogo";
 import getMonthName from "../../utils/getMonthName";
-import { ReactComponent as ThreePointsIcon } from "../../images/three-points-icon.svg";
-import { useDispatch } from "react-redux";
-import { openModalAction } from "../../utils/store";
-import CardOptionsModal from "../CardOptionsModal/CardOptionsModal";
+import CardOptionsButton from "../CardOptionsButton/CardOptionsButton";
 
 type propsType = {
   cardInfo: cardInfoType;
 };
 
 export default function CardGridItem({ cardInfo }: propsType) {
-  const dispatch = useDispatch();
   const cardRef: React.MutableRefObject<HTMLDivElement> =
     useRef<HTMLDivElement>();
 
@@ -31,25 +27,6 @@ export default function CardGridItem({ cardInfo }: propsType) {
   useEffect(() => {
     setColor(getColorByAnimalElement(cardInfo.year.element));
   }, [cardInfo.year.element]);
-  // eslint-disable-next-line
-  const handleThreePointsClick = () => {
-    const rootWidth = document
-      .getElementById("root")
-      .getBoundingClientRect().width;
-    console.log(rootWidth);
-    const cardX = cardRef.current.getBoundingClientRect().x;
-    console.log(cardX);
-
-    dispatch(
-      openModalAction(
-        <CardOptionsModal
-          position={rootWidth / 2 > cardX ? "right" : "left"}
-          cardData={cardInfo}
-          cardRef={cardRef}
-        />
-      )
-    );
-  };
   return (
     <li className={styles.section}>
       <div
@@ -57,14 +34,10 @@ export default function CardGridItem({ cardInfo }: propsType) {
         style={{ backgroundColor: color ? color.backgroundHex : "#FFFFFF" }}
         ref={cardRef}
       >
-        <ThreePointsIcon
-          className={styles.threePointsIcon}
-          onClick={handleThreePointsClick}
-        />
+        <CardOptionsButton cardRef={cardRef} cardInfo={cardInfo} />
         <span className={styles.name}>{cardInfo.name}</span>
         <div className={styles.mainInfoContainer}>
           <AnimalLogo doneFor="CardGridItem" animal={cardInfo.year.animal} />
-          {/* <img src={pfpUrl} alt="" className={styles.pfp} /> */}
           <IconedCardInfoList cardInfo={cardInfo} doneFor="CardGridItem" />
         </div>
         <span className={styles.birthdate}>

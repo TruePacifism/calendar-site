@@ -12,6 +12,6 @@
 }
 .value {
   color: var(--main-text-color);
-  line-height: normal;
+  line-height: 13px;
   font-size: 13px;
 }

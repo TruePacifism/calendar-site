@@ -1,38 +1,36 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styles from "./CardListItem.module.css";
 import { cardInfoType, colorType } from "../../utils/types";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
-import { useNavigate } from "react-router-dom";
+import CardOptionsButton from "../CardOptionsButton/CardOptionsButton";
 
 type propsType = {
   cardInfo: cardInfoType;
 };
 
 export default function CardListItem({ cardInfo }: propsType) {
-  const navigate = useNavigate();
+  const cardRef: React.MutableRefObject<HTMLDivElement> =
+    useRef<HTMLDivElement>();
 
   const [color, setColor]: [colorType, Dispatch<SetStateAction<colorType>>] =
     useState();
   useEffect(() => {
     setColor(getColorByAnimalElement(cardInfo.year.element));
   }, [cardInfo.year.element]);
-  const handleCardClick = () => {
-    const { name, birthdate, gender, birthcity, livingcity, id } = cardInfo;
-    const inputData = {
-      name,
-      birthdate,
-      gender,
-      birthcity,
-      livingcity,
-    };
-    navigate(`/cards`, { state: { inputData, id } });
-  };
   return (
-    <li className={styles.section} onClick={handleCardClick}>
+    <li className={styles.section}>
       <div
+        ref={cardRef}
         className={styles.container}
         style={{ backgroundColor: color ? color.backgroundHex : "transparent" }}
       >
+        <CardOptionsButton cardRef={cardRef} cardInfo={cardInfo} />
         <span className={styles.name}>{cardInfo.name}</span>
         <span
           className={styles.birthdate}

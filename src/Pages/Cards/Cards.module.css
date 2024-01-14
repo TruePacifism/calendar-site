@@ -7,38 +7,40 @@
 }
 .topContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding-top: 13px;
   padding-bottom: 13px;
-  padding-left: 26px;
-  padding-right: 26px;
+  padding-left: 13px;
+  padding-right: 13px;
 }
 .viewSettings {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  max-width: calc(100% + 18px);
+  min-width: max-content;
+  width: 40%;
 }
-.listIcon {
-  fill: var(--background-color);
-  width: 36px;
-}
+.listIcon,
 .gridIcon {
   fill: var(--background-color);
   width: 36px;
+  max-width: calc(50% - 5px);
 }
 .searchContainer {
   display: none;
 }
 .sortingContainer {
-  margin-left: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 77px;
 }
 .sortingIcon {
   fill: var(--background-color);
-  width: 36px;
+  min-width: 36px;
+  max-width: 36px;
   margin-right: 2px;
 }
 .sortingName {
