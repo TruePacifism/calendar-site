@@ -108,15 +108,14 @@ export default function IconedCardInfoList({
   }, [doneFor]);
 
   return (
-    <div className={styles.container}>
-      <ul
-        className={styles.list}
-        onClick={onClick}
-        style={{
-          backgroundColor:
-            doneFor === "Calculator" ? backgroundColor.backgroundHex : null,
-        }}
-      >
+    <div
+      className={styles.container}
+      style={{
+        backgroundColor:
+          doneFor === "Calculator" ? backgroundColor.backgroundHex : null,
+      }}
+    >
+      <ul className={styles.list} onClick={onClick}>
         {values &&
           values.map(
             (value, idx) =>

@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  &:not(:last-child) {
+    margin-bottom: 28px;
+  }
+}
+.blackContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > .image {
+    width: 30px;
+  }
+  & > .image:not(:last-child) {
+    margin-right: 12px;
+  }
+}
+.image {
+  width: 36px;
+  border-radius: 5px;
+}
+.text {
+  margin-left: 20px;
+  text-align: left;
+}

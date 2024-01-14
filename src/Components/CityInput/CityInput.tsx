@@ -58,12 +58,7 @@ export default function CityInput({
   return (
     <ThemeProvider theme={cityInputTheme}>
       <label className={styles.formFieldContainer}>
-        <span
-          className={styles.label}
-          style={{ color: doneFor === "homeModal" ? "white" : "#02081e" }}
-        >
-          {title}
-        </span>
+        <span className={styles.label}>{title}</span>
         <Autocomplete
           id={name}
           // renderOption={(props, option) => {

@@ -1,9 +1,11 @@
 .container {
   position: absolute;
-  top: 0;
+  top: 52px;
+  background-color: var(--background-color);
   padding-top: 26px;
   padding-left: 26px;
   padding-right: 26px;
+  padding-bottom: 26px;
   width: 100%;
 }
 .inputList {

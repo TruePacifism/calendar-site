@@ -4,6 +4,7 @@ import { cardInfoType, collisionType } from "../../../utils/types";
 import CardColumn from "../../CardColumn/CardColumn";
 import ModalCollision from "../ModalCollision/ModalCollision";
 import ModalHeading from "../ModalHeading/ModalHeading";
+import ElementsExamples from "../../ElementsExamples/ElementsExamples";
 
 type propsType = {
   cardInfo: cardInfoType;
@@ -113,6 +114,7 @@ export default function ModalCardInfo({ cardInfo }: propsType) {
           </>
         ))}
       </ul>
+      <ElementsExamples />
     </div>
   );
 }

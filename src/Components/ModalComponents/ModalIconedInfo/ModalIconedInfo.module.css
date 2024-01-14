@@ -1,6 +1,5 @@
 .container {
   background-color: var(--background-color);
-  padding: 20px;
   width: 100%;
 }
 .list {

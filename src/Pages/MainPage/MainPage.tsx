@@ -1,4 +1,10 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import styles from "./MainPage.module.css";
 import DaysLine from "../../Components/DaysLine/DaysLine";
 import IconedCardInfoList from "../../Components/IconedCardInfoList/IconedCardInfoList";
@@ -11,9 +17,11 @@ import {
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import CardInfo from "../../Components/CardInfo/CardInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoadingAction } from "../../utils/store";
+import { openModalAction, setLoadingAction } from "../../utils/store";
 import AnimalLogo from "../../Components/AnimalLogo/AnimalLogo";
 import countCard from "../../api/countCard";
+import ModalIconedInfo from "../../Components/ModalComponents/ModalIconedInfo/ModalIconedInfo";
+import ElementsExamples from "../../Components/ElementsExamples/ElementsExamples";
 
 let hashUser: userType = null;
 let hashMainPageInfo: inputDataType = null;
@@ -44,6 +52,17 @@ export default function MainPage() {
 
     fetchInfo();
   }, [user, mainPageInfo, dispatch]);
+
+  const fetchIconedInfoClick = useCallback(() => {
+    dispatch(
+      openModalAction(
+        <div className={styles.modal}>
+          <ModalIconedInfo cardInfo={todayInfo} />
+          <ElementsExamples />
+        </div>
+      )
+    );
+  }, [dispatch, todayInfo]);
   // useEffect(() => {
   //   const fetchNewToday = async () => {
   //     await submitTodayHandler(mainPageInfo);
@@ -70,7 +89,11 @@ export default function MainPage() {
       >
         <DaysLine />
         <section className={styles.section}>
-          <IconedCardInfoList doneFor="HomePage" cardInfo={todayInfo} />
+          <IconedCardInfoList
+            doneFor="HomePage"
+            onClick={fetchIconedInfoClick}
+            cardInfo={todayInfo}
+          />
           <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
           <div className={styles.animalLogoContainer}>
             <AnimalLogo doneFor="HomePage" animal={todayInfo.day.animal} />
