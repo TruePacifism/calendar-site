@@ -62,7 +62,7 @@ export const modalTheme = createTheme({
           justifyContent: "center",
           margin: 0,
           width: "100%",
-          minHeight: "100vh",
+          minHeight: "100svh",
           backgroundColor: "transparent",
           pointerEvents: "none",
           borderRadius: 0,
