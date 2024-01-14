@@ -27,11 +27,13 @@ export default function ModalIconedInfo({ cardInfo }: propsType) {
   ] = useState();
   useEffect(() => {
     setValues([
-      {
-        Icon: AgeIcon,
-        value: `${cardInfo.age.year},${cardInfo.age.month}`,
-        description: `Возраст: ${cardInfo.age.year} лет и ${cardInfo.age.month} месяцев`,
-      },
+      cardInfo.age.year !== 0 && cardInfo.age.month !== 0
+        ? {
+            Icon: AgeIcon,
+            value: `${cardInfo.age.year},${cardInfo.age.month}`,
+            description: `Возраст: ${cardInfo.age.year} лет и ${cardInfo.age.month} месяцев`,
+          }
+        : undefined,
       {
         Icon: BirthSideIcon,
         value: cardInfo.direction.shortName,
@@ -70,13 +72,16 @@ export default function ModalIconedInfo({ cardInfo }: propsType) {
     <div className={styles.container}>
       <ul className={styles.list}>
         {values &&
-          values.map((value) => (
-            <li className={styles.listItem}>
-              <value.Icon className={styles.icon} />
-              <span className={styles.value}>{value.value}</span>
-              <p className={styles.description}>{value.description}</p>
-            </li>
-          ))}
+          values.map(
+            (value) =>
+              value && (
+                <li className={styles.listItem}>
+                  <value.Icon className={styles.icon} />
+                  <span className={styles.value}>{value.value}</span>
+                  <p className={styles.description}>{value.description}</p>
+                </li>
+              )
+          )}
       </ul>
     </div>
   );
