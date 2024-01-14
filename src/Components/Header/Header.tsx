@@ -20,6 +20,7 @@ type propsType = {
 
 export default function Header({ heading }: propsType) {
   const dispatch = useDispatch();
+  const location = useLocation();
   const isErrorPage = useSelector<stateType, boolean>(
     (state) => state.isErrorPage
   );
@@ -29,8 +30,38 @@ export default function Header({ heading }: propsType) {
   const closeModal = useCallback(() => {
     dispatch(closeModalAction());
   }, [dispatch]);
-  console.log("innerHeight", window.innerHeight);
-  console.log("innerWidth", window.innerWidth);
+  const getInfoText = useCallback<
+    () => React.ReactElement<HTMLParagraphElement>
+  >(() => {
+    switch (location.pathname) {
+      case "/calculator":
+        return (
+          <p className={styles.modalText}>
+            В калькуляторе необходимо заполнить всю информацию. Чем подробнее
+            данные, тем более точные рассчеты вы получите. <br />
+            <br /> Однако, можно рассчитать и с неполными данными. Минимально -
+            год рождения.
+            <br />
+            <br /> Для рассчета часа рождения необходимо указать место и время
+            рождения.
+          </p>
+        );
+      case "/":
+      case "/cards":
+        return (
+          <p className={styles.modalText}>
+            Нажмите на любой раздел страницы, чтобы посмотреть подробнее
+          </p>
+        );
+
+      default:
+        return (
+          <p className={styles.modalText}>
+            Нажмите на любой раздел страницы, чтобы посмотреть подробнее
+          </p>
+        );
+    }
+  }, [location.pathname]);
 
   const openInfoModal = useCallback(() => {
     const infoBounds = infoRef.current.getBoundingClientRect();
@@ -50,15 +81,7 @@ export default function Header({ heading }: propsType) {
           />
           <div className={styles.modalContainer}>
             <div className={styles.infoContainer}>
-              <p className={styles.modalText}>
-                В калькуляторе необходимо заполнить всю информацию. Чем
-                подробнее данные, тем более точные рассчеты вы получите. <br />
-                <br /> Однако, можно рассчитать и с неполными данными.
-                Минимально - год рождения.
-                <br />
-                <br /> Для рассчета часа рождения необходимо указать место и
-                время рождения.
-              </p>
+              {getInfoText()}
               <ThemeProvider theme={mainTheme}>
                 <Button className={styles.modalButton} onClick={closeModal}>
                   НАЗАД
@@ -69,7 +92,7 @@ export default function Header({ heading }: propsType) {
         </>
       )
     );
-  }, [dispatch, closeModal]);
+  }, [dispatch, closeModal, getInfoText]);
   const openServiceModal = useCallback(() => {
     const headingBounds = headingRef.current.getBoundingClientRect();
     dispatch(
@@ -96,7 +119,6 @@ export default function Header({ heading }: propsType) {
       )
     );
   }, [dispatch]);
-  const location = useLocation();
   return (
     !isErrorPage && (
       <>
