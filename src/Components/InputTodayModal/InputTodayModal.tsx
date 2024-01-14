@@ -92,12 +92,7 @@ export default function InputTodayModal() {
     dispatch(closeModalAction());
   };
   return (
-    <div
-      className={styles.container}
-      style={{
-        top: inputRefs.hour.getBoundingClientRect().top,
-      }}
-    >
+    <div className={styles.container}>
       <ThemeProvider theme={homePageInput}>
         <form ref={formRef} onSubmit={fetchHandler}>
           <div className={styles.inputList}>

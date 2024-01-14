@@ -1,5 +1,7 @@
 .container {
   position: absolute;
+  top: 0;
+  padding-top: 26px;
   padding-left: 26px;
   padding-right: 26px;
   width: 100%;

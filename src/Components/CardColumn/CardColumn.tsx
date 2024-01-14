@@ -103,6 +103,7 @@ export default function CardColumn({
           <ThemeProvider theme={homePageInput}>
             <Input
               value={title}
+              readOnly
               disableUnderline
               inputRef={inputRef}
               onClick={onClickHandle}
