@@ -9,15 +9,10 @@ import React, {
 } from "react";
 import styles from "./CardOptionsModal.module.css";
 import CardOptionsItem from "../CardOptionsItem/CardOptionsItem";
-import { cardInfoType, inputDataType, stateType } from "../../utils/types";
+import { cardInfoType, inputDataType } from "../../utils/types";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  closeModalAction,
-  deleteCardAction,
-  openModalAction,
-} from "../../utils/store";
-import deleteCard from "../../api/deleteCard";
+import { useDispatch } from "react-redux";
+import { closeModalAction, openModalAction } from "../../utils/store";
 import CardDeletionPopup from "../CardDeletionPopup/CardDeletionPopup";
 
 type propsType = {
@@ -35,7 +30,6 @@ export default function CardOptionsModal({
 }: propsType) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = useSelector<stateType, string>((store) => store.token);
 
   const handleOpenCard = useCallback(() => {
     const { name, birthdate, birthcity, gender, livingcity } = cardData;
@@ -54,16 +48,9 @@ export default function CardOptionsModal({
       pathname: "/cards",
     });
   }, [dispatch, navigate, cardData]);
-  const handleDeleteCard = useCallback(async () => {
-    const { id } = cardData;
-    const response = await deleteCard({ id, token });
-    console.log(response);
-    dispatch(deleteCardAction(id));
-    dispatch(openModalAction(<CardDeletionPopup />));
-    setTimeout(() => {
-      dispatch(closeModalAction());
-    }, 1000);
-  }, [dispatch, token, cardData]);
+  const handleDeleteCard = useCallback(() => {
+    dispatch(openModalAction(<CardDeletionPopup cardData={cardData} />));
+  }, [dispatch, cardData]);
   // eslint-disable-next-line
   const [isShowingGroups, setIsShowingGroups]: [
     boolean,

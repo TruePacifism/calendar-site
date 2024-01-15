@@ -8,10 +8,9 @@
 .darkBlue,
 .yellow,
 .pink {
-  min-width: 12px;
-  max-width: 12px;
-  min-height: 12px;
-  max-height: 12px;
+  min-width: 10px;
+  max-width: 10px;
+  height: auto;
   stroke: white;
   &:not(:last-child) {
     margin-right: 2px;

@@ -178,6 +178,7 @@ export const store = configureStore({
         } else {
           cards.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
         }
+        state.isLoading = false;
       })
       .addCase(
         setMainPageDateAction,

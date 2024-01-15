@@ -51,7 +51,8 @@
   margin-left: auto;
 }
 .donutInfo,
-.feedbackInfo {
+.feedbackInfo,
+.feedbackFullInfo {
   font-size: 13px;
   font-weight: 400;
   line-height: 16px;

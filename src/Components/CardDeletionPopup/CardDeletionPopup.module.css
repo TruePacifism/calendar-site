@@ -1,14 +1,33 @@
+.modal {
+  height: 100dvh;
+  width: 100%;
+  padding-top: 52px;
+}
 .container {
   background-color: white;
-  height: 133px;
-  width: 90%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 .heading {
-  color: var(--main-text-color);
   font-size: 20px;
   font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  color: var(--main-text-color);
+
+  margin-bottom: 31px;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  & > *:not(:last-child) {
+    margin-right: 13px;
+  }
 }

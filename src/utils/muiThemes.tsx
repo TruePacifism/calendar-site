@@ -75,6 +75,31 @@ export const modalTheme = createTheme({
     },
   },
 });
+export const delitionModalTheme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontSize: 15,
+          fontWeight: 400,
+          lineHeight: 20,
+          letterSpacing: 0,
+          textAlign: "center",
+          paddingTop: 8,
+          paddingRight: 28,
+          paddingBottom: 6,
+          paddingLeft: 28,
+          color: accentColor,
+          border: `1px solid ${basicButtonBorderColor}`,
+          borderRadius: 5,
+          height: "auto",
+          minHeight: 0,
+          maxHeight: 51,
+        },
+      },
+    },
+  },
+});
 export const searchModalTheme = createTheme({
   components: {
     MuiDialog: {
