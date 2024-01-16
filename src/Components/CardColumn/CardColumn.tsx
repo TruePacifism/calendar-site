@@ -83,7 +83,9 @@ export default function CardColumn({
     if (name === "month") {
       sessionStorage.setItem(
         name.toString(),
-        getMonthName(title as number).substring(0, 3)
+        getMonthName(title as number)
+          .substring(0, 3)
+          .toLowerCase()
       );
     } else {
       sessionStorage.setItem(name.toString(), title.toString());
@@ -112,7 +114,9 @@ export default function CardColumn({
             <Input
               value={
                 name === "month" && typeof title === "number"
-                  ? getMonthName(title as number).substring(0, 3)
+                  ? getMonthName(title as number)
+                      .substring(0, 3)
+                      .toLowerCase()
                   : title
               }
               readOnly
