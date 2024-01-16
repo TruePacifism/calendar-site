@@ -33,9 +33,6 @@ export default function CardDeletionPopup({ cardData }: propsType) {
             <div className={styles.modal}>
               <div className={styles.container}>
                 <h1 className={styles.heading}>Карта удалена</h1>
-                <div className={styles.buttonsContainer}>
-                  <Button onClick={handleCancel}>ОК</Button>
-                </div>
               </div>
             </div>
           </ThemeProvider>
