@@ -11,7 +11,8 @@ import { darkButtonTheme, homePageInput } from "../../utils/muiThemes";
 import CityInput from "../CityInput/CityInput";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModalAction, setMainPageDateAction } from "../../utils/store";
-import { stateType, userType } from "../../utils/types";
+import { monthType, stateType, userType } from "../../utils/types";
+import { months } from "../../enums";
 
 export default function InputTodayModal() {
   const dispatch = useDispatch();
@@ -85,7 +86,9 @@ export default function InputTodayModal() {
       hour: Number.parseInt(e.target.elements.hour.value.split(":")[0]),
       minute: Number.parseInt(e.target.elements.hour.value.split(":")[1]),
       day: Number.parseInt(e.target.elements.day.value),
-      month: Number.parseInt(e.target.elements.month.value) - 1,
+      month:
+        months.indexOf(e.target.elements.month.value as unknown as monthType) -
+        1,
       year: Number.parseInt(e.target.elements.year.value),
     };
     dispatch(setMainPageDateAction(newTodayDatabirthdate));

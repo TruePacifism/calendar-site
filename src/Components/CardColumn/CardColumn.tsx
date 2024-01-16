@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openModalAction } from "../../utils/store";
 import InputTodayModal from "../InputTodayModal/InputTodayModal";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
+import getMonthName from "../../utils/getMonthName";
 
 type propsType = {
   animal: animalType;
@@ -79,7 +80,14 @@ export default function CardColumn({
   //УДАЛИТЬ В КОНЦЕ
   useEffect(() => {
     setStyles(getStyles(doneFor));
-    sessionStorage.setItem(name.toString(), title.toString());
+    if (name === "month") {
+      sessionStorage.setItem(
+        name.toString(),
+        getMonthName(title as number).substring(0, 3)
+      );
+    } else {
+      sessionStorage.setItem(name.toString(), title.toString());
+    }
   }, [doneFor, name, title]);
 
   // eslint-disable-next-line
@@ -102,7 +110,11 @@ export default function CardColumn({
         {doneFor === "HomePage" ? (
           <ThemeProvider theme={homePageInput}>
             <Input
-              value={title}
+              value={
+                name === "month" && typeof title === "number"
+                  ? getMonthName(title as number).substring(0, 3)
+                  : title
+              }
               readOnly
               disableUnderline
               inputRef={inputRef}
@@ -126,7 +138,11 @@ export default function CardColumn({
         ) : (
           <div className={styles.headingContainer}>
             <h3 className={styles.heading}>
-              {badNames.includes(title.toString()) ? "N/A" : title}
+              {badNames.includes(title.toString())
+                ? "N/A"
+                : name === "month"
+                ? getMonthName(title as number).substring(0, 2)
+                : title}
             </h3>
           </div>
         )}

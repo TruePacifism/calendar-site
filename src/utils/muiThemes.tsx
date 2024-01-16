@@ -241,6 +241,11 @@ export const homePageInput = createTheme({
           textAlign: "center",
           borderRadius: "5px",
           border: `1px solid ${basicButtonBorderColor}`,
+          fontsize: 20,
+          fontweight: 400,
+          lineHeight: 26,
+          letterSpacing: 0,
+          textalign: "center",
           "::after": {
             display: "none",
           },

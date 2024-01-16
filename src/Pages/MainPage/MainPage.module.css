@@ -24,12 +24,15 @@
 }
 .animalLogoContainer {
   border-top: 1px solid var(--background-color);
-  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
   max-width: 400px;
-  padding-top: 32px;
-  padding-left: 32px;
-  padding-right: 32px;
-  padding-bottom: 32px;
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
 }
 .modal {
   background-color: var(--background-color);
