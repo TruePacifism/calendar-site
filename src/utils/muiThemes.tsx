@@ -230,6 +230,68 @@ export const homePageInput = createTheme({
   components: {
     MuiInput: {
       styleOverrides: {
+        // root: {
+        //   backgroundColor: "white",
+        //   color: accentColor,
+        //   width: "57px",
+        //   height: "39px",
+        //   fontFamily: "Roboto Slab",
+        //   fontWeight: 400,
+        //   fontSize: "20px",
+        //   textAlign: "center",
+        //   borderRadius: "5px",
+        //   border: `1px solid ${basicButtonBorderColor}`,
+        //   fontsize: 20,
+        //   fontweight: 400,
+        //   lineHeight: 26,
+        //   letterSpacing: 0,
+        //   textalign: "center",
+        //   "::after": {
+        //     display: "none",
+        //   },
+        //   "::before": {
+        //     display: "none",
+        //   },
+        //   marginBottom: "12px",
+        // },
+        input: {
+          textAlign: "center",
+          padding: 0,
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        icon: { display: "none" },
+        // select: {
+        //   backgroundColor: "white",
+        //   color: accentColor,
+        //   width: "57px",
+        //   height: "39px",
+        //   fontFamily: "Roboto Slab",
+        //   fontWeight: 400,
+        //   fontSize: "20px",
+        //   textAlign: "center",
+        //   borderRadius: "5px",
+        //   border: `1px solid ${basicButtonBorderColor}`,
+        //   fontsize: 20,
+        //   fontweight: 400,
+        //   lineHeight: 26,
+        //   letterSpacing: 0,
+        //   textalign: "center",
+        //   "::after": {
+        //     display: "none",
+        //   },
+        //   "::before": {
+        //     display: "none",
+        //   },
+        //   padding: 0,
+        // },
+        standard: { paddingRight: "0px !important" },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
         root: {
           backgroundColor: "white",
           color: accentColor,
@@ -252,10 +314,12 @@ export const homePageInput = createTheme({
           "::before": {
             display: "none",
           },
+          overflow: "hidden",
           marginBottom: "12px",
+          padding: 0,
         },
         input: {
-          textAlign: "center",
+          padding: 0,
         },
       },
     },

@@ -6,6 +6,7 @@ import CardColumn from "../CardColumn/CardColumn";
 import { cardInfoType, stylesType } from "../../utils/types";
 import { useMediaQuery } from "@mui/material";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
+import getMonthName from "../../utils/getMonthName";
 
 type propsType = {
   cardInfo: cardInfoType;
@@ -67,7 +68,13 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             doneFor={doneFor}
             animal={cardInfo.month.animal}
             element={cardInfo.month.element}
-            title={cardInfo.birthdate.month + 1}
+            title={
+              typeof cardInfo.birthdate.month === "number"
+                ? getMonthName(cardInfo.birthdate.month)
+                    .slice(0, 3)
+                    .toLowerCase()
+                : "НЕТ"
+            }
             name={"month"}
           />
           <CardColumn

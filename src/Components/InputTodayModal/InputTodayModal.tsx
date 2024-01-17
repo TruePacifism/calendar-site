@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import styles from "./InputTodayModal.module.css";
-import { Button, Input, ThemeProvider } from "@mui/material";
+import { Button, Input, MenuItem, Select, ThemeProvider } from "@mui/material";
 import { darkButtonTheme, homePageInput } from "../../utils/muiThemes";
 import CityInput from "../CityInput/CityInput";
 import { useDispatch, useSelector } from "react-redux";
@@ -82,13 +82,20 @@ export default function InputTodayModal() {
     }
   ) => {
     e.preventDefault();
+    console.log("month", e.target.elements.month.value);
+    console.log(
+      months.find((month) => month.name === e.target.elements.month.value)
+        .orderNumber
+    );
+    console.log(months);
+
     const newTodayDatabirthdate = {
       hour: Number.parseInt(e.target.elements.hour.value.split(":")[0]),
       minute: Number.parseInt(e.target.elements.hour.value.split(":")[1]),
       day: Number.parseInt(e.target.elements.day.value),
-      month:
-        months.indexOf(e.target.elements.month.value as unknown as monthType) -
-        1,
+      month: months.find(
+        (month) => month.name === e.target.elements.month.value
+      ).orderNumber,
       year: Number.parseInt(e.target.elements.year.value),
     };
     dispatch(setMainPageDateAction(newTodayDatabirthdate));
@@ -109,11 +116,31 @@ export default function InputTodayModal() {
               name="day"
               defaultValue={inputRefs.day.value}
             />
-            <Input
+            <Select
               disableUnderline
+              displayEmpty
+              autoWidth
+              variant="standard"
               name="month"
-              defaultValue={inputRefs.month.value}
-            />
+              defaultValue={
+                months.find((month) =>
+                  month.name
+                    .toLowerCase()
+                    .startsWith(inputRefs.month.value.toLowerCase())
+                ).name
+              }
+              onChange={(e) => {
+                console.log(e.target.value);
+              }}
+            >
+              {Object.values(months).map((month) => {
+                return (
+                  <MenuItem value={month.name}>
+                    {month.name.slice(0, 3).toLowerCase()}
+                  </MenuItem>
+                );
+              })}
+            </Select>
             <Input
               disableUnderline
               name="year"

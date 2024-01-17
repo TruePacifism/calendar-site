@@ -80,16 +80,9 @@ export default function CardColumn({
   //УДАЛИТЬ В КОНЦЕ
   useEffect(() => {
     setStyles(getStyles(doneFor));
-    if (name === "month") {
-      sessionStorage.setItem(
-        name.toString(),
-        getMonthName(title as number)
-          .substring(0, 3)
-          .toLowerCase()
-      );
-    } else {
-      sessionStorage.setItem(name.toString(), title.toString());
-    }
+    console.log("title", title);
+
+    sessionStorage.setItem(name.toString(), title.toString());
   }, [doneFor, name, title]);
 
   // eslint-disable-next-line
@@ -114,7 +107,7 @@ export default function CardColumn({
             <Input
               value={
                 name === "month" && typeof title === "number"
-                  ? getMonthName(title as number)
+                  ? getMonthName((title as number) - 1)
                       .substring(0, 3)
                       .toLowerCase()
                   : title
@@ -142,11 +135,7 @@ export default function CardColumn({
         ) : (
           <div className={styles.headingContainer}>
             <h3 className={styles.heading}>
-              {badNames.includes(title.toString())
-                ? "N/A"
-                : name === "month"
-                ? getMonthName(title as number).substring(0, 2)
-                : title}
+              {badNames.includes(title.toString()) ? "N/A" : title}
             </h3>
           </div>
         )}
