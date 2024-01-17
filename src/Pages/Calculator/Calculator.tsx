@@ -152,6 +152,8 @@ export default function Calculator() {
                   variant="outlined"
                   name="day"
                   defaultValue="ДД"
+                  type="number"
+                  inputProps={{ max: 31, min: 0 }}
                   IconComponent={DownArrowIcon}
                   onChange={(e) => {}}
                 >
@@ -229,6 +231,7 @@ export default function Calculator() {
                   disableUnderline
                   type="number"
                   name="hour"
+                  inputProps={{ max: 23, min: 0 }}
                   placeholder="час"
                 />
                 <Input
@@ -236,6 +239,7 @@ export default function Calculator() {
                   type="number"
                   name="minute"
                   placeholder="мин"
+                  inputProps={{ max: 59, min: 0 }}
                 />
               </ThemeProvider>
             </div>

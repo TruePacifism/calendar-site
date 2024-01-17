@@ -1,4 +1,5 @@
 import React, {
+  ChangeEvent,
   Dispatch,
   SetStateAction,
   useCallback,
@@ -40,6 +41,31 @@ export default function InputTodayModal() {
     month: document.querySelector("#monthInput"),
     year: document.querySelector("#yearInput"),
   });
+  const [hourValue, setHourValue] = useState("");
+
+  const handleHourChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputTime = e.target.value;
+    setHourValue((oldHourValue) => {
+      if (/^\d{0,2}:\d{0,2}$/.test(inputTime)) {
+        const [hours, minutes] = inputTime.split(":").map(Number);
+        if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
+          return inputTime;
+        }
+      }
+      if (/^\d{0,2}/.test(inputTime)) {
+        const [hours, minutes] = inputTime.split(":").map(Number);
+        if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
+          return inputTime + ":";
+        }
+      }
+    });
+    if (/^\d{0,2}:\d{0,2}$/.test(inputTime)) {
+      const [hours, minutes] = inputTime.split(":").map(Number);
+      if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
+        setHourValue(inputTime);
+      }
+    }
+  };
 
   const formRef = useRef();
 
@@ -109,11 +135,15 @@ export default function InputTodayModal() {
             <Input
               disableUnderline
               name="hour"
+              value={hourValue}
+              onChange={handleHourChange}
               defaultValue={inputRefs.hour.value}
             />
             <Input
               disableUnderline
               name="day"
+              type="number"
+              inputProps={{ max: 31, min: 0 }}
               defaultValue={inputRefs.day.value}
             />
             <Select
