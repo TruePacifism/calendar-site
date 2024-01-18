@@ -1,6 +1,6 @@
 .container {
   position: absolute;
-  top: 52px;
+  top: 0px;
   background-color: var(--background-color);
   padding-top: 26px;
   padding-left: 26px;
