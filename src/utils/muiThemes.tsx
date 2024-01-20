@@ -326,7 +326,25 @@ export const homePageInput = createTheme({
     },
   },
 });
-
+export const loginTheme = createTheme({
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+          backgroundColor: "white",
+        },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          width: "100%",
+          height: 39,
+        },
+      },
+    },
+  },
+});
 export const dateInputTheme = createTheme({
   components: {
     MuiOutlinedInput: {

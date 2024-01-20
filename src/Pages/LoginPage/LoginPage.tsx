@@ -9,8 +9,8 @@ import {
 import { FirebaseOptions, initializeApp } from "firebase/app";
 import { ReactComponent as GoogleIcon } from "../../images/google-icon.svg";
 import { userInput } from "../../utils/types";
-import { Button, Input, ThemeProvider } from "@mui/material";
-import { googleAuthButton, mainTheme } from "../../utils/muiThemes";
+import { Button, Input, TextField, ThemeProvider } from "@mui/material";
+import { googleAuthButton, loginTheme, mainTheme } from "../../utils/muiThemes";
 import CityInput from "../../Components/CityInput/CityInput";
 import authUser from "../../api/authUser";
 import { useNavigate } from "react-router-dom";
@@ -119,7 +119,7 @@ export default function LoginPage(props: propsType) {
         </div>
       </div>
       {userInfo ? (
-        <ThemeProvider theme={mainTheme}>
+        <ThemeProvider theme={loginTheme}>
           <form
             onSubmit={(
               e: React.FormEvent<HTMLFormElement> & {
@@ -153,7 +153,17 @@ export default function LoginPage(props: propsType) {
 
               fetchUser(user);
             }}
+            className={styles.formAfterGoogle}
           >
+            <label className={styles.formFieldContainer}>
+              <TextField
+                type="text"
+                name="name"
+                label="имя"
+                defaultValue={userInfo.name}
+                variant="outlined"
+              />
+            </label>
             <label className={styles.formFieldContainer}>
               <span className={styles.label}>Имя</span>
               <Input
@@ -165,14 +175,13 @@ export default function LoginPage(props: propsType) {
               />
             </label>
             <label className={styles.formFieldContainer}>
-              <span className={styles.label}>Почта</span>
+              <span className={styles.label}>Имя</span>
               <Input
-                disabled
                 disableUnderline
-                type="email"
-                name="mail"
-                defaultValue={userInfo.mail}
-                placeholder="почта"
+                type="text"
+                name="name"
+                defaultValue={userInfo.name}
+                placeholder="имя"
               />
             </label>
             <CityInput

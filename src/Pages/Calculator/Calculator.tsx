@@ -27,10 +27,13 @@ const getPreetyNumber = (number: number): string => {
   return formattedNum;
 };
 
-const getMonthDaysArray = (month: monthType): number[] => {
+const getMonthDaysArray = (month: monthType, year: number): number[] => {
   const days: number[] = [];
   for (let i = 0; i < month.length; i++) {
     days.push(i + 1);
+  }
+  if (month.orderNumber === 1 && year % 4 === 0) {
+    days.push(29);
   }
   return days;
 };
@@ -55,6 +58,10 @@ export default function Calculator() {
     monthType,
     Dispatch<SetStateAction<monthType>>
   ] = useState(months[0]);
+  const [selectedYear, setSelectedYear]: [
+    number,
+    Dispatch<SetStateAction<number>>
+  ] = useState(new Date().getFullYear());
 
   const onSubmit = (
     e: React.FormEvent<HTMLFormElement> & {
@@ -158,7 +165,7 @@ export default function Calculator() {
                   onChange={(e) => {}}
                 >
                   <MenuItem value={"ДД"}>ДД</MenuItem>
-                  {getMonthDaysArray(selectedMonth).map((day) => (
+                  {getMonthDaysArray(selectedMonth, selectedYear).map((day) => (
                     <MenuItem value={day}>{getPreetyNumber(day)}</MenuItem>
                   ))}
                 </Select>
@@ -189,6 +196,9 @@ export default function Calculator() {
                   type="number"
                   name="year"
                   placeholder="ГГГГ"
+                  onChange={(e) => {
+                    setSelectedYear(Number.parseInt(e.target.value));
+                  }}
                 />
                 {/* <Select
                 variant="outlined"
