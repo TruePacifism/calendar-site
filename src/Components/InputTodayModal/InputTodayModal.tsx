@@ -3,6 +3,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -14,6 +15,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModalAction, setMainPageDateAction } from "../../utils/store";
 import { monthType, stateType, userType } from "../../utils/types";
 import { months } from "../../enums";
+import InputMask from "react-input-mask";
+import { IMask, IMaskInput } from "react-imask";
+
+const normalizeTime = (hour: number, minute: number): string => {
+  if (hour > 23) {
+    hour = 23;
+  }
+  if (hour < 0) {
+    hour = 0;
+  }
+  if (minute > 59) {
+    minute = 59;
+  }
+  if (minute < 0) {
+    minute = 0;
+  }
+  if (!hour && !minute) {
+    return "";
+  }
+  if (!hour) {
+    return `00:${minute}`;
+  }
+  if (!minute) {
+    return `${hour < 10 ? hour : hour + ":"}`;
+  }
+  return `${hour < 10 ? "0" + hour : hour}:${minute}`;
+};
 
 export default function InputTodayModal() {
   const dispatch = useDispatch();
@@ -41,33 +69,42 @@ export default function InputTodayModal() {
     month: document.querySelector("#monthInput"),
     year: document.querySelector("#yearInput"),
   });
-  const [hourValue, setHourValue] = useState("");
+  const [hourValue, setHourValue] = useState(inputRefs.hour.value);
 
   const handleHourChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputTime = e.target.value;
-    setHourValue((oldHourValue) => {
-      if (/^\d{0,2}:\d{0,2}$/.test(inputTime)) {
-        const [hours, minutes] = inputTime.split(":").map(Number);
-        if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
-          return inputTime;
-        }
+    const newValue = e.target.value;
+    setHourValue((oldValue) => {
+      let hour = Number.parseInt(newValue.split(":")[0]);
+      let minute = Number.parseInt(newValue.split(":")[1]);
+      let oldHour = Number.parseInt(oldValue.split(":")[0]);
+      let oldMinute = Number.parseInt(oldValue.split(":")[1]);
+      if (newValue + ":" === oldValue || oldValue + ":" === newValue) {
+        return newValue;
       }
-      if (/^\d{0,2}/.test(inputTime)) {
-        const [hours, minutes] = inputTime.split(":").map(Number);
-        if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
-          return inputTime + ":";
-        }
-      }
+      return normalizeTime(hour, minute);
+      // const addedSymbol =
+      //   oldValue.length < newValue.length
+      //     ? newValue.charAt(newValue.length - 1)
+      //     : null;
+      // const removedSymbol =
+      //   oldValue.length > newValue.length
+      //     ? oldValue.charAt(oldValue.length - 1)
+      //     : null;
+      // if (/^\d{0,2}:\d{0,2}$/.test(newValue)) {
+      //   if (addedSymbol) {
+      //     return newValue;
+      //   }
+      // }
+      // if (/^\d{0,2}/.test(newValue)) {
+      //   if (addedSymbol) {
+      //     return newValue + ":";
+      //   }
+      // }
     });
-    if (/^\d{0,2}:\d{0,2}$/.test(inputTime)) {
-      const [hours, minutes] = inputTime.split(":").map(Number);
-      if (hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59) {
-        setHourValue(inputTime);
-      }
-    }
   };
 
   const formRef = useRef();
+  const hourInputRef = useRef<HTMLInputElement>();
 
   const cancelHandler = useCallback(() => {
     dispatch(closeModalAction());

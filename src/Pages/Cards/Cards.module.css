@@ -1,6 +1,19 @@
 .mainContainer {
   background-color: var(--accent-color);
 }
+.heading {
+  width: 100%;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: center;
+}
 .cardsInfoContainer {
   background-color: var(--accent-color);
   box-shadow: var(--top-shadow);
@@ -54,4 +67,21 @@
   border-bottom: 1px solid var(--background-color);
   display: grid;
   grid-template-columns: 1fr 1fr; /* Задает две колонки равной ширины */
+}
+.noCardContainer {
+  padding-top: 14px;
+  width: 100%;
+  border-top: 1px solid var(--background-color);
+}
+.noCardMessage {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: center;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  width: 50%;
+  color: var(--background-color);
 }

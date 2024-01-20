@@ -22,6 +22,7 @@ import {
   setUserAction,
 } from "../../utils/store";
 import NameHeading from "../../Components/NameHeading/NameHeading";
+import { ReactComponent as LogoIcon } from "../../images/logo-another-icon.svg";
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: "AIzaSyB_eoV10ywFfBnJ3RsXSUAPd-IFZ6oboTY",
@@ -110,6 +111,13 @@ export default function LoginPage(props: propsType) {
 
   return (
     <div className={styles.container}>
+      <div className={styles.companyContainer}>
+        <LogoIcon className={styles.logo} />
+        <div className={styles.nameContainer}>
+          <span className={styles.name}>виктория манькова</span>
+          <span className={styles.title}>система</span>
+        </div>
+      </div>
       {userInfo ? (
         <ThemeProvider theme={mainTheme}>
           <form
@@ -179,13 +187,13 @@ export default function LoginPage(props: propsType) {
               placeholder="населенный пункт"
               doneFor="loginPage"
             />
-            <Button type="submit">Зарегистрироваться</Button>
+            <Button className={styles.regButton} type="submit">
+              ДАЛЕЕ
+            </Button>
           </form>
         </ThemeProvider>
       ) : (
         <>
-          <NameHeading />
-          <h1 className={styles.beforeHeading}>СИСТЕМА ФЕНШУЙ</h1>
           <ThemeProvider theme={googleAuthButton}>
             <Button
               onClick={token ? googleLogOut : googleSignIn}

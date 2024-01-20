@@ -83,12 +83,13 @@ export default function Cards() {
     <Card inputData={inputData} />
   ) : (
     <div className={styles.mainContainer}>
-      <FiltersList
+      {/* <FiltersList
         onChange={(e) => {
           setFilter(e.target.value);
         }}
-      />
+      /> */}
       <div className={styles.cardsInfoContainer}>
+        <div className={styles.heading}>КАРТОТЕКА</div>
         <div className={styles.topContainer}>
           <div className={styles.viewSettings}>
             {isFullCards ? (
@@ -114,7 +115,7 @@ export default function Cards() {
           </div>
           <SearchField />
         </div>
-        {cardsInfo && (
+        {cardsInfo && cardsInfo.length > 0 ? (
           <>
             {isFullCards ? (
               <ul className={styles.cardsGrid}>
@@ -130,6 +131,12 @@ export default function Cards() {
               </ul>
             )}
           </>
+        ) : (
+          <div className={styles.noCardContainer}>
+            <span className={styles.noCardMessage}>
+              Здесь будут ваши сохраненные карты
+            </span>
+          </div>
         )}
       </div>
     </div>

@@ -34,7 +34,7 @@ export default function ServiceInfo() {
       </div>
       <div className={styles.donutContainer}>
         <p className={styles.donutInfo}>
-          Сказать Виктории "Спасибо" - любая сумма по сердцу
+          Сказать Виктории "Спасибо" - любая сумма:
         </p>
         <a
           href="https://pay.cloudtips.ru/p/48f16266"

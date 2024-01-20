@@ -131,6 +131,7 @@ export const darkButtonTheme = createTheme({
           color: "white",
           fontWeight: 400,
           fontSize: "15px",
+          lineHeight: "19.78px",
           fontFamily: "Roboto Slab",
           textAlign: "center",
           textTransform: "uppercase",
@@ -426,7 +427,6 @@ export const dateInputTheme = createTheme({
     },
   },
 });
-
 export const mainTheme = createTheme({
   components: {
     MuiInput: {
@@ -537,7 +537,11 @@ export const googleAuthButton = createTheme({
           height: "57px",
           display: "flex",
           justifyContent: "space-between",
+          ":hover": {
+            backgroundColor: accentColor,
+          },
         },
+        disabled: {},
       },
     },
   },

@@ -11,6 +11,45 @@
   margin-bottom: 110px;
   line-height: 42px;
 }
+.companyContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 250px;
+  text-transform: uppercase;
+  margin-right: auto;
+  margin-left: auto;
+
+  margin-bottom: 38px;
+}
+.logo {
+  min-width: 52px;
+  min-height: 52px;
+  max-width: 52px;
+  max-height: 52px;
+  border-radius: 50%;
+  margin-right: 15px;
+  box-shadow: var(--bottom-shadow);
+}
+.name {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-align: center;
+  display: block;
+  color: #060606;
+  text-shadow: var(--bottom-shadow);
+}
+.title {
+  font-family: Roboto Slab;
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: 0em;
+  text-align: center;
+  color: var(--accent-color);
+  display: block;
+}
+
 .heading {
   margin-bottom: 30px;
 }
@@ -40,6 +79,7 @@
   margin-bottom: 26px;
 }
 .label {
+  display: block;
   margin-right: 9px;
   text-transform: uppercase;
   font-family: Roboto Slab;
@@ -48,8 +88,16 @@
   line-height: 15px;
   letter-spacing: 0em;
   text-align: left;
-  min-width: calc((100vw - 26px * 2) / 4);
-  max-width: calc((100vw - 26px * 2) / 4);
 
   color: #02081e;
+  min-width: 104px;
+  max-width: 104px;
+  @media screen and (max-width: 360px) {
+    min-width: 90px;
+    max-width: 90px;
+  }
+}
+.regButton {
+  margin-right: auto !important;
+  margin-left: auto !important;
 }
