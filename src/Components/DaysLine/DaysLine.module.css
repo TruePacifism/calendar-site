@@ -5,6 +5,12 @@
   padding-right: 11px;
 
   background-color: var(--background-color);
+  position: fixed;
+  width: 100%;
+  max-width: 400px;
+  z-index: 100;
+
+  box-shadow: var(--bottom-shadow);
 
   height: 52px;
   display: flex;

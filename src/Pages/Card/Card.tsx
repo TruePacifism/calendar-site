@@ -229,10 +229,6 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
             ) : (
               <Button onClick={fetchAddCard}>СОХРАНИТЬ</Button>
             )}
-            <p className={styles.saveText}>
-              Рассчитать совместимость с другой картой, генеалогическое древо
-              можно построить, если зайти на полную версию сайта с компьютера.
-            </p>
           </ThemeProvider>
         </div>
       </div>

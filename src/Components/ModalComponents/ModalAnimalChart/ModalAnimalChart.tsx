@@ -19,6 +19,7 @@ import rat from "../../../images/animals/rat-gb.jpg";
 import ModalHeading from "../ModalHeading/ModalHeading";
 import { Colors } from "../../../utils/enums";
 import { chartDataType } from "../../../utils/types";
+import AnimalPic from "../../AnimalElementPic/AnimalPic";
 
 ChartJS.register(RadialLinearScale);
 

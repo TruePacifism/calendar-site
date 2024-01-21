@@ -46,7 +46,7 @@
 }
 .feedbackContainer,
 .donutContainer {
-  max-width: 230px;
+  max-width: 80%;
   margin-right: auto;
   margin-left: auto;
 }

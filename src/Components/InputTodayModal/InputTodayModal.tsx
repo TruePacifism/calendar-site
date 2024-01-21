@@ -3,7 +3,6 @@ import React, {
   Dispatch,
   SetStateAction,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -13,10 +12,8 @@ import { darkButtonTheme, homePageInput } from "../../utils/muiThemes";
 import CityInput from "../CityInput/CityInput";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModalAction, setMainPageDateAction } from "../../utils/store";
-import { monthType, stateType, userType } from "../../utils/types";
+import { stateType, userType } from "../../utils/types";
 import { months } from "../../enums";
-import InputMask from "react-input-mask";
-import { IMask, IMaskInput } from "react-imask";
 
 const normalizeTime = (hour: number, minute: number): string => {
   if (hour > 23) {
@@ -31,13 +28,13 @@ const normalizeTime = (hour: number, minute: number): string => {
   if (minute < 0) {
     minute = 0;
   }
-  if (!hour && !minute) {
+  if (Number.isNaN(hour) && Number.isNaN(minute)) {
     return "";
   }
-  if (!hour) {
+  if (Number.isNaN(hour)) {
     return `00:${minute}`;
   }
-  if (!minute) {
+  if (Number.isNaN(minute)) {
     return `${hour < 10 ? hour : hour + ":"}`;
   }
   return `${hour < 10 ? "0" + hour : hour}:${minute}`;
@@ -76,8 +73,8 @@ export default function InputTodayModal() {
     setHourValue((oldValue) => {
       let hour = Number.parseInt(newValue.split(":")[0]);
       let minute = Number.parseInt(newValue.split(":")[1]);
-      let oldHour = Number.parseInt(oldValue.split(":")[0]);
-      let oldMinute = Number.parseInt(oldValue.split(":")[1]);
+      // let oldHour = Number.parseInt(oldValue.split(":")[0]);
+      // let oldMinute = Number.parseInt(oldValue.split(":")[1]);
       if (newValue + ":" === oldValue || oldValue + ":" === newValue) {
         return newValue;
       }
@@ -104,7 +101,7 @@ export default function InputTodayModal() {
   };
 
   const formRef = useRef();
-  const hourInputRef = useRef<HTMLInputElement>();
+  // const hourInputRef = useRef<HTMLInputElement>();
 
   const cancelHandler = useCallback(() => {
     dispatch(closeModalAction());
@@ -173,13 +170,14 @@ export default function InputTodayModal() {
               disableUnderline
               name="hour"
               value={hourValue}
+              type="tel"
               onChange={handleHourChange}
               defaultValue={inputRefs.hour.value}
             />
             <Input
               disableUnderline
               name="day"
-              type="number"
+              type="tel"
               inputProps={{ max: 31, min: 0 }}
               defaultValue={inputRefs.day.value}
             />
@@ -188,6 +186,7 @@ export default function InputTodayModal() {
               displayEmpty
               autoWidth
               variant="standard"
+              type="tel"
               name="month"
               defaultValue={
                 months.find((month) =>
@@ -210,6 +209,7 @@ export default function InputTodayModal() {
             </Select>
             <Input
               disableUnderline
+              type="tel"
               name="year"
               defaultValue={inputRefs.year.value}
             />

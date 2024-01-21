@@ -56,7 +56,7 @@ export default function CardDeletionPopup({ cardData }: propsType) {
     }
     setTimeout(() => {
       dispatch(closeModalAction());
-    }, 1000);
+    }, 2000);
   }, [cardData, dispatch, handleCancel, token]);
 
   return (

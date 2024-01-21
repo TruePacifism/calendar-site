@@ -6,49 +6,49 @@ const getColorByAnimalElement = (
 ): colorType => {
   const { name } = animalElement;
   switch (name) {
-    case "Вода Инь":
+    case "вода инь":
       return Colors.LIGHT_BLUE;
-    case "Вода Ян":
+    case "вода ян":
       return Colors.DARK_BLUE;
-    case "Земля Инь":
+    case "земля инь":
       return Colors.YELLOW;
-    case "Земля Ян":
+    case "земля ян":
       return Colors.BROWN;
-    case "Металл Инь":
+    case "металл инь":
       return Colors.PINK;
-    case "Металл Ян":
+    case "металл ян":
       return Colors.PURPLE;
-    case "Дерево Инь":
+    case "дерево инь":
       return Colors.LIGHT_GREEN;
-    case "Дерево Ян":
+    case "дерево ян":
       return Colors.DARK_GREEN;
-    case "Огонь Инь":
+    case "огонь инь":
       return Colors.ORANGE;
-    case "Огонь Ян":
+    case "огонь ян":
       return Colors.RED;
-    case "Бык":
+    case "бык":
       return Colors.LIGHT_BLUE;
-    case "Тигр":
+    case "тигр":
       return Colors.DARK_BLUE;
-    case "Кролик":
+    case "кролик":
       return Colors.LIGHT_GREEN;
-    case "Дракон":
+    case "дракон":
       return Colors.BROWN;
-    case "Свинья":
+    case "свинья":
       return Colors.LIGHT_BLUE;
-    case "Обезьяна":
+    case "обезьяна":
       return Colors.BROWN;
-    case "Коза":
+    case "коза":
       return Colors.ORANGE;
-    case "Крыса":
+    case "крыса":
       return Colors.DARK_BLUE;
-    case "Собака":
+    case "собака":
       return Colors.PURPLE;
-    case "Петух":
+    case "петух":
       return Colors.PINK;
-    case "Лошадь":
+    case "лошадь":
       return Colors.RED;
-    case "Змея":
+    case "змея":
       return Colors.LIGHT_GREEN;
     default:
       return Colors.BROWN;

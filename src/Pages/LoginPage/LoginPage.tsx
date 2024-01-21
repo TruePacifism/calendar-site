@@ -10,7 +10,7 @@ import { FirebaseOptions, initializeApp } from "firebase/app";
 import { ReactComponent as GoogleIcon } from "../../images/google-icon.svg";
 import { userInput } from "../../utils/types";
 import { Button, Input, TextField, ThemeProvider } from "@mui/material";
-import { googleAuthButton, loginTheme, mainTheme } from "../../utils/muiThemes";
+import { googleAuthButton, loginTheme } from "../../utils/muiThemes";
 import CityInput from "../../Components/CityInput/CityInput";
 import authUser from "../../api/authUser";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,6 @@ import {
   setLoadingAction,
   setUserAction,
 } from "../../utils/store";
-import NameHeading from "../../Components/NameHeading/NameHeading";
 import { ReactComponent as LogoIcon } from "../../images/logo-another-icon.svg";
 
 const firebaseConfig: FirebaseOptions = {

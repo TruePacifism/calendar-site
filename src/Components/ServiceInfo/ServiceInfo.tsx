@@ -15,12 +15,6 @@ export default function ServiceInfo() {
         </div>
       </div>
       <div className={styles.feedbackContainer}>
-        <p className={styles.feedbackFullInfo}>
-          Я сделала этот сайт, чтобы анализировать различные параметры по дате
-          рождения человека, рожденного с 23 по 80 градус северной широты. На
-          истину пока не претендую) сайт будет развиваться и корректироваться. В
-          работе уже многие полезные дополнения.
-        </p>
         <p className={styles.feedbackInfo}>
           Оставить отзыв, сообщить об ошибке, задать вопрос:
         </p>
@@ -33,9 +27,7 @@ export default function ServiceInfo() {
         </a>
       </div>
       <div className={styles.donutContainer}>
-        <p className={styles.donutInfo}>
-          Сказать Виктории "Спасибо" - любая сумма:
-        </p>
+        <p className={styles.donutInfo}>Сказать "Спасибо" - любая сумма:</p>
         <a
           href="https://pay.cloudtips.ru/p/48f16266"
           className={styles.donutButton}

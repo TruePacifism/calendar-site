@@ -44,6 +44,7 @@ export default function CardOptionsModal({
     navigate({
       search: createSearchParams({
         inputData: JSON.stringify(inputData),
+        id: cardData.id,
       }).toString(),
       pathname: "/cards",
     });

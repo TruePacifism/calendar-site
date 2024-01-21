@@ -50,7 +50,8 @@ export default function Header({ heading }: propsType) {
       case "/cards":
         return (
           <p className={styles.modalText}>
-            Нажмите на любой раздел страницы, чтобы посмотреть подробнее
+            Здесь Вы найдете все Ваши сохраненные карты. Их можно сортировать по
+            новизне, переключать вид. Работает поиск по ФИО или дате.
           </p>
         );
 
@@ -80,14 +81,7 @@ export default function Header({ heading }: propsType) {
             }}
           />
           <div className={styles.modalContainer}>
-            <div className={styles.infoContainer}>
-              {getInfoText()}
-              <ThemeProvider theme={mainTheme}>
-                <Button className={styles.modalButton} onClick={closeModal}>
-                  НАЗАД
-                </Button>
-              </ThemeProvider>
-            </div>
+            <div className={styles.infoContainer}>{getInfoText()}</div>
           </div>
         </>
       )

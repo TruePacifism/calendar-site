@@ -1,14 +1,12 @@
 .container {
   padding-top: 15px;
   padding-bottom: 15px;
-  padding-left: 13px;
-  padding-right: calc(13px + 2rem);
-
-  box-shadow: var(--top-shadow);
+  padding-left: 53px;
+  padding-right: calc(53px + 2rem);
 }
 .list {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 .city {

@@ -2,6 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
   &:not(:last-child) {
     margin-bottom: 28px;
   }

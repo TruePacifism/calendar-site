@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./Cards.module.css";
-import FiltersList from "../../Components/FiltersList/FiltersList";
 import { ReactComponent as ListIcon } from "../../images/list-icon.svg";
 import { ReactComponent as GridIcon } from "../../images/grid-icon.svg";
 import { ReactComponent as SortingIcon } from "../../images/sorting-icon.svg";
@@ -25,6 +24,10 @@ import SearchField from "../../Components/SearchField/SearchField";
 
 export default function Cards() {
   const dispatch = useDispatch();
+  const [selectedCardId, setSelectedCardId]: [
+    string,
+    Dispatch<SetStateAction<string>>
+  ] = useState("");
   // eslint-disable-next-line
   const [params, setParams] = useSearchParams();
   // eslint-disable-next-line
@@ -71,6 +74,12 @@ export default function Cards() {
     } else {
       setInputData(null);
     }
+    const id = params.get("id");
+    if (id) {
+      setSelectedCardId(id);
+    } else {
+      setSelectedCardId("");
+    }
   }, [params, dispatch]);
   useEffect(() => {
     if (!cardsInfo || cardsInfo.length < 2) {
@@ -80,7 +89,10 @@ export default function Cards() {
   }, [sortingOrder, dispatch, cardsInfo]);
 
   return inputData ? (
-    <Card inputData={inputData} />
+    <Card
+      inputData={inputData}
+      id={selectedCardId ? selectedCardId : undefined}
+    />
   ) : (
     <div className={styles.mainContainer}>
       {/* <FiltersList

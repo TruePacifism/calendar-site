@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import cardGridItemStyles from "./AnimalLogo-CardGridItem.module.css";
 import homePageStyles from "./AnimalLogo-HomePage.module.css";
+import cardLineStyles from "./AnimalLogo-CardLineItem.module.css";
 
 import { ReactComponent as Bull } from "../../images/animalsLogo/bull.svg";
 import { ReactComponent as Tiger } from "../../images/animalsLogo/tiger.svg";
@@ -27,12 +28,14 @@ type propsType = {
   doneFor: doneForType;
 };
 
-type doneForType = "CardGridItem" | "HomePage";
+type doneForType = "CardGridItem" | "CardLineItem" | "HomePage";
 
 const getStyles = (doneFor: doneForType): stylesType => {
   switch (doneFor) {
     case "CardGridItem":
       return cardGridItemStyles;
+    case "CardLineItem":
+      return cardLineStyles;
     case "HomePage":
       return homePageStyles;
   }
@@ -50,29 +53,29 @@ export default function AnimalLogo({ animal, doneFor }: propsType) {
   }, [doneFor]);
   const getAnimalLogo = useCallback(() => {
     switch (animal.name) {
-      case "Бык":
+      case "бык":
         return <Bull className={styles.icon} />;
-      case "Тигр":
+      case "тигр":
         return <Tiger className={styles.icon} />;
-      case "Кролик":
+      case "кролик":
         return <Cat className={styles.icon} />;
-      case "Собака":
+      case "собака":
         return <Dog className={styles.icon} />;
-      case "Дракон":
+      case "дракон":
         return <Dragon className={styles.icon} />;
-      case "Коза":
+      case "коза":
         return <Goat className={styles.icon} />;
-      case "Лошадь":
+      case "лошадь":
         return <Horse className={styles.icon} />;
-      case "Обезьяна":
+      case "обезьяна":
         return <Monkey className={styles.icon} />;
-      case "Свинья":
+      case "свинья":
         return <Pig className={styles.icon} />;
-      case "Крыса":
+      case "крыса":
         return <Rat className={styles.icon} />;
-      case "Петух":
+      case "петух":
         return <Rooster className={styles.icon} />;
-      case "Змея":
+      case "змея":
         return <Snake className={styles.icon} />;
 
       default:

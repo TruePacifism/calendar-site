@@ -11,9 +11,9 @@
 .whiteBorder,
 .grayBorder,
 .blackBorder {
+  border-width: 3px;
   border-radius: 5px;
   overflow: hidden;
-  border-width: 3px;
   border-style: solid;
 }
 .whiteBorder {
@@ -31,13 +31,13 @@
   background-color: black;
 }
 .name {
+  display: none;
   font-family: Roboto;
   font-size: 13px;
   font-weight: 400;
   line-height: 15px;
   letter-spacing: 0em;
   text-align: left;
-  height: 1rem;
 
   margin-bottom: 4px;
 }

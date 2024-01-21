@@ -60,11 +60,11 @@ export default function ModalIconedInfo({ cardInfo }: propsType) {
           (cardInfo.cardStrength.power / cardInfo.cardStrength.maxPower) * 100
         )}%`,
       },
-      {
-        Icon: LivingsideIcon,
-        value: cardInfo.movedDirection.shortName,
-        description: `Перемещение от места рождения: ${cardInfo.movedDirection.fullName}`,
-      },
+      // {
+      //   Icon: LivingsideIcon,
+      //   value: cardInfo.movedDirection.shortName,
+      //   description: `Перемещение от места рождения: ${cardInfo.movedDirection.fullName}`,
+      // },
     ]);
   }, [cardInfo]);
 

@@ -135,7 +135,7 @@ export default function CardColumn({
         ) : (
           <div className={styles.headingContainer}>
             <h3 className={styles.heading}>
-              {badNames.includes(title.toString()) ? "N/A" : title}
+              {badNames.includes(title.toString()) ? "ㅤ" : title}
             </h3>
           </div>
         )}

@@ -1,15 +1,36 @@
 .section {
-  padding: 13px;
-  border-top: 1px solid var(--background-color);
-  border-bottom: 1px solid var(--background-color);
+  padding-left: 13px;
+  padding-right: 13px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  &:first-child {
+    padding-top: 13px;
+  }
+  &:last-child {
+    padding-bottom: 13px;
+  }
 }
 .container {
   padding: 7px;
+  height: 48px;
   position: relative;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 .name,
 .birthdate {
   display: block;
+  height: 15px;
+  line-height: 15px;
+  font-size: 15px;
   text-align: left;
+}
+.cardInfoContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
 }

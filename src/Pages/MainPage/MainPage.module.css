@@ -1,8 +1,11 @@
 .wrapper {
   min-height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 .section {
   height: 100%;
+  padding-top: 52px;
 }
 .circleInfo {
   display: flex;
@@ -27,7 +30,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 150px;
   max-width: 400px;
   padding-top: 16px;
   padding-left: 16px;
@@ -35,9 +37,13 @@
   padding-bottom: 16px;
 }
 .modal {
-  background-color: var(--background-color);
+  position: absolute;
+  top: 52px;
+  left: 0;
+  width: 100%;
   padding: 20px;
   & > *:not(:last-child) {
     margin-bottom: 28px;
   }
+  background-color: var(--background-color);
 }

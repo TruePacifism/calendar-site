@@ -3,6 +3,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import calculatorStyles from "./Pic-Calculator.module.css";
 import cardGridItemStyles from "./Pic-CardGridItem.module.css";
 import homePageStyles from "./Pic-HomePage.module.css";
+import exampleStyles from "./Pic-Examples.module.css";
 
 import { animalType, stylesType } from "../../utils/types";
 import Bull from "../../images/animals/bull.png";
@@ -27,7 +28,7 @@ type propsType = {
   doneFor: doneForType;
 };
 
-type doneForType = "Calculator" | "CardGridItem" | "HomePage";
+type doneForType = "Calculator" | "CardGridItem" | "HomePage" | "Examples";
 
 const getStyles = (doneFor: doneForType): stylesType => {
   switch (doneFor) {
@@ -37,6 +38,8 @@ const getStyles = (doneFor: doneForType): stylesType => {
       return cardGridItemStyles;
     case "HomePage":
       return homePageStyles;
+    case "Examples":
+      return exampleStyles;
   }
 };
 
@@ -58,40 +61,40 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
       return;
     }
     switch (animal.name) {
-      case "Бык":
+      case "бык":
         setSrc(Bull);
         break;
-      case "Тигр":
+      case "тигр":
         setSrc(Tiger);
         break;
-      case "Кролик":
+      case "кролик":
         setSrc(Cat);
         break;
-      case "Собака":
+      case "собака":
         setSrc(Dog);
         break;
-      case "Дракон":
+      case "дракон":
         setSrc(Dragon);
         break;
-      case "Коза":
+      case "коза":
         setSrc(Goat);
         break;
-      case "Лошадь":
+      case "лошадь":
         setSrc(Horse);
         break;
-      case "Обезьяна":
+      case "обезьяна":
         setSrc(Monkey);
         break;
-      case "Свинья":
+      case "свинья":
         setSrc(Pig);
         break;
-      case "Крыса":
+      case "крыса":
         setSrc(Rat);
         break;
-      case "Петух":
+      case "петух":
         setSrc(Rooster);
         break;
-      case "Змея":
+      case "змея":
         setSrc(Snake);
         break;
 
@@ -115,7 +118,8 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
   }, [animal, code, dispatch]);
 
   return (
-    styles && (
+    styles &&
+    (animal && animal.name !== " " && animal.name ? (
       <>
         <div
           className={
@@ -156,6 +160,12 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
         </div>
         <span className={styles.name}>{animal ? animal.name : "Нет"}</span>
       </>
-    )
+    ) : (
+      <div className={styles.imageWrapper + " " + styles.noImageBorder}>
+        <div className={styles.noBlackBorder}>
+          <img src={NoAnimal} className={styles.noImage} alt="" />
+        </div>
+      </div>
+    ))
   );
 }

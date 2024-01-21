@@ -1,6 +1,10 @@
 .container {
   padding: 26px;
-  background-color: var(--main-background-color);
+  background-color: var(--background-color);
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 52px;
 }
 .chart {
   width: 221px;
@@ -23,6 +27,7 @@
 .animalImage {
   width: 52px;
   height: 47px;
+  border-radius: 5px;
   box-shadow: var(--bottom-shadow);
   margin-bottom: 13px;
 }

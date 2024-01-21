@@ -135,6 +135,9 @@ export const darkButtonTheme = createTheme({
           fontFamily: "Roboto Slab",
           textAlign: "center",
           textTransform: "uppercase",
+          ":hover": {
+            backgroundColor: accentColor,
+          },
         },
       },
     },

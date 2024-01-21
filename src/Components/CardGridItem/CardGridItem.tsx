@@ -1,18 +1,29 @@
 import React, {
   Dispatch,
+  MouseEventHandler,
   SetStateAction,
+  useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
 import styles from "./CardGridItem.module.css";
 import IconedCardInfoList from "../IconedCardInfoList/IconedCardInfoList";
-import { cardInfoType, colorType } from "../../utils/types";
+import {
+  cardInfoType,
+  colorType,
+  dateType,
+  inputDataType,
+} from "../../utils/types";
 import CardInfo from "../CardInfo/CardInfo";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import AnimalLogo from "../AnimalLogo/AnimalLogo";
 import getMonthName from "../../utils/getMonthName";
 import CardOptionsButton from "../CardOptionsButton/CardOptionsButton";
+import { useDispatch } from "react-redux";
+import { closeModalAction } from "../../utils/store";
+import { createSearchParams, useNavigate } from "react-router-dom";
+import { normalizeBirthdate } from "../../utils/normalizeBirthdateString";
 
 type propsType = {
   cardInfo: cardInfoType;
@@ -21,6 +32,34 @@ type propsType = {
 export default function CardGridItem({ cardInfo }: propsType) {
   const cardRef: React.MutableRefObject<HTMLDivElement> =
     useRef<HTMLDivElement>();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleOpenCard = useCallback<MouseEventHandler<HTMLDivElement>>(
+    (e) => {
+      console.log(e);
+
+      if (e.target !== e.currentTarget) {
+        return;
+      }
+      const { name, birthdate, birthcity, gender, livingcity } = cardInfo;
+      const inputData: inputDataType = {
+        name,
+        birthdate,
+        birthcity,
+        gender,
+        livingcity,
+      };
+      dispatch(closeModalAction());
+      navigate({
+        search: createSearchParams({
+          inputData: JSON.stringify(inputData),
+          id: cardInfo.id,
+        }).toString(),
+        pathname: "/cards",
+      });
+    },
+    [dispatch, navigate, cardInfo]
+  );
 
   const [color, setColor]: [colorType, Dispatch<SetStateAction<colorType>>] =
     useState();
@@ -32,20 +71,21 @@ export default function CardGridItem({ cardInfo }: propsType) {
       <div
         className={styles.container}
         style={{ backgroundColor: color ? color.backgroundHex : "#FFFFFF" }}
+        onClick={handleOpenCard}
         ref={cardRef}
       >
         <CardOptionsButton cardRef={cardRef} cardInfo={cardInfo} />
-        <span className={styles.name}>{cardInfo.name}</span>
+        <span className={styles.name}>
+          {cardInfo.name.length > 15
+            ? cardInfo.name.substring(0, 15) + "..."
+            : cardInfo.name}
+        </span>
         <div className={styles.mainInfoContainer}>
           <AnimalLogo doneFor="CardGridItem" animal={cardInfo.year.animal} />
           <IconedCardInfoList cardInfo={cardInfo} doneFor="CardGridItem" />
         </div>
         <span className={styles.birthdate}>
-          {`${cardInfo.birthdate.hour}:${cardInfo.birthdate.minute} ${
-            cardInfo.birthdate.day
-          } ${getMonthName(cardInfo.birthdate.month).substring(0, 3)} ${
-            cardInfo.birthdate.year
-          }`}
+          {normalizeBirthdate(cardInfo.birthdate)}
         </span>
         <CardInfo doneFor="CardGridItem" cardInfo={cardInfo} />
       </div>

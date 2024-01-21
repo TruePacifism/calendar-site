@@ -84,3 +84,7 @@
 .genderInputBox > * > *:not(:last-child) {
   margin-right: 5px;
 }
+.countButton {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}

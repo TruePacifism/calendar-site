@@ -22,7 +22,9 @@ import {
   stateType,
   stylesType,
 } from "../../utils/types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { openModalAction } from "../../utils/store";
+import InputTodayModal from "../InputTodayModal/InputTodayModal";
 
 type valueInfo = {
   Icon: React.FunctionComponent<
@@ -61,6 +63,7 @@ export default function IconedCardInfoList({
   doneFor,
   backgroundColor,
 }: propsType) {
+  const dispatch = useDispatch();
   const livingCity = useSelector<stateType, string>(
     (store) => store.mainPageInfo.livingcity
   );
@@ -74,7 +77,10 @@ export default function IconedCardInfoList({
         ? undefined
         : {
             Icon: AgeIcon,
-            value: `${cardInfo.age.year},${cardInfo.age.month}`,
+            value:
+              cardInfo.age.year < 0 || cardInfo.age.month < 0
+                ? "ㅤ"
+                : `${cardInfo.age.year},${cardInfo.age.month}`,
           },
       {
         Icon: BirthSideIcon,
@@ -93,10 +99,10 @@ export default function IconedCardInfoList({
           (cardInfo.cardStrength.power / cardInfo.cardStrength.maxPower) * 100
         )}`,
       },
-      {
-        Icon: LivingsideIcon,
-        value: cardInfo.movedDirection.shortName,
-      },
+      // {
+      //   Icon: LivingsideIcon,
+      //   value: cardInfo.movedDirection.shortName,
+      // },
     ]);
   }, [doneFor, cardInfo]);
   const [styles, setStyles]: [
@@ -130,7 +136,14 @@ export default function IconedCardInfoList({
           )}
       </ul>
       {doneFor === "HomePage" && (
-        <span className={styles.city}>{livingCity}</span>
+        <span
+          className={styles.city}
+          onClick={() => {
+            dispatch(openModalAction(<InputTodayModal />));
+          }}
+        >
+          {livingCity}
+        </span>
       )}
     </div>
   );

@@ -193,7 +193,7 @@ export default function Calculator() {
                 <Input
                   disableUnderline
                   required
-                  type="number"
+                  type="tel"
                   name="year"
                   placeholder="ГГГГ"
                   onChange={(e) => {
@@ -266,7 +266,9 @@ export default function Calculator() {
             placeholder="населенный пункт"
             doneFor="calculator"
           />
-          <Button type="submit">РАССЧИТАТЬ</Button>
+          <Button className={styles.countButton} type="submit">
+            РАССЧИТАТЬ
+          </Button>
         </form>
       </Container>
     </ThemeProvider>

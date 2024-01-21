@@ -56,34 +56,34 @@ export default function ElementPic({ element, doneFor }: propsType) {
       return;
     }
     switch (element.name) {
-      case "Вода Инь":
+      case "вода инь":
         setSrc(WaterIn);
         break;
-      case "Вода Ян":
+      case "вода ян":
         setSrc(WaterYan);
         break;
-      case "Дерево Инь":
+      case "дерево инь":
         setSrc(WoodIn);
         break;
-      case "Дерево Ян":
+      case "дерево ян":
         setSrc(WoodYan);
         break;
-      case "Земля Инь":
+      case "земля инь":
         setSrc(EarthIn);
         break;
-      case "Земля Ян":
+      case "земля ян":
         setSrc(EarthYan);
         break;
-      case "Огонь Инь":
+      case "огонь инь":
         setSrc(FireIn);
         break;
-      case "Огонь Ян":
+      case "огонь ян":
         setSrc(FireYan);
         break;
-      case "Металл Инь":
+      case "металл инь":
         setSrc(MetalIn);
         break;
-      case "Металл Ян":
+      case "металл ян":
         setSrc(MetalYan);
         break;
       default:
@@ -115,7 +115,8 @@ export default function ElementPic({ element, doneFor }: propsType) {
   );
 
   return (
-    styles && (
+    styles &&
+    (element && element.name !== " " && element.name ? (
       <>
         <div
           className={
@@ -158,7 +159,13 @@ export default function ElementPic({ element, doneFor }: propsType) {
           {element ? element.name.split(" ")[0] : "Нет"}
         </span>
       </>
-    )
+    ) : (
+      <div className={styles.imageWrapper + " " + styles.noImageBorder}>
+        <div className={styles.noBlackBorder}>
+          <img src={NoElement} className={styles.noImage} alt="" />
+        </div>
+      </div>
+    ))
   );
 
   // return (
