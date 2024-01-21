@@ -6,12 +6,9 @@ import { ReactComponent as InfoIcon } from "../../images/info-icon.svg";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { stateType } from "../../utils/types";
-import { closeModalAction, openModalAction } from "../../utils/store";
+import { openModalAction } from "../../utils/store";
 import { ReactComponent as TopHeading } from "../../images/ВИКТОРИЯ МАНЬКОВА.svg";
 import { ReactComponent as BottomHeading } from "../../images/СИСТЕМА.svg";
-import { ThemeProvider } from "@emotion/react";
-import { mainTheme } from "../../utils/muiThemes";
-import { Button } from "@mui/material";
 import ServiceInfo from "../ServiceInfo/ServiceInfo";
 
 type propsType = {
@@ -26,10 +23,6 @@ export default function Header({ heading }: propsType) {
   );
   const infoRef = useRef<SVGSVGElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
-  // eslint-disable-next-line
-  const closeModal = useCallback(() => {
-    dispatch(closeModalAction());
-  }, [dispatch]);
   const getInfoText = useCallback<
     () => React.ReactElement<HTMLParagraphElement>
   >(() => {
@@ -86,7 +79,7 @@ export default function Header({ heading }: propsType) {
         </>
       )
     );
-  }, [dispatch, closeModal, getInfoText]);
+  }, [dispatch, getInfoText]);
   const openServiceModal = useCallback(() => {
     const headingBounds = headingRef.current.getBoundingClientRect();
     dispatch(

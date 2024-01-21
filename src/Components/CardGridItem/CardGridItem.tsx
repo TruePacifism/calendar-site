@@ -9,16 +9,10 @@ import React, {
 } from "react";
 import styles from "./CardGridItem.module.css";
 import IconedCardInfoList from "../IconedCardInfoList/IconedCardInfoList";
-import {
-  cardInfoType,
-  colorType,
-  dateType,
-  inputDataType,
-} from "../../utils/types";
+import { cardInfoType, colorType, inputDataType } from "../../utils/types";
 import CardInfo from "../CardInfo/CardInfo";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import AnimalLogo from "../AnimalLogo/AnimalLogo";
-import getMonthName from "../../utils/getMonthName";
 import CardOptionsButton from "../CardOptionsButton/CardOptionsButton";
 import { useDispatch } from "react-redux";
 import { closeModalAction } from "../../utils/store";
