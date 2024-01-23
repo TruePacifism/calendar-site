@@ -3,6 +3,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -14,6 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModalAction, setMainPageDateAction } from "../../utils/store";
 import { stateType, userType } from "../../utils/types";
 import { months } from "../../enums";
+import { cardColumnNameType } from "../CardColumn/CardColumn";
+import validateNumbersInput from "../../utils/validateNumbersInput";
 
 const normalizeTime = (hour: number, minute: number): string => {
   if (hour > 23) {
@@ -40,7 +43,10 @@ const normalizeTime = (hour: number, minute: number): string => {
   return `${hour < 10 ? "0" + hour : hour}:${minute}`;
 };
 
-export default function InputTodayModal() {
+export type propsType = {
+  selected: cardColumnNameType;
+};
+export default function InputTodayModal({ selected }: propsType) {
   const dispatch = useDispatch();
   const user = useSelector<stateType, userType>((state) => state.user);
 
@@ -66,7 +72,39 @@ export default function InputTodayModal() {
     month: document.querySelector("#monthInput"),
     year: document.querySelector("#yearInput"),
   });
-  const [hourValue, setHourValue] = useState(inputRefs.hour.value);
+  const thisHourRef = useRef<HTMLInputElement>(null);
+  const thisDayRef = useRef<HTMLInputElement>(null);
+  const thisMonthRef = useRef<HTMLInputElement>(null);
+  const thisYearRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (!thisHourRef || !thisDayRef || !thisYearRef) {
+      return;
+    }
+    switch (selected) {
+      case "day":
+        thisDayRef.current.focus();
+        return;
+      case "year":
+        thisYearRef.current.focus();
+        return;
+      case "hour":
+        thisHourRef.current.focus();
+        return;
+
+      default:
+        break;
+    }
+  }, [selected]);
+  const [hourValue, setHourValue]: [string, Dispatch<SetStateAction<string>>] =
+    useState(inputRefs.hour.value);
+  const [dayValue, setDayValue]: [number, Dispatch<SetStateAction<number>>] =
+    useState(Number.parseInt(inputRefs.day.value));
+  const [monthValue, setMonthValue]: [
+    string,
+    Dispatch<SetStateAction<string>>
+  ] = useState(inputRefs.month.value);
+  const [yearValue, setYearValue]: [number, Dispatch<SetStateAction<number>>] =
+    useState(Number.parseInt(inputRefs.year.value));
 
   const handleHourChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -99,7 +137,24 @@ export default function InputTodayModal() {
       // }
     });
   };
+  const handleDayChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(monthValue);
+    console.log(months.map((month) => month.name));
 
+    const currentMonth = months.find((month) => month.name === monthValue);
+    const maxDay =
+      yearValue % 4 === 0 && currentMonth.name === "Февраль"
+        ? 29
+        : currentMonth.length;
+    setDayValue(validateNumbersInput(e.target.value, 0, maxDay));
+  };
+  const handleYearChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length < 4) {
+      setYearValue(Number.parseInt(e.target.value));
+      return;
+    }
+    setYearValue(validateNumbersInput(e.target.value, 1900, 2500));
+  };
   const formRef = useRef();
   // const hourInputRef = useRef<HTMLInputElement>();
 
@@ -173,13 +228,16 @@ export default function InputTodayModal() {
               type="tel"
               onChange={handleHourChange}
               defaultValue={inputRefs.hour.value}
+              inputRef={thisHourRef}
             />
             <Input
               disableUnderline
               name="day"
               type="tel"
-              inputProps={{ max: 31, min: 0 }}
               defaultValue={inputRefs.day.value}
+              inputRef={thisDayRef}
+              value={Number.isNaN(dayValue) ? "" : dayValue}
+              onChange={handleDayChange}
             />
             <Select
               disableUnderline
@@ -196,7 +254,17 @@ export default function InputTodayModal() {
                 ).name
               }
               onChange={(e) => {
-                console.log(e.target.value);
+                setMonthValue(e.target.value);
+                const currentMonth = months.find(
+                  (month) => month.name === monthValue
+                );
+                const maxDay =
+                  yearValue % 4 === 0 && currentMonth.name === "Февраль"
+                    ? 29
+                    : currentMonth.length;
+                setDayValue(
+                  validateNumbersInput(dayValue.toString(), 0, maxDay)
+                );
               }}
             >
               {Object.values(months).map((month) => {
@@ -208,10 +276,26 @@ export default function InputTodayModal() {
               })}
             </Select>
             <Input
+              inputRef={thisYearRef}
               disableUnderline
               type="tel"
               name="year"
               defaultValue={inputRefs.year.value}
+              value={Number.isNaN(yearValue) ? "" : yearValue}
+              onChange={handleYearChange}
+              onBlur={(e) => {
+                setYearValue(validateNumbersInput(e.target.value, 1900, 2500));
+                const currentMonth = months.find(
+                  (month) => month.name === monthValue
+                );
+                const maxDay =
+                  yearValue % 4 === 0 && currentMonth.name === "Февраль"
+                    ? 29
+                    : currentMonth.length;
+                setDayValue(
+                  validateNumbersInput(dayValue.toString(), 0, maxDay)
+                );
+              }}
             />
           </div>
           <CityInput

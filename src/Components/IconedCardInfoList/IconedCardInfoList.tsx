@@ -139,7 +139,9 @@ export default function IconedCardInfoList({
         <span
           className={styles.city}
           onClick={() => {
-            dispatch(openModalAction(<InputTodayModal />));
+            dispatch(
+              openModalAction(<InputTodayModal selected="currentPillar" />)
+            );
           }}
         >
           {livingCity}
