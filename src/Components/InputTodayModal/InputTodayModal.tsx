@@ -102,7 +102,12 @@ export default function InputTodayModal({ selected }: propsType) {
   const [monthValue, setMonthValue]: [
     string,
     Dispatch<SetStateAction<string>>
-  ] = useState(inputRefs.month.value);
+  ] = useState(
+    months.find(
+      (month) =>
+        month.name.substring(0, 3).toLowerCase() === inputRefs.month.value
+    ).name
+  );
   const [yearValue, setYearValue]: [number, Dispatch<SetStateAction<number>>] =
     useState(Number.parseInt(inputRefs.year.value));
 
@@ -161,6 +166,9 @@ export default function InputTodayModal({ selected }: propsType) {
   const cancelHandler = useCallback(() => {
     dispatch(closeModalAction());
   }, [dispatch]);
+  useEffect(() => {
+    console.log("monthValue", monthValue);
+  }, [monthValue]);
 
   // eslint-disable-next-line
   const fetchHandler: React.FormEventHandler<HTMLFormElement> = (
