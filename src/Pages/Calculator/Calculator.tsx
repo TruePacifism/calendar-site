@@ -40,7 +40,7 @@ const getMonthDaysArray = (month: monthType, year: number): number[] => {
 };
 
 const yearsArray: number[] = [];
-for (let i = 1900; i < 2100; i++) {
+for (let i = 1800; i < 2100; i++) {
   yearsArray.push(i);
 }
 const hoursArray: number[] = [];
@@ -209,13 +209,13 @@ export default function Calculator() {
                     const value = e.target.value;
                     setSelectedYear(
                       value.length > 3
-                        ? validateNumbersInput(value, 1900, 2500)
+                        ? validateNumbersInput(value, 1800, 2500)
                         : Number.parseInt(value)
                     );
                   }}
                   onBlur={(e) => {
                     setSelectedYear(
-                      validateNumbersInput(e.target.value, 1900, 2500)
+                      validateNumbersInput(e.target.value, 1800, 2500)
                     );
                   }}
                 />

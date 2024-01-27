@@ -21,8 +21,6 @@ import validateNumbersInput from "../../utils/validateNumbersInput";
 const normalizeTime = (hour: string, minute: string): string => {
   const hourValue = Number.parseInt(hour);
   const minuteValue = Number.parseInt(minute);
-  console.log("hour", hour);
-  console.log("minute", minute);
 
   if (hour.length < 2 && minute === undefined) {
     return hour;
@@ -86,7 +84,7 @@ export default function InputTodayModal({ selected }: propsType) {
   });
   const thisHourRef = useRef<HTMLInputElement>(null);
   const thisDayRef = useRef<HTMLInputElement>(null);
-  const thisMonthRef = useRef<HTMLInputElement>(null);
+  // const thisMonthRef = useRef<HTMLInputElement>(null);
   const thisYearRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!thisHourRef || !thisDayRef || !thisYearRef) {
@@ -130,7 +128,6 @@ export default function InputTodayModal({ selected }: propsType) {
       let hour = newValue.split(":")[0];
       let minute = newValue.split(":")[1];
       const addedChar = newValue.substring(oldValue.length);
-      console.log("addedChar", addedChar);
       if (addedChar && Number.isNaN(Number.parseInt(addedChar))) {
         return oldValue;
       }
@@ -162,9 +159,6 @@ export default function InputTodayModal({ selected }: propsType) {
     });
   };
   const handleDayChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(monthValue);
-    console.log(months.map((month) => month.name));
-
     const currentMonth = months.find((month) => month.name === monthValue);
     const maxDay =
       yearValue % 4 === 0 && currentMonth.name === "Февраль"
@@ -177,7 +171,7 @@ export default function InputTodayModal({ selected }: propsType) {
       setYearValue(Number.parseInt(e.target.value));
       return;
     }
-    setYearValue(validateNumbersInput(e.target.value, 1900, 2500));
+    setYearValue(validateNumbersInput(e.target.value, 1800, 2500));
   };
   const formRef = useRef();
   // const hourInputRef = useRef<HTMLInputElement>();
@@ -185,9 +179,6 @@ export default function InputTodayModal({ selected }: propsType) {
   const cancelHandler = useCallback(() => {
     dispatch(closeModalAction());
   }, [dispatch]);
-  useEffect(() => {
-    console.log("monthValue", monthValue);
-  }, [monthValue]);
 
   // eslint-disable-next-line
   const fetchHandler: React.FormEventHandler<HTMLFormElement> = (
@@ -224,12 +215,6 @@ export default function InputTodayModal({ selected }: propsType) {
     }
   ) => {
     e.preventDefault();
-    console.log("month", e.target.elements.month.value);
-    console.log(
-      months.find((month) => month.name === e.target.elements.month.value)
-        .orderNumber
-    );
-    console.log(months);
 
     const newTodayDatabirthdate = {
       hour: Number.parseInt(e.target.elements.hour.value.split(":")[0]),
@@ -311,7 +296,7 @@ export default function InputTodayModal({ selected }: propsType) {
               value={Number.isNaN(yearValue) ? "" : yearValue}
               onChange={handleYearChange}
               onBlur={(e) => {
-                setYearValue(validateNumbersInput(e.target.value, 1900, 2500));
+                setYearValue(validateNumbersInput(e.target.value, 1800, 2500));
                 const currentMonth = months.find(
                   (month) => month.name === monthValue
                 );
