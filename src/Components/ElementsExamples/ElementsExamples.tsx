@@ -12,7 +12,7 @@ export default function ElementsExamples() {
       <div className={styles.container}>
         <AnimalPic
           animal={{
-            name: "Бык",
+            name: "бык",
             isBlack: false,
             isGood: true,
           }}
@@ -23,7 +23,7 @@ export default function ElementsExamples() {
       <div className={styles.container}>
         <AnimalPic
           animal={{
-            name: "Бык",
+            name: "бык",
             isBlack: false,
             isGood: false,
           }}
@@ -35,7 +35,7 @@ export default function ElementsExamples() {
         <div className={styles.blackContainer}>
           <AnimalPic
             animal={{
-              name: "Бык",
+              name: "бык",
               isBlack: true,
               isGood: true,
             }}
@@ -43,7 +43,7 @@ export default function ElementsExamples() {
           />
           <AnimalPic
             animal={{
-              name: "Бык",
+              name: "бык",
               isBlack: true,
               isGood: false,
             }}

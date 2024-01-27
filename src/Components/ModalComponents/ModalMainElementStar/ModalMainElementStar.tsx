@@ -23,19 +23,19 @@ export default function ModalMainElementStar({ mainElement }: propsType) {
     useState("");
   useEffect(() => {
     switch (mainElement.name) {
-      case "Огонь":
+      case "огонь":
         setStarSrc(mainElement.elements[0].isGood ? FireGood : FireBad);
         break;
-      case "Вода":
+      case "вода":
         setStarSrc(mainElement.elements[0].isGood ? WaterGood : WaterBad);
         break;
-      case "Земля":
+      case "земля":
         setStarSrc(mainElement.elements[0].isGood ? EarthGood : EarthBad);
         break;
-      case "Дерево":
+      case "дерево":
         setStarSrc(mainElement.elements[0].isGood ? WoodGood : WoodBad);
         break;
-      case "Металл":
+      case "металл":
         setStarSrc(mainElement.elements[0].isGood ? MetalGood : MetalBad);
         break;
 

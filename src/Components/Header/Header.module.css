@@ -71,3 +71,42 @@
   height: 26px;
   transform: translate(-2px, -2px);
 }
+.companyContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-transform: uppercase;
+}
+.logo {
+  min-width: 35px;
+  min-height: 35px;
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 50%;
+  margin-right: 5px;
+  box-shadow: var(--bottom-shadow);
+}
+.nameContainer {
+  text-align: center;
+}
+.name {
+  font-size: 10.9px;
+  font-weight: 400;
+  letter-spacing: 0em;
+  text-align: center;
+  display: block;
+  width: 100%;
+  color: #060606;
+  color: var(--background-color);
+  text-shadow: var(--bottom-shadow);
+}
+.title {
+  font-family: Roboto Slab;
+  font-size: 23px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: var(--background-color);
+  display: block;
+  width: 100%;
+}

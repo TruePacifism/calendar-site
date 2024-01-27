@@ -6,12 +6,12 @@
   margin-right: auto;
   margin-left: auto;
   position: relative;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 .container {
-  min-height: 100vh;
+  min-height: 100dvh;
   & > :nth-child(2) {
-    min-height: calc(100vh - 52px - 60px);
+    min-height: calc(100dvh - 52px - 60px);
   }
 }
 .App-logo {

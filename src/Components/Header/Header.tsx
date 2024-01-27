@@ -9,10 +9,8 @@ import { stateType } from "../../utils/types";
 import { closeModalAction, openModalAction } from "../../utils/store";
 import { ReactComponent as TopHeading } from "../../images/ВИКТОРИЯ МАНЬКОВА.svg";
 import { ReactComponent as BottomHeading } from "../../images/СИСТЕМА.svg";
-import { ThemeProvider } from "@emotion/react";
-import { mainTheme } from "../../utils/muiThemes";
-import { Button } from "@mui/material";
 import ServiceInfo from "../ServiceInfo/ServiceInfo";
+import { ReactComponent as LogoIcon } from "../../images/logo-another-icon.svg";
 
 type propsType = {
   heading: string;
@@ -136,11 +134,14 @@ export default function Header({ heading }: propsType) {
           )}
           <div
             ref={headingRef}
-            className={styles.heading}
+            className={styles.companyContainer}
             onClick={openServiceModal}
           >
-            <TopHeading className={styles.topHeading} />
-            <BottomHeading />
+            <LogoIcon className={styles.logo} />
+            <div className={styles.nameContainer}>
+              <span className={styles.name}>виктория манькова</span>
+              <span className={styles.title}>система</span>
+            </div>
           </div>
           <OptionsIcon className={styles.logoIcon} />
         </div>
