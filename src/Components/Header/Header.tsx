@@ -3,7 +3,7 @@ import styles from "./Header.module.css";
 import { ReactComponent as BackIcon } from "../../images/back-icon.svg";
 import { ReactComponent as OptionsIcon } from "../../images/options-icon.svg";
 import { ReactComponent as InfoIcon } from "../../images/info-icon.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { stateType } from "../../utils/types";
 import { openModalAction } from "../../utils/store";
@@ -20,6 +20,7 @@ export default function Header({ heading }: propsType) {
   const isErrorPage = useSelector<stateType, boolean>(
     (state) => state.isErrorPage
   );
+  const params = useSearchParams()[0];
   const infoRef = useRef<SVGSVGElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const getInfoText = useCallback<
@@ -39,13 +40,27 @@ export default function Header({ heading }: propsType) {
           </p>
         );
       case "/":
-      case "/cards":
         return (
           <p className={styles.modalText}>
-            Здесь Вы найдете все Ваши сохраненные карты. Их можно сортировать по
-            новизне, переключать вид. Работает поиск по ФИО или дате.
+            Нажмите на любой раздел страницы, чтобы посмотреть подробнее
           </p>
         );
+      case "/cards":
+        if (params.size === 0) {
+          return (
+            <p className={styles.modalText}>
+              Здесь Вы найдете все Ваши сохраненные карты. Их можно сортировать
+              по новизне, переключать вид. Работает поиск по ФИО или дате.
+            </p>
+          );
+        } else {
+          return (
+            <p className={styles.modalText}>
+              Нажмите на любой раздел, чтобы увеличить и увидеть дополнительную
+              информацию
+            </p>
+          );
+        }
 
       default:
         return (
