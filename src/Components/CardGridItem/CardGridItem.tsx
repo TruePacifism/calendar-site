@@ -31,10 +31,6 @@ export default function CardGridItem({ cardInfo }: propsType) {
   const handleOpenCard = useCallback<MouseEventHandler<HTMLDivElement>>(
     (e) => {
       console.log(e);
-
-      if (e.target !== e.currentTarget) {
-        return;
-      }
       const { name, birthdate, birthcity, gender, livingcity } = cardInfo;
       const inputData: inputDataType = {
         name,

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { MouseEventHandler, useRef } from "react";
 import styles from "./CardOptionsButton.module.css";
 import { cardInfoType } from "../../utils/types";
 import { ReactComponent as ThreePointsIcon } from "../../images/three-points-icon.svg";
@@ -16,7 +16,8 @@ export default function CardOptionsButton({ cardInfo, cardRef }: propsType) {
   const iconRef = useRef<SVGSVGElement>(null);
 
   // eslint-disable-next-line
-  const handleThreePointsClick = () => {
+  const handleThreePointsClick: MouseEventHandler<SVGSVGElement> = (event) => {
+    event.stopPropagation();
     const rootWidth = document
       .getElementById("root")
       .getBoundingClientRect().width;
