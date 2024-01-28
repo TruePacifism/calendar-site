@@ -60,7 +60,7 @@ export default function Calculator() {
     if (isLoading) {
       dispatch(setLoadingAction({ value: false, from: "calculator" }));
     }
-  }, [isLoading]);
+  }, [isLoading, dispatch]);
   const [selectedMonth, setSelectedMonth]: [
     monthType,
     Dispatch<SetStateAction<monthType>>

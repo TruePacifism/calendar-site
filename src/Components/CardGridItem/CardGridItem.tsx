@@ -69,11 +69,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
         ref={cardRef}
       >
         <CardOptionsButton cardRef={cardRef} cardInfo={cardInfo} />
-        <span className={styles.name}>
-          {cardInfo.name.length > 15
-            ? cardInfo.name.substring(0, 15) + "..."
-            : cardInfo.name}
-        </span>
+        <span className={styles.name}>{cardInfo.name}</span>
         <div className={styles.mainInfoContainer}>
           <AnimalLogo doneFor="CardGridItem" animal={cardInfo.year.animal} />
           <IconedCardInfoList cardInfo={cardInfo} doneFor="CardGridItem" />

@@ -7,8 +7,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { stateType } from "../../utils/types";
 import { openModalAction } from "../../utils/store";
-import { ReactComponent as TopHeading } from "../../images/ВИКТОРИЯ МАНЬКОВА.svg";
-import { ReactComponent as BottomHeading } from "../../images/СИСТЕМА.svg";
 import ServiceInfo from "../ServiceInfo/ServiceInfo";
 import { ReactComponent as LogoIcon } from "../../images/logo-another-icon.svg";
 
@@ -87,7 +85,7 @@ export default function Header({ heading }: propsType) {
       openModalAction(
         <>
           <div
-            className={styles.heading}
+            className={styles.companyContainer}
             style={{
               position: "absolute",
               top: headingBounds.top,
@@ -97,8 +95,11 @@ export default function Header({ heading }: propsType) {
                   : headingBounds.left,
             }}
           >
-            <TopHeading className={styles.topHeading} />
-            <BottomHeading />
+            <LogoIcon className={styles.logo} />
+            <div className={styles.nameContainer}>
+              <span className={styles.name}>виктория манькова</span>
+              <span className={styles.title}>система</span>
+            </div>
           </div>
           <div className={styles.modalContainer}>
             <ServiceInfo />

@@ -98,7 +98,7 @@ export default function CardColumn({
     (e) => {
       dispatch(openModalAction(<InputTodayModal selected={name} />));
     },
-    [dispatch]
+    [dispatch, name]
   );
 
   return (
