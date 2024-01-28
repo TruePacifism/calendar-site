@@ -3,8 +3,11 @@ export default function validateNumbersInput(
   min: number,
   max: number
 ): number {
+  console.log(input);
+  console.log(min);
+  console.log(max);
+
   const number = Number.parseInt(input);
-  console.log(number);
   if (Number.isNaN(number)) {
     return NaN;
   }

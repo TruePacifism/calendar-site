@@ -11,6 +11,7 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearLoadingImages,
+  closeModalAction,
   setLoadingAction,
   setUserAction,
 } from "./utils/store";
@@ -19,6 +20,7 @@ import { stateType, userType } from "./utils/types";
 import Loading from "./Components/Loading/Loading";
 import Page404 from "./Pages/404Page/404Page";
 import MyModal from "./Components/MyModal/MyModal";
+import useBackButton from "./utils/useBackButton";
 
 const getHeadingText = (path: string): string => {
   switch (path) {
@@ -37,6 +39,17 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const modalContent = useSelector<stateType, JSX.Element>(
+    (state) => state.modalContent
+  );
+  useBackButton((e) => {
+    console.log(!!modalContent);
+
+    if (modalContent) {
+      e.preventDefault();
+      dispatch(closeModalAction);
+    }
+  });
   const [headerText, setHeaderText]: [
     string,
     Dispatch<SetStateAction<string>>
