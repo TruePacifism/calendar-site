@@ -1,18 +1,22 @@
 .container {
+  width: min-content;
+  overflow: hidden;
+}
+.searchContainer {
+  border-radius: 5px;
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
-  border-radius: 5px;
+  display: flex;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 9px;
   padding-right: 25px;
-  width: min-content;
-
-  display: flex;
 }
 .icon {
   margin-right: 12px;
   width: 14px;
+  min-width: 14px;
+  max-width: 14px;
   height: auto;
 }
 .placeholder {
@@ -24,4 +28,28 @@
   letter-spacing: 0em;
   text-align: left;
   height: min-content;
+  border: none;
+  width: 100%;
+  &:focus-visible {
+    border: none;
+    outline-width: 0;
+  }
+  &::placeholder {
+    opacity: 1;
+  }
+}
+.searchResultList {
+  margin-top: 10px;
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: left;
+  overflow-y: scroll;
+  height: calc(90dvh - 55px - 52px - 50px);
+}
+.searchResultItem {
+  color: white;
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
 }
