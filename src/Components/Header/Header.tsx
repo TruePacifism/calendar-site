@@ -69,7 +69,7 @@ export default function Header({ heading }: propsType) {
           </p>
         );
     }
-  }, [location.pathname]);
+  }, [location.pathname, params.size]);
 
   const openInfoModal = useCallback(() => {
     const infoBounds = infoRef.current.getBoundingClientRect();

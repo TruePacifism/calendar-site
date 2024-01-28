@@ -88,7 +88,6 @@ export default function CardColumn({
   //УДАЛИТЬ В КОНЦЕ
   useEffect(() => {
     setStyles(getStyles(doneFor));
-    console.log("title", title);
 
     sessionStorage.setItem(name.toString(), title.toString());
   }, [doneFor, name, title]);
