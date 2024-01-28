@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./Calculator.module.css";
 import { months } from "../../enums";
-import { monthType } from "../../utils/types";
+import { monthType, stateType } from "../../utils/types";
 import Container from "../../Components/Container/Container";
 import { Select, MenuItem, Input, Button } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
@@ -14,8 +14,9 @@ import {
 } from "../../utils/muiThemes";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import CityInput from "../../Components/CityInput/CityInput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoadingAction } from "../../utils/store";
+import validateNumbersInput from "../../utils/validateNumbersInput";
 
 const getPreetyNumber = (number: number): string => {
   let formattedNum: string = String(number); // Преобразовываем число в строку
@@ -39,7 +40,7 @@ const getMonthDaysArray = (month: monthType, year: number): number[] => {
 };
 
 const yearsArray: number[] = [];
-for (let i = 1900; i < 2100; i++) {
+for (let i = 1800; i < 2100; i++) {
   yearsArray.push(i);
 }
 const hoursArray: number[] = [];
@@ -54,6 +55,12 @@ for (let i = 1; i < 61; i++) {
 export default function Calculator() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLoading = useSelector<stateType, boolean>((store) => store.isLoading);
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setLoadingAction({ value: false, from: "calculator" }));
+    }
+  }, [isLoading]);
   const [selectedMonth, setSelectedMonth]: [
     monthType,
     Dispatch<SetStateAction<monthType>>
@@ -61,8 +68,15 @@ export default function Calculator() {
   const [selectedYear, setSelectedYear]: [
     number,
     Dispatch<SetStateAction<number>>
-  ] = useState(new Date().getFullYear());
-
+  ] = useState();
+  const [selectedHour, setSelectedHour]: [
+    number,
+    Dispatch<SetStateAction<number>>
+  ] = useState();
+  const [selectedMinute, setSelectedMinute]: [
+    number,
+    Dispatch<SetStateAction<number>>
+  ] = useState();
   const onSubmit = (
     e: React.FormEvent<HTMLFormElement> & {
       target: {
@@ -196,8 +210,19 @@ export default function Calculator() {
                   type="tel"
                   name="year"
                   placeholder="ГГГГ"
+                  value={Number.isNaN(selectedYear) ? "" : selectedYear}
                   onChange={(e) => {
-                    setSelectedYear(Number.parseInt(e.target.value));
+                    const value = e.target.value;
+                    setSelectedYear(
+                      value.length > 3
+                        ? validateNumbersInput(value, 1800, 2500)
+                        : Number.parseInt(value)
+                    );
+                  }}
+                  onBlur={(e) => {
+                    setSelectedYear(
+                      validateNumbersInput(e.target.value, 1800, 2500)
+                    );
                   }}
                 />
                 {/* <Select
@@ -241,15 +266,34 @@ export default function Calculator() {
                   disableUnderline
                   type="number"
                   name="hour"
-                  inputProps={{ max: 23, min: 0 }}
                   placeholder="час"
+                  value={Number.isNaN(selectedHour) ? "" : selectedHour}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setSelectedHour(validateNumbersInput(value, 0, 23));
+                  }}
+                  onBlur={(e) => {
+                    setSelectedHour(
+                      validateNumbersInput(e.target.value, 0, 23)
+                    );
+                    console.log(selectedHour);
+                  }}
                 />
                 <Input
                   disableUnderline
                   type="number"
                   name="minute"
                   placeholder="мин"
-                  inputProps={{ max: 59, min: 0 }}
+                  value={Number.isNaN(selectedMinute) ? "" : selectedMinute}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setSelectedMinute(validateNumbersInput(value, 0, 59));
+                  }}
+                  onBlur={(e) => {
+                    setSelectedMinute(
+                      validateNumbersInput(e.target.value, 0, 59)
+                    );
+                  }}
                 />
               </ThemeProvider>
             </div>

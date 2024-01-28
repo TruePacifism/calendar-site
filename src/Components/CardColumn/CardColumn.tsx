@@ -27,13 +27,21 @@ import InputTodayModal from "../InputTodayModal/InputTodayModal";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import getMonthName from "../../utils/getMonthName";
 
+export type cardColumnNameType =
+  | "year"
+  | "month"
+  | "day"
+  | "hour"
+  | "currentPillar"
+  | number;
+
 type propsType = {
   animal: animalType;
   element: elementType;
   isCurrentPillar?: boolean;
   doneFor: doneForType;
   title: string | number;
-  name: "year" | "month" | "day" | "hour" | "currentPillar" | number;
+  name: cardColumnNameType;
 };
 
 type doneForType = "Calculator" | "CardGridItem" | "HomePage";
@@ -88,7 +96,7 @@ export default function CardColumn({
   // eslint-disable-next-line
   const onClickHandle: MouseEventHandler<HTMLInputElement> = useCallback(
     (e) => {
-      dispatch(openModalAction(<InputTodayModal />));
+      dispatch(openModalAction(<InputTodayModal selected={name} />));
     },
     [dispatch]
   );

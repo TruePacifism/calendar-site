@@ -3,6 +3,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -14,33 +15,48 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModalAction, setMainPageDateAction } from "../../utils/store";
 import { stateType, userType } from "../../utils/types";
 import { months } from "../../enums";
+import { cardColumnNameType } from "../CardColumn/CardColumn";
+import validateNumbersInput from "../../utils/validateNumbersInput";
 
-const normalizeTime = (hour: number, minute: number): string => {
-  if (hour > 23) {
-    hour = 23;
+const normalizeTime = (hour: string, minute: string): string => {
+  const hourValue = Number.parseInt(hour);
+  const minuteValue = Number.parseInt(minute);
+
+  if (hour.length < 2 && minute === undefined) {
+    return hour;
   }
-  if (hour < 0) {
-    hour = 0;
+  if (hour.length === 2 && minute === undefined) {
+    if (hourValue < 0) {
+      return "00:";
+    } else if (hourValue > 23) {
+      return "23:";
+    } else {
+      return hour + ":";
+    }
   }
-  if (minute > 59) {
-    minute = 59;
+  if (hour.length > 2) {
+    return hour.substring(0, 2) + ":" + hour.charAt(2);
   }
-  if (minute < 0) {
-    minute = 0;
+  if (minute.length < 2) {
+    return hour + ":" + minute;
   }
-  if (Number.isNaN(hour) && Number.isNaN(minute)) {
-    return "";
+  if (minute.length === 2) {
+    if (minuteValue < 0) {
+      return hour + ":00";
+    } else if (minuteValue > 59) {
+      return hour + ":59";
+    } else {
+      return hour + ":" + minute;
+    }
   }
-  if (Number.isNaN(hour)) {
-    return `00:${minute}`;
-  }
-  if (Number.isNaN(minute)) {
-    return `${hour < 10 ? hour : hour + ":"}`;
-  }
-  return `${hour < 10 ? "0" + hour : hour}:${minute}`;
+  // let oldHour = Number.parseInt(oldValue.split(":")[0]);
+  // let oldMinute = Number.parseInt(oldValue.split(":")[1]);
 };
 
-export default function InputTodayModal() {
+export type propsType = {
+  selected: cardColumnNameType;
+};
+export default function InputTodayModal({ selected }: propsType) {
   const dispatch = useDispatch();
   const user = useSelector<stateType, userType>((state) => state.user);
 
@@ -66,15 +82,58 @@ export default function InputTodayModal() {
     month: document.querySelector("#monthInput"),
     year: document.querySelector("#yearInput"),
   });
-  const [hourValue, setHourValue] = useState(inputRefs.hour.value);
+  const thisHourRef = useRef<HTMLInputElement>(null);
+  const thisDayRef = useRef<HTMLInputElement>(null);
+  // const thisMonthRef = useRef<HTMLInputElement>(null);
+  const thisYearRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (!thisHourRef || !thisDayRef || !thisYearRef) {
+      return;
+    }
+    switch (selected) {
+      case "day":
+        thisDayRef.current.focus();
+        return;
+      case "year":
+        thisYearRef.current.focus();
+        return;
+      case "hour":
+        thisHourRef.current.focus();
+        return;
+
+      default:
+        break;
+    }
+  }, [selected]);
+  const [hourValue, setHourValue]: [string, Dispatch<SetStateAction<string>>] =
+    useState(inputRefs.hour.value);
+  const [dayValue, setDayValue]: [number, Dispatch<SetStateAction<number>>] =
+    useState(Number.parseInt(inputRefs.day.value));
+  const [monthValue, setMonthValue]: [
+    string,
+    Dispatch<SetStateAction<string>>
+  ] = useState(
+    months.find(
+      (month) =>
+        month.name.substring(0, 3).toLowerCase() === inputRefs.month.value
+    ).name
+  );
+  const [yearValue, setYearValue]: [number, Dispatch<SetStateAction<number>>] =
+    useState(Number.parseInt(inputRefs.year.value));
 
   const handleHourChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
+
     setHourValue((oldValue) => {
-      let hour = Number.parseInt(newValue.split(":")[0]);
-      let minute = Number.parseInt(newValue.split(":")[1]);
-      // let oldHour = Number.parseInt(oldValue.split(":")[0]);
-      // let oldMinute = Number.parseInt(oldValue.split(":")[1]);
+      let hour = newValue.split(":")[0];
+      let minute = newValue.split(":")[1];
+      const addedChar = newValue.substring(oldValue.length);
+      if (addedChar && Number.isNaN(Number.parseInt(addedChar))) {
+        return oldValue;
+      }
+      if (newValue.endsWith(":")) {
+        return hour;
+      }
       if (newValue + ":" === oldValue || oldValue + ":" === newValue) {
         return newValue;
       }
@@ -99,7 +158,21 @@ export default function InputTodayModal() {
       // }
     });
   };
-
+  const handleDayChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const currentMonth = months.find((month) => month.name === monthValue);
+    const maxDay =
+      yearValue % 4 === 0 && currentMonth.name === "Февраль"
+        ? 29
+        : currentMonth.length;
+    setDayValue(validateNumbersInput(e.target.value, 0, maxDay));
+  };
+  const handleYearChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length < 4) {
+      setYearValue(Number.parseInt(e.target.value));
+      return;
+    }
+    setYearValue(validateNumbersInput(e.target.value, 1800, 2500));
+  };
   const formRef = useRef();
   // const hourInputRef = useRef<HTMLInputElement>();
 
@@ -142,12 +215,6 @@ export default function InputTodayModal() {
     }
   ) => {
     e.preventDefault();
-    console.log("month", e.target.elements.month.value);
-    console.log(
-      months.find((month) => month.name === e.target.elements.month.value)
-        .orderNumber
-    );
-    console.log(months);
 
     const newTodayDatabirthdate = {
       hour: Number.parseInt(e.target.elements.hour.value.split(":")[0]),
@@ -173,13 +240,16 @@ export default function InputTodayModal() {
               type="tel"
               onChange={handleHourChange}
               defaultValue={inputRefs.hour.value}
+              inputRef={thisHourRef}
             />
             <Input
               disableUnderline
               name="day"
               type="tel"
-              inputProps={{ max: 31, min: 0 }}
               defaultValue={inputRefs.day.value}
+              inputRef={thisDayRef}
+              value={Number.isNaN(dayValue) ? "" : dayValue}
+              onChange={handleDayChange}
             />
             <Select
               disableUnderline
@@ -196,7 +266,17 @@ export default function InputTodayModal() {
                 ).name
               }
               onChange={(e) => {
-                console.log(e.target.value);
+                setMonthValue(e.target.value);
+                const currentMonth = months.find(
+                  (month) => month.name === monthValue
+                );
+                const maxDay =
+                  yearValue % 4 === 0 && currentMonth.name === "Февраль"
+                    ? 29
+                    : currentMonth.length;
+                setDayValue(
+                  validateNumbersInput(dayValue.toString(), 0, maxDay)
+                );
               }}
             >
               {Object.values(months).map((month) => {
@@ -208,10 +288,26 @@ export default function InputTodayModal() {
               })}
             </Select>
             <Input
+              inputRef={thisYearRef}
               disableUnderline
               type="tel"
               name="year"
               defaultValue={inputRefs.year.value}
+              value={Number.isNaN(yearValue) ? "" : yearValue}
+              onChange={handleYearChange}
+              onBlur={(e) => {
+                setYearValue(validateNumbersInput(e.target.value, 1800, 2500));
+                const currentMonth = months.find(
+                  (month) => month.name === monthValue
+                );
+                const maxDay =
+                  yearValue % 4 === 0 && currentMonth.name === "Февраль"
+                    ? 29
+                    : currentMonth.length;
+                setDayValue(
+                  validateNumbersInput(dayValue.toString(), 0, maxDay)
+                );
+              }}
             />
           </div>
           <CityInput

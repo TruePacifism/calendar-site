@@ -17,7 +17,7 @@ export type monthNameType =
 export type monthType = {
   length: number;
   orderNumber: number;
-  name: string;
+  name: monthNameType;
 };
 export type monthListType = [
   monthType,

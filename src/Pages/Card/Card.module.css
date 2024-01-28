@@ -86,10 +86,18 @@
   padding-bottom: 13px;
   padding-left: 26px;
   padding-right: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 .saveText {
   margin-top: 13px;
   font-size: 13px;
   font-weight: 400;
   text-align: left;
+}
+.button {
+  margin-right: auto !important;
+  margin-left: auto !important;
 }
