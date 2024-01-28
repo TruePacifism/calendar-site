@@ -20,7 +20,6 @@ import { stateType, userType } from "./utils/types";
 import Loading from "./Components/Loading/Loading";
 import Page404 from "./Pages/404Page/404Page";
 import MyModal from "./Components/MyModal/MyModal";
-import useBackButton from "./utils/useBackButton";
 
 const getHeadingText = (path: string): string => {
   switch (path) {
@@ -42,14 +41,19 @@ function App() {
   const modalContent = useSelector<stateType, JSX.Element>(
     (state) => state.modalContent
   );
-  useBackButton((e) => {
-    console.log(!!modalContent);
+  useEffect(() => {
+    const handleBackPressed = (event: PopStateEvent) => {
+      // Обработка нажатия кнопки "назад"
+      event.preventDefault();
+      if (modalContent) {
+        window.history.pushState(null, "", window.location.href);
+        dispatch(closeModalAction());
+      }
+      // Здесь можно добавить свою логику для обработки нажатия кнопки "назад"
+    };
 
-    if (modalContent) {
-      e.preventDefault();
-      dispatch(closeModalAction);
-    }
-  });
+    window.addEventListener("popstate", handleBackPressed);
+  }, [modalContent, dispatch]);
   const [headerText, setHeaderText]: [
     string,
     Dispatch<SetStateAction<string>>

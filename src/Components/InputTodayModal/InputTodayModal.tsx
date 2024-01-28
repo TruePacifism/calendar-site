@@ -215,6 +215,7 @@ export default function InputTodayModal({ selected }: propsType) {
       ).orderNumber,
       year: Number.parseInt(e.target.elements.year.value),
     };
+
     dispatch(setMainPageDateAction(newTodayDatabirthdate));
     dispatch(closeModalAction());
   };

@@ -73,9 +73,9 @@
   margin-right: auto;
 }
 .formFieldContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  padding-top: 1px;
+  display: block;
+  width: 100%;
   margin-bottom: 26px;
 }
 .formAfterGoogle {

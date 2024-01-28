@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./CityInput.module.css";
 import { ThemeProvider } from "@emotion/react";
-import { cityInputTheme } from "../../utils/muiThemes";
+import { cityInputTheme, loginTheme } from "../../utils/muiThemes";
 import { Autocomplete, TextField, debounce } from "@mui/material";
 import { cityInfoType } from "../../utils/types";
 import getCities from "../../api/getCities";
@@ -56,9 +56,19 @@ export default function CityInput({
     // eslint-disable-next-line
   }, [inputValue]);
   return (
-    <ThemeProvider theme={cityInputTheme}>
-      <label className={styles.formFieldContainer}>
-        <span className={styles.label}>{title}</span>
+    <ThemeProvider
+      theme={doneFor === "loginPage" ? loginTheme : cityInputTheme}
+    >
+      <label
+        className={styles.formFieldContainer}
+        style={{
+          width: doneFor === "loginPage" ? "100%" : undefined,
+          marginBottom: 26,
+        }}
+      >
+        {doneFor !== "loginPage" && (
+          <span className={styles.label}>{title}</span>
+        )}
         <Autocomplete
           id={name}
           // renderOption={(props, option) => {
@@ -78,24 +88,23 @@ export default function CityInput({
                 name={name}
                 onChange={updateInput}
                 label={placeholder}
-                sx={{ height: "26px" }}
                 defaultValue={defaultValue}
+                required={doneFor === "loginPage"}
+                error={doneFor === "loginPage" && inputValue === ""}
               />
             ) : (
               <></>
             )
           }
           freeSolo
-          sx={{ width: "203.4px", height: "100%" }}
+          size={doneFor === "loginPage" ? "small" : "medium"}
+          sx={
+            doneFor === "loginPage"
+              ? { width: "100%" }
+              : { width: "203.4px", height: "100%" }
+          }
           options={citiesList.map((city) => city.name)}
         />
-        {/* <Input
-          required
-          disableUnderline
-          type="text"
-          name={name}
-          placeholder={placeholder}
-        /> */}
       </label>
     </ThemeProvider>
   );

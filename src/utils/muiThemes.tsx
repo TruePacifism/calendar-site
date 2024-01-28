@@ -331,11 +331,25 @@ export const homePageInput = createTheme({
 });
 export const loginTheme = createTheme({
   components: {
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          width: "100%",
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          position: "absolute",
+          top: "100%",
+          left: 0,
+        },
+      },
+    },
     MuiOutlinedInput: {
       styleOverrides: {
-        notchedOutline: {
-          backgroundColor: "white",
-        },
+        root: { backgroundColor: "white" },
       },
     },
     MuiInputBase: {
@@ -343,6 +357,22 @@ export const loginTheme = createTheme({
         root: {
           width: "100%",
           height: 39,
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: accentColor,
+          color: "white",
+          fontFamily: "Roboto Slab",
+          fontSize: 15,
+          fontWeight: 400,
+          lineHeight: 20,
+          letterSpacing: "0em",
+          textAlign: "center",
+          height: 39,
+          width: 156,
         },
       },
     },
