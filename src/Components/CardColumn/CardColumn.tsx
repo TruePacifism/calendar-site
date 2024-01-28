@@ -99,6 +99,7 @@ export default function CardColumn({
     },
     [dispatch, name]
   );
+  console.log(animal.collisions);
 
   return (
     styles && (
