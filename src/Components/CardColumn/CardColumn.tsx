@@ -96,6 +96,7 @@ export default function CardColumn({
   // eslint-disable-next-line
   const onClickHandle: MouseEventHandler<HTMLInputElement> = useCallback(
     (e) => {
+      e.stopPropagation();
       dispatch(openModalAction(<InputTodayModal selected={name} />));
     },
     [dispatch]

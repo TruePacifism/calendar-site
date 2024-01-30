@@ -5,6 +5,7 @@ import CardColumn from "../../CardColumn/CardColumn";
 import ModalCollision from "../ModalCollision/ModalCollision";
 import ModalHeading from "../ModalHeading/ModalHeading";
 import ElementsExamples from "../../ElementsExamples/ElementsExamples";
+import getMonthName from "../../../utils/getMonthName";
 
 type propsType = {
   cardInfo: cardInfoType;
@@ -84,7 +85,9 @@ export default function ModalCardInfo({ cardInfo }: propsType) {
           key={keys[1]}
           animal={cardInfo.month.animal}
           element={cardInfo.month.element}
-          title={cardInfo.birthdate.month + 1}
+          title={getMonthName(cardInfo.birthdate.month)
+            .substring(0, 3)
+            .toLowerCase()}
           name={"month"}
         />
         <CardColumn
@@ -96,16 +99,20 @@ export default function ModalCardInfo({ cardInfo }: propsType) {
           name={"year"}
         />
         <div></div>
-        <CardColumn
-          doneFor="Calculator"
-          key={keys[4]}
-          animal={cardInfo.currentPillar ? cardInfo.currentPillar.animal : null}
-          element={
-            cardInfo.currentPillar ? cardInfo.currentPillar.element : null
-          }
-          title="такт"
-          name={"currentPillar"}
-        />
+        {cardInfo.currentPillar && (
+          <CardColumn
+            doneFor="Calculator"
+            key={keys[4]}
+            animal={
+              cardInfo.currentPillar ? cardInfo.currentPillar.animal : null
+            }
+            element={
+              cardInfo.currentPillar ? cardInfo.currentPillar.element : null
+            }
+            title="такт"
+            name={"currentPillar"}
+          />
+        )}
       </ul>
       <ul className={styles.collisionsList}>
         {getAllCollisions(cardInfo).map((collision, idx) => (

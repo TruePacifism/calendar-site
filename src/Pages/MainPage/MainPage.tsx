@@ -22,6 +22,7 @@ import AnimalLogo from "../../Components/AnimalLogo/AnimalLogo";
 import countCard from "../../api/countCard";
 import ModalIconedInfo from "../../Components/ModalComponents/ModalIconedInfo/ModalIconedInfo";
 import ElementsExamples from "../../Components/ElementsExamples/ElementsExamples";
+import ModalCardInfo from "../../Components/ModalComponents/ModalCardInfo/ModalCardInfo";
 
 let hashUser: userType = null;
 let hashMainPageInfo: inputDataType = null;
@@ -94,7 +95,15 @@ export default function MainPage() {
             onClick={fetchIconedInfoClick}
             cardInfo={todayInfo}
           />
-          <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
+          <div
+            onClick={() => {
+              console.log("clicked");
+
+              dispatch(openModalAction(<ModalCardInfo cardInfo={todayInfo} />));
+            }}
+          >
+            <CardInfo doneFor="HomePage" cardInfo={todayInfo} />
+          </div>
           <div className={styles.animalLogoContainer}>
             <AnimalLogo doneFor="HomePage" animal={todayInfo.day.animal} />
           </div>
