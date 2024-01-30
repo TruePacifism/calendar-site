@@ -35,6 +35,11 @@
   height: 26px;
   border-radius: 50%;
   overflow: visible;
+  -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.backIcon {
+  border-radius: 5px;
 }
 .centerIcon {
   width: 43px;

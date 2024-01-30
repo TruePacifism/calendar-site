@@ -9,11 +9,13 @@ import React, {
 import styles from "./SearchField.module.css";
 import { ReactComponent as SearchIcon } from "../../images/search-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { openModalAction } from "../../utils/store";
-import { Input, useAutocomplete } from "@mui/material";
-import { cardInfoType, stateType } from "../../utils/types";
+import { closeModalAction, openModalAction } from "../../utils/store";
+import { cardInfoType, inputDataType, stateType } from "../../utils/types";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 function SearchFieldModal() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cards = useSelector<stateType, cardInfoType[]>(
     (store) => store.user.cards
   );
@@ -45,7 +47,31 @@ function SearchFieldModal() {
               card.name.toLowerCase().includes(searchValue.toLowerCase())
             )
             .map((card) => (
-              <li className={styles.searchResultItem}>{card.name}</li>
+              <li
+                className={styles.searchResultItem}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const { name, birthdate, birthcity, gender, livingcity } =
+                    card;
+                  const inputData: inputDataType = {
+                    name,
+                    birthdate,
+                    birthcity,
+                    gender,
+                    livingcity,
+                  };
+                  dispatch(closeModalAction());
+                  navigate({
+                    search: createSearchParams({
+                      inputData: JSON.stringify(inputData),
+                      id: card.id,
+                    }).toString(),
+                    pathname: "/cards",
+                  });
+                }}
+              >
+                {card.name}
+              </li>
             ))}
       </ul>
     </>

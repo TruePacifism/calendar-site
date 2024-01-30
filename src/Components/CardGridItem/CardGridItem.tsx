@@ -30,7 +30,6 @@ export default function CardGridItem({ cardInfo }: propsType) {
   const navigate = useNavigate();
   const handleOpenCard = useCallback<MouseEventHandler<HTMLDivElement>>(
     (e) => {
-      console.log(e);
       const { name, birthdate, birthcity, gender, livingcity } = cardInfo;
       const inputData: inputDataType = {
         name,
@@ -71,7 +70,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
           <IconedCardInfoList cardInfo={cardInfo} doneFor="CardGridItem" />
         </div>
         <span className={styles.birthdate}>
-          {normalizeBirthdate(cardInfo.birthdate)}
+          {normalizeBirthdate(cardInfo.trueBirthdate)}
         </span>
         <CardInfo doneFor="CardGridItem" cardInfo={cardInfo} />
       </div>

@@ -33,7 +33,7 @@ import { ReactComponent as ScrollTopIcon } from "../../images/scroll-top-icon.sv
 export default function Cards() {
   const [elementRef, isVisible] = useElementOnScreen(
     {
-      rootMargin: "500px",
+      rootMargin: "-107px",
     },
     true
   );

@@ -6,6 +6,7 @@
   margin-right: auto;
   margin-left: auto;
   min-height: 100dvh;
+  position: relative;
 }
 .container {
   min-height: 100dvh;

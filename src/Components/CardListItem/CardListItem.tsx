@@ -28,9 +28,6 @@ export default function CardListItem({ cardInfo }: propsType) {
   const navigate = useNavigate();
   const handleOpenCard = useCallback<MouseEventHandler<HTMLDivElement>>(
     (e) => {
-      if (e.target !== e.currentTarget) {
-        return;
-      }
       const { name, birthdate, birthcity, gender, livingcity } = cardInfo;
       const inputData: inputDataType = {
         name,
@@ -71,7 +68,7 @@ export default function CardListItem({ cardInfo }: propsType) {
         <div className={styles.cardInfoContainer}>
           <span className={styles.name}>{cardInfo.name}</span>
           <span className={styles.birthdate}>
-            {normalizeBirthdate(cardInfo.birthdate)}
+            {normalizeBirthdate(cardInfo.trueBirthdate)}
           </span>
         </div>
       </div>

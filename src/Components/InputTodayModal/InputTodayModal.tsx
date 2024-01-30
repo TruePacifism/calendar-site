@@ -13,45 +13,22 @@ import { darkButtonTheme, homePageInput } from "../../utils/muiThemes";
 import CityInput from "../CityInput/CityInput";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModalAction, setMainPageDateAction } from "../../utils/store";
-import { stateType, userType } from "../../utils/types";
+import { monthType, stateType, userType } from "../../utils/types";
 import { months } from "../../enums";
 import { cardColumnNameType } from "../CardColumn/CardColumn";
 import validateNumbersInput from "../../utils/validateNumbersInput";
 import normalizeNumber from "../../utils/normalizeNumber";
+import normalizeTime from "../../utils/normalizeTime";
 
-const normalizeTime = (hour: string, minute: string): string => {
-  const hourValue = Number.parseInt(hour);
-  const minuteValue = Number.parseInt(minute);
-
-  if (hour.length < 2 && minute === undefined) {
-    return hour;
+const getMonthDaysArray = (month: monthType, year: number): number[] => {
+  const days: number[] = [];
+  for (let i = 0; i < month.length; i++) {
+    days.push(i + 1);
   }
-  if (hour.length === 2 && minute === undefined) {
-    if (hourValue < 0) {
-      return "00:";
-    } else if (hourValue > 23) {
-      return "23:";
-    } else {
-      return hour + ":";
-    }
+  if (month.orderNumber === 1 && year % 4 === 0) {
+    days.push(29);
   }
-  if (hour.length > 2) {
-    return hour.substring(0, 2) + ":" + hour.charAt(2);
-  }
-  if (minute.length < 2) {
-    return hour + ":" + minute;
-  }
-  if (minute.length === 2) {
-    if (minuteValue < 0) {
-      return hour + ":00";
-    } else if (minuteValue > 59) {
-      return hour + ":59";
-    } else {
-      return hour + ":" + minute;
-    }
-  }
-  // let oldHour = Number.parseInt(oldValue.split(":")[0]);
-  // let oldMinute = Number.parseInt(oldValue.split(":")[1]);
+  return days;
 };
 
 export type propsType = {
@@ -233,21 +210,31 @@ export default function InputTodayModal({ selected }: propsType) {
               defaultValue={inputRefs.hour.value}
               inputRef={thisHourRef}
             />
-            <Input
-              disableUnderline
-              name="day"
-              type="tel"
-              defaultValue={inputRefs.day.value}
-              inputRef={thisDayRef}
-              value={dayValue}
-              onChange={handleDayChange}
-            />
             <Select
               disableUnderline
               displayEmpty
               autoWidth
               variant="standard"
-              type="tel"
+              name="day"
+              defaultValue={inputRefs.day.value}
+              inputRef={thisDayRef}
+              value={dayValue}
+              onChange={handleDayChange}
+            >
+              {Object.values(
+                getMonthDaysArray(
+                  months.find((month) => month.name === monthValue),
+                  yearValue
+                )
+              ).map((day) => {
+                return <MenuItem value={day}>{day}</MenuItem>;
+              })}
+            </Select>
+            <Select
+              disableUnderline
+              displayEmpty
+              autoWidth
+              variant="standard"
               name="month"
               defaultValue={
                 months.find((month) =>

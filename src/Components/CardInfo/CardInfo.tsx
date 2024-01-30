@@ -7,6 +7,7 @@ import { cardInfoType, stylesType } from "../../utils/types";
 import { useMediaQuery } from "@mui/material";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import getMonthName from "../../utils/getMonthName";
+import normalizeTime from "../../utils/normalizeTime";
 
 type propsType = {
   cardInfo: cardInfoType;
@@ -54,14 +55,17 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             doneFor={doneFor}
             animal={cardInfo.hour.animal}
             element={cardInfo.hour.element}
-            title={`${cardInfo.birthdate.hour}:${cardInfo.birthdate.minute}`}
+            title={normalizeTime(
+              cardInfo.trueBirthdate.hour.toString(),
+              cardInfo.trueBirthdate.minute.toString()
+            )}
             name={"hour"}
           />
           <CardColumn
             doneFor={doneFor}
             animal={cardInfo.day.animal}
             element={cardInfo.day.element}
-            title={cardInfo.birthdate.day}
+            title={cardInfo.trueBirthdate.day}
             name={"day"}
           />
           <CardColumn
@@ -69,8 +73,8 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             animal={cardInfo.month.animal}
             element={cardInfo.month.element}
             title={
-              typeof cardInfo.birthdate.month === "number"
-                ? getMonthName(cardInfo.birthdate.month)
+              typeof cardInfo.trueBirthdate.month === "number"
+                ? getMonthName(cardInfo.trueBirthdate.month)
                     .slice(0, 3)
                     .toLowerCase()
                 : "НЕТ"
@@ -81,7 +85,7 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             doneFor={doneFor}
             animal={cardInfo.year.animal}
             element={cardInfo.year.element}
-            title={cardInfo.birthdate.year}
+            title={cardInfo.trueBirthdate.year}
             name={"year"}
           />
           {smallMobile && doneFor !== "HomePage" && (
