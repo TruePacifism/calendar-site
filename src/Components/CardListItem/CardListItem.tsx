@@ -64,14 +64,12 @@ export default function CardListItem({ cardInfo }: propsType) {
         onClick={handleOpenCard}
         style={{ backgroundColor: color ? color.backgroundHex : "transparent" }}
       >
-        <AnimalLogo animal={cardInfo.year.animal} doneFor="CardLineItem" />
+        <div className={styles.animalLogoContainer}>
+          <AnimalLogo animal={cardInfo.year.animal} doneFor="CardLineItem" />
+        </div>
         <CardOptionsButton cardRef={cardRef} cardInfo={cardInfo} />
         <div className={styles.cardInfoContainer}>
-          <span className={styles.name}>
-            {cardInfo.name.length > 30
-              ? cardInfo.name.substring(0, 30) + "..."
-              : cardInfo.name}
-          </span>
+          <span className={styles.name}>{cardInfo.name}</span>
           <span className={styles.birthdate}>
             {normalizeBirthdate(cardInfo.birthdate)}
           </span>

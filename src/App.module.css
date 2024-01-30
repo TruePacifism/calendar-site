@@ -5,7 +5,6 @@
   max-width: 400px;
   margin-right: auto;
   margin-left: auto;
-  position: relative;
   min-height: 100dvh;
 }
 .container {
@@ -13,6 +12,7 @@
   & > :nth-child(2) {
     min-height: calc(100dvh - 52px - 60px);
   }
+  position: relative;
 }
 .App-logo {
   height: 40vmin;

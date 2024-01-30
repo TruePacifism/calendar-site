@@ -11,6 +11,7 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearLoadingImages,
+  closeModalAction,
   setLoadingAction,
   setUserAction,
 } from "./utils/store";
@@ -37,6 +38,22 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const modalContent = useSelector<stateType, JSX.Element>(
+    (state) => state.modalContent
+  );
+  useEffect(() => {
+    const handleBackPressed = (event: PopStateEvent) => {
+      // Обработка нажатия кнопки "назад"
+      event.preventDefault();
+      if (modalContent) {
+        window.history.pushState(null, "", window.location.href);
+        dispatch(closeModalAction());
+      }
+      // Здесь можно добавить свою логику для обработки нажатия кнопки "назад"
+    };
+
+    window.addEventListener("popstate", handleBackPressed);
+  }, [modalContent, dispatch]);
   const [headerText, setHeaderText]: [
     string,
     Dispatch<SetStateAction<string>>

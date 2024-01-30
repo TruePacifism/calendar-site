@@ -17,6 +17,7 @@ import { stateType, userType } from "../../utils/types";
 import { months } from "../../enums";
 import { cardColumnNameType } from "../CardColumn/CardColumn";
 import validateNumbersInput from "../../utils/validateNumbersInput";
+import normalizeNumber from "../../utils/normalizeNumber";
 
 const normalizeTime = (hour: string, minute: string): string => {
   const hourValue = Number.parseInt(hour);
@@ -107,8 +108,8 @@ export default function InputTodayModal({ selected }: propsType) {
   }, [selected]);
   const [hourValue, setHourValue]: [string, Dispatch<SetStateAction<string>>] =
     useState(inputRefs.hour.value);
-  const [dayValue, setDayValue]: [number, Dispatch<SetStateAction<number>>] =
-    useState(Number.parseInt(inputRefs.day.value));
+  const [dayValue, setDayValue]: [string, Dispatch<SetStateAction<string>>] =
+    useState(inputRefs.day.value);
   const [monthValue, setMonthValue]: [
     string,
     Dispatch<SetStateAction<string>>
@@ -137,25 +138,10 @@ export default function InputTodayModal({ selected }: propsType) {
       if (newValue + ":" === oldValue || oldValue + ":" === newValue) {
         return newValue;
       }
+      if (newValue.length === 5 && oldValue.length === 4) {
+        thisDayRef.current.focus();
+      }
       return normalizeTime(hour, minute);
-      // const addedSymbol =
-      //   oldValue.length < newValue.length
-      //     ? newValue.charAt(newValue.length - 1)
-      //     : null;
-      // const removedSymbol =
-      //   oldValue.length > newValue.length
-      //     ? oldValue.charAt(oldValue.length - 1)
-      //     : null;
-      // if (/^\d{0,2}:\d{0,2}$/.test(newValue)) {
-      //   if (addedSymbol) {
-      //     return newValue;
-      //   }
-      // }
-      // if (/^\d{0,2}/.test(newValue)) {
-      //   if (addedSymbol) {
-      //     return newValue + ":";
-      //   }
-      // }
     });
   };
   const handleDayChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -164,7 +150,11 @@ export default function InputTodayModal({ selected }: propsType) {
       yearValue % 4 === 0 && currentMonth.name === "Февраль"
         ? 29
         : currentMonth.length;
-    setDayValue(validateNumbersInput(e.target.value, 0, maxDay));
+    const validatedValue = validateNumbersInput(e.target.value, 0, maxDay);
+    const normalizedValue: string = normalizeNumber(validatedValue, 2);
+    setDayValue((oldValue) => {
+      return normalizedValue;
+    });
   };
   const handleYearChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 4) {
@@ -225,6 +215,7 @@ export default function InputTodayModal({ selected }: propsType) {
       ).orderNumber,
       year: Number.parseInt(e.target.elements.year.value),
     };
+
     dispatch(setMainPageDateAction(newTodayDatabirthdate));
     dispatch(closeModalAction());
   };
@@ -248,7 +239,7 @@ export default function InputTodayModal({ selected }: propsType) {
               type="tel"
               defaultValue={inputRefs.day.value}
               inputRef={thisDayRef}
-              value={Number.isNaN(dayValue) ? "" : dayValue}
+              value={dayValue}
               onChange={handleDayChange}
             />
             <Select
@@ -268,15 +259,22 @@ export default function InputTodayModal({ selected }: propsType) {
               onChange={(e) => {
                 setMonthValue(e.target.value);
                 const currentMonth = months.find(
-                  (month) => month.name === monthValue
+                  (month) => month.name === e.target.value
                 );
                 const maxDay =
                   yearValue % 4 === 0 && currentMonth.name === "Февраль"
                     ? 29
                     : currentMonth.length;
-                setDayValue(
-                  validateNumbersInput(dayValue.toString(), 0, maxDay)
+                const validatedValue = validateNumbersInput(
+                  dayValue,
+                  0,
+                  maxDay
                 );
+                const normalizedValue: string = normalizeNumber(
+                  validatedValue,
+                  2
+                );
+                setDayValue(normalizedValue);
               }}
             >
               {Object.values(months).map((month) => {
@@ -304,9 +302,17 @@ export default function InputTodayModal({ selected }: propsType) {
                   yearValue % 4 === 0 && currentMonth.name === "Февраль"
                     ? 29
                     : currentMonth.length;
-                setDayValue(
-                  validateNumbersInput(dayValue.toString(), 0, maxDay)
+
+                const validatedValue = validateNumbersInput(
+                  dayValue,
+                  0,
+                  maxDay
                 );
+                const normalizedValue: string = normalizeNumber(
+                  validatedValue,
+                  2
+                );
+                setDayValue(normalizedValue);
               }}
             />
           </div>

@@ -15,7 +15,7 @@ import { ReactComponent as AgeIcon } from "../../images/age-icon.svg";
 import { ReactComponent as BirthSideIcon } from "../../images/birth-side-icon.svg";
 import { ReactComponent as GenderIcon } from "../../images/gender-icon.svg";
 import { ReactComponent as PowerIcon } from "../../images/power-icon.svg";
-import { ReactComponent as LivingsideIcon } from "../../images/living-side-icon.svg";
+// import { ReactComponent as LivingsideIcon } from "../../images/living-side-icon.svg";
 import {
   cardInfoType,
   colorType,

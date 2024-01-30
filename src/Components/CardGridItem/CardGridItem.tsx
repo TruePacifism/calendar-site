@@ -9,16 +9,10 @@ import React, {
 } from "react";
 import styles from "./CardGridItem.module.css";
 import IconedCardInfoList from "../IconedCardInfoList/IconedCardInfoList";
-import {
-  cardInfoType,
-  colorType,
-  dateType,
-  inputDataType,
-} from "../../utils/types";
+import { cardInfoType, colorType, inputDataType } from "../../utils/types";
 import CardInfo from "../CardInfo/CardInfo";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import AnimalLogo from "../AnimalLogo/AnimalLogo";
-import getMonthName from "../../utils/getMonthName";
 import CardOptionsButton from "../CardOptionsButton/CardOptionsButton";
 import { useDispatch } from "react-redux";
 import { closeModalAction } from "../../utils/store";
@@ -37,10 +31,6 @@ export default function CardGridItem({ cardInfo }: propsType) {
   const handleOpenCard = useCallback<MouseEventHandler<HTMLDivElement>>(
     (e) => {
       console.log(e);
-
-      if (e.target !== e.currentTarget) {
-        return;
-      }
       const { name, birthdate, birthcity, gender, livingcity } = cardInfo;
       const inputData: inputDataType = {
         name,
@@ -75,11 +65,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
         ref={cardRef}
       >
         <CardOptionsButton cardRef={cardRef} cardInfo={cardInfo} />
-        <span className={styles.name}>
-          {cardInfo.name.length > 15
-            ? cardInfo.name.substring(0, 15) + "..."
-            : cardInfo.name}
-        </span>
+        <span className={styles.name}>{cardInfo.name}</span>
         <div className={styles.mainInfoContainer}>
           <AnimalLogo doneFor="CardGridItem" animal={cardInfo.year.animal} />
           <IconedCardInfoList cardInfo={cardInfo} doneFor="CardGridItem" />

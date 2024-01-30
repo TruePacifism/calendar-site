@@ -1,4 +1,10 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  LegacyRef,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import styles from "./Cards.module.css";
 import { ReactComponent as ListIcon } from "../../images/list-icon.svg";
 import { ReactComponent as GridIcon } from "../../images/grid-icon.svg";
@@ -21,8 +27,16 @@ import {
 import { useSearchParams } from "react-router-dom";
 import Card from "../Card/Card";
 import SearchField from "../../Components/SearchField/SearchField";
+import useElementOnScreen from "../../utils/useElementOnScreen";
+import { ReactComponent as ScrollTopIcon } from "../../images/scroll-top-icon.svg";
 
 export default function Cards() {
+  const [elementRef, isVisible] = useElementOnScreen(
+    {
+      rootMargin: "500px",
+    },
+    true
+  );
   const dispatch = useDispatch();
   const [selectedCardId, setSelectedCardId]: [
     string,
@@ -100,9 +114,22 @@ export default function Cards() {
           setFilter(e.target.value);
         }}
       /> */}
+      <ScrollTopIcon
+        className={styles.scrollTopIcon}
+        onClick={() => {
+          window.scroll({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+        style={{ opacity: isVisible || !elementRef.valueOf() ? 0 : 1 }}
+      />
       <div className={styles.cardsInfoContainer}>
         <div className={styles.heading}>КАРТОТЕКА</div>
-        <div className={styles.topContainer}>
+        <div
+          className={styles.topContainer}
+          ref={elementRef as LegacyRef<HTMLDivElement>}
+        >
           <div className={styles.viewSettings}>
             {isFullCards ? (
               <ListIcon className={styles.listIcon} onClick={switchCardView} />

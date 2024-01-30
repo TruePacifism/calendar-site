@@ -3,12 +3,10 @@ import styles from "./Header.module.css";
 import { ReactComponent as BackIcon } from "../../images/back-icon.svg";
 import { ReactComponent as OptionsIcon } from "../../images/options-icon.svg";
 import { ReactComponent as InfoIcon } from "../../images/info-icon.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { stateType } from "../../utils/types";
-import { closeModalAction, openModalAction } from "../../utils/store";
-import { ReactComponent as TopHeading } from "../../images/ВИКТОРИЯ МАНЬКОВА.svg";
-import { ReactComponent as BottomHeading } from "../../images/СИСТЕМА.svg";
+import { openModalAction } from "../../utils/store";
 import ServiceInfo from "../ServiceInfo/ServiceInfo";
 import { ReactComponent as LogoIcon } from "../../images/logo-another-icon.svg";
 
@@ -22,12 +20,9 @@ export default function Header({ heading }: propsType) {
   const isErrorPage = useSelector<stateType, boolean>(
     (state) => state.isErrorPage
   );
+  const params = useSearchParams()[0];
   const infoRef = useRef<SVGSVGElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
-  // eslint-disable-next-line
-  const closeModal = useCallback(() => {
-    dispatch(closeModalAction());
-  }, [dispatch]);
   const getInfoText = useCallback<
     () => React.ReactElement<HTMLParagraphElement>
   >(() => {
@@ -45,13 +40,27 @@ export default function Header({ heading }: propsType) {
           </p>
         );
       case "/":
-      case "/cards":
         return (
           <p className={styles.modalText}>
-            Здесь Вы найдете все Ваши сохраненные карты. Их можно сортировать по
-            новизне, переключать вид. Работает поиск по ФИО или дате.
+            Нажмите на любой раздел страницы, чтобы посмотреть подробнее
           </p>
         );
+      case "/cards":
+        if (params.size === 0) {
+          return (
+            <p className={styles.modalText}>
+              Здесь Вы найдете все Ваши сохраненные карты. Их можно сортировать
+              по новизне, переключать вид. Работает поиск по ФИО или дате.
+            </p>
+          );
+        } else {
+          return (
+            <p className={styles.modalText}>
+              Нажмите на любой раздел, чтобы увеличить и увидеть дополнительную
+              информацию
+            </p>
+          );
+        }
 
       default:
         return (
@@ -60,7 +69,7 @@ export default function Header({ heading }: propsType) {
           </p>
         );
     }
-  }, [location.pathname]);
+  }, [location.pathname, params.size]);
 
   const openInfoModal = useCallback(() => {
     const infoBounds = infoRef.current.getBoundingClientRect();
@@ -84,14 +93,14 @@ export default function Header({ heading }: propsType) {
         </>
       )
     );
-  }, [dispatch, closeModal, getInfoText]);
+  }, [dispatch, getInfoText]);
   const openServiceModal = useCallback(() => {
     const headingBounds = headingRef.current.getBoundingClientRect();
     dispatch(
       openModalAction(
         <>
           <div
-            className={styles.heading}
+            className={styles.companyContainer}
             style={{
               position: "absolute",
               top: headingBounds.top,
@@ -101,8 +110,11 @@ export default function Header({ heading }: propsType) {
                   : headingBounds.left,
             }}
           >
-            <TopHeading className={styles.topHeading} />
-            <BottomHeading />
+            <LogoIcon className={styles.logo} />
+            <div className={styles.nameContainer}>
+              <span className={styles.name}>виктория манькова</span>
+              <span className={styles.title}>система</span>
+            </div>
           </div>
           <div className={styles.modalContainer}>
             <ServiceInfo />

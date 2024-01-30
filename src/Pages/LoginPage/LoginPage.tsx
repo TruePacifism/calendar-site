@@ -9,7 +9,7 @@ import {
 import { FirebaseOptions, initializeApp } from "firebase/app";
 import { ReactComponent as GoogleIcon } from "../../images/google-icon.svg";
 import { userInput } from "../../utils/types";
-import { Button, Input, TextField, ThemeProvider } from "@mui/material";
+import { Button, TextField, ThemeProvider } from "@mui/material";
 import { googleAuthButton, loginTheme } from "../../utils/muiThemes";
 import CityInput from "../../Components/CityInput/CityInput";
 import authUser from "../../api/authUser";
@@ -54,10 +54,18 @@ export default function LoginPage(props: propsType) {
   useEffect(() => {
     dispatch(setLoadingAction({ value: false, from: "loaded Login Page" }));
     dispatch(setIsErrorPageAction(true));
+    // const authDev = async () => {
+    //   const token: string = "rWtBfn90plcd4a4fhxtfQeR4Xtl1";
+    //   const user = await getUserInfo({ token });
+    //   localStorage.setItem("token", user.token);
+    //   dispatch(setUserAction(user));
+    //   navigate("/");
+    // };
+    // authDev();
     return () => {
       dispatch(setIsErrorPageAction(false));
     };
-  }, [dispatch]);
+  }, [dispatch, navigate]);
   const [token, setToken]: [string, Dispatch<SetStateAction<string>>] =
     useState();
   useEffect(() => {
@@ -107,6 +115,11 @@ export default function LoginPage(props: propsType) {
       setUserInfo(null);
     });
   };
+  const [nameValue, setNameValue]: [string, Dispatch<SetStateAction<string>>] =
+    useState("");
+  useEffect(() => {
+    setNameValue(userInfo?.name);
+  }, [userInfo?.name]);
 
   return (
     <div className={styles.container}>
@@ -118,88 +131,96 @@ export default function LoginPage(props: propsType) {
         </div>
       </div>
       {userInfo ? (
-        <ThemeProvider theme={loginTheme}>
-          <form
-            onSubmit={(
-              e: React.FormEvent<HTMLFormElement> & {
-                target: {
-                  elements?: {
-                    name: {
-                      value: string;
-                    };
-                    mail: {
-                      value: string;
-                    };
-                    birthcity: {
-                      value: string;
-                    };
-                    livingcity: {
-                      value: string;
+        <div className={styles.inputsContainer}>
+          <ThemeProvider theme={loginTheme}>
+            <form
+              onSubmit={(
+                e: React.FormEvent<HTMLFormElement> & {
+                  target: {
+                    elements?: {
+                      name: {
+                        value: string;
+                      };
+                      mail: {
+                        value: string;
+                      };
+                      birthcity: {
+                        value: string;
+                      };
+                      livingcity: {
+                        value: string;
+                      };
                     };
                   };
+                }
+              ) => {
+                e.preventDefault();
+                const { name, livingcity, birthcity } = e.target.elements;
+                console.dir(e.target.elements);
+                const user: userInfoType = {
+                  ...userInfo,
+                  name: name.value,
+                  livingcity: livingcity.value,
+                  birthcity: birthcity.value,
                 };
-              }
-            ) => {
-              e.preventDefault();
-              const { name, livingcity, birthcity } = e.target.elements;
-              console.dir(e.target.elements);
-              const user: userInfoType = {
-                ...userInfo,
-                name: name.value,
-                livingcity: livingcity.value,
-                birthcity: birthcity.value,
-              };
 
-              fetchUser(user);
-            }}
-            className={styles.formAfterGoogle}
-          >
-            <label className={styles.formFieldContainer}>
-              <TextField
-                type="text"
-                name="name"
-                label="имя"
-                defaultValue={userInfo.name}
-                variant="outlined"
+                fetchUser(user);
+              }}
+              className={styles.formAfterGoogle}
+            >
+              <label className={styles.formFieldContainer}>
+                <TextField
+                  type="text"
+                  name="name"
+                  label="имя"
+                  size="small"
+                  value={nameValue}
+                  onChange={(event) => {
+                    setNameValue(event.target.value);
+                  }}
+                  required
+                  error={nameValue === ""}
+                  variant="outlined"
+                />
+              </label>
+              <label className={styles.formFieldContainer}>
+                <TextField
+                  type="text"
+                  name="surname"
+                  size="small"
+                  label="фамилия"
+                  defaultValue={userInfo.name}
+                  variant="outlined"
+                />
+              </label>
+              <label className={styles.formFieldContainer}>
+                <TextField
+                  type="text"
+                  name="thirdName"
+                  size="small"
+                  label="отчество"
+                  defaultValue={userInfo.name}
+                  variant="outlined"
+                />
+              </label>
+              <CityInput
+                name="birthcity"
+                title="Место рождения"
+                placeholder="населенный пункт"
+                doneFor="loginPage"
               />
-            </label>
-            <label className={styles.formFieldContainer}>
-              <span className={styles.label}>Имя</span>
-              <Input
-                disableUnderline
-                type="text"
-                name="name"
-                defaultValue={userInfo.name}
-                placeholder="имя"
+              <CityInput
+                name="livingcity"
+                title="Место жительства"
+                placeholder="населенный пункт"
+                doneFor="loginPage"
               />
-            </label>
-            <label className={styles.formFieldContainer}>
-              <span className={styles.label}>Имя</span>
-              <Input
-                disableUnderline
-                type="text"
-                name="name"
-                defaultValue={userInfo.name}
-                placeholder="имя"
-              />
-            </label>
-            <CityInput
-              name="birthcity"
-              title="Место рождения"
-              placeholder="населенный пункт"
-              doneFor="loginPage"
-            />
-            <CityInput
-              name="livingcity"
-              title="Место жительства"
-              placeholder="населенный пункт"
-              doneFor="loginPage"
-            />
-            <Button className={styles.regButton} type="submit">
-              ДАЛЕЕ
-            </Button>
-          </form>
-        </ThemeProvider>
+              <Button className={styles.regButton} type="submit">
+                ДАЛЕЕ
+              </Button>
+            </form>
+          </ThemeProvider>
+        </div>
       ) : (
         <>
           <ThemeProvider theme={googleAuthButton}>
