@@ -8,7 +8,10 @@
   letter-spacing: 0em;
   text-align: left;
   &:not(:last-child) {
-    margin-bottom: 28px;
+    margin-bottom: 10px;
+  }
+  & > *:nth-child(1) {
+    transform: scale(0.7) translateX(-30%);
   }
 }
 .blackContainer {
@@ -19,7 +22,7 @@
   & > .image {
     width: 30px;
   }
-  & > .image:not(:last-child) {
+  & > *:nth-child(1) {
     margin-right: 12px;
   }
 }
@@ -28,6 +31,6 @@
   border-radius: 5px;
 }
 .text {
-  margin-left: 20px;
+  margin-left: 10px;
   text-align: left;
 }

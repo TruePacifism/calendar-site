@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ModalCollision.module.css";
 import { ReactComponent as Rectangle } from "../../../images/collisions/rectangle.svg";
 import { ReactComponent as Circle } from "../../../images/collisions/circle.svg";
-import { ReactComponent as Heart } from "../../../images/collisions/heart.svg";
+import { ReactComponent as Heart } from "../../../images/collisions/broken-heart.svg";
 import { ReactComponent as Half } from "../../../images/collisions/half-circle.svg";
 import { ReactComponent as Triangle } from "../../../images/collisions/triangle.svg";
 import { ReactComponent as HalfHorizontal } from "../../../images/collisions/half-circle-horizontal.svg";

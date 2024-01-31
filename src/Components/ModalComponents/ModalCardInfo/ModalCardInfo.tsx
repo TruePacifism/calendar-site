@@ -3,7 +3,6 @@ import styles from "./ModalCardInfo.module.css";
 import { cardInfoType, collisionType } from "../../../utils/types";
 import CardColumn from "../../CardColumn/CardColumn";
 import ModalCollision from "../ModalCollision/ModalCollision";
-import ModalHeading from "../ModalHeading/ModalHeading";
 import ElementsExamples from "../../ElementsExamples/ElementsExamples";
 import getMonthName from "../../../utils/getMonthName";
 
@@ -62,7 +61,6 @@ const keys = ["year", "month", "day", "hour", "pillar"];
 export default function ModalCardInfo({ cardInfo }: propsType) {
   return (
     <div className={styles.container}>
-      <ModalHeading text="КАРТА" />
       <ul className={styles.list}>
         <CardColumn
           doneFor="Calculator"

@@ -56,8 +56,8 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             animal={cardInfo.hour.animal}
             element={cardInfo.hour.element}
             title={normalizeTime(
-              cardInfo.trueBirthdate.hour.toString(),
-              cardInfo.trueBirthdate.minute.toString()
+              cardInfo.birthdate.hour.toString(),
+              cardInfo.birthdate.minute.toString()
             )}
             name={"hour"}
           />
@@ -65,7 +65,7 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             doneFor={doneFor}
             animal={cardInfo.day.animal}
             element={cardInfo.day.element}
-            title={cardInfo.trueBirthdate.day}
+            title={cardInfo.birthdate.day}
             name={"day"}
           />
           <CardColumn
@@ -73,8 +73,8 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             animal={cardInfo.month.animal}
             element={cardInfo.month.element}
             title={
-              typeof cardInfo.trueBirthdate.month === "number"
-                ? getMonthName(cardInfo.trueBirthdate.month)
+              typeof cardInfo.birthdate.month === "number"
+                ? getMonthName(cardInfo.birthdate.month)
                     .slice(0, 3)
                     .toLowerCase()
                 : "НЕТ"
@@ -85,7 +85,7 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             doneFor={doneFor}
             animal={cardInfo.year.animal}
             element={cardInfo.year.element}
-            title={cardInfo.trueBirthdate.year}
+            title={cardInfo.birthdate.year}
             name={"year"}
           />
           {smallMobile && doneFor !== "HomePage" && (

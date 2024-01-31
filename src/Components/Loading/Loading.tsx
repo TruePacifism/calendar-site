@@ -26,7 +26,8 @@ export default function Loading() {
         }, 1000)
       );
     }
-  }, [isLoading, renderTimeout]);
+    // eslint-disable-next-line
+  }, [isLoading]);
   return (
     isRendering && (
       <div className={isLoading ? styles.showed : styles.hidden}>

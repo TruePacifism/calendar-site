@@ -3,7 +3,7 @@ import styles from "./CardOptionsButton.module.css";
 import { cardInfoType } from "../../utils/types";
 import { ReactComponent as ThreePointsIcon } from "../../images/three-points-icon.svg";
 import { useDispatch } from "react-redux";
-import { openModalAction } from "../../utils/store";
+import { openModalAction, setModalTop } from "../../utils/store";
 import CardOptionsModal from "../CardOptionsModal/CardOptionsModal";
 
 type propsType = {
@@ -18,13 +18,21 @@ export default function CardOptionsButton({ cardInfo, cardRef }: propsType) {
   // eslint-disable-next-line
   const handleThreePointsClick: MouseEventHandler<SVGSVGElement> = (event) => {
     event.stopPropagation();
+    const cardHeight = cardRef.current.getBoundingClientRect().height;
+    const cardTop = cardRef.current.getBoundingClientRect().top;
+    if (window.innerHeight < cardHeight + cardTop) {
+      window.scrollTo({
+        top:
+          window.scrollY + cardHeight + cardTop - window.innerHeight + 60 + 15,
+      });
+    }
     const rootWidth = document
       .getElementById("root")
       .getBoundingClientRect().width;
     const cardX = cardRef.current.getBoundingClientRect().x;
     const cardWidth = cardRef.current.getBoundingClientRect().width;
     const iconBounds = iconRef.current.getBoundingClientRect();
-
+    dispatch(setModalTop(0));
     dispatch(
       openModalAction(
         <>

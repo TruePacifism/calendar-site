@@ -1,8 +1,14 @@
+.сontainer {
+  position: absolute;
+  top: 55px;
+  left: 0;
+  width: 100%;
+}
 .closeIcon {
   width: 20px;
   height: 20px;
   position: absolute;
-  top: calc(52px);
+  top: 0;
   right: 0;
   z-index: 10000;
   transform: translate(-50%, 50%);

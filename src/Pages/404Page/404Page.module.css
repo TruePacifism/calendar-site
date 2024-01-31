@@ -4,7 +4,8 @@
   padding-top: 60px;
   padding-left: 59px;
   padding-right: 59px;
-  height: 100vh;
+  padding-bottom: 60px;
+  min-height: 100vh;
 }
 .heading {
   color: var(--accent-color);

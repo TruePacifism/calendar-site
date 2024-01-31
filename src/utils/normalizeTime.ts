@@ -1,8 +1,6 @@
 export default function normalizeTime(hour: string, minute: string): string {
   const hourValue = Number.parseInt(hour);
   const minuteValue = Number.parseInt(minute);
-  console.log(hour);
-  console.log(minute);
 
   if (hour.length < 2 && minute === undefined) {
     return "0" + hour;
@@ -20,7 +18,7 @@ export default function normalizeTime(hour: string, minute: string): string {
     return hour.substring(0, 2) + ":" + hour.charAt(2);
   }
   if (minute.length < 2) {
-    return (hour.length < 2 ? "0" + hour : hour) + ":" + "0" + minute;
+    return (hour.length < 2 ? "0" + hour : hour) + ":0" + minute;
   }
   if (minute.length === 2) {
     if (minuteValue < 0) {

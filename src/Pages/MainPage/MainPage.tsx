@@ -21,7 +21,6 @@ import { openModalAction, setLoadingAction } from "../../utils/store";
 import AnimalLogo from "../../Components/AnimalLogo/AnimalLogo";
 import countCard from "../../api/countCard";
 import ModalIconedInfo from "../../Components/ModalComponents/ModalIconedInfo/ModalIconedInfo";
-import ElementsExamples from "../../Components/ElementsExamples/ElementsExamples";
 import ModalCardInfo from "../../Components/ModalComponents/ModalCardInfo/ModalCardInfo";
 
 let hashUser: userType = null;
@@ -59,7 +58,6 @@ export default function MainPage() {
       openModalAction(
         <div className={styles.modal}>
           <ModalIconedInfo cardInfo={todayInfo} />
-          <ElementsExamples />
         </div>
       )
     );

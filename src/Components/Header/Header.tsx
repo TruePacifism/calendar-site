@@ -80,16 +80,14 @@ export default function Header({ heading }: propsType) {
             className={styles.backIcon}
             style={{
               position: "absolute",
-              top: infoBounds.top,
+              top: infoBounds.top - 55,
               left:
                 window.innerWidth > 400
                   ? infoBounds.left - (window.innerWidth - 400) / 2
                   : infoBounds.left,
             }}
           />
-          <div className={styles.modalContainer}>
-            <div className={styles.infoContainer}>{getInfoText()}</div>
-          </div>
+          <div className={styles.infoContainer}>{getInfoText()}</div>
         </>
       )
     );
@@ -103,7 +101,7 @@ export default function Header({ heading }: propsType) {
             className={styles.companyContainer}
             style={{
               position: "absolute",
-              top: headingBounds.top,
+              top: headingBounds.top - 55,
               left:
                 window.innerWidth > 400
                   ? headingBounds.left - (window.innerWidth - 400) / 2
@@ -116,9 +114,7 @@ export default function Header({ heading }: propsType) {
               <span className={styles.title}>система</span>
             </div>
           </div>
-          <div className={styles.modalContainer}>
-            <ServiceInfo />
-          </div>
+          <ServiceInfo />
         </>
       )
     );

@@ -25,6 +25,7 @@ const initialState: stateType = {
   loadingImages: [],
   isErrorPage: false,
   mainPageInfo: null,
+  modalTop: 55,
 };
 
 type setLoadingPayloadType = {
@@ -57,6 +58,9 @@ export const setIsErrorPageAction = createAction<boolean, "SET_IS_ERROR_PAGE">(
 );
 export const openModalAction = createAction<ReactJSXElement, "OPEN_MODAL">(
   "OPEN_MODAL"
+);
+export const setModalTop = createAction<number | string, "SET_MODAL_TOP">(
+  "SET_MODAL_TOP"
 );
 export const closeModalAction = createAction<null, "CLOSE_MODAL">(
   "CLOSE_MODAL"
@@ -159,10 +163,17 @@ export const store = configureStore({
           };
         }
       )
+      .addCase(setModalTop, (state, action: PayloadAction<number | string>) => {
+        return {
+          ...state,
+          modalTop: action.payload,
+        };
+      })
       .addCase(closeModalAction, (state, action: PayloadAction<null>) => {
         return {
           ...state,
           modalContent: null,
+          modalTop: 55,
         };
       })
       .addCase(sortCardsAction, (state, action: PayloadAction<sortingType>) => {

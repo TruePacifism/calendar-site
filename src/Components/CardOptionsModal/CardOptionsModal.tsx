@@ -88,7 +88,13 @@ export default function CardOptionsModal({
   }, [groupButtonRef.current]);
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onClick={(e) => {
+        e.stopPropagation();
+        handleCancel();
+      }}
+    >
       <ul
         className={styles.list}
         style={{
@@ -98,6 +104,9 @@ export default function CardOptionsModal({
               : cardBounds.y,
           left: position === "left" ? 13 : undefined,
           right: position === "right" ? 13 : undefined,
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
         }}
       >
         <CardOptionsItem title="ОТКРЫТЬ" onClick={handleOpenCard} />

@@ -13,21 +13,16 @@ export default function MyModal() {
   const modalContent = useSelector<stateType, ReactJSXElement>(
     (store) => store.modalContent
   );
+  const modalTop = useSelector<stateType, number | string>(
+    (store) => store.modalTop
+  );
   const [isOpen, setIsOpen]: [boolean, Dispatch<SetStateAction<boolean>>] =
     useState(false);
-  const [modalElement, setModalElement]: [
-    ReactJSXElement,
-    Dispatch<SetStateAction<ReactJSXElement>>
-  ] = useState(null);
   useEffect(() => {
     if (modalContent) {
-      setModalElement(modalContent);
       setIsOpen(true);
     } else {
       setIsOpen(false);
-      setTimeout(() => {
-        setModalElement(<></>);
-      }, 400);
     }
   }, [modalContent]);
   return (
@@ -39,13 +34,15 @@ export default function MyModal() {
         }}
         transitionDuration={400}
       >
-        <CloseIcon
-          className={styles.closeIcon}
-          onClick={() => {
-            dispatch(closeModalAction());
-          }}
-        />
-        {modalElement}
+        <div className={styles.сontainer} style={{ top: modalTop }}>
+          <CloseIcon
+            className={styles.closeIcon}
+            onClick={() => {
+              dispatch(closeModalAction());
+            }}
+          />
+          {modalContent}
+        </div>
       </Dialog>
     </ThemeProvider>
   );

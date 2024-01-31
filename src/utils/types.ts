@@ -262,6 +262,7 @@ export type stateType = {
   loadingImages: string[];
   isErrorPage: boolean;
   mainPageInfo: inputDataType;
+  modalTop: number | string;
 };
 
 export type userType = {

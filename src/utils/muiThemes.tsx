@@ -231,7 +231,19 @@ export const cityInputTheme = createTheme({
 });
 
 export const homePageInput = createTheme({
+  palette: {
+    primary: {
+      main: "#ff0000", // Your desired color
+    },
+  },
   components: {
+    MuiTouchRipple: {
+      styleOverrides: {
+        child: {
+          backgroundColor: "red",
+        },
+      },
+    },
     MuiInput: {
       styleOverrides: {
         // root: {

@@ -37,9 +37,6 @@
   padding-bottom: 16px;
 }
 .modal {
-  position: absolute;
-  top: 52px;
-  left: 0;
   width: 100%;
   padding: 20px;
   & > *:not(:last-child) {

@@ -28,6 +28,7 @@ const getMonthDaysArray = (month: monthType, year: number): number[] => {
   if (month.orderNumber === 1 && year % 4 === 0) {
     days.push(29);
   }
+
   return days;
 };
 
@@ -117,8 +118,19 @@ export default function InputTodayModal({ selected }: propsType) {
       }
       if (newValue.length === 5 && oldValue.length === 4) {
         thisDayRef.current.focus();
+        return normalizeTime(hour, minute);
       }
-      return normalizeTime(hour, minute);
+      if (!hour || hour.length < 2) {
+        return newValue;
+      }
+      if (!minute || minute.length === 0) {
+        return normalizeTime(hour, minute).split(":")[0] + ":";
+      }
+      if (!minute || minute.length === 1) {
+        return normalizeTime(hour, minute).split(":")[0] + ":" + minute;
+      }
+
+      return hour + ":" + minute;
     });
   };
   const handleDayChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -218,7 +230,7 @@ export default function InputTodayModal({ selected }: propsType) {
               name="day"
               defaultValue={inputRefs.day.value}
               inputRef={thisDayRef}
-              value={dayValue}
+              value={Number.parseInt(dayValue).toString()}
               onChange={handleDayChange}
             >
               {Object.values(
