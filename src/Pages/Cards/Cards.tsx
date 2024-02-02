@@ -116,12 +116,16 @@ export default function Cards() {
       /> */}
       <ScrollTopIcon
         className={styles.scrollTopIcon}
-        onClick={() => {
-          window.scroll({
-            top: 0,
-            behavior: "smooth",
-          });
-        }}
+        onClick={
+          isVisible
+            ? () => {
+                window.scroll({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }
+            : undefined
+        }
         style={{ opacity: isVisible || !elementRef.valueOf() ? 0 : 1 }}
       />
       <div className={styles.cardsInfoContainer}>

@@ -3,8 +3,8 @@
   height: 100%;
 }
 .imageWrapper {
-  width: 52px;
-  height: 47px;
+  width: 30px;
+  height: auto;
   margin-bottom: 4px;
   box-shadow: var(--bottom-shadow);
 }

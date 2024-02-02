@@ -7,6 +7,7 @@ import { cardInfoType, stylesType } from "../../utils/types";
 import { useMediaQuery } from "@mui/material";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import getMonthName from "../../utils/getMonthName";
+import timeMask from "../../utils/timeMask";
 import normalizeTime from "../../utils/normalizeTime";
 
 type propsType = {
@@ -33,7 +34,7 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
     Dispatch<SetStateAction<stylesType>>
   ] = useState({ container: "" });
 
-  const smallMobile = useMediaQuery("(min-width: 345px)");
+  const smallMobile = useMediaQuery("(max-width: 345px)");
 
   //УДАЛИТЬ В КОНЦЕ
   useEffect(() => {
@@ -56,8 +57,8 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             animal={cardInfo.hour.animal}
             element={cardInfo.hour.element}
             title={normalizeTime(
-              cardInfo.birthdate.hour.toString(),
-              cardInfo.birthdate.minute.toString()
+              cardInfo.birthdate.hour,
+              cardInfo.birthdate.minute
             )}
             name={"hour"}
           />
@@ -88,9 +89,9 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             title={cardInfo.birthdate.year}
             name={"year"}
           />
-          {smallMobile && doneFor !== "HomePage" && (
+          {/* {smallMobile && doneFor !== "HomePage" && (
             <div className={styles.separator}></div>
-          )}
+          )} */}
           {doneFor !== "HomePage" && doneFor !== "CardGridItem" && (
             <CardColumn
               animal={

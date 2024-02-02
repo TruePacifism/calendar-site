@@ -12,6 +12,7 @@
   min-height: 100dvh;
   & > :nth-child(2) {
     min-height: calc(100dvh - 52px - 60px);
+    position: relative;
   }
   position: relative;
 }

@@ -11,7 +11,7 @@
     margin-bottom: 10px;
   }
   & > *:nth-child(1) {
-    transform: scale(0.7) translateX(-30%);
+    /* transform: scale(0.7) translateX(-30%); */
   }
 }
 .blackContainer {
@@ -23,7 +23,7 @@
     width: 30px;
   }
   & > *:nth-child(1) {
-    margin-right: 12px;
+    margin-right: 10px;
   }
 }
 .image {

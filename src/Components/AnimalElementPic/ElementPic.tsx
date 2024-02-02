@@ -162,7 +162,7 @@ export default function ElementPic({ element, doneFor }: propsType) {
     ) : (
       <div className={styles.imageWrapper + " " + styles.noImageBorder}>
         <div className={styles.noBlackBorder}>
-          <img src={NoElement} className={styles.noImage} alt="" />
+          <img src={NoElement} className={styles.image} alt="" />
         </div>
       </div>
     ))

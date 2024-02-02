@@ -18,7 +18,7 @@ import { months } from "../../enums";
 import { cardColumnNameType } from "../CardColumn/CardColumn";
 import validateNumbersInput from "../../utils/validateNumbersInput";
 import normalizeNumber from "../../utils/normalizeNumber";
-import normalizeTime from "../../utils/normalizeTime";
+import timeMask from "../../utils/timeMask";
 
 const getMonthDaysArray = (month: monthType, year: number): number[] => {
   const days: number[] = [];
@@ -116,18 +116,24 @@ export default function InputTodayModal({ selected }: propsType) {
       if (newValue + ":" === oldValue || oldValue + ":" === newValue) {
         return newValue;
       }
-      if (newValue.length === 5 && oldValue.length === 4) {
-        thisDayRef.current.focus();
-        return normalizeTime(hour, minute);
+      if (
+        oldValue.length === 2 &&
+        newValue.length === 3 &&
+        !oldValue.endsWith(":")
+      ) {
+        return oldValue + ":" + addedChar;
+      }
+      if (newValue.length >= 5 && oldValue.length >= 4) {
+        return timeMask(hour, minute);
       }
       if (!hour || hour.length < 2) {
         return newValue;
       }
       if (!minute || minute.length === 0) {
-        return normalizeTime(hour, minute).split(":")[0] + ":";
+        return timeMask(hour, minute).split(":")[0] + ":";
       }
       if (!minute || minute.length === 1) {
-        return normalizeTime(hour, minute).split(":")[0] + ":" + minute;
+        return timeMask(hour, minute).split(":")[0] + ":" + minute;
       }
 
       return hour + ":" + minute;

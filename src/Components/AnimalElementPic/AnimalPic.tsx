@@ -163,7 +163,7 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
     ) : (
       <div className={styles.imageWrapper + " " + styles.noImageBorder}>
         <div className={styles.noBlackBorder}>
-          <img src={NoAnimal} className={styles.noImage} alt="" />
+          <img src={NoAnimal} className={styles.image} alt="" />
         </div>
       </div>
     ))

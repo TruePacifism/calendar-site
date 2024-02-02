@@ -6,6 +6,7 @@
   max-width: 12px;
   height: auto;
   stroke: white;
+  stroke-width: 5px;
 }
 .lightGreen,
 .lightGreen-left > path:nth-child(5),
