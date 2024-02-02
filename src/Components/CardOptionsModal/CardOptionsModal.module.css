@@ -30,6 +30,8 @@
   width: 5px;
   height: 26px;
   fill: white;
+  top: 7px;
+  right: 7px;
   position: absolute;
 }
 .connectingLine {

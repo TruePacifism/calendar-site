@@ -14,6 +14,7 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { closeModalAction, openModalAction } from "../../utils/store";
 import CardDeletionPopup from "../CardDeletionPopup/CardDeletionPopup";
+import { ReactComponent as CardOptionsButton } from "../../images/three-points-icon.svg";
 
 type propsType = {
   cardRef: React.MutableRefObject<HTMLDivElement>;
@@ -100,7 +101,7 @@ export default function CardOptionsModal({
         style={{
           top:
             cardBounds.y + 239 > window.innerHeight
-              ? window.innerHeight - 239 - 5
+              ? window.innerHeight - 239 - 60 - 13 - 5
               : cardBounds.y,
           left: position === "left" ? 13 : undefined,
           right: position === "right" ? 13 : undefined,
@@ -109,6 +110,7 @@ export default function CardOptionsModal({
           e.stopPropagation();
         }}
       >
+        <CardOptionsButton className={styles.icon} />
         <CardOptionsItem title="ОТКРЫТЬ" onClick={handleOpenCard} />
         <CardOptionsItem title="УДАЛИТЬ" onClick={handleDeleteCard} />
         {/* <CardOptionsItem

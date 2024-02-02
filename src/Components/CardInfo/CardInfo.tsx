@@ -4,10 +4,8 @@ import cardGridItemStyles from "./CardInfo-CardGridItem.module.css";
 import homePageStyles from "./CardInfo-HomePage.module.css";
 import CardColumn from "../CardColumn/CardColumn";
 import { cardInfoType, stylesType } from "../../utils/types";
-import { useMediaQuery } from "@mui/material";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import getMonthName from "../../utils/getMonthName";
-import timeMask from "../../utils/timeMask";
 import normalizeTime from "../../utils/normalizeTime";
 
 type propsType = {
@@ -33,8 +31,6 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
     stylesType,
     Dispatch<SetStateAction<stylesType>>
   ] = useState({ container: "" });
-
-  const smallMobile = useMediaQuery("(max-width: 345px)");
 
   //УДАЛИТЬ В КОНЦЕ
   useEffect(() => {

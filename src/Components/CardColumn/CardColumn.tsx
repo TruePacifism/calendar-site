@@ -22,7 +22,7 @@ import CollisionsList from "../CollisionsList/CollisionsList";
 import { Input, ThemeProvider } from "@mui/material";
 import { homePageInput } from "../../utils/muiThemes";
 import { useDispatch, useSelector } from "react-redux";
-import { openModalAction, setModalTop } from "../../utils/store";
+import { openModalAction } from "../../utils/store";
 import InputTodayModal from "../InputTodayModal/InputTodayModal";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import getMonthName from "../../utils/getMonthName";
@@ -96,7 +96,6 @@ export default function CardColumn({
   const onClickHandle: MouseEventHandler<HTMLInputElement> = useCallback(
     (e) => {
       e.stopPropagation();
-      dispatch(setModalTop(0));
       dispatch(openModalAction(<InputTodayModal selected={name} />));
     },
     [dispatch, name]

@@ -24,6 +24,7 @@ export default function CardOptionsButton({ cardInfo, cardRef }: propsType) {
       window.scrollTo({
         top:
           window.scrollY + cardHeight + cardTop - window.innerHeight + 60 + 15,
+        behavior: "smooth",
       });
     }
     const rootWidth = document
@@ -31,18 +32,10 @@ export default function CardOptionsButton({ cardInfo, cardRef }: propsType) {
       .getBoundingClientRect().width;
     const cardX = cardRef.current.getBoundingClientRect().x;
     const cardWidth = cardRef.current.getBoundingClientRect().width;
-    const iconBounds = iconRef.current.getBoundingClientRect();
     dispatch(setModalTop(0));
     dispatch(
       openModalAction(
-        <>
-          <ThreePointsIcon
-            className={styles.threePointsIcon}
-            style={{
-              top: iconBounds.top,
-              left: iconBounds.left,
-            }}
-          />
+        <div>
           <CardOptionsModal
             position={
               rootWidth / 2 < cardX ||
@@ -54,7 +47,7 @@ export default function CardOptionsButton({ cardInfo, cardRef }: propsType) {
             cardData={cardInfo}
             cardRef={cardRef}
           />
-        </>
+        </div>
       )
     );
   };
