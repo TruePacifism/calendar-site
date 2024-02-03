@@ -100,7 +100,7 @@ export default function CardOptionsModal({
         className={styles.list}
         style={{
           top:
-            cardBounds.y + 239 > window.innerHeight
+            cardBounds.top + 239 + 60 > window.innerHeight
               ? window.innerHeight - 239 - 60 - 13 - 5
               : cardBounds.y,
           left: position === "left" ? 13 : undefined,

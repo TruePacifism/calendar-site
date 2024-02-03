@@ -117,7 +117,7 @@ export default function Cards() {
       <ScrollTopIcon
         className={styles.scrollTopIcon}
         onClick={
-          isVisible
+          !isVisible
             ? () => {
                 window.scroll({
                   top: 0,
@@ -126,7 +126,10 @@ export default function Cards() {
               }
             : undefined
         }
-        style={{ opacity: isVisible || !elementRef.valueOf() ? 0 : 1 }}
+        style={{
+          opacity: isVisible || !elementRef.valueOf() ? 0 : 1,
+          pointerEvents: isVisible || !elementRef.valueOf() ? "none" : "auto",
+        }}
       />
       <div className={styles.cardsInfoContainer}>
         <div className={styles.heading}>КАРТОТЕКА</div>

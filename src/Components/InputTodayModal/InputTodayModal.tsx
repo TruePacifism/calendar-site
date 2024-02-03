@@ -110,11 +110,17 @@ export default function InputTodayModal({ selected }: propsType) {
       if (addedChar && Number.isNaN(Number.parseInt(addedChar))) {
         return oldValue;
       }
-      if (newValue.endsWith(":")) {
-        return hour;
-      }
-      if (newValue + ":" === oldValue || oldValue + ":" === newValue) {
+
+      if (oldValue + ":" === newValue) {
         return newValue;
+      }
+      if (
+        oldValue.length === 3 &&
+        oldValue.endsWith(":") &&
+        newValue.length === 2 &&
+        !newValue.endsWith(":")
+      ) {
+        return hour.charAt(0);
       }
       if (
         oldValue.length === 2 &&
