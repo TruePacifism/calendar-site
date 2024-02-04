@@ -95,6 +95,10 @@ export const delitionModalTheme = createTheme({
           height: "auto",
           minHeight: 0,
           maxHeight: 51,
+          ":hover": {
+            color: "white",
+            backgroundColor: accentColor,
+          },
         },
       },
     },
@@ -385,6 +389,10 @@ export const loginTheme = createTheme({
           textAlign: "center",
           height: 39,
           width: 156,
+          "&:hover": {
+            backgroundColor: accentColor,
+            opacity: 0.8,
+          },
         },
       },
     },

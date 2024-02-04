@@ -6,7 +6,6 @@ import {
 } from "@reduxjs/toolkit";
 import {
   cardInfoType,
-  dateType,
   inputDataType,
   sortingType,
   stateType,

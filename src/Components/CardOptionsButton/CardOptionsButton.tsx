@@ -34,7 +34,7 @@ export default function CardOptionsButton({ cardInfo, cardRef }: propsType) {
   const iconRef = useRef<SVGSVGElement>(null);
 
   // eslint-disable-next-line
-  const handleThreePointsClick: MouseEventHandler<SVGSVGElement> = (event) => {
+  const handleThreePointsClick: MouseEventHandler<HTMLDivElement> = (event) => {
     event.stopPropagation();
     // const cardHeight = cardRef.current.getBoundingClientRect().height;
     const cardTop = cardRef.current.getBoundingClientRect().top;
@@ -78,10 +78,8 @@ export default function CardOptionsButton({ cardInfo, cardRef }: propsType) {
   };
 
   return (
-    <ThreePointsIcon
-      ref={iconRef}
-      className={styles.threePointsIcon}
-      onClick={handleThreePointsClick}
-    />
+    <div className={styles.wrapper} onClick={handleThreePointsClick}>
+      <ThreePointsIcon ref={iconRef} className={styles.threePointsIcon} />
+    </div>
   );
 }
