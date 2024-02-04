@@ -96,7 +96,6 @@ export default function ModalCardInfo({ cardInfo }: propsType) {
           title={cardInfo.birthdate.year}
           name={"year"}
         />
-        <div></div>
         {cardInfo.currentPillar && (
           <CardColumn
             doneFor="Calculator"

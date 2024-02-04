@@ -40,14 +40,6 @@ auth.languageCode = "ru";
 
 type propsType = {};
 
-type userInfoType = {
-  token: string;
-  name: string;
-  mail: string;
-  livingcity: string;
-  birthcity: string;
-};
-
 export default function LoginPage(props: propsType) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -76,12 +68,14 @@ export default function LoginPage(props: propsType) {
     }
   }, [token]);
   const [userInfo, setUserInfo]: [
-    userInfoType,
-    Dispatch<SetStateAction<userInfoType>>
+    userInput,
+    Dispatch<SetStateAction<userInput>>
   ] = useState();
   const googleSignIn = () => {
     signInWithPopup(auth, provider).then(async (result) => {
       const token: string = result.user.uid;
+      console.log(result.user);
+
       const user = await getUserInfo({ token });
       if (user) {
         localStorage.setItem("token", user.token);
@@ -91,7 +85,9 @@ export default function LoginPage(props: propsType) {
       } else {
         const user: userInput = {
           token: token,
-          name: result.user.displayName,
+          firstName: result.user.displayName.split(" ")[0],
+          secondName: result.user.displayName.split(" ")[1],
+          thirdName: "",
           mail: result.user.email,
           livingcity: "",
           birthcity: "",
@@ -104,7 +100,7 @@ export default function LoginPage(props: propsType) {
       }
     });
   };
-  const fetchUser = async (user: userInfoType) => {
+  const fetchUser = async (user: userInput) => {
     const token = await authUser({ user });
     localStorage.setItem("token", token);
     navigate("/");
@@ -118,8 +114,8 @@ export default function LoginPage(props: propsType) {
   const [nameValue, setNameValue]: [string, Dispatch<SetStateAction<string>>] =
     useState("");
   useEffect(() => {
-    setNameValue(userInfo?.name);
-  }, [userInfo?.name]);
+    setNameValue(userInfo?.firstName);
+  }, [userInfo?.firstName]);
 
   return (
     <div className={styles.container}>
@@ -138,7 +134,13 @@ export default function LoginPage(props: propsType) {
                 e: React.FormEvent<HTMLFormElement> & {
                   target: {
                     elements?: {
-                      name: {
+                      firstName: {
+                        value: string;
+                      };
+                      secondName: {
+                        value: string;
+                      };
+                      thirdName: {
                         value: string;
                       };
                       mail: {
@@ -155,11 +157,19 @@ export default function LoginPage(props: propsType) {
                 }
               ) => {
                 e.preventDefault();
-                const { name, livingcity, birthcity } = e.target.elements;
+                const {
+                  firstName,
+                  secondName,
+                  thirdName,
+                  livingcity,
+                  birthcity,
+                } = e.target.elements;
                 console.dir(e.target.elements);
-                const user: userInfoType = {
+                const user: userInput = {
                   ...userInfo,
-                  name: name.value,
+                  firstName: firstName.value,
+                  secondName: secondName.value,
+                  thirdName: thirdName.value,
                   livingcity: livingcity.value,
                   birthcity: birthcity.value,
                 };
@@ -171,7 +181,7 @@ export default function LoginPage(props: propsType) {
               <label className={styles.formFieldContainer}>
                 <TextField
                   type="text"
-                  name="name"
+                  name="firstName"
                   label="имя"
                   size="small"
                   value={nameValue}
@@ -186,10 +196,10 @@ export default function LoginPage(props: propsType) {
               <label className={styles.formFieldContainer}>
                 <TextField
                   type="text"
-                  name="surname"
+                  name="secondName"
                   size="small"
                   label="фамилия"
-                  defaultValue={userInfo.name}
+                  defaultValue={userInfo.secondName}
                   variant="outlined"
                 />
               </label>
@@ -199,20 +209,20 @@ export default function LoginPage(props: propsType) {
                   name="thirdName"
                   size="small"
                   label="отчество"
-                  defaultValue={userInfo.name}
+                  defaultValue={userInfo.thirdName}
                   variant="outlined"
                 />
               </label>
               <CityInput
                 name="birthcity"
                 title="Место рождения"
-                placeholder="населенный пункт"
+                placeholder="место рождения"
                 doneFor="loginPage"
               />
               <CityInput
                 name="livingcity"
                 title="Место жительства"
-                placeholder="населенный пункт"
+                placeholder="место жительства"
                 doneFor="loginPage"
               />
               <Button className={styles.regButton} type="submit">

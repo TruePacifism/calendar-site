@@ -13,7 +13,12 @@ import { darkButtonTheme, homePageInput } from "../../utils/muiThemes";
 import CityInput from "../CityInput/CityInput";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModalAction, setMainPageDateAction } from "../../utils/store";
-import { monthType, stateType, userType } from "../../utils/types";
+import {
+  inputDataType,
+  monthType,
+  stateType,
+  userType,
+} from "../../utils/types";
 import { months } from "../../enums";
 import { cardColumnNameType } from "../CardColumn/CardColumn";
 import validateNumbersInput from "../../utils/validateNumbersInput";
@@ -207,14 +212,20 @@ export default function InputTodayModal({ selected }: propsType) {
   ) => {
     e.preventDefault();
 
-    const newTodayDatabirthdate = {
-      hour: Number.parseInt(e.target.elements.hour.value.split(":")[0]),
-      minute: Number.parseInt(e.target.elements.hour.value.split(":")[1]),
-      day: Number.parseInt(e.target.elements.day.value),
-      month: months.find(
-        (month) => month.name === e.target.elements.month.value
-      ).orderNumber,
-      year: Number.parseInt(e.target.elements.year.value),
+    const newTodayDatabirthdate: inputDataType = {
+      birthdate: {
+        hour: Number.parseInt(e.target.elements.hour.value.split(":")[0]),
+        minute: Number.parseInt(e.target.elements.hour.value.split(":")[1]),
+        day: Number.parseInt(e.target.elements.day.value),
+        month: months.find(
+          (month) => month.name === e.target.elements.month.value
+        ).orderNumber,
+        year: Number.parseInt(e.target.elements.year.value),
+      },
+      gender: "female",
+      name: "today",
+      livingcity: e.target.elements.livingcity.value,
+      birthcity: e.target.elements.birthcity.value,
     };
 
     dispatch(setMainPageDateAction(newTodayDatabirthdate));

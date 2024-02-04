@@ -247,8 +247,10 @@ export type cityInfoType = {
 };
 
 export type userInput = {
+  firstName: string;
+  secondName?: string;
+  thirdName?: string;
   token: string;
-  name: string;
   mail: string;
   livingcity: string;
   birthcity: string;
@@ -266,7 +268,9 @@ export type stateType = {
 };
 
 export type userType = {
-  name: string;
+  firstName: string;
+  secondName?: string;
+  thirdName?: string;
   mail: string;
   livingcity: string;
   birthcity: string;

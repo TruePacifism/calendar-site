@@ -9,7 +9,11 @@ import React, {
 import styles from "./SearchField.module.css";
 import { ReactComponent as SearchIcon } from "../../images/search-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModalAction, openModalAction } from "../../utils/store";
+import {
+  closeModalAction,
+  openModalAction,
+  setModalTop,
+} from "../../utils/store";
 import { cardInfoType, inputDataType, stateType } from "../../utils/types";
 import { createSearchParams, useNavigate } from "react-router-dom";
 
@@ -42,6 +46,7 @@ function SearchFieldModal() {
       </div>
       <ul className={styles.searchResultList}>
         {cards &&
+          searchValue !== "" &&
           cards
             .filter((card) =>
               card.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -85,6 +90,7 @@ export default function SearchField() {
     if (!searchRef.current) {
       return;
     }
+    dispatch(setModalTop(0));
     dispatch(
       openModalAction(
         <div

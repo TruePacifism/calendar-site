@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, MutableRefObject, useRef } from "react";
+import React, { MouseEventHandler, useRef } from "react";
 import styles from "./CardOptionsButton.module.css";
 import { cardInfoType } from "../../utils/types";
 import { ReactComponent as ThreePointsIcon } from "../../images/three-points-icon.svg";
@@ -29,45 +29,6 @@ function scrollToAnimate(targetPosition: number, duration: number) {
   }, 16);
 }
 
-function scrollToY(scrollTargetY: number, speed: number) {
-  // scrollTargetY: the target scrollY property of the window
-  // speed: time in pixels per second
-  // easing: easing equation to use
-
-  var scrollY = window.scrollY || document.documentElement.scrollTop,
-    currentTime = 0;
-
-  // easing equations from https://github.com/danro/easing-js/blob/master/easing.js
-  var easeInOutQuad = function (t: number, b: number, c: number, d: number) {
-    t /= d / 2;
-    if (t < 1) return (c / 2) * t * t + b;
-    t--;
-    return (-c / 2) * (t * (t - 2) - 1) + b;
-  };
-
-  var time = Math.max(
-    0.1,
-    Math.min(Math.abs(scrollY - scrollTargetY) / speed, 0.8)
-  );
-
-  function tick() {
-    currentTime += 1 / 60;
-
-    var p = currentTime / time;
-    var t = easeInOutQuad(p, scrollY, scrollTargetY - scrollY, time);
-
-    if (p < 1) {
-      window.requestAnimationFrame(tick);
-
-      window.scrollTo(0, t);
-    } else {
-      window.scrollTo(0, scrollTargetY);
-    }
-  }
-
-  tick();
-}
-
 export default function CardOptionsButton({ cardInfo, cardRef }: propsType) {
   const dispatch = useDispatch();
   const iconRef = useRef<SVGSVGElement>(null);
@@ -75,7 +36,7 @@ export default function CardOptionsButton({ cardInfo, cardRef }: propsType) {
   // eslint-disable-next-line
   const handleThreePointsClick: MouseEventHandler<SVGSVGElement> = (event) => {
     event.stopPropagation();
-    const cardHeight = cardRef.current.getBoundingClientRect().height;
+    // const cardHeight = cardRef.current.getBoundingClientRect().height;
     const cardTop = cardRef.current.getBoundingClientRect().top;
     if (window.innerHeight < 239 + cardTop + 60) {
       scrollToAnimate(

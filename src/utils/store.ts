@@ -7,6 +7,7 @@ import {
 import {
   cardInfoType,
   dateType,
+  inputDataType,
   sortingType,
   stateType,
   userType,
@@ -69,7 +70,7 @@ export const sortCardsAction = createAction<sortingType, "SORT_CARDS">(
   "SORT_CARDS"
 );
 export const setMainPageDateAction = createAction<
-  dateType,
+  inputDataType,
   "SET_MAIN_PAGE_DATE"
 >("SET_MAIN_PAGE_DATE");
 export const incrementMainPageDateAction = createAction<
@@ -193,8 +194,8 @@ export const store = configureStore({
       })
       .addCase(
         setMainPageDateAction,
-        (state, action: PayloadAction<dateType>) => {
-          state.mainPageInfo.birthdate = action.payload;
+        (state, action: PayloadAction<inputDataType>) => {
+          state.mainPageInfo = action.payload;
         }
       )
       .addCase(
