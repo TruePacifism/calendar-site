@@ -97,7 +97,9 @@ export default function MainPage() {
             onClick={() => {
               console.log("clicked");
 
-              dispatch(openModalAction(<ModalCardInfo cardInfo={todayInfo} />));
+              dispatch(
+                openModalAction(<ModalCardInfo cardInfo={todayInfo} isToday />)
+              );
             }}
           >
             <CardInfo doneFor="HomePage" cardInfo={todayInfo} />

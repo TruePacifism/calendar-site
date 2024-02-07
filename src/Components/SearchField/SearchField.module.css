@@ -49,6 +49,7 @@
 }
 .searchResultItem {
   color: white;
+  cursor: pointer;
   &:not(:last-child) {
     margin-bottom: 10px;
   }

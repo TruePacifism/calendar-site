@@ -5,9 +5,11 @@ import CardColumn from "../../CardColumn/CardColumn";
 import ModalCollision from "../ModalCollision/ModalCollision";
 import ElementsExamples from "../../ElementsExamples/ElementsExamples";
 import getMonthName from "../../../utils/getMonthName";
+import getCollisionFrames from "../../../api/getCollisionFrames";
 
 type propsType = {
   cardInfo: cardInfoType;
+  isToday?: boolean;
 };
 
 const getAllCollisions = (cardInfo: cardInfoType): collisionType[] => {
@@ -58,7 +60,7 @@ const getAllCollisions = (cardInfo: cardInfoType): collisionType[] => {
 
 const keys = ["year", "month", "day", "hour", "pillar"];
 
-export default function ModalCardInfo({ cardInfo }: propsType) {
+export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
   return (
     <div className={styles.container}>
       <ul className={styles.list}>
@@ -114,7 +116,13 @@ export default function ModalCardInfo({ cardInfo }: propsType) {
       <ul className={styles.collisionsList}>
         {getAllCollisions(cardInfo).map((collision, idx) => (
           <>
-            <ModalCollision collision={collision} key={idx} />
+            <ModalCollision
+              collision={collision}
+              key={idx}
+              isToday
+              birthdate={isToday ? cardInfo.birthdate : undefined}
+              trueBirthdate={isToday ? cardInfo.trueBirthdate : undefined}
+            />
           </>
         ))}
       </ul>

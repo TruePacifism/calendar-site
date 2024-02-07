@@ -612,7 +612,17 @@ export const googleAuthButton = createTheme({
             backgroundColor: accentColor,
           },
         },
-        disabled: {},
+        disabled: {
+          color: "white",
+        },
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+          marginRight: 6,
+        },
       },
     },
   },

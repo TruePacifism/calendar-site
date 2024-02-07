@@ -42,7 +42,9 @@ export type propsType = {
 };
 export default function InputTodayModal({ selected }: propsType) {
   const dispatch = useDispatch();
-  const user = useSelector<stateType, userType>((state) => state.user);
+  const mainPageInfo = useSelector<stateType, inputDataType>(
+    (state) => state.mainPageInfo
+  );
 
   // eslint-disable-next-line
   const [inputRefs, setInputRefs]: [
@@ -343,14 +345,14 @@ export default function InputTodayModal({ selected }: propsType) {
             name="birthcity"
             placeholder="место рождения"
             doneFor="homeModal"
-            defaultValue={user.birthcity}
+            defaultValue={mainPageInfo.birthcity}
           />
           <CityInput
             title="Место жительства"
             name="livingcity"
             placeholder="место жительства"
             doneFor="homeModal"
-            defaultValue={user.livingcity}
+            defaultValue={mainPageInfo.livingcity}
           />
           <div className={styles.buttonList}>
             <ThemeProvider theme={darkButtonTheme}>

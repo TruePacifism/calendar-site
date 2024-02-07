@@ -82,7 +82,7 @@ export default function IconedCardInfoList({
                 ? "ㅤ"
                 : `${cardInfo.age.year},${cardInfo.age.month}`,
           },
-      {
+      cardInfo.direction && {
         Icon: BirthSideIcon,
         value: cardInfo.direction.shortName,
       },

@@ -218,7 +218,7 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
 
         <div className={styles.saveContainer}>
           <ThemeProvider theme={buttonTheme}>
-            {id ? (
+            {id && (
               <Button
                 className={styles.button}
                 onClick={() => {
@@ -226,10 +226,6 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
                 }}
               >
                 УДАЛИТЬ
-              </Button>
-            ) : (
-              <Button className={styles.button} onClick={fetchAddCard}>
-                СОХРАНИТЬ
               </Button>
             )}
           </ThemeProvider>
