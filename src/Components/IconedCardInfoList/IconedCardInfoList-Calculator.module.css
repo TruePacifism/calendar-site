@@ -2,11 +2,11 @@
   padding-top: 19px;
   padding-bottom: 19px;
   padding-left: 13px;
-  padding-right: 13px;
+  padding-right: calc(13px + 2rem);
   background-color: var(--light-accent-color);
 }
 .list {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 }

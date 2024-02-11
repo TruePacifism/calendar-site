@@ -1,14 +1,24 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import styles from "./Header.module.css";
 import { ReactComponent as BackIcon } from "../../images/back-icon.svg";
 import { ReactComponent as OptionsIcon } from "../../images/options-icon.svg";
 import { ReactComponent as InfoIcon } from "../../images/info-icon.svg";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { stateType } from "../../utils/types";
-import { openModalAction } from "../../utils/store";
+import { stateType, userType } from "../../utils/types";
+import { closeModalAction, openModalAction } from "../../utils/store";
 import ServiceInfo from "../ServiceInfo/ServiceInfo";
 import { ReactComponent as LogoIcon } from "../../images/logo-another-icon.svg";
+import { ReactComponent as LogOutIcon } from "../../images/log-out-icon.svg";
+import { ReactComponent as DeleteIcon } from "../../images/delete-icon.svg";
+import { Button, ThemeProvider } from "@mui/material";
+import { darkButtonTheme } from "../../utils/muiThemes";
+import deleteUser from "../../api/deleteUser";
 
 type propsType = {
   heading: string;
@@ -20,6 +30,9 @@ export default function Header({ heading }: propsType) {
   const isErrorPage = useSelector<stateType, boolean>(
     (state) => state.isErrorPage
   );
+  const navigate = useNavigate();
+  const user = useSelector<stateType, userType>((state) => state.user);
+  const userMail = useMemo(() => (user ? user.mail : ""), [user]);
   const params = useSearchParams()[0];
   const infoRef = useRef<SVGSVGElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
@@ -119,6 +132,85 @@ export default function Header({ heading }: propsType) {
       )
     );
   }, [dispatch]);
+  const openWarningModal = (message: "delete" | "logout") => {
+    dispatch(
+      openModalAction(
+        <div className={styles.warningContainer}>
+          <p className={styles.warningText}>
+            {message === "delete"
+              ? "Вы действительно хотите удалить аккаунт?"
+              : "Вы действительно хотите выйти из аккаунта?"}
+          </p>
+          <div className={styles.warningButtonsContainer}>
+            <ThemeProvider theme={darkButtonTheme}>
+              <Button
+                onClick={
+                  message === "logout"
+                    ? () => {
+                        localStorage.removeItem("token");
+                        dispatch(closeModalAction());
+                        navigate("/login");
+                      }
+                    : async () => {
+                        await deleteUser({
+                          token: localStorage.getItem("token"),
+                        });
+                        dispatch(closeModalAction());
+                        navigate("/login");
+                      }
+                }
+              >
+                Да
+              </Button>
+              <Button
+                onClick={() => {
+                  dispatch(closeModalAction());
+                }}
+              >
+                Нет
+              </Button>
+            </ThemeProvider>
+          </div>
+        </div>
+      )
+    );
+  };
+  const openOptionsModal = () => {
+    dispatch(
+      openModalAction(
+        <div className={styles.optionsContainer}>
+          <ul className={styles.optionsList}>
+            <li
+              className={styles.optionsItem}
+              onClick={() => {
+                openWarningModal("logout");
+              }}
+            >
+              <LogOutIcon className={styles.logOutIcon} />
+              <span className={styles.optionsText}>
+                Выйти из аккаунта
+                <br />
+                {userMail}
+              </span>
+            </li>
+            <li
+              className={styles.optionsItem}
+              onClick={() => {
+                openWarningModal("delete");
+              }}
+            >
+              <DeleteIcon className={styles.deleteIcon} />
+              <span className={styles.optionsText}>
+                Удалить аккаунт
+                <br />
+                {userMail}
+              </span>
+            </li>
+          </ul>
+        </div>
+      )
+    );
+  };
   return (
     !isErrorPage && (
       <>
@@ -151,7 +243,7 @@ export default function Header({ heading }: propsType) {
               <span className={styles.title}>система</span>
             </div>
           </div>
-          <OptionsIcon className={styles.logoIcon} />
+          <OptionsIcon onClick={openOptionsModal} className={styles.logoIcon} />
         </div>
       </>
     )

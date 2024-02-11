@@ -2,7 +2,12 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./CityInput.module.css";
 import { ThemeProvider } from "@emotion/react";
 import { cityInputTheme, loginTheme } from "../../utils/muiThemes";
-import { Autocomplete, TextField, debounce } from "@mui/material";
+import {
+  Autocomplete,
+  TextField,
+  TextFieldProps,
+  debounce,
+} from "@mui/material";
 import { cityInfoType } from "../../utils/types";
 import getCities from "../../api/getCities";
 
@@ -14,7 +19,7 @@ type propsType = {
   placeholder: string;
   doneFor: doneForType;
   defaultValue?: string;
-};
+} & TextFieldProps;
 
 export default function CityInput({
   title,
@@ -80,11 +85,13 @@ export default function CityInput({
           //     </li>
           //   );
           // }}
+
           defaultValue={defaultValue}
           renderInput={(params) =>
             citiesList ? (
               <TextField
                 {...params}
+                InputLabelProps={{ shrink: true }}
                 name={name}
                 onChange={updateInput}
                 label={placeholder}

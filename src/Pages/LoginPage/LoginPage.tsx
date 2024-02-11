@@ -112,6 +112,10 @@ export default function LoginPage(props: propsType) {
       }
     });
   };
+  const [isRulesShowing, setIsRulesShowing]: [
+    boolean,
+    Dispatch<SetStateAction<boolean>>
+  ] = useState(false);
   const fetchUser = async (user: userInput) => {
     const token = await authUser({ user });
     localStorage.setItem("token", token);
@@ -192,6 +196,7 @@ export default function LoginPage(props: propsType) {
             >
               <label className={styles.formFieldContainer}>
                 <TextField
+                  InputLabelProps={{ shrink: true }}
                   type="text"
                   name="firstName"
                   label="имя"
@@ -207,6 +212,7 @@ export default function LoginPage(props: propsType) {
               </label>
               <label className={styles.formFieldContainer}>
                 <TextField
+                  InputLabelProps={{ shrink: true }}
                   type="text"
                   name="secondName"
                   size="small"
@@ -217,6 +223,7 @@ export default function LoginPage(props: propsType) {
               </label>
               <label className={styles.formFieldContainer}>
                 <TextField
+                  InputLabelProps={{ shrink: true }}
                   type="text"
                   name="thirdName"
                   size="small"
@@ -246,10 +253,29 @@ export default function LoginPage(props: propsType) {
       ) : (
         <>
           <ThemeProvider theme={googleAuthButton}>
-            <div className={styles.policyContainer}>
-              <p className={styles.policyText}>{policyString}</p>
-            </div>
-            <InputLabel
+            {isRulesShowing ? (
+              <div className={styles.policyContainer}>
+                <p className={styles.policyText}>{policyString}</p>
+              </div>
+            ) : (
+              <p className={styles.description}>
+                Этот ресурс создан для расчетов и анализа дат. Применяется
+                только для 23-80℃Ш. Система корректирует китайский Феншуй в
+                зависимости от географических координат. <br /> <br /> В
+                дальнейшем здесь будет добавлена информация, которой можно
+                доверять. В работе уже многие полезные дополнения. Также здесь
+                будут размещаться и непроверенные и изучаемые параметры, которые
+                будут выделены отдельным цветом или значком. <br /> <br />
+                Информацию, полученную на этом сайте не следует воспринимать как
+                истину в последней инстанции. Пользуйтесь степенью свободы,
+                которая Вам дана.
+                <br /> <br /> Для регистрации Вам понадобится указать
+                гугл-аккаунт, а также Ваше имя, место рождения и место
+                жительства (населенный пункт). Эта информация необходима для
+                корректных расчетов.
+              </p>
+            )}
+            <p
               style={{
                 whiteSpace: "normal",
                 display: "flex",
@@ -266,12 +292,25 @@ export default function LoginPage(props: propsType) {
             >
               <Checkbox
                 onChange={(e) => {
+                  e.stopPropagation();
+
                   setIsAgreed(e.target.checked);
                 }}
                 name="agreed"
               />
-              Согласен с правилами обработки персональных данных
-            </InputLabel>
+              <span className={styles.rulesMessage}>
+                Согласен с{" "}
+                <b
+                  className={styles.rulesName}
+                  onClick={(e) => {
+                    setIsRulesShowing((oldValue) => !oldValue);
+                  }}
+                >
+                  правилами
+                </b>{" "}
+                обработки персональных данных
+              </span>
+            </p>
             <Button
               onClick={token ? googleLogOut : googleSignIn}
               disabled={!isAgreed}

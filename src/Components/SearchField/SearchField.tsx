@@ -16,6 +16,7 @@ import {
 } from "../../utils/store";
 import { cardInfoType, inputDataType, stateType } from "../../utils/types";
 import { createSearchParams, useNavigate } from "react-router-dom";
+import { normalizeBirthdate } from "../../utils/normalizeBirthdateString";
 
 function SearchFieldModal() {
   const dispatch = useDispatch();
@@ -48,8 +49,16 @@ function SearchFieldModal() {
         {cards &&
           searchValue !== "" &&
           cards
-            .filter((card) =>
-              card.name.toLowerCase().includes(searchValue.toLowerCase())
+            .filter(
+              (card) =>
+                card.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+                searchValue
+                  .split(" ")
+                  .every(
+                    (searchPart) =>
+                      normalizeBirthdate(card.birthdate).includes(searchPart) ||
+                      card.birthdate.month.toString().includes(searchPart)
+                  )
             )
             .map((card) => (
               <li

@@ -3,6 +3,7 @@ import React, {
   LegacyRef,
   SetStateAction,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import styles from "./Cards.module.css";
@@ -15,6 +16,7 @@ import {
   inputDataType,
   sortingType,
   stateType,
+  userType,
 } from "../../utils/types";
 import CardListItem from "../../Components/CardListItem/CardListItem";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,10 +61,9 @@ export default function Cards() {
   const switchCardView = () => {
     setIsFullCards(!isFullCards);
   };
+  const user = useSelector<stateType, userType>((state) => state.user);
 
-  const cardsInfo = useSelector<stateType, cardInfoType[]>(
-    (state) => state.user.cards
-  );
+  const cardsInfo = useMemo(() => (user ? user.cards : []), [user]);
   useEffect(() => {
     if (cardsInfo && cardsInfo.length !== 0 && usedImages.length === 0) {
       dispatch(setLoadingAction({ value: true, from: "loaded cards page" }));
@@ -101,6 +102,7 @@ export default function Cards() {
     }
     dispatch(sortCardsAction(sortingOrder));
   }, [sortingOrder, dispatch, cardsInfo]);
+  console.log("cardsInfo", cardsInfo);
 
   return inputData ? (
     <Card

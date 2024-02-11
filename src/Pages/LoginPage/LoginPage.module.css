@@ -108,7 +108,16 @@
 }
 .regButton {
   margin-right: auto !important;
+  overflow: hidden !important;
   margin-left: auto !important;
+}
+.description {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding-bottom: 18px;
 }
 .policyContainer {
   width: 100%;
@@ -134,4 +143,12 @@
 }
 .checkboxContainer {
   text-wrap: wrap;
+}
+.rulesMessage {
+  display: block;
+  width: fit-content;
+}
+.rulesName {
+  color: var(--accent-color);
+  text-decoration: underline;
 }

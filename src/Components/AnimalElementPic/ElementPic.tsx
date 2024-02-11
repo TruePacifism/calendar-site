@@ -156,15 +156,18 @@ export default function ElementPic({ element, doneFor }: propsType) {
           </div>
         </div>
         <span className={styles.name}>
-          {element ? element.name.split(" ")[0] : "Нет"}
+          {element && element.name !== " " ? element.name.split(" ")[0] : "ㅤ"}
         </span>
       </>
     ) : (
-      <div className={styles.imageWrapper + " " + styles.noImageBorder}>
-        <div className={styles.noBlackBorder}>
-          <img src={NoElement} className={styles.image} alt="" />
+      <>
+        <div className={styles.imageWrapper + " " + styles.noImageBorder}>
+          <div className={styles.noBlackBorder}>
+            <img src={NoElement} className={styles.image} alt="" />
+          </div>
         </div>
-      </div>
+        <span className={styles.name}>{"ㅤ"}</span>
+      </>
     ))
   );
 

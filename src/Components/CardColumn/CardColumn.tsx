@@ -57,7 +57,7 @@ const getStyles = (doneFor: doneForType): stylesType => {
   }
 };
 
-const badNames = ["-1:-1", "-1", "0"];
+const badNames = ["-1:-1", "-1", "0", " ", ""];
 
 export default function CardColumn({
   element,

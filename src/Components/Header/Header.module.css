@@ -115,3 +115,62 @@
   display: block;
   width: 100%;
 }
+.optionsContainer {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 46px;
+  padding-right: 46px;
+  background-color: white;
+}
+.optionsItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &:not(:last-child) {
+    margin-bottom: 27px;
+  }
+}
+.optionsText {
+  width: 100%;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.logOutIcon,
+.deleteIcon {
+  width: 26px;
+  height: 26px;
+  fill: var(--accent-color);
+  margin-right: 15px;
+}
+.warningContainer {
+  background-color: white;
+  width: 100%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.warningText {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  margin-bottom: 15px;
+
+  color: var(--main-text-color);
+}
+
+.warningButtonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  overflow: hidden;
+  & > *:not(:last-child) {
+    margin-right: 13px;
+  }
+}

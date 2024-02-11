@@ -161,11 +161,14 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
         <span className={styles.name}>{animal ? animal.name : "Нет"}</span>
       </>
     ) : (
-      <div className={styles.imageWrapper + " " + styles.noImageBorder}>
-        <div className={styles.noBlackBorder}>
-          <img src={NoAnimal} className={styles.image} alt="" />
+      <>
+        <div className={styles.imageWrapper + " " + styles.noImageBorder}>
+          <div className={styles.noBlackBorder}>
+            <img src={NoAnimal} className={styles.image} alt="" />
+          </div>
         </div>
-      </div>
+        <span className={styles.name}>{"ㅤ"}</span>
+      </>
     ))
   );
 }
