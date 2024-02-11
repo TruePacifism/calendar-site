@@ -3,7 +3,8 @@ import styles from "./ModalIconedInfo.module.css";
 import { cardInfoType } from "../../../utils/types";
 import { ReactComponent as AgeIcon } from "../../../images/age-icon.svg";
 import { ReactComponent as BirthSideIcon } from "../../../images/birth-side-icon.svg";
-import { ReactComponent as GenderIcon } from "../../../images/gender-icon.svg";
+import { ReactComponent as MaleIcon } from "../../../images/male-icon.svg";
+import { ReactComponent as FemaleIcon } from "../../../images/female-icon.svg";
 import { ReactComponent as PowerIcon } from "../../../images/power-icon.svg";
 // import { ReactComponent as LivingsideIcon } from "../../../images/living-side-icon.svg";
 
@@ -40,7 +41,10 @@ export default function ModalIconedInfo({ cardInfo }: propsType) {
         description: `Направление: ${cardInfo.direction.fullName}`,
       },
       {
-        Icon: GenderIcon,
+        Icon:
+          cardInfo.genderCount.female > cardInfo.genderCount.male
+            ? FemaleIcon
+            : MaleIcon,
         value: `${Math.max(
           cardInfo.genderCount.female,
           cardInfo.genderCount.male

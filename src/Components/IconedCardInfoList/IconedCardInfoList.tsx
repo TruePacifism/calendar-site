@@ -13,7 +13,8 @@ import homePageStyles from "./IconedCardInfoList-HomePage.module.css";
 import IconedCardInfoListItem from "../IconedCardInfoListItem/IconedCardInfoListItem";
 import { ReactComponent as AgeIcon } from "../../images/age-icon.svg";
 import { ReactComponent as BirthSideIcon } from "../../images/birth-side-icon.svg";
-import { ReactComponent as GenderIcon } from "../../images/gender-icon.svg";
+import { ReactComponent as MaleIcon } from "../../images/male-icon.svg";
+import { ReactComponent as FemaleIcon } from "../../images/female-icon.svg";
 import { ReactComponent as PowerIcon } from "../../images/power-icon.svg";
 // import { ReactComponent as LivingsideIcon } from "../../images/living-side-icon.svg";
 import {
@@ -87,7 +88,7 @@ export default function IconedCardInfoList({
         value: cardInfo.direction.shortName,
       },
       {
-        Icon: GenderIcon,
+        Icon: cardInfo.genderCount.female > cardInfo.genderCount.male ? FemaleIcon : MaleIcon,
         value: `${Math.max(
           cardInfo.genderCount.female,
           cardInfo.genderCount.male

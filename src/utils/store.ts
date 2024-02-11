@@ -22,7 +22,6 @@ const initialState: stateType = {
   token,
   modalContent: null,
   isLoading: true,
-  loadingImages: [],
   isErrorPage: false,
   mainPageInfo: null,
   modalTop: 55,
@@ -33,8 +32,6 @@ type setLoadingPayloadType = {
   from: string;
 };
 
-export let usedImages: string[] = [];
-
 export const setUserAction = createAction<userType, "SET_USER">("SET_USER");
 export const addCardAction = createAction<cardInfoType, "ADD_CARD">("ADD_CARD");
 export const deleteCardAction = createAction<string, "DELETE_CARD">(
@@ -44,15 +41,6 @@ export const setLoadingAction = createAction<
   setLoadingPayloadType,
   "SET_LOADING"
 >("SET_LOADING");
-export const addLoadingImage = createAction<string, "ADD_LOADING_IMAGE">(
-  "ADD_LOADING_IMAGE"
-);
-export const removeLoadingImage = createAction<string, "REMOVE_LOADING_IMAGE">(
-  "REMOVE_LOADING_IMAGE"
-);
-export const clearLoadingImages = createAction<null, "CLEAR_LOADING_IMAGE">(
-  "CLEAR_LOADING_IMAGE"
-);
 export const setIsErrorPageAction = createAction<boolean, "SET_IS_ERROR_PAGE">(
   "SET_IS_ERROR_PAGE"
 );
@@ -119,38 +107,6 @@ export const store = configureStore({
           };
         }
       )
-      .addCase(addLoadingImage, (state, action) => {
-        // console.log("usedImages", usedImages.length);
-        // console.log("loadingImages", state.loadingImages.length);
-        // console.log(usedImages);
-
-        if (
-          !state.loadingImages.includes(action.payload) &&
-          !usedImages.includes(action.payload)
-        ) {
-          // console.log("start loading images: ", action.payload);
-          state.loadingImages.push(action.payload);
-          usedImages.push(action.payload);
-        }
-      })
-      .addCase(removeLoadingImage, (state, action) => {
-        // console.log("usedImages", usedImages.length);
-        // console.log("loadingImages", state.loadingImages.length);
-        state.loadingImages = state.loadingImages.filter(
-          (image) => image !== action.payload
-        );
-
-        if (state.loadingImages.length === 0) {
-          state.isLoading = false;
-          // console.log("loaded all images");
-        }
-      })
-      .addCase(clearLoadingImages, (state, action) => {
-        usedImages = [];
-        // console.log("usedImages", usedImages.length);
-        // console.log("loadingImages", state.loadingImages.length);
-        // console.log("cleared cash");
-      })
       .addCase(setIsErrorPageAction, (state, action) => {
         state.isErrorPage = action.payload;
       })

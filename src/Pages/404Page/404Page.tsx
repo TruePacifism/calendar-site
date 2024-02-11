@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styles from "./404Page.module.css";
 import { useDispatch } from "react-redux";
-import { setIsErrorPageAction, setLoadingAction } from "../../utils/store";
+import { setIsErrorPageAction } from "../../utils/store";
 import { Button, ThemeProvider } from "@mui/material";
 import { mainTheme } from "../../utils/muiThemes";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,6 @@ export default function Page404() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(setLoadingAction({ value: false, from: "404 Page" }));
     dispatch(setIsErrorPageAction(true));
     return () => {
       dispatch(setIsErrorPageAction(false));

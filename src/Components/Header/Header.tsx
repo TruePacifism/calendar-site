@@ -1,14 +1,8 @@
 import React, { useCallback, useMemo, useRef } from "react";
 import styles from "./Header.module.css";
-import { ReactComponent as BackIcon } from "../../images/back-icon.svg";
 import { ReactComponent as OptionsIcon } from "../../images/options-icon.svg";
 import { ReactComponent as InfoIcon } from "../../images/info-icon.svg";
-import {
-  Link,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { stateType, userType } from "../../utils/types";
 import { closeModalAction, openModalAction } from "../../utils/store";
@@ -20,11 +14,7 @@ import { Button, ThemeProvider } from "@mui/material";
 import { darkButtonTheme } from "../../utils/muiThemes";
 import deleteUser from "../../api/deleteUser";
 
-type propsType = {
-  heading: string;
-};
-
-export default function Header({ heading }: propsType) {
+export default function Header() {
   const dispatch = useDispatch();
   const location = useLocation();
   const isErrorPage = useSelector<stateType, boolean>(
@@ -138,7 +128,7 @@ export default function Header({ heading }: propsType) {
         <div className={styles.warningContainer}>
           <p className={styles.warningText}>
             {message === "delete"
-              ? "Вы действительно хотите удалить аккаунт?"
+              ? "Все Ваши данные, в том числе все сохраненные карты, будут удалены, это нельзя будет отменить. Вы действительно хотите удалить свой аккаунт с этого сайта?"
               : "Вы действительно хотите выйти из аккаунта?"}
           </p>
           <div className={styles.warningButtonsContainer}>
@@ -215,23 +205,11 @@ export default function Header({ heading }: propsType) {
     !isErrorPage && (
       <>
         <div className={styles.container}>
-          {heading === "СИСТЕМА ФЕНШУЙ" ? (
-            <InfoIcon
-              ref={infoRef}
-              className={styles.backIcon}
-              onClick={openInfoModal}
-            />
-          ) : (
-            <Link
-              to={
-                location.pathname === "/calculator" && location.search
-                  ? "/calculator"
-                  : "/"
-              }
-            >
-              <BackIcon className={styles.backIcon} />
-            </Link>
-          )}
+          <InfoIcon
+            ref={infoRef}
+            className={styles.backIcon}
+            onClick={openInfoModal}
+          />
           <div
             ref={headingRef}
             className={styles.companyContainer}

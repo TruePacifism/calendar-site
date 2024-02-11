@@ -19,9 +19,6 @@ import Rat from "../../images/animals/rat.png";
 import Rooster from "../../images/animals/rooster.png";
 import Snake from "../../images/animals/snake.png";
 import NoAnimal from "../../images/animals/no.png";
-import { useDispatch } from "react-redux";
-import { addLoadingImage, removeLoadingImage } from "../../utils/store";
-import uniqid from "uniqid";
 
 type propsType = {
   animal: animalType;
@@ -103,19 +100,6 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
         break;
     }
   }, [animal]);
-  const dispatch = useDispatch();
-  // eslint-disable-next-line
-  const [code, setCode]: [string, Dispatch<SetStateAction<string>>] = useState(
-    uniqid(animal ? animal.name + "-" : "null-")
-  );
-  useEffect(() => {
-    if (animal && animal.name !== " ") {
-      dispatch(addLoadingImage(code));
-    }
-    return () => {
-      dispatch(removeLoadingImage(code));
-    };
-  }, [animal, code, dispatch]);
 
   return (
     styles &&
@@ -149,9 +133,6 @@ export default function AnimalPic({ animal, doneFor }: propsType) {
               // onLoadStart={() => {
               //   dispatch(addLoadingImage(code));
               // }}
-              onLoad={() => {
-                dispatch(removeLoadingImage(code));
-              }}
               // onLoadStart={() => {
               //   dispatch(addLoadingImage(code));
               // }}

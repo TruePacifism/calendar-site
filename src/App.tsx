@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./App.module.css";
 import Header from "./Components/Header/Header";
 import Calculator from "./Pages/Calculator/Calculator";
@@ -10,7 +10,6 @@ import SettingsPage from "./Pages/Settings/Settings";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  clearLoadingImages,
   closeModalAction,
   setLoadingAction,
   setUserAction,
@@ -20,19 +19,6 @@ import { stateType, userType } from "./utils/types";
 import Loading from "./Components/Loading/Loading";
 import Page404 from "./Pages/404Page/404Page";
 import MyModal from "./Components/MyModal/MyModal";
-
-const getHeadingText = (path: string): string => {
-  switch (path) {
-    case "/calculator":
-      return "СИСТЕМА ФЕНШУЙ";
-    case "/card":
-      return "Карта";
-    case "/cards":
-      return "СИСТЕМА ФЕНШУЙ";
-    default:
-      return "СИСТЕМА ФЕНШУЙ";
-  }
-};
 
 function App() {
   const location = useLocation();
@@ -54,27 +40,10 @@ function App() {
 
     window.addEventListener("popstate", handleBackPressed);
   }, [modalContent, dispatch]);
-  const [headerText, setHeaderText]: [
-    string,
-    Dispatch<SetStateAction<string>>
-  ] = useState();
   useEffect(() => {
     console.log("Перенаправление");
-    const actualHeadingText = getHeadingText(location.pathname);
-    dispatch(clearLoadingImages());
-
-    if (
-      location.pathname !== "/calculator" &&
-      headerText !== actualHeadingText &&
-      location.pathname !== "/login"
-    ) {
-      dispatch(setLoadingAction({ from: "Перенаправление", value: true }));
-    }
-    if (headerText !== actualHeadingText) {
-      setHeaderText(actualHeadingText);
-    } else {
-    }
-  }, [location, dispatch, headerText]);
+    dispatch(setLoadingAction({ from: "Перенаправление", value: true }));
+  }, [location, dispatch]);
   const currentUser: userType = useSelector<stateType, userType>(
     (store) => store.user
   );
@@ -104,7 +73,7 @@ function App() {
 
       {(currentUser || !token) && (
         <div className={styles.container}>
-          <Header heading={headerText} />
+          <Header />
           <Routes>
             <Route Component={MainPage} path="/" />
             <Route Component={Calculator} path="/calculator" />

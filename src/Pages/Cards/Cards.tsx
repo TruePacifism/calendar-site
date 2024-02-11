@@ -12,7 +12,6 @@ import { ReactComponent as GridIcon } from "../../images/grid-icon.svg";
 import { ReactComponent as SortingIcon } from "../../images/sorting-icon.svg";
 import CardGridItem from "../../Components/CardGridItem/CardGridItem";
 import {
-  cardInfoType,
   inputDataType,
   sortingType,
   stateType,
@@ -20,12 +19,7 @@ import {
 } from "../../utils/types";
 import CardListItem from "../../Components/CardListItem/CardListItem";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  clearLoadingImages,
-  setLoadingAction,
-  sortCardsAction,
-  usedImages,
-} from "../../utils/store";
+import { sortCardsAction } from "../../utils/store";
 import { useSearchParams } from "react-router-dom";
 import Card from "../Card/Card";
 import SearchField from "../../Components/SearchField/SearchField";
@@ -64,18 +58,6 @@ export default function Cards() {
   const user = useSelector<stateType, userType>((state) => state.user);
 
   const cardsInfo = useMemo(() => (user ? user.cards : []), [user]);
-  useEffect(() => {
-    if (cardsInfo && cardsInfo.length !== 0 && usedImages.length === 0) {
-      dispatch(setLoadingAction({ value: true, from: "loaded cards page" }));
-    } else {
-      dispatch(
-        setLoadingAction({ value: false, from: "loaded empty cards page" })
-      );
-    }
-    return () => {
-      dispatch(clearLoadingImages());
-    };
-  }, [dispatch, cardsInfo]);
 
   const [inputData, setInputData]: [
     inputDataType,
@@ -102,7 +84,6 @@ export default function Cards() {
     }
     dispatch(sortCardsAction(sortingOrder));
   }, [sortingOrder, dispatch, cardsInfo]);
-  console.log("cardsInfo", cardsInfo);
 
   return inputData ? (
     <Card

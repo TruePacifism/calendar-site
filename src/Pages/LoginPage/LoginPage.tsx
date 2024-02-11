@@ -9,24 +9,14 @@ import {
 import { FirebaseOptions, initializeApp } from "firebase/app";
 import { ReactComponent as GoogleIcon } from "../../images/google-icon.svg";
 import { userInput } from "../../utils/types";
-import {
-  Button,
-  Checkbox,
-  InputLabel,
-  TextField,
-  ThemeProvider,
-} from "@mui/material";
+import { Button, Checkbox, TextField, ThemeProvider } from "@mui/material";
 import { googleAuthButton, loginTheme } from "../../utils/muiThemes";
 import CityInput from "../../Components/CityInput/CityInput";
 import authUser from "../../api/authUser";
 import { useNavigate } from "react-router-dom";
 import getUserInfo from "../../api/getUserInfo";
 import { useDispatch } from "react-redux";
-import {
-  setIsErrorPageAction,
-  setLoadingAction,
-  setUserAction,
-} from "../../utils/store";
+import { setIsErrorPageAction, setUserAction } from "../../utils/store";
 import { ReactComponent as LogoIcon } from "../../images/logo-another-icon.svg";
 
 const firebaseConfig: FirebaseOptions = {
@@ -54,7 +44,6 @@ export default function LoginPage(props: propsType) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setLoadingAction({ value: false, from: "loaded Login Page" }));
     dispatch(setIsErrorPageAction(true));
     // const authDev = async () => {
     //   const token: string = "rWtBfn90plcd4a4fhxtfQeR4Xtl1";
@@ -259,20 +248,30 @@ export default function LoginPage(props: propsType) {
               </div>
             ) : (
               <p className={styles.description}>
-                Этот ресурс создан для расчетов и анализа дат. Применяется
-                только для 23-80℃Ш. Система корректирует китайский Феншуй в
-                зависимости от географических координат. <br /> <br /> В
-                дальнейшем здесь будет добавлена информация, которой можно
-                доверять. В работе уже многие полезные дополнения. Также здесь
-                будут размещаться и непроверенные и изучаемые параметры, которые
-                будут выделены отдельным цветом или значком. <br /> <br />
-                Информацию, полученную на этом сайте не следует воспринимать как
-                истину в последней инстанции. Пользуйтесь степенью свободы,
-                которая Вам дана.
-                <br /> <br /> Для регистрации Вам понадобится указать
-                гугл-аккаунт, а также Ваше имя, место рождения и место
-                жительства (населенный пункт). Эта информация необходима для
-                корректных расчетов.
+                <b>Сайт СИСТЕМА создан для расчетов и анализа дат. .</b>{" "}
+                <i>
+                  Расчеты возможны для территории 23-80℃Ш. Система корректирует
+                  китайский Феншуй в зависимости от географических координат.{" "}
+                </i>{" "}
+                <br /> <br />{" "}
+                <i>
+                  В дальнейшем здесь будет добавлена информация, которой можно
+                  доверять. В работе уже многие полезные дополнения. Также здесь
+                  будут размещаться и непроверенные и изучаемые параметры,
+                  которые будут выделены отдельным цветом или значком.{" "}
+                </i>{" "}
+                <br /> <br />
+                <b>
+                  Информацию, полученную на этом сайте не следует воспринимать
+                  как истину в последней инстанции. Пользуйтесь степенью
+                  свободы, которая Вам дана.{" "}
+                </b>
+                <br /> <br />{" "}
+                <i>
+                  Для регистрации Вам понадобится указать гугл-аккаунт, а также
+                  Ваше имя, место рождения и место жительства (населенный
+                  пункт). Эта информация необходима для корректных расчетов.{" "}
+                </i>
               </p>
             )}
             <p
@@ -296,6 +295,7 @@ export default function LoginPage(props: propsType) {
 
                   setIsAgreed(e.target.checked);
                 }}
+                defaultChecked
                 name="agreed"
               />
               <span className={styles.rulesMessage}>

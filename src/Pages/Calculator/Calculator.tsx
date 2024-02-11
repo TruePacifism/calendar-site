@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Calculator.module.css";
 import { months } from "../../enums";
-import { monthType, stateType } from "../../utils/types";
+import { monthType } from "../../utils/types";
 import Container from "../../Components/Container/Container";
 import { Select, MenuItem, Input, Button } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
@@ -14,8 +14,6 @@ import {
 } from "../../utils/muiThemes";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import CityInput from "../../Components/CityInput/CityInput";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoadingAction } from "../../utils/store";
 import validateNumbersInput from "../../utils/validateNumbersInput";
 
 const getPreetyNumber = (number: number): string => {
@@ -54,13 +52,6 @@ for (let i = 1; i < 61; i++) {
 
 export default function Calculator() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const isLoading = useSelector<stateType, boolean>((store) => store.isLoading);
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(setLoadingAction({ value: false, from: "calculator" }));
-    }
-  }, [isLoading, dispatch]);
   const [selectedMonth, setSelectedMonth]: [
     monthType,
     Dispatch<SetStateAction<monthType>>
@@ -110,9 +101,6 @@ export default function Calculator() {
       };
     }
   ) => {
-    dispatch(
-      setLoadingAction({ value: true, from: "inputed data from calculator" })
-    );
     console.dir(e.target.elements);
 
     const { year, month, day, hour, minute } = e.target.elements;

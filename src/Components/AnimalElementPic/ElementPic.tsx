@@ -15,9 +15,6 @@ import MetalYan from "../../images/elements/mjan.png";
 import EarthIn from "../../images/elements/sin.png";
 import EarthYan from "../../images/elements/sjan.png";
 import NoElement from "../../images/animals/no.png";
-import { useDispatch } from "react-redux";
-import { removeLoadingImage } from "../../utils/store";
-import uniqid from "uniqid";
 
 type propsType = {
   element: elementType;
@@ -38,7 +35,6 @@ const getStyles = (doneFor: doneForType): stylesType => {
 };
 
 export default function ElementPic({ element, doneFor }: propsType) {
-  const dispatch = useDispatch();
   const [styles, setStyles]: [
     stylesType,
     Dispatch<SetStateAction<stylesType>>
@@ -109,10 +105,6 @@ export default function ElementPic({ element, doneFor }: propsType) {
     }
     setClassName(initClassNames.join(" "));
   }, [element, styles.image, styles.black, styles.bad]);
-  // eslint-disable-next-line
-  const [code, setCode]: [string, Dispatch<SetStateAction<string>>] = useState(
-    uniqid(element ? element.name + "-" : "null-")
-  );
 
   return (
     styles &&
@@ -146,9 +138,6 @@ export default function ElementPic({ element, doneFor }: propsType) {
               // onLoadStart={() => {
               //   dispatch(addLoadingImage(code));
               // }}
-              onLoad={() => {
-                dispatch(removeLoadingImage(code));
-              }}
               // onLoadStart={() => {
               //   dispatch(addLoadingImage(code));
               // }}

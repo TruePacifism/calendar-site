@@ -261,7 +261,6 @@ export type stateType = {
   token: string;
   modalContent: ReactJSXElement;
   isLoading: boolean;
-  loadingImages: string[];
   isErrorPage: boolean;
   mainPageInfo: inputDataType;
   modalTop: number | string;

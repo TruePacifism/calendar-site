@@ -20,13 +20,8 @@ import ModalPillars from "../../Components/ModalComponents/ModalPillars/ModalPil
 import countCard from "../../api/countCard";
 import { useSelector, useDispatch } from "react-redux";
 import addCard from "../../api/addCard";
-import {
-  addCardAction,
-  clearLoadingImages,
-  setLoadingAction,
-} from "../../utils/store";
+import { addCardAction } from "../../utils/store";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
-import deleteCard from "../../api/deleteCard";
 import { useNavigate } from "react-router-dom";
 
 type propsType = {
@@ -59,17 +54,8 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
   useEffect(() => {
     if (inputData) {
       const getCard = async (inputData: inputDataType) => {
-        dispatch(
-          setLoadingAction({
-            value: true,
-            from: "start fetched counted card info",
-          })
-        );
         const data = await countCard({ inputData });
         setCardInfo(data);
-        dispatch(
-          setLoadingAction({ value: false, from: "fetched counted card info" })
-        );
       };
       getCard(inputData);
     }
@@ -84,11 +70,6 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
   }, [isOpenModal]);
 
   const token = useSelector<stateType, string>((state) => state.token);
-  const fetchDeleteCard = async () => {
-    const result = await deleteCard({ id, token });
-    console.log(result);
-    navigate("/cards");
-  };
   const fetchAddCard = async () => {
     const result = await addCard({ card: cardInfo, token });
     if (result.status / 100 === 2) {
@@ -97,17 +78,6 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
     } else {
     }
   };
-  useEffect(() => {
-    return () => {
-      dispatch(clearLoadingImages());
-      dispatch(
-        setLoadingAction({
-          value: true,
-          from: "exited counted card info",
-        })
-      );
-    };
-  }, [dispatch]);
 
   return (
     cardInfo && (
@@ -218,14 +188,14 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
 
         <div className={styles.saveContainer}>
           <ThemeProvider theme={buttonTheme}>
-            {id && (
+            {!id && (
               <Button
                 className={styles.button}
                 onClick={() => {
-                  fetchDeleteCard();
+                  fetchAddCard();
                 }}
               >
-                УДАЛИТЬ
+                СОХРАНИТЬ
               </Button>
             )}
           </ThemeProvider>
