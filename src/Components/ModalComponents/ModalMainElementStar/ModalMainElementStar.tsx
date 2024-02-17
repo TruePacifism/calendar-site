@@ -14,6 +14,9 @@ import MetalGood from "../../../images/mainStar/m+.png";
 import MetalBad from "../../../images/mainStar/m-.png";
 import ModalHeading from "../ModalHeading/ModalHeading";
 
+import { ReactComponent as GoodCircleExample } from "../../../images/good-circle-example.svg";
+import { ReactComponent as BadCircleExample } from "../../../images/bad-circle-example.svg";
+
 type propsType = {
   mainElement: mainElementType;
 };
@@ -47,7 +50,19 @@ export default function ModalMainElementStar({ mainElement }: propsType) {
     <section className={styles.section}>
       <div className={styles.container}>
         <ModalHeading text="ЭЛЕМЕНТЫ" />
-        <img src={starSrc} alt="" className={styles.image} />
+        <div className={styles.imageContainer}>
+          <img src={starSrc} alt="" className={styles.image} />
+        </div>
+        <ul className={styles.exampleList}>
+          <li className={styles.exampleItem}>
+            <GoodCircleExample className={styles.exampleIcon} />
+            <span className={styles.exampleTitle}>Полезные элементы</span>
+          </li>
+          <li className={styles.exampleItem}>
+            <BadCircleExample className={styles.exampleIcon} />
+            <span className={styles.exampleTitle}>Неполезные элементы</span>
+          </li>
+        </ul>
       </div>
     </section>
   );

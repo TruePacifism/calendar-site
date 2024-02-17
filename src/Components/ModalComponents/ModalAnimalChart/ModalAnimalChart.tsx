@@ -1,6 +1,6 @@
 import React, { SetStateAction, Dispatch, useState, useEffect } from "react";
 import styles from "./ModalAnimalChart.module.css";
-import { PolarArea } from "react-chartjs-2";
+import { Doughnut, PolarArea } from "react-chartjs-2";
 import { ChartData, RadialLinearScale } from "chart.js";
 import { Point } from "chart.js/dist/core/core.controller";
 import { Chart as ChartJS } from "chart.js";
@@ -21,6 +21,48 @@ import { Colors } from "../../../utils/enums";
 import { chartDataType } from "../../../utils/types";
 
 ChartJS.register(RadialLinearScale);
+
+const PieChart = () => {
+  const data = {
+    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    datasets: [
+      {
+        data: [12, 19, 3, 5, 2, 3].map((value) => (value / 44) * 100), // Преобразуем значения в проценты от общей суммы (44 в данном случае)
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const options = {
+    cutout: "0", // Измените это значение, чтобы управлять размером центрального пустого пространства
+    cutin: "60%",
+    rotation: 270, // Начальная точка (в градусах)
+    circumference: 360, // Угол дуги (в градусах)
+    plugins: {
+      legend: {
+        display: false, // Скрыть легенду, если она вам не нужна
+      },
+    },
+  };
+
+  return <Doughnut data={data} options={options} />;
+};
 
 type propsType = {
   chartData: chartDataType;
@@ -114,9 +156,10 @@ export default function ModalAnimalChart({ chartData }: propsType) {
       labels: labels,
       datasets: [
         {
-          label: "Dataset 1",
+          label: "",
           data: data,
           borderWidth: 1,
+          borderColor: "black",
           backgroundColor: [
             Colors.LIGHT_BLUE.mainHex,
             Colors.LIGHT_BLUE.mainHex,
@@ -137,13 +180,14 @@ export default function ModalAnimalChart({ chartData }: propsType) {
   }, [chartData]);
   return (
     <div className={styles.container}>
-      <ModalHeading text="ЖИВОТНЫЕ" />{" "}
+      <ModalHeading text="ЖИВОТНЫЕ" />
       <div className={styles.chart}>
         {data && (
           <PolarArea
             data={data}
             className={styles.chart}
             options={{
+              borderColor: "black",
               responsive: true,
               plugins: {
                 legend: {
@@ -159,6 +203,7 @@ export default function ModalAnimalChart({ chartData }: propsType) {
               scales: {
                 r: {
                   display: false,
+                  suggestedMax: 5,
                 },
               },
             }}
@@ -178,7 +223,7 @@ export default function ModalAnimalChart({ chartData }: propsType) {
                 <span className={styles.animalName}>
                   {getAnimalName(name)}
                   <br />
-                  {value}
+                  <span className={styles.animalValue}>{value + "%"}</span>
                 </span>
               </li>
             )

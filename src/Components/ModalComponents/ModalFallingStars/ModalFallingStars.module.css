@@ -1,6 +1,6 @@
 .container {
-  background-color: var(--main-background-color);
-  padding: 26px;
+  background-color: var(--background-color);
+  padding: 20px;
 }
 .starsList {
   width: 171px;
@@ -11,10 +11,10 @@
   gap: 10px; /* Задает промежуток между элементами */
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 22px;
 }
 .star {
   background-color: aqua;
-  color: var(--dark-blue-color);
   position: relative;
   font-family: "Lilita One", cursive;
   border-radius: 5px;
@@ -22,6 +22,9 @@
 .white {
   background-color: white;
   border: 1px solid black;
+  & .year {
+    -webkit-text-stroke: 1px #1e1e1e; /* width and color */
+  }
 }
 .yellow {
   background-color: var(--yellow-color);
@@ -40,6 +43,9 @@
 .black {
   background-color: black;
   color: white;
+  & .month {
+    color: white;
+  }
 }
 .purple {
   background-color: var(--purple-color);
@@ -51,6 +57,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 40px;
+  color: white;
 }
 .month {
   position: absolute;
@@ -58,4 +65,33 @@
   left: 20%;
   transform: translate(-50%, -50%);
   font-size: 20px;
+  color: black;
+}
+.clickText {
+  margin-bottom: 26px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  max-width: 90%;
+}
+.selectedStarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selectedStarContainer .star {
+  width: 58px;
+  height: 58px;
+}
+.starDescription {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
 }
