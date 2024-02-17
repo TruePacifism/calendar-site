@@ -11,7 +11,7 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import { useDispatch, useSelector } from "react-redux";
 import {
   closeModalAction,
-  setLoadingAction,
+  setLoadingActionSecond,
   setUserAction,
 } from "./utils/store";
 import getUserInfo from "./api/getUserInfo";
@@ -42,7 +42,7 @@ function App() {
   }, [modalContent, dispatch]);
   useEffect(() => {
     console.log("Перенаправление");
-    dispatch(setLoadingAction({ from: "Перенаправление", value: true }));
+    dispatch(setLoadingActionSecond());
   }, [location, dispatch]);
   const currentUser: userType = useSelector<stateType, userType>(
     (store) => store.user

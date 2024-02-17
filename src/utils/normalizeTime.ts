@@ -3,7 +3,7 @@ export default function normalizeTime(
   minute: number | string
 ) {
   if (hour.toString() === "-1" || minute.toString() === "-1") {
-    return "00:00";
+    return "ㅤ";
   }
   const hourValue = typeof hour === "string" ? Number.parseInt(hour) : hour;
   const minuteValue =

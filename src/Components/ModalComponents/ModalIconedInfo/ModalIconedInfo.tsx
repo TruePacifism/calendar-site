@@ -38,7 +38,7 @@ export default function ModalIconedInfo({ cardInfo }: propsType) {
       {
         Icon: BirthSideIcon,
         value: cardInfo.direction.shortName,
-        description: `Направление: ${cardInfo.direction.fullName}`,
+        description: `Направление: ${cardInfo.direction.fullName.toLowerCase()}`,
       },
       {
         Icon:

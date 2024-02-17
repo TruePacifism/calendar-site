@@ -1,5 +1,9 @@
 .container {
   background-color: var(--background-color);
+  padding-top: 26px;
+  padding-bottom: 26px;
+  padding-left: 45px;
+  padding-right: 45px;
   width: 100%;
 }
 .list {
@@ -11,6 +15,7 @@
   width: 100%;
 }
 .listItem {
+  min-height: 34.5px;
   display: flex;
   align-items: center;
   justify-content: flex-start;

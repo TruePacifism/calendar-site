@@ -19,6 +19,7 @@ const useElementOnScreen = (
     }
     return () => {
       if (containerRef.current) {
+        // eslint-disable-next-line
         observer.unobserve(containerRef.current);
       }
     };

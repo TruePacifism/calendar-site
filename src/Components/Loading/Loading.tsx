@@ -6,33 +6,33 @@ import { stateType } from "../../utils/types";
 
 export default function Loading() {
   const isLoading = useSelector<stateType, boolean>((store) => store.isLoading);
-  const [stateIsLoading, setStateIsLoading]: [
-    boolean,
-    Dispatch<SetStateAction<boolean>>
-  ] = useState(true);
-  useEffect(() => {
-    setStateIsLoading(true);
-  }, [isLoading]);
   const [isRendering, setIsRendering]: [
     boolean,
     Dispatch<SetStateAction<boolean>>
   ] = useState(true);
+  const [renderTimeout, setRenderTimeout]: [
+    NodeJS.Timeout,
+    Dispatch<SetStateAction<NodeJS.Timeout>>
+  ] = useState();
   useEffect(() => {
-    if (stateIsLoading) {
+    if (isLoading) {
       setIsRendering(true);
-      setTimeout(() => {
-        setStateIsLoading(false);
-      }, 1000);
-    } else {
-      setTimeout(() => {
-        setIsRendering(false);
-      }, 1000);
+      clearTimeout(renderTimeout);
+    }
+    if (!isLoading) {
+      setRenderTimeout(
+        setTimeout(() => {
+          if (!isLoading) {
+            setIsRendering(false);
+          }
+        }, 1000)
+      );
     }
     // eslint-disable-next-line
-  }, [stateIsLoading]);
+  }, [isLoading]);
   return (
     isRendering && (
-      <div className={stateIsLoading ? styles.showed : styles.hidden}>
+      <div className={isLoading ? styles.showed : styles.hidden}>
         <LoadingSpinner className={styles.icon} />
       </div>
     )

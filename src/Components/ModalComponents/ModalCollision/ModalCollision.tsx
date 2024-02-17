@@ -6,13 +6,7 @@ import { ReactComponent as Heart } from "../../../images/collisions/broken-heart
 import { ReactComponent as Half } from "../../../images/collisions/half-circle.svg";
 import { ReactComponent as Triangle } from "../../../images/collisions/triangle.svg";
 import { ReactComponent as HalfHorizontal } from "../../../images/collisions/half-circle-horizontal.svg";
-import {
-  cardInfoType,
-  collisionType,
-  dateType,
-  stateType,
-} from "../../../utils/types";
-import { useSelector } from "react-redux";
+import { collisionType, dateType } from "../../../utils/types";
 import getCollisionFrames from "../../../api/getCollisionFrames";
 import normalizeTime from "../../../utils/normalizeTime";
 
@@ -95,7 +89,14 @@ export default function ModalCollision({
       setFrames(fetchedFrames);
     };
     fetchFrames();
-  }, [isToday, collision.targetName, birthdate, trueBirthdate]);
+  }, [
+    isToday,
+    collision.targetName,
+    birthdate,
+    trueBirthdate,
+    collision.secondTarget.targetTime,
+    collision.thirdTarget?.targetTime,
+  ]);
   return (
     (!isToday || collision.targetName !== "час" || frames) && (
       <li className={styles.container}>

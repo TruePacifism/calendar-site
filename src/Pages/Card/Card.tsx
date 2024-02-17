@@ -8,8 +8,8 @@ import FallingStarsField from "../../Components/FallingStarsField/FallingStarsFi
 import CardLineChart from "../../Components/CardLineChart/CardLineChart";
 import PillarsInfo from "../../Components/PillarsInfo/PillarsInfo";
 import AnimalChart from "../../Components/AnimalChart/AnimalChart";
-import { Button, Dialog, ThemeProvider } from "@mui/material";
-import { buttonTheme, modalTheme } from "../../utils/muiThemes";
+import { Button, ThemeProvider } from "@mui/material";
+import { buttonTheme } from "../../utils/muiThemes";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import ModalIconedInfo from "../../Components/ModalComponents/ModalIconedInfo/ModalIconedInfo";
 import ModalCardInfo from "../../Components/ModalComponents/ModalCardInfo/ModalCardInfo";
@@ -20,7 +20,7 @@ import ModalPillars from "../../Components/ModalComponents/ModalPillars/ModalPil
 import countCard from "../../api/countCard";
 import { useSelector, useDispatch } from "react-redux";
 import addCard from "../../api/addCard";
-import { addCardAction } from "../../utils/store";
+import { addCardAction, openModalAction } from "../../utils/store";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import { useNavigate } from "react-router-dom";
 
@@ -36,20 +36,8 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
     cardInfoType,
     Dispatch<SetStateAction<cardInfoType>>
   ] = useState();
-  const [isOpenModal, setIsOpenModal]: [
-    boolean,
-    Dispatch<SetStateAction<boolean>>
-  ] = useState(false);
-  const [modalContent, setModalContent]: [
-    ReactJSXElement,
-    Dispatch<SetStateAction<ReactJSXElement>>
-  ] = useState(<p></p>);
   const openModal = (content: ReactJSXElement) => {
-    setModalContent(content);
-    setIsOpenModal(true);
-  };
-  const closeModal = () => {
-    setIsOpenModal(false);
+    dispatch(openModalAction(content));
   };
   useEffect(() => {
     if (inputData) {
@@ -60,14 +48,6 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
       getCard(inputData);
     }
   }, [inputData, dispatch]);
-
-  useEffect(() => {
-    if (isOpenModal) {
-      window.addEventListener("popstate", closeModal);
-    } else {
-      window.removeEventListener("popstate", closeModal);
-    }
-  }, [isOpenModal]);
 
   const token = useSelector<stateType, string>((state) => state.token);
   const fetchAddCard = async () => {
@@ -82,11 +62,6 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
   return (
     cardInfo && (
       <div className={styles.container}>
-        <ThemeProvider theme={modalTheme}>
-          <Dialog fullWidth open={isOpenModal} onClose={closeModal}>
-            {modalContent}
-          </Dialog>
-        </ThemeProvider>
         <div className={styles.nameContainer}>
           <h1 className={styles.name}>{cardInfo.name}</h1>
         </div>

@@ -67,7 +67,7 @@ export default function LoginPage(props: propsType) {
     }
   }, [token]);
   const [isAgreed, setIsAgreed]: [boolean, Dispatch<SetStateAction<boolean>>] =
-    useState(false);
+    useState(true);
   const [userInfo, setUserInfo]: [
     userInput,
     Dispatch<SetStateAction<userInput>>
@@ -295,7 +295,7 @@ export default function LoginPage(props: propsType) {
 
                   setIsAgreed(e.target.checked);
                 }}
-                defaultChecked
+                checked={isAgreed}
                 name="agreed"
               />
               <span className={styles.rulesMessage}>

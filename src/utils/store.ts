@@ -41,6 +41,9 @@ export const setLoadingAction = createAction<
   setLoadingPayloadType,
   "SET_LOADING"
 >("SET_LOADING");
+export const setLoadingActionSecond = createAction<null, "SET_LOADING_SECOND">(
+  "SET_LOADING_SECOND"
+);
 export const setIsErrorPageAction = createAction<boolean, "SET_IS_ERROR_PAGE">(
   "SET_IS_ERROR_PAGE"
 );
@@ -107,6 +110,12 @@ export const store = configureStore({
           };
         }
       )
+      .addCase(setLoadingActionSecond, (state, action) => {
+        state.isLoading = true;
+        setTimeout(() => {
+          store.dispatch(setLoadingAction({ value: false, from: "second" }));
+        }, 1000);
+      })
       .addCase(setIsErrorPageAction, (state, action) => {
         state.isErrorPage = action.payload;
       })
@@ -140,12 +149,12 @@ export const store = configureStore({
         if (!cards || cards.length < 2) {
           return;
         }
+        // store.dispatch(setLoadingActionSecond());
         if (action.payload === "oldFirst") {
           cards.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
         } else {
           cards.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
         }
-        state.isLoading = false;
       })
       .addCase(
         setMainPageDateAction,

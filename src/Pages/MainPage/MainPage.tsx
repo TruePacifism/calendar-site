@@ -17,7 +17,7 @@ import {
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
 import CardInfo from "../../Components/CardInfo/CardInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { openModalAction } from "../../utils/store";
+import { openModalAction, setLoadingAction } from "../../utils/store";
 import AnimalLogo from "../../Components/AnimalLogo/AnimalLogo";
 import countCard from "../../api/countCard";
 import ModalIconedInfo from "../../Components/ModalComponents/ModalIconedInfo/ModalIconedInfo";
@@ -42,15 +42,18 @@ export default function MainPage() {
 
     hashMainPageInfo = mainPageInfo;
     hashUser = user;
-
     const fetchInfo = async () => {
+      dispatch(setLoadingAction({ value: true, from: "mainFetch" }));
+      console.log("fetched");
+
       const newTodayInfo = await countCard({ inputData: mainPageInfo });
       console.log(newTodayInfo);
       setTodayInfo(newTodayInfo);
+      dispatch(setLoadingAction({ value: false, from: "mainFetch" }));
     };
 
     fetchInfo();
-  }, [user, mainPageInfo, dispatch]);
+  }, [user, mainPageInfo, mainPageInfo.birthdate, dispatch]);
 
   const fetchIconedInfoClick = useCallback(() => {
     dispatch(

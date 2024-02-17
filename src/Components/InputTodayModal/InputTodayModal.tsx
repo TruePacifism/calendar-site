@@ -17,7 +17,6 @@ import {
   inputDataType,
   monthType,
   stateType,
-  userType,
 } from "../../utils/types";
 import { months } from "../../enums";
 import { cardColumnNameType } from "../CardColumn/CardColumn";

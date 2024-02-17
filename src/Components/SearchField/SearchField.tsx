@@ -17,6 +17,7 @@ import {
 import { cardInfoType, inputDataType, stateType } from "../../utils/types";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { normalizeBirthdate } from "../../utils/normalizeBirthdateString";
+import { months } from "../../enums";
 
 function SearchFieldModal() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function SearchFieldModal() {
         <input
           className={styles.placeholder}
           value={searchValue}
+          autoFocus
           onChange={(e) => {
             console.log(e);
             setSearchValue(e.target.value);
@@ -57,7 +59,15 @@ function SearchFieldModal() {
                   .every(
                     (searchPart) =>
                       normalizeBirthdate(card.birthdate).includes(searchPart) ||
-                      card.birthdate.month.toString().includes(searchPart)
+                      (card.birthdate.month + 1 < 10
+                        ? "0" + card.birthdate.month + 1
+                        : card.birthdate.month + 1
+                      )
+                        .toString()
+                        .includes(searchPart) ||
+                      months[card.birthdate.month].name
+                        .toLowerCase()
+                        .includes(searchPart)
                   )
             )
             .map((card) => (

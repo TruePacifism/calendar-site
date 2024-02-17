@@ -10,6 +10,7 @@ import React, {
 import calculatorStyles from "./CardColumn-Calculator.module.css";
 import cardGridItemStyles from "./CardColumn-CardGridItem.module.css";
 import homePageStyles from "./CardColumn-HomePage.module.css";
+import editingStyles from "./CardColumn-Editing.module.css";
 import {
   animalType,
   elementType,
@@ -26,6 +27,8 @@ import { openModalAction } from "../../utils/store";
 import InputTodayModal from "../InputTodayModal/InputTodayModal";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import getMonthName from "../../utils/getMonthName";
+import { ReactComponent as ArrowTopIcon } from "../../images/arrow-top-icon.svg";
+import { ReactComponent as ArrowBottomIcon } from "../../images/arrow-down-icon.svg";
 
 export type cardColumnNameType =
   | "year"
@@ -44,7 +47,7 @@ type propsType = {
   name: cardColumnNameType;
 };
 
-type doneForType = "Calculator" | "CardGridItem" | "HomePage";
+type doneForType = "Calculator" | "Editing" | "CardGridItem" | "HomePage";
 
 const getStyles = (doneFor: doneForType): stylesType => {
   switch (doneFor) {
@@ -54,6 +57,8 @@ const getStyles = (doneFor: doneForType): stylesType => {
       return cardGridItemStyles;
     case "HomePage":
       return homePageStyles;
+    case "Editing":
+      return editingStyles;
   }
 };
 
@@ -147,8 +152,20 @@ export default function CardColumn({
             </h3>
           </div>
         )}
-        <ElementPic element={element} doneFor={doneFor} />
-        <AnimalPic animal={animal} doneFor={doneFor} />
+        {doneFor === "Editing" && (
+          <ArrowTopIcon className={styles.editingArrowIcon} />
+        )}
+        <ElementPic
+          element={element}
+          doneFor={doneFor === "Editing" ? "Calculator" : doneFor}
+        />
+        <AnimalPic
+          animal={animal}
+          doneFor={doneFor === "Editing" ? "Calculator" : doneFor}
+        />
+        {doneFor === "Editing" && (
+          <ArrowBottomIcon className={styles.editingArrowIcon} />
+        )}
         {(doneFor === "Calculator" || doneFor === "HomePage") && animal && (
           <CollisionsList collisions={animal.collisions} />
         )}
