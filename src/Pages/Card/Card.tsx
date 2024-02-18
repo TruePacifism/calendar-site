@@ -88,7 +88,6 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
           <h2 className={styles.otherInfoNamesItem}>Летящие звезды</h2>
           <h2 className={styles.otherInfoNamesItem}>Животные</h2>
         </ul>
-
         <ul className={styles.otherInfoList}>
           <li
             className={styles.otherInfoListItem}
@@ -160,21 +159,22 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
             }
           />
         </div>
-
-        <div className={styles.saveContainer}>
-          <ThemeProvider theme={buttonTheme}>
-            {!id && (
-              <Button
-                className={styles.button}
-                onClick={() => {
-                  fetchAddCard();
-                }}
-              >
-                СОХРАНИТЬ
-              </Button>
-            )}
-          </ThemeProvider>
-        </div>
+        {!id && (
+          <div className={styles.saveContainer}>
+            <ThemeProvider theme={buttonTheme}>
+              {
+                <Button
+                  className={styles.button}
+                  onClick={() => {
+                    fetchAddCard();
+                  }}
+                >
+                  СОХРАНИТЬ
+                </Button>
+              }
+            </ThemeProvider>
+          </div>
+        )}
       </div>
     )
   );

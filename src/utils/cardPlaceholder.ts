@@ -520,56 +520,398 @@ const cardInfoPlaceholder: cardInfoType = {
     {
       yearNumber: 6,
       monthNumber: 5,
-      description: "",
-      direction: "Запад",
+      element: {
+        elements: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        animals: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        name: "вода",
+      },
+      side: { shortName: "СЗ", fullName: "Северо-Запад" },
+      goods: ["мудрость", "коммуникабельность", "общительность"],
+      bads: ["бесплодие", "импотенция", "слепота"],
     },
     {
       yearNumber: 2,
       monthNumber: 1,
-      description: "",
-      direction: "Юг",
+      element: {
+        elements: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        animals: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        name: "вода",
+      },
+      side: { shortName: "СЗ", fullName: "Северо-Запад" },
+      goods: ["мудрость", "коммуникабельность", "общительность"],
+      bads: ["бесплодие", "импотенция", "слепота"],
     },
     {
       yearNumber: 4,
       monthNumber: 3,
-      description: "",
-      direction: "Восток",
+      element: {
+        elements: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        animals: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        name: "вода",
+      },
+      side: { shortName: "СЗ", fullName: "Северо-Запад" },
+      goods: ["мудрость", "коммуникабельность", "общительность"],
+      bads: ["бесплодие", "импотенция", "слепота"],
     },
     {
       yearNumber: 5,
       monthNumber: 4,
-      description: "",
-      direction: "Север",
+      element: {
+        elements: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        animals: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        name: "вода",
+      },
+      side: { shortName: "СЗ", fullName: "Северо-Запад" },
+      goods: ["мудрость", "коммуникабельность", "общительность"],
+      bads: ["бесплодие", "импотенция", "слепота"],
     },
     {
       yearNumber: 7,
       monthNumber: 6,
-      description: "",
-      direction: "Северо-Запад",
+      element: {
+        elements: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        animals: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        name: "вода",
+      },
+      side: { shortName: "СЗ", fullName: "Северо-Запад" },
+      goods: ["мудрость", "коммуникабельность", "общительность"],
+      bads: ["бесплодие", "импотенция", "слепота"],
     },
     {
       yearNumber: 9,
       monthNumber: 8,
-      description: "",
-      direction: "Северо-Восток",
+      element: {
+        elements: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        animals: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        name: "вода",
+      },
+      side: { shortName: "СЗ", fullName: "Северо-Запад" },
+      goods: ["мудрость", "коммуникабельность", "общительность"],
+      bads: ["бесплодие", "импотенция", "слепота"],
     },
     {
       yearNumber: 1,
       monthNumber: 9,
-      description: "",
-      direction: "Юго-Запад",
+      element: {
+        elements: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        animals: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        name: "вода",
+      },
+      side: { shortName: "СЗ", fullName: "Северо-Запад" },
+      goods: ["мудрость", "коммуникабельность", "общительность"],
+      bads: ["бесплодие", "импотенция", "слепота"],
     },
     {
       yearNumber: 3,
       monthNumber: 2,
-      description: "",
-      direction: "Юго-Восток",
+      element: {
+        elements: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        animals: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        name: "вода",
+      },
+      side: { shortName: "СЗ", fullName: "Северо-Запад" },
+      goods: ["мудрость", "коммуникабельность", "общительность"],
+      bads: ["бесплодие", "импотенция", "слепота"],
     },
     {
       yearNumber: 8,
       monthNumber: 7,
-      description: "",
-      direction: "Центр",
+      element: {
+        elements: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        animals: [
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+          {
+            name: "огонь инь",
+            isBlack: true,
+            isGood: true,
+          },
+        ],
+        name: "вода",
+      },
+      side: { shortName: "СЗ", fullName: "Северо-Запад" },
+      goods: ["мудрость", "коммуникабельность", "общительность"],
+      bads: ["бесплодие", "импотенция", "слепота"],
     },
   ],
   momCard: "sdsada",

@@ -1,6 +1,6 @@
 import React, { SetStateAction, Dispatch, useState, useEffect } from "react";
 import styles from "./ModalAnimalChart.module.css";
-import { Doughnut, PolarArea } from "react-chartjs-2";
+import { PolarArea } from "react-chartjs-2";
 import { ChartData, RadialLinearScale } from "chart.js";
 import { Point } from "chart.js/dist/core/core.controller";
 import { Chart as ChartJS } from "chart.js";
@@ -19,50 +19,11 @@ import rat from "../../../images/animals/rat-gb.jpg";
 import ModalHeading from "../ModalHeading/ModalHeading";
 import { Colors } from "../../../utils/enums";
 import { chartDataType } from "../../../utils/types";
+import { ReactComponent as ChartBack } from "../../../images/animal-chart-back.svg";
+import getColorByAnimalElement from "../../../utils/getColorByAnimal";
+import AnimalPic from "../../AnimalElementPic/AnimalPic";
 
 ChartJS.register(RadialLinearScale);
-
-const PieChart = () => {
-  const data = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [
-      {
-        data: [12, 19, 3, 5, 2, 3].map((value) => (value / 44) * 100), // Преобразуем значения в проценты от общей суммы (44 в данном случае)
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const options = {
-    cutout: "0", // Измените это значение, чтобы управлять размером центрального пустого пространства
-    cutin: "60%",
-    rotation: 270, // Начальная точка (в градусах)
-    circumference: 360, // Угол дуги (в градусах)
-    plugins: {
-      legend: {
-        display: false, // Скрыть легенду, если она вам не нужна
-      },
-    },
-  };
-
-  return <Doughnut data={data} options={options} />;
-};
 
 type propsType = {
   chartData: chartDataType;
@@ -158,22 +119,11 @@ export default function ModalAnimalChart({ chartData }: propsType) {
         {
           label: "",
           data: data,
-          borderWidth: 1,
+          borderWidth: 0,
           borderColor: "black",
-          backgroundColor: [
-            Colors.LIGHT_BLUE.mainHex,
-            Colors.LIGHT_BLUE.mainHex,
-            Colors.LIGHT_GREEN.mainHex,
-            Colors.LIGHT_GREEN.mainHex,
-            Colors.LIGHT_GREEN.mainHex,
-            Colors.RED.mainHex,
-            Colors.YELLOW.mainHex,
-            Colors.YELLOW.mainHex,
-            Colors.PINK.mainHex,
-            Colors.PURPLE.mainHex,
-            Colors.LIGHT_BLUE.mainHex,
-            Colors.LIGHT_BLUE.mainHex,
-          ],
+          backgroundColor: labels.map(
+            (label) => getColorByAnimalElement(label.toLowerCase()).mainHex
+          ),
         },
       ],
     });
@@ -182,6 +132,36 @@ export default function ModalAnimalChart({ chartData }: propsType) {
     <div className={styles.container}>
       <ModalHeading text="ЖИВОТНЫЕ" />
       <div className={styles.chart}>
+        <ChartBack className={styles.chartBack} />
+        <ul className={styles.chartAnimalNames}>
+          {labels.map((label, idx) => {
+            const angle = 90 + idx * (360 / labels.length); // Вычисляем угол для каждого элемента
+            const radianAngle = (angle * Math.PI) / 180; // Переводим угол в радианы
+            const x = 50 + 50 * Math.cos(radianAngle); // Рассчитываем координату X
+            const y = 50 + 50 * Math.sin(radianAngle); // Рассчитываем координату Y
+
+            return (
+              <li
+                key={idx}
+                className={styles.chartAnimalName}
+                style={{
+                  position: "absolute",
+                  top: `${y}%`,
+                  left: `${x}%`,
+                  fontSize: 15,
+                  zIndex: 100,
+                  fontWeight: 900,
+                  textAlign: "left",
+                  transform: `translate(-50%, -50%) rotate(${angle}deg) scale(${
+                    idx >= labels.length / 2 ? -100 : 100
+                  }%, ${idx >= labels.length / 2 ? -100 : 100}%)`, // Поворачиваем текст
+                }}
+              >
+                {label}
+              </li>
+            );
+          })}
+        </ul>
         {data && (
           <PolarArea
             data={data}
@@ -189,6 +169,7 @@ export default function ModalAnimalChart({ chartData }: propsType) {
             options={{
               borderColor: "black",
               responsive: true,
+
               plugins: {
                 legend: {
                   display: false,
@@ -197,9 +178,11 @@ export default function ModalAnimalChart({ chartData }: propsType) {
                   display: false,
                 },
                 tooltip: {
+                  enabled: false,
                   displayColors: false,
                 },
               },
+
               scales: {
                 r: {
                   display: false,
@@ -211,23 +194,26 @@ export default function ModalAnimalChart({ chartData }: propsType) {
         )}
       </div>
       <ul className={styles.animalsList}>
-        {Object.entries(chartData).map(
-          ([name, value], idx) =>
-            value > 0 && (
-              <li key={idx} className={styles.animalsItem}>
-                <img
-                  src={getAnimalImage(name)}
-                  alt=""
-                  className={styles.animalImage}
-                />
-                <span className={styles.animalName}>
-                  {getAnimalName(name)}
-                  <br />
-                  <span className={styles.animalValue}>{value + "%"}</span>
-                </span>
-              </li>
-            )
-        )}
+        {Object.entries(chartData)
+          .sort((a, b) => b[1] - a[1])
+          .map(
+            ([name, value], idx) =>
+              value > 0 && (
+                <li key={idx} className={styles.animalsItem}>
+                  <AnimalPic
+                    animal={{
+                      name: getAnimalName(name).toLowerCase(),
+                      isBlack: false,
+                      isGood: false,
+                    }}
+                    doneFor="Calculator"
+                  />
+                  <span className={styles.animalName}>
+                    <span className={styles.animalValue}>{value + "%"}</span>
+                  </span>
+                </li>
+              )
+          )}
       </ul>
     </div>
   );

@@ -1,13 +1,15 @@
 .container {
   background-color: aqua;
-  color: var(--dark-blue-color);
   position: relative;
   font-family: "Lilita One", cursive;
   border-radius: 5px;
 }
 .white {
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid gray;
+  & .year {
+    -webkit-text-stroke: 1px #1e1e1e; /* width and color */
+  }
 }
 .yellow {
   background-color: var(--yellow-color);
@@ -26,6 +28,9 @@
 .black {
   background-color: black;
   color: white;
+  & .month {
+    color: white;
+  }
 }
 .purple {
   background-color: var(--purple-color);
@@ -33,9 +38,10 @@
 }
 .year {
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: white;
 }
 .month {
   position: absolute;
@@ -43,4 +49,5 @@
   left: 20%;
   transform: translate(-50%, -50%);
   font-size: 12px;
+  color: black;
 }

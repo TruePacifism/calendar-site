@@ -26,8 +26,9 @@ export default function PillarsInfo({
             isCurrentPillar={
               currentPillar && currentPillar.ageYear === pillar.ageYear
             }
-            title={`${pillar.year},${pillar.month}\n
-            ${pillar.ageYear},${pillar.ageMonth}`}
+            title={`${pillar.month < 10 ? "0" + pillar.month : pillar.month}/${
+              pillar.year
+            }\n${pillar.ageYear}л.${pillar.ageMonth}м.`}
             name={idx}
           />
         ))}

@@ -14,9 +14,38 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: var(--bottom-shadow);
+  position: relative;
 }
 .chartTitle {
 }
 .chartCheckboxes {
   width: 60%;
+}
+.modalContainer {
+  background-color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.modalViewContainer:not(:last-child) {
+  margin-bottom: 25px;
+}
+.chartCheckbox {
+  width: 73px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-left: 33px;
+  margin-bottom: 10px;
+  transition: color 250ms linear, background-color 250ms linear;
+}
+.chartCheckbox.selected {
+  background-color: white;
+  color: var(--accent-color);
+  border: 1px solid var(--border-color);
 }

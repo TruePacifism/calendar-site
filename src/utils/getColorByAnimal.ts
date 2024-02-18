@@ -2,9 +2,10 @@ import { Colors } from "./enums";
 import { animalType, colorType, elementType } from "./types";
 
 const getColorByAnimalElement = (
-  animalElement: animalType | elementType
+  animalElement: animalType | elementType | string
 ): colorType => {
-  const { name } = animalElement;
+  const name =
+    typeof animalElement === "string" ? animalElement : animalElement.name;
   switch (name) {
     case "вода инь":
       return Colors.LIGHT_BLUE;

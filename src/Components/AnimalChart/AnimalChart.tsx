@@ -6,6 +6,9 @@ import { Point } from "chart.js/dist/core/core.controller";
 import { Chart as ChartJS } from "chart.js";
 import { Colors } from "../../utils/enums";
 import { chartDataType } from "../../utils/types";
+import { ReactComponent as ChartBack } from "../../images/animal-chart-back.svg";
+import getColorByAnimalElement from "../../utils/getColorByAnimal";
+
 ChartJS.register(RadialLinearScale);
 
 type propsType = {
@@ -73,27 +76,45 @@ export default function AnimalChart({ chartData }: propsType) {
         {
           label: "Dataset 1",
           data: data,
-          borderWidth: 1,
-          backgroundColor: [
-            Colors.LIGHT_BLUE.mainHex,
-            Colors.LIGHT_BLUE.mainHex,
-            Colors.LIGHT_GREEN.mainHex,
-            Colors.LIGHT_GREEN.mainHex,
-            Colors.LIGHT_GREEN.mainHex,
-            Colors.RED.mainHex,
-            Colors.YELLOW.mainHex,
-            Colors.YELLOW.mainHex,
-            Colors.PINK.mainHex,
-            Colors.PURPLE.mainHex,
-            Colors.LIGHT_BLUE.mainHex,
-            Colors.LIGHT_BLUE.mainHex,
-          ],
+          borderWidth: 0,
+          backgroundColor: labels.map(
+            (label) => getColorByAnimalElement(label.toLowerCase()).mainHex
+          ),
         },
       ],
     });
   }, [chartData]);
   return (
     <div className={styles.container}>
+      <ChartBack className={styles.chartBack} />
+      <ul className={styles.chartAnimalNames}>
+        {labels.map((label, idx) => {
+          const angle = 90 + idx * (360 / labels.length); // Вычисляем угол для каждого элемента
+          const radianAngle = (angle * Math.PI) / 180; // Переводим угол в радианы
+          const x = 50 + 50 * Math.cos(radianAngle); // Рассчитываем координату X
+          const y = 50 + 50 * Math.sin(radianAngle); // Рассчитываем координату Y
+
+          return (
+            <li
+              key={idx}
+              className={styles.chartAnimalName}
+              style={{
+                position: "absolute",
+                top: `${y}%`,
+                left: `${x}%`,
+                fontSize: 8,
+                color: "white",
+                zIndex: 100,
+                transform: `translate(-50%, -50%) rotate(${angle}deg) scale(${
+                  idx >= labels.length / 2 ? -100 : 100
+                }%, ${idx >= labels.length / 2 ? -100 : 100}%)`, // Поворачиваем текст
+              }}
+            >
+              {label}
+            </li>
+          );
+        })}
+      </ul>
       {data && (
         <PolarArea
           data={data}
@@ -108,6 +129,7 @@ export default function AnimalChart({ chartData }: propsType) {
                 display: false,
               },
               tooltip: {
+                enabled: false,
                 displayColors: false,
               },
             },

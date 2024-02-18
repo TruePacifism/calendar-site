@@ -147,7 +147,14 @@ export default function CardColumn({
           </ThemeProvider>
         ) : (
           <div className={styles.headingContainer}>
-            <h3 className={styles.heading}>
+            <h3
+              className={styles.heading}
+              style={
+                typeof name !== "number"
+                  ? { fontSize: 20, lineHeight: "26px" }
+                  : {}
+              }
+            >
               {badNames.includes(title.toString()) ? "ㅤ" : title}
             </h3>
           </div>

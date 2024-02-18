@@ -1,17 +1,32 @@
 .container {
   background-color: var(--background-color);
   padding: 20px;
+  padding-bottom: 30px;
 }
-.starsList {
+.starsContainer {
+  position: relative;
   width: 171px;
   height: 171px;
   aspect-ratio: 1 / 1;
+  margin-top: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 43px;
+}
+.starDirection {
+  position: absolute;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+.starsList {
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr; /* Задает три колонки равной ширины */
   gap: 10px; /* Задает промежуток между элементами */
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 22px;
 }
 .star {
   background-color: aqua;
@@ -21,7 +36,7 @@
 }
 .white {
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid gray;
   & .year {
     -webkit-text-stroke: 1px #1e1e1e; /* width and color */
   }
@@ -53,10 +68,10 @@
 }
 .year {
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 40px;
+  font-size: 35px;
   color: white;
 }
 .month {
@@ -75,18 +90,21 @@
   letter-spacing: 0em;
   text-align: left;
   margin-right: auto;
-  margin-left: auto;
   display: block;
   max-width: 90%;
 }
 .selectedStarContainer {
+}
+.selectedStarMainInfoContainer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  margin-bottom: 23px;
 }
 .selectedStarContainer .star {
   width: 58px;
   height: 58px;
+  margin-right: 11px;
 }
 .starDescription {
   font-size: 13px;
@@ -94,4 +112,25 @@
   line-height: 17px;
   letter-spacing: 0em;
   text-align: left;
+}
+.selectedStarOtherInfo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.selectedStarGoodsContainer,
+.selectedStarBadsContainer {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  width: calc((100% - 5px) / 2);
+}
+.selectedStarGoodsContainer {
+  margin-right: 12px;
+}
+.selectedStarGoodsHeading,
+.selectedStarBadsHeading {
+  font-weight: 700;
 }

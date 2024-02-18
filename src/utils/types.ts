@@ -144,8 +144,10 @@ export type cardStrengthType = {
 export type fallingStarType = {
   yearNumber: number;
   monthNumber: number;
-  description: string;
-  direction: string;
+  element: mainElementType;
+  side: directionType;
+  goods: string[];
+  bads: string[];
 };
 
 export type ageType = {

@@ -1,9 +1,10 @@
 .container {
   background-color: var(--light-accent-color);
-  padding-left: 23px;
-  padding-right: 23px;
+  box-shadow: var(--top-shadow);
 }
 .innerContainer {
   display: flex;
   overflow: scroll;
+  padding-left: 23px;
+  padding-right: 23px;
 }

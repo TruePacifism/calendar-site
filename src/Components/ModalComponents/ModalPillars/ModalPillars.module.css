@@ -1,18 +1,20 @@
 .container {
-  background-color: var(--main-background-color);
+  background-color: var(--background-color);
   padding-top: 13px;
   padding-bottom: 13px;
-  padding-left: 13px;
   padding-right: 13px;
+  padding-left: 13px;
 }
 .pillarsContainer {
-  background-color: var(--main-background-color);
+  background-color: var(--background-color);
   /* padding-left: 11px;
   padding-right: 11px; */
-  padding-left: -13px;
-  padding-right: -13px;
-  display: flex;
-  overflow: scroll;
+  transform: translateX(-13px);
+  width: calc(100% + 13px * 2);
 }
 .pillarsInnerContainer {
+  display: flex;
+  overflow: scroll;
+  padding-left: 13px;
+  padding-right: 13px;
 }
