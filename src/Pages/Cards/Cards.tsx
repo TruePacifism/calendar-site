@@ -20,7 +20,7 @@ import {
 import CardListItem from "../../Components/CardListItem/CardListItem";
 import { useDispatch, useSelector } from "react-redux";
 import { sortCardsAction } from "../../utils/store";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import Card from "../Card/Card";
 import SearchField from "../../Components/SearchField/SearchField";
 import useElementOnScreen from "../../utils/useElementOnScreen";
@@ -34,6 +34,7 @@ export default function Cards() {
     true
   );
   const dispatch = useDispatch();
+  const location = useLocation();
   const [selectedCardId, setSelectedCardId]: [
     string,
     Dispatch<SetStateAction<string>>
@@ -77,7 +78,8 @@ export default function Cards() {
     } else {
       setSelectedCardId("");
     }
-  }, [params, dispatch]);
+    console.log("refreshed", JSON.parse(data));
+  }, [params, dispatch, location]);
   useEffect(() => {
     if (!cardsInfo || cardsInfo.length < 2) {
       return;

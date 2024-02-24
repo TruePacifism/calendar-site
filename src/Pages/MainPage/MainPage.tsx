@@ -45,6 +45,7 @@ export default function MainPage() {
     const fetchInfo = async () => {
       dispatch(setLoadingAction({ value: true, from: "mainFetch" }));
       console.log("fetched");
+      console.log(mainPageInfo);
 
       const newTodayInfo = await countCard({ inputData: mainPageInfo });
       console.log(newTodayInfo);
@@ -77,6 +78,7 @@ export default function MainPage() {
 
   //   setTodayInfo(newInfo);
   // };
+  console.log(todayInfo);
 
   return (
     todayInfo && (

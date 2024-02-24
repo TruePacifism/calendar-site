@@ -3,10 +3,11 @@
   height: 100%;
 }
 .imageWrapper {
-  width: 52px;
-  height: 47px;
+  width: 57px;
+  height: auto;
   margin-bottom: 4px;
   box-shadow: var(--bottom-shadow);
+  aspect-ratio: 52 / 47;
 }
 .whiteBorder,
 .grayBorder,

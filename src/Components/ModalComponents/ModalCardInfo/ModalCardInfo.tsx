@@ -1,6 +1,11 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./ModalCardInfo.module.css";
-import { cardInfoType, collisionType } from "../../../utils/types";
+import {
+  cardInfoType,
+  collisionType,
+  dateType,
+  inputDataType,
+} from "../../../utils/types";
 import CardColumn from "../../CardColumn/CardColumn";
 import ModalCollision from "../ModalCollision/ModalCollision";
 import ElementsExamples from "../../ElementsExamples/ElementsExamples";
@@ -9,6 +14,9 @@ import ModalHeading from "../ModalHeading/ModalHeading";
 import { ReactComponent as EditIcon } from "../../../images/edit-icon.svg";
 import { Button, ThemeProvider } from "@mui/material";
 import { darkButtonTheme } from "../../../utils/muiThemes";
+import { createSearchParams, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { closeModalAction } from "../../../utils/store";
 
 type propsType = {
   cardInfo: cardInfoType;
@@ -64,10 +72,46 @@ const getAllCollisions = (cardInfo: cardInfoType): collisionType[] => {
 const keys = ["year", "month", "day", "hour", "pillar"];
 
 export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isEditingMode, setIsEditingMode]: [
     boolean,
     Dispatch<SetStateAction<boolean>>
   ] = useState(false);
+  const [offset, setOffset]: [dateType, Dispatch<SetStateAction<dateType>>] =
+    useState(
+      cardInfo.offset
+        ? cardInfo.offset
+        : {
+            year: 0,
+            month: 0,
+            day: 0,
+            hour: 0,
+            minute: 0,
+          }
+    );
+  useEffect(() => {
+    console.log(offset);
+  }, [offset]);
+  const handleRecount = () => {
+    const { birthdate, birthcity, name, gender, livingcity } = cardInfo;
+    const inputData: inputDataType = {
+      birthdate,
+      birthcity,
+      name,
+      gender,
+      livingcity,
+      offset,
+    };
+
+    navigate({
+      search: createSearchParams({
+        inputData: JSON.stringify(inputData),
+      }).toString(),
+      pathname: "/cards",
+    });
+    window.location.reload();
+  };
   return (
     <>
       <div className={styles.container}>
@@ -87,6 +131,18 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
             animal={cardInfo.hour.animal}
             element={cardInfo.hour.element}
             title={`${cardInfo.birthdate.hour}:${cardInfo.birthdate.minute}`}
+            onOffsetIncrement={() => {
+              setOffset((oldOffset) => ({
+                ...oldOffset,
+                hour: oldOffset.hour + 1,
+              }));
+            }}
+            onOffsetDecrement={() => {
+              setOffset((oldOffset) => ({
+                ...oldOffset,
+                hour: oldOffset.hour - 1,
+              }));
+            }}
             name={"hour"}
           />
           <CardColumn
@@ -95,7 +151,19 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
             animal={cardInfo.day.animal}
             element={cardInfo.day.element}
             title={cardInfo.birthdate.day}
+            onOffsetIncrement={() => {
+              setOffset((oldOffset) => ({
+                ...oldOffset,
+                day: oldOffset.day + 1,
+              }));
+            }}
             name={"day"}
+            onOffsetDecrement={() => {
+              setOffset((oldOffset) => ({
+                ...oldOffset,
+                day: oldOffset.day - 1,
+              }));
+            }}
           />
           <CardColumn
             doneFor={isEditingMode ? "Editing" : "Calculator"}
@@ -106,6 +174,18 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
               .substring(0, 3)
               .toLowerCase()}
             name={"month"}
+            onOffsetIncrement={() => {
+              setOffset((oldOffset) => ({
+                ...oldOffset,
+                month: oldOffset.month + 1,
+              }));
+            }}
+            onOffsetDecrement={() => {
+              setOffset((oldOffset) => ({
+                ...oldOffset,
+                month: oldOffset.month - 1,
+              }));
+            }}
           />
           <CardColumn
             doneFor={isEditingMode ? "Editing" : "Calculator"}
@@ -114,10 +194,22 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
             element={cardInfo.year.element}
             title={cardInfo.birthdate.year}
             name={"year"}
+            onOffsetIncrement={() => {
+              setOffset((oldOffset) => ({
+                ...oldOffset,
+                year: oldOffset.year + 1,
+              }));
+            }}
+            onOffsetDecrement={() => {
+              setOffset((oldOffset) => ({
+                ...oldOffset,
+                year: oldOffset.year - 1,
+              }));
+            }}
           />
           {cardInfo.currentPillar && (
             <CardColumn
-              doneFor={isEditingMode ? "Editing" : "Calculator"}
+              doneFor={"Calculator"}
               key={keys[4]}
               animal={
                 cardInfo.currentPillar ? cardInfo.currentPillar.animal : null
@@ -150,8 +242,14 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
         ) : (
           <div className={styles.editingButtonsContainer}>
             <ThemeProvider theme={darkButtonTheme}>
-              <Button>СОХРАНИТЬ</Button>
-              <Button>ОТМЕНА</Button>
+              <Button onClick={handleRecount}>СОХРАНИТЬ</Button>
+              <Button
+                onClick={() => {
+                  dispatch(closeModalAction());
+                }}
+              >
+                ОТМЕНА
+              </Button>
             </ThemeProvider>
           </div>
         )}

@@ -191,6 +191,7 @@ export type cardInfoType = {
   gender: "male" | "female";
   birthdate: dateType;
   trueBirthdate: dateType;
+  offset?: dateType;
   birthcity: string;
   livingcity: string;
   date: string;
@@ -238,6 +239,7 @@ export type inputDataType = {
   birthcity: string;
   gender: "male" | "female";
   livingcity: string;
+  offset?: dateType;
 };
 
 export type cityInfoType = {

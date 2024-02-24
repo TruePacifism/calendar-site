@@ -29,6 +29,9 @@ import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import getMonthName from "../../utils/getMonthName";
 import { ReactComponent as ArrowTopIcon } from "../../images/arrow-top-icon.svg";
 import { ReactComponent as ArrowBottomIcon } from "../../images/arrow-down-icon.svg";
+import { ArrowFunction } from "typescript";
+import getNextAnimalElement from "../../utils/getNextAnimalElement";
+import getPrevAnimalElement from "../../utils/getPrevAnimalElement";
 
 export type cardColumnNameType =
   | "year"
@@ -45,6 +48,8 @@ type propsType = {
   doneFor: doneForType;
   title: string | number;
   name: cardColumnNameType;
+  onOffsetIncrement?: Function;
+  onOffsetDecrement?: Function;
 };
 
 type doneForType = "Calculator" | "Editing" | "CardGridItem" | "HomePage";
@@ -71,6 +76,8 @@ export default function CardColumn({
   doneFor,
   title,
   name,
+  onOffsetIncrement,
+  onOffsetDecrement,
 }: propsType) {
   const dispatch = useDispatch();
 
@@ -96,6 +103,18 @@ export default function CardColumn({
 
     sessionStorage.setItem(name.toString(), title.toString());
   }, [doneFor, name, title]);
+  const [isSwitching, setIsSwitching]: [
+    boolean,
+    Dispatch<SetStateAction<boolean>>
+  ] = useState(false);
+  const [editingModeAnimal, setEditingModeAnimal]: [
+    animalType,
+    Dispatch<SetStateAction<animalType>>
+  ] = useState(animal);
+  const [editingModeElement, setEditingModeElement]: [
+    elementType,
+    Dispatch<SetStateAction<elementType>>
+  ] = useState(element);
 
   // eslint-disable-next-line
   const onClickHandle: MouseEventHandler<HTMLInputElement> = useCallback(
@@ -160,18 +179,55 @@ export default function CardColumn({
           </div>
         )}
         {doneFor === "Editing" && (
-          <ArrowTopIcon className={styles.editingArrowIcon} />
+          <ArrowTopIcon
+            className={styles.editingArrowIcon}
+            onClick={() => {
+              onOffsetIncrement();
+              setIsSwitching(true);
+              setTimeout(() => {
+                setEditingModeAnimal((oldAnimal) =>
+                  getNextAnimalElement(oldAnimal)
+                );
+                setEditingModeElement((oldElement) =>
+                  getNextAnimalElement(oldElement)
+                );
+                setIsSwitching(false);
+              }, 250);
+            }}
+          />
         )}
-        <ElementPic
-          element={element}
-          doneFor={doneFor === "Editing" ? "Calculator" : doneFor}
-        />
-        <AnimalPic
-          animal={animal}
-          doneFor={doneFor === "Editing" ? "Calculator" : doneFor}
-        />
+        <div
+          style={{
+            opacity: isSwitching ? 0 : 1,
+            transition: "opacity 250ms linear",
+          }}
+        >
+          <ElementPic
+            element={editingModeElement}
+            doneFor={doneFor === "Editing" ? "Calculator" : doneFor}
+          />
+          <AnimalPic
+            animal={editingModeAnimal}
+            doneFor={doneFor === "Editing" ? "Calculator" : doneFor}
+          />
+        </div>
         {doneFor === "Editing" && (
-          <ArrowBottomIcon className={styles.editingArrowIcon} />
+          <ArrowBottomIcon
+            onClick={() => {
+              onOffsetDecrement();
+              setIsSwitching(true);
+              setTimeout(() => {
+                setEditingModeAnimal((oldAnimal) =>
+                  getPrevAnimalElement(oldAnimal)
+                );
+                setEditingModeElement((oldElement) =>
+                  getPrevAnimalElement(oldElement)
+                );
+                setIsSwitching(false);
+              }, 250);
+            }}
+            className={styles.editingArrowIcon}
+          />
         )}
         {(doneFor === "Calculator" || doneFor === "HomePage") && animal && (
           <CollisionsList collisions={animal.collisions} />

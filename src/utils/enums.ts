@@ -1,4 +1,4 @@
-import { colorType, CustomEnum } from "./types";
+import { animalType, colorType, CustomEnum, elementType } from "./types";
 
 export const Colors: CustomEnum<colorType> = {
   BROWN: {
@@ -60,5 +60,82 @@ export const Colors: CustomEnum<colorType> = {
     mainHex: "#f475a2",
     backgroundHex: "#ffbad2",
     name: "pink",
+  },
+};
+export const Elements: CustomEnum<Omit<elementType, "isGood" | "isBlack">> = {
+  METAL_YAN: {
+    name: "металл ян",
+  },
+  METAL_IN: {
+    name: "металл инь",
+  },
+  WATER_YAN: {
+    name: "вода ян",
+  },
+  WATER_IN: {
+    name: "вода инь",
+  },
+  WOOD_YAN: {
+    name: "дерево ян",
+  },
+  WOOD_IN: {
+    name: "дерево инь",
+  },
+  FIRE_YAN: {
+    name: "огонь ян",
+  },
+
+  FIRE_IN: {
+    name: "огонь инь",
+  },
+  EARTH_YAN: {
+    name: "земля ян",
+  },
+  EARTH_IN: {
+    name: "земля инь",
+  },
+  NULL_ELEMENT: {
+    name: " ",
+  },
+};
+export const Animals: CustomEnum<Omit<animalType, "isGood" | "isBlack">> = {
+  BULL: {
+    name: "бык",
+  },
+  TIGER: {
+    name: "тигр",
+  },
+  RABBIT: {
+    name: "кролик",
+  },
+  DRAGON: {
+    name: "дракон",
+  },
+  SNAKE: {
+    name: "змея",
+  },
+  HORSE: {
+    name: "лошадь",
+  },
+  GOAT: {
+    name: "коза",
+  },
+  MONKEY: {
+    name: "обезьяна",
+  },
+  ROOSTER: {
+    name: "петух",
+  },
+  DOG: {
+    name: "собака",
+  },
+  PIG: {
+    name: "свинья",
+  },
+  RAT: {
+    name: "крыса",
+  },
+  NULL_ANIMAL: {
+    name: " ",
   },
 };
