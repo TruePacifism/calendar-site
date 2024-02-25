@@ -30,13 +30,15 @@ export default function CardGridItem({ cardInfo }: propsType) {
   const navigate = useNavigate();
   const handleOpenCard = useCallback<MouseEventHandler<HTMLDivElement>>(
     (e) => {
-      const { name, birthdate, birthcity, gender, livingcity } = cardInfo;
+      const { name, birthdate, birthcity, gender, livingcity, offset } =
+        cardInfo;
       const inputData: inputDataType = {
         name,
         birthdate,
         birthcity,
         gender,
         livingcity,
+        offset,
       };
       dispatch(closeModalAction());
       navigate({

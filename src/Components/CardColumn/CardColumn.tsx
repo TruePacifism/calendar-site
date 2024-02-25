@@ -29,7 +29,6 @@ import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import getMonthName from "../../utils/getMonthName";
 import { ReactComponent as ArrowTopIcon } from "../../images/arrow-top-icon.svg";
 import { ReactComponent as ArrowBottomIcon } from "../../images/arrow-down-icon.svg";
-import { ArrowFunction } from "typescript";
 import getNextAnimalElement from "../../utils/getNextAnimalElement";
 import getPrevAnimalElement from "../../utils/getPrevAnimalElement";
 

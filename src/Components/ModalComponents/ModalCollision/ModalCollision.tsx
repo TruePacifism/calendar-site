@@ -71,6 +71,8 @@ export default function ModalCollision({
   console.log(collision);
 
   useEffect(() => {
+    console.log("isToday", isToday);
+
     if (
       !isToday ||
       (collision.targetName !== "час" &&

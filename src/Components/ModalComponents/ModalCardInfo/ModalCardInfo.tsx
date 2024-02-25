@@ -230,7 +230,7 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
                   <ModalCollision
                     collision={collision}
                     key={idx}
-                    isToday
+                    isToday={isToday}
                     birthdate={isToday ? cardInfo.birthdate : undefined}
                     trueBirthdate={isToday ? cardInfo.trueBirthdate : undefined}
                   />
