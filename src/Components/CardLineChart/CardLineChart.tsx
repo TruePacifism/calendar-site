@@ -38,8 +38,8 @@ type propsType = {
   chartData: lineChartDataType;
   backgroundColor: string;
 };
-type viewType = "Неделя" | "Месяц" | "Год";
-const viewsArray: viewType[] = ["Неделя", "Месяц", "Год"];
+type viewType = "Неделя" | "Месяц" | "Год" | "Жизнь";
+const viewsArray: viewType[] = ["Неделя", "Месяц", "Год", "Жизнь"];
 const Modal = ({
   backgroundColor,
   dataArray,
@@ -78,61 +78,68 @@ const Modal = ({
                 {view}
               </button>
               {openedViews.includes(view) && (
-                <div className={styles.container}>
-                  <Line
-                    data={dataArray[view]}
-                    className={styles.chart}
-                    width="auto"
-                    options={{
-                      backgroundColor: chartBackgroundColor,
-                      plugins: {
-                        colors: {},
-                        legend: {
-                          display: false,
+                <div style={{ overflowX: "scroll" }}>
+                  <div
+                    style={{
+                      overflowX: "scroll",
+                      width: view === "Жизнь" ? "600vw" : "",
+                    }}
+                    className={styles.container}
+                  >
+                    <Line
+                      data={dataArray[view]}
+                      className={styles.chart}
+                      width="auto"
+                      options={{
+                        backgroundColor: chartBackgroundColor,
+                        plugins: {
+                          colors: {},
+                          legend: {
+                            display: false,
+                          },
                         },
-                      },
-                      elements: {
-                        point: {
-                          radius: 0,
+                        elements: {
+                          point: {
+                            radius: 0,
+                          },
                         },
-                      },
-                      maintainAspectRatio: false,
-                      responsive: true,
-                      scales: {
-                        y: {
-                          display: true,
-                          suggestedMin: -6,
-                          suggestedMax: 6,
-                          grid: {
-                            drawOnChartArea: true,
-                            color(ctx, options) {
-                              if (ctx.tick.value === 0) {
-                                return "white";
-                              } else {
-                                return "";
-                              }
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        scales: {
+                          y: {
+                            display: true,
+                            suggestedMin: -6,
+                            suggestedMax: 6,
+                            grid: {
+                              drawOnChartArea: true,
+                              color(ctx, options) {
+                                if (ctx.tick.value === 0) {
+                                  return "white";
+                                } else {
+                                  return "";
+                                }
+                              },
+                            },
+                          },
+                          x: {
+                            offset: true,
+                            title: {
+                              padding: 10,
+                            },
+
+                            backgroundColor: miniAccentColor,
+                            clip: true,
+                            grid: {
+                              drawTicks: false,
+
+                              color: "#FFFFFF",
                             },
                           },
                         },
-                        x: {
-                          offset: true,
-                          title: {
-                            padding: 10,
-                          },
-                          max: 7,
-
-                          backgroundColor: miniAccentColor,
-                          clip: true,
-                          grid: {
-                            drawTicks: false,
-
-                            color: "#FFFFFF",
-                          },
-                        },
-                      },
-                    }}
-                    plugins={[customBackgroundPlugin(backgroundColor)]}
-                  />
+                      }}
+                      plugins={[customBackgroundPlugin(backgroundColor)]}
+                    />
+                  </div>
                 </div>
               )}
             </li>
@@ -183,6 +190,10 @@ export default function CardLineChart({
       let data: number[] = [];
       let labels: string[] = [];
       switch (v) {
+        case "Жизнь":
+          labels = chartData.life.map((data) => data.date.toString());
+          data = chartData.life.map((data) => data.value);
+          break;
         case "Год":
           labels = chartData.year.map((data) => data.date.toString());
           data = chartData.year.map((data) => data.value);
@@ -211,6 +222,8 @@ export default function CardLineChart({
         ],
       };
     });
+    console.log("line chart: ", object);
+
     return object;
   }, [backgroundColor, chartData]);
 
@@ -250,6 +263,9 @@ export default function CardLineChart({
                 },
               },
               elements: {
+                line: {
+                  borderWidth: 5,
+                },
                 point: {
                   radius: 0,
                 },
@@ -277,10 +293,8 @@ export default function CardLineChart({
                   title: {
                     padding: 10,
                   },
-                  max: 7,
 
                   backgroundColor: miniAccentColor,
-                  clip: true,
                   grid: {
                     drawTicks: false,
 

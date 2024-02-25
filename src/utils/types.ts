@@ -178,6 +178,7 @@ export type lineChartDataPartType = {
   value: number;
 };
 export type lineChartDataType = {
+  life: lineChartDataPartType[];
   year: lineChartDataPartType[];
   month: lineChartDataPartType[];
   day: lineChartDataPartType[];

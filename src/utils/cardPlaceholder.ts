@@ -367,6 +367,7 @@ const cardInfoPlaceholder: cardInfoType = {
     },
   ],
   lineChartData: {
+    life: [],
     year: [],
     month: [],
     day: [],

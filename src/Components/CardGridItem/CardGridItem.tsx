@@ -72,7 +72,7 @@ export default function CardGridItem({ cardInfo }: propsType) {
           <IconedCardInfoList cardInfo={cardInfo} doneFor="CardGridItem" />
         </div>
         <span className={styles.birthdate}>
-          {normalizeBirthdate(cardInfo.trueBirthdate)}
+          {normalizeBirthdate(cardInfo.birthdate)}
         </span>
         <CardInfo doneFor="CardGridItem" cardInfo={cardInfo} />
       </div>
