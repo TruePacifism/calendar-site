@@ -52,10 +52,14 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             doneFor={doneFor}
             animal={cardInfo.hour.animal}
             element={cardInfo.hour.element}
-            title={normalizeTime(
-              cardInfo.birthdate.hour,
-              cardInfo.birthdate.minute
-            )}
+            title={
+              cardInfo.birthdate.hour === -1 || cardInfo.birthdate.minute === -1
+                ? "Время"
+                : normalizeTime(
+                    cardInfo.birthdate.hour,
+                    cardInfo.birthdate.minute
+                  )
+            }
             name={"hour"}
           />
           <CardColumn

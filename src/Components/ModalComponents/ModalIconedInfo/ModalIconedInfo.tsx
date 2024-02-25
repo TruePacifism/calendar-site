@@ -6,6 +6,7 @@ import { ReactComponent as BirthSideIcon } from "../../../images/birth-side-icon
 import { ReactComponent as MaleIcon } from "../../../images/male-icon.svg";
 import { ReactComponent as FemaleIcon } from "../../../images/female-icon.svg";
 import { ReactComponent as PowerIcon } from "../../../images/power-icon.svg";
+import declOfNum from "../../../utils/declOfNum";
 // import { ReactComponent as LivingsideIcon } from "../../../images/living-side-icon.svg";
 
 type propsType = {
@@ -32,7 +33,14 @@ export default function ModalIconedInfo({ cardInfo }: propsType) {
         ? {
             Icon: AgeIcon,
             value: `${cardInfo.age.year},${cardInfo.age.month}`,
-            description: `Возраст: ${cardInfo.age.year} лет и ${cardInfo.age.month} месяцев`,
+            description: `Возраст: ${cardInfo.age.year} ${declOfNum(
+              cardInfo.age.year,
+              ["год", "года", "лет"]
+            )} и ${cardInfo.age.month} ${declOfNum(cardInfo.age.month, [
+              "месяц",
+              "месяца",
+              "месяцев",
+            ])}`,
           }
         : undefined,
       {

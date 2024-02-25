@@ -16,7 +16,8 @@ import { Button, ThemeProvider } from "@mui/material";
 import { darkButtonTheme } from "../../../utils/muiThemes";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { closeModalAction } from "../../../utils/store";
+import { addCardAction, closeModalAction } from "../../../utils/store";
+import addCard from "../../../api/addCard";
 
 type propsType = {
   cardInfo: cardInfoType;
@@ -94,23 +95,31 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
     console.log(offset);
   }, [offset]);
   const handleRecount = () => {
-    const { birthdate, birthcity, name, gender, livingcity } = cardInfo;
-    const inputData: inputDataType = {
-      birthdate,
-      birthcity,
-      name,
-      gender,
-      livingcity,
-      offset,
+    const addCardFunc = async () => {
+      const result = await addCard({
+        card: cardInfo,
+        token: localStorage.getItem("token"),
+      });
+      dispatch(addCardAction(cardInfo));
+      const { name, birthdate, birthcity, gender, livingcity, offset } =
+        cardInfo;
+      const inputData: inputDataType = {
+        name,
+        birthdate,
+        birthcity,
+        gender,
+        livingcity,
+        offset,
+      };
+      dispatch(closeModalAction());
+      navigate({
+        search: createSearchParams({
+          inputData: JSON.stringify(inputData),
+          id: result.data.id,
+        }).toString(),
+        pathname: "/cards",
+      });
     };
-
-    navigate({
-      search: createSearchParams({
-        inputData: JSON.stringify(inputData),
-      }).toString(),
-      pathname: "/cards",
-    });
-    window.location.reload();
   };
   return (
     <>

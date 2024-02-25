@@ -20,9 +20,13 @@ import ModalPillars from "../../Components/ModalComponents/ModalPillars/ModalPil
 import countCard from "../../api/countCard";
 import { useSelector, useDispatch } from "react-redux";
 import addCard from "../../api/addCard";
-import { addCardAction, openModalAction } from "../../utils/store";
+import {
+  addCardAction,
+  closeModalAction,
+  openModalAction,
+} from "../../utils/store";
 import getColorByAnimalElement from "../../utils/getColorByAnimal";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 type propsType = {
   inputData: inputDataType;
@@ -43,6 +47,8 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
     if (inputData) {
       const getCard = async (inputData: inputDataType) => {
         const data = await countCard({ inputData });
+        console.log("cardInfo", data);
+
         setCardInfo(data);
       };
       getCard(inputData);
@@ -54,7 +60,24 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
     const result = await addCard({ card: cardInfo, token });
     if (result.status / 100 === 2) {
       dispatch(addCardAction(cardInfo));
-      navigate("/cards");
+      const { name, birthdate, birthcity, gender, livingcity, offset } =
+        cardInfo;
+      const inputData: inputDataType = {
+        name,
+        birthdate,
+        birthcity,
+        gender,
+        livingcity,
+        offset,
+      };
+      dispatch(closeModalAction());
+      navigate({
+        search: createSearchParams({
+          inputData: JSON.stringify(inputData),
+          id: result.data.id,
+        }).toString(),
+        pathname: "/cards",
+      });
     } else {
     }
   };
@@ -159,22 +182,24 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
             }
           />
         </div>
-        {!id && (
-          <div className={styles.saveContainer}>
-            <ThemeProvider theme={buttonTheme}>
-              {
-                <Button
-                  className={styles.button}
-                  onClick={() => {
-                    fetchAddCard();
-                  }}
-                >
-                  СОХРАНИТЬ
-                </Button>
-              }
-            </ThemeProvider>
-          </div>
-        )}
+        <div className={styles.saveContainer}>
+          <ThemeProvider theme={buttonTheme}>
+            {
+              <Button
+                className={styles.button}
+                onClick={
+                  id
+                    ? undefined
+                    : () => {
+                        fetchAddCard();
+                      }
+                }
+              >
+                {id ? "КАРТА СОХРАНЕНА" : "СОХРАНИТЬ"}
+              </Button>
+            }
+          </ThemeProvider>
+        </div>
       </div>
     )
   );

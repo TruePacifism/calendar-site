@@ -1,5 +1,10 @@
 import { createTheme } from "@mui/material";
-import { accentColor, basicButtonBorderColor, hiddenTextColor } from "./vars";
+import {
+  accentColor,
+  basicButtonBorderColor,
+  hiddenTextColor,
+  miniAccentColor,
+} from "./vars";
 import { hexToRgba } from "./hexToRgba";
 
 export const buttonTheme = createTheme({
@@ -11,8 +16,9 @@ export const buttonTheme = createTheme({
           paddingBottom: 15,
           paddingLeft: 29,
           paddingRight: 29,
-          color: "#ffffff",
-          backgroundColor: accentColor,
+          color: accentColor,
+          border: `1px solid ${miniAccentColor}`,
+          backgroundColor: "white",
           fontFamily: "Roboto Slab",
           fontSize: "15px",
           fontWeight: "400",
@@ -23,7 +29,7 @@ export const buttonTheme = createTheme({
           marginRight: "auto",
           "&:hover": {
             backgroundColor: accentColor,
-            opacity: 0.8,
+            color: "white",
           },
         }),
       },
@@ -79,27 +85,27 @@ export const delitionModalTheme = createTheme({
   components: {
     MuiButton: {
       styleOverrides: {
-        root: {
-          fontSize: 15,
-          fontWeight: 400,
-          lineHeight: 20,
-          letterSpacing: 0,
-          textAlign: "center",
-          paddingTop: 8,
-          paddingRight: 28,
-          paddingBottom: 6,
-          paddingLeft: 28,
+        root: ({ ownerState }) => ({
+          paddingTop: 15,
+          paddingBottom: 15,
+          paddingLeft: 29,
+          paddingRight: 29,
           color: accentColor,
-          border: `1px solid ${basicButtonBorderColor}`,
-          borderRadius: 5,
-          height: "auto",
-          minHeight: 0,
-          maxHeight: 51,
-          ":hover": {
-            color: "white",
+          border: `1px solid ${miniAccentColor}`,
+          backgroundColor: "white",
+          fontFamily: "Roboto Slab",
+          fontSize: "15px",
+          fontWeight: "400",
+          lineHeight: "20px",
+          letterSpacing: "0em",
+          textAlign: "center",
+          display: "block",
+          marginRight: "auto",
+          "&:hover": {
             backgroundColor: accentColor,
+            color: "white",
           },
-        },
+        }),
       },
     },
   },
@@ -126,23 +132,27 @@ export const darkButtonTheme = createTheme({
   components: {
     MuiButton: {
       styleOverrides: {
-        root: {
-          border: "1px solid white",
-          borderRadius: "5px",
-          backgroundColor: accentColor,
-          width: "131px",
-          height: "51px",
-          color: "white",
-          fontWeight: 400,
-          fontSize: "15px",
-          lineHeight: "19.78px",
+        root: ({ ownerState }) => ({
+          paddingTop: 15,
+          paddingBottom: 15,
+          paddingLeft: 29,
+          paddingRight: 29,
+          color: accentColor,
+          border: `1px solid ${miniAccentColor}`,
+          backgroundColor: "white",
           fontFamily: "Roboto Slab",
+          fontSize: "15px",
+          fontWeight: "400",
+          lineHeight: "20px",
+          letterSpacing: "0em",
           textAlign: "center",
-          textTransform: "uppercase",
-          ":hover": {
+          display: "block",
+          marginRight: "auto",
+          "&:hover": {
             backgroundColor: accentColor,
+            color: "white",
           },
-        },
+        }),
       },
     },
   },
@@ -378,22 +388,27 @@ export const loginTheme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
-        root: {
-          backgroundColor: accentColor,
-          color: "white",
+        root: ({ ownerState }) => ({
+          paddingTop: 15,
+          paddingBottom: 15,
+          paddingLeft: 29,
+          paddingRight: 29,
+          color: accentColor,
+          border: `1px solid ${miniAccentColor}`,
+          backgroundColor: "white",
           fontFamily: "Roboto Slab",
-          fontSize: 15,
-          fontWeight: 400,
-          lineHeight: 20,
+          fontSize: "15px",
+          fontWeight: "400",
+          lineHeight: "20px",
           letterSpacing: "0em",
           textAlign: "center",
-          height: 39,
-          width: 156,
+          display: "block",
+          marginRight: "auto",
           "&:hover": {
             backgroundColor: accentColor,
-            opacity: 0.8,
+            color: "white",
           },
-        },
+        }),
       },
     },
   },
@@ -573,8 +588,9 @@ export const mainTheme = createTheme({
           paddingBottom: 15,
           paddingLeft: 29,
           paddingRight: 29,
-          color: "#ffffff",
-          backgroundColor: accentColor,
+          color: accentColor,
+          border: `1px solid ${miniAccentColor}`,
+          backgroundColor: "white",
           fontFamily: "Roboto Slab",
           fontSize: "15px",
           fontWeight: "400",
@@ -585,7 +601,7 @@ export const mainTheme = createTheme({
           marginRight: "auto",
           "&:hover": {
             backgroundColor: accentColor,
-            opacity: 0.8,
+            color: "white",
           },
         }),
       },

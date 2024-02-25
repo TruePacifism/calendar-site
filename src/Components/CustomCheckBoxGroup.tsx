@@ -97,6 +97,7 @@ type propsType = {
   onChange: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
   className?: string;
   defaultCheckedIndex?: number;
+  required?: boolean;
 };
 
 export default function CustomCheckBoxGroup({
@@ -104,6 +105,7 @@ export default function CustomCheckBoxGroup({
   onChange,
   className,
   defaultCheckedIndex,
+  required,
 }: propsType) {
   const [selectedCheckbox, setSelectedCheckbox]: [
     string,
@@ -134,10 +136,10 @@ export default function CustomCheckBoxGroup({
             <InputLabel>
               {checkboxInfo.title}
               <Radio
+                required={required && idx === 0}
                 defaultChecked={checkboxInfo.value === selectedCheckbox}
                 value={checkboxInfo.value}
                 title={checkboxInfo.title}
-                hidden
               />
             </InputLabel>
           </ThemeProvider>

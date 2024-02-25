@@ -232,6 +232,7 @@ export default function Calculator() {
             <span className={styles.label}>Пол</span>
             <div className={styles.genderInputBox}>
               <CustomCheckBoxGroup
+                required
                 checkboxesInfo={[
                   {
                     title: "мужской",
