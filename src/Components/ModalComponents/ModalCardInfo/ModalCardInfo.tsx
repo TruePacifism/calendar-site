@@ -5,6 +5,7 @@ import {
   collisionType,
   dateType,
   inputDataType,
+  offsetType,
 } from "../../../utils/types";
 import CardColumn from "../../CardColumn/CardColumn";
 import ModalCollision from "../ModalCollision/ModalCollision";
@@ -79,18 +80,18 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
     boolean,
     Dispatch<SetStateAction<boolean>>
   ] = useState(false);
-  const [offset, setOffset]: [dateType, Dispatch<SetStateAction<dateType>>] =
-    useState(
-      cardInfo.offset
-        ? cardInfo.offset
-        : {
-            year: 0,
-            month: 0,
-            day: 0,
-            hour: 0,
-            minute: 0,
-          }
-    );
+  const [offset, setOffset]: [
+    offsetType,
+    Dispatch<SetStateAction<offsetType>>
+  ] = useState(
+    cardInfo.offset
+      ? cardInfo.offset
+      : {
+          year: 0,
+          month: 0,
+          pillar: 0,
+        }
+  );
   useEffect(() => {
     console.log(offset);
   }, [offset]);
@@ -120,6 +121,7 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
         pathname: "/cards",
       });
     };
+    addCardFunc();
   };
   return (
     <>
@@ -135,44 +137,44 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
         <ModalHeading text={isEditingMode ? "РЕДАКТИРОВАТЬ КАРТУ" : "КАРТА"} />
         <ul className={styles.list}>
           <CardColumn
-            doneFor={isEditingMode ? "Editing" : "Calculator"}
+            doneFor={"Calculator"}
             key={keys[3]}
             animal={cardInfo.hour.animal}
             element={cardInfo.hour.element}
             title={`${cardInfo.birthdate.hour}:${cardInfo.birthdate.minute}`}
-            onOffsetIncrement={() => {
-              setOffset((oldOffset) => ({
-                ...oldOffset,
-                hour: oldOffset.hour + 1,
-              }));
-            }}
-            onOffsetDecrement={() => {
-              setOffset((oldOffset) => ({
-                ...oldOffset,
-                hour: oldOffset.hour - 1,
-              }));
-            }}
+            // onOffsetIncrement={() => {
+            //   setOffset((oldOffset) => ({
+            //     ...oldOffset,
+            //     hour: oldOffset.hour + 1,
+            //   }));
+            // }}
+            // onOffsetDecrement={() => {
+            //   setOffset((oldOffset) => ({
+            //     ...oldOffset,
+            //     hour: oldOffset.hour - 1,
+            //   }));
+            // }}
             name={"hour"}
           />
           <CardColumn
-            doneFor={isEditingMode ? "Editing" : "Calculator"}
+            doneFor={"Calculator"}
             key={keys[2]}
             animal={cardInfo.day.animal}
             element={cardInfo.day.element}
             title={cardInfo.birthdate.day}
-            onOffsetIncrement={() => {
-              setOffset((oldOffset) => ({
-                ...oldOffset,
-                day: oldOffset.day + 1,
-              }));
-            }}
+            // onOffsetIncrement={() => {
+            //   setOffset((oldOffset) => ({
+            //     ...oldOffset,
+            //     day: oldOffset.day + 1,
+            //   }));
+            // }}
             name={"day"}
-            onOffsetDecrement={() => {
-              setOffset((oldOffset) => ({
-                ...oldOffset,
-                day: oldOffset.day - 1,
-              }));
-            }}
+            // onOffsetDecrement={() => {
+            //   setOffset((oldOffset) => ({
+            //     ...oldOffset,
+            //     day: oldOffset.day - 1,
+            //   }));
+            // }}
           />
           <CardColumn
             doneFor={isEditingMode ? "Editing" : "Calculator"}
