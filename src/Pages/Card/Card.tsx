@@ -101,7 +101,7 @@ export default function Card({ inputData, id }: propsType): React.JSX.Element {
         </div>
         <div
           onClick={() => {
-            openModal(<ModalCardInfo cardInfo={cardInfo} />);
+            openModal(<ModalCardInfo doneFor="Card" cardInfo={cardInfo} />);
           }}
         >
           <CardInfo doneFor="Calculator" cardInfo={cardInfo} />

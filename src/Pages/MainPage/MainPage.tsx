@@ -39,23 +39,25 @@ export default function MainPage() {
   useEffect(() => {
     console.log(hashMainPageInfo === mainPageInfo);
     console.log(hashUser === user);
-
+    if (hashMainPageInfo === mainPageInfo && hashUser === user) {
+      return;
+    }
     hashMainPageInfo = mainPageInfo;
     hashUser = user;
     const fetchInfo = async () => {
       dispatch(setLoadingAction({ value: true, from: "mainFetch" }));
-      console.log("fetched");
       console.log(mainPageInfo);
 
       const newTodayInfo = await countCard({ inputData: mainPageInfo });
-      console.log(newTodayInfo);
       setTodayInfo(newTodayInfo);
       dispatch(setLoadingAction({ value: false, from: "mainFetch" }));
     };
 
     fetchInfo();
-  }, [user, mainPageInfo, mainPageInfo.birthdate, dispatch]);
-
+  }, [user, mainPageInfo, dispatch]);
+  useEffect(() => {
+    console.log("todayInfo", todayInfo);
+  }, [todayInfo]);
   const fetchIconedInfoClick = useCallback(() => {
     dispatch(
       openModalAction(
@@ -78,7 +80,6 @@ export default function MainPage() {
 
   //   setTodayInfo(newInfo);
   // };
-  console.log(todayInfo);
 
   return (
     todayInfo && (
@@ -102,7 +103,13 @@ export default function MainPage() {
               console.log("clicked");
 
               dispatch(
-                openModalAction(<ModalCardInfo cardInfo={todayInfo} isToday />)
+                openModalAction(
+                  <ModalCardInfo
+                    doneFor="MainPage"
+                    cardInfo={todayInfo}
+                    isToday
+                  />
+                )
               );
             }}
           >

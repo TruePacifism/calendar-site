@@ -3,7 +3,6 @@ import styles from "./ModalCardInfo.module.css";
 import {
   cardInfoType,
   collisionType,
-  dateType,
   inputDataType,
   offsetType,
 } from "../../../utils/types";
@@ -17,12 +16,19 @@ import { Button, ThemeProvider } from "@mui/material";
 import { darkButtonTheme } from "../../../utils/muiThemes";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addCardAction, closeModalAction } from "../../../utils/store";
+import {
+  addCardAction,
+  closeModalAction,
+  setLoadingAction,
+} from "../../../utils/store";
 import addCard from "../../../api/addCard";
+import countCard from "../../../api/countCard";
+type doneForType = "MainPage" | "Card";
 
 type propsType = {
   cardInfo: cardInfoType;
   isToday?: boolean;
+  doneFor: doneForType;
 };
 
 const getAllCollisions = (cardInfo: cardInfoType): collisionType[] => {
@@ -73,7 +79,11 @@ const getAllCollisions = (cardInfo: cardInfoType): collisionType[] => {
 
 const keys = ["year", "month", "day", "hour", "pillar"];
 
-export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
+export default function ModalCardInfo({
+  cardInfo,
+  isToday,
+  doneFor,
+}: propsType) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isEditingMode, setIsEditingMode]: [
@@ -96,14 +106,16 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
     console.log(offset);
   }, [offset]);
   const handleRecount = () => {
+    dispatch(setLoadingAction({ from: "edited card", value: true }));
     const addCardFunc = async () => {
-      const result = await addCard({
-        card: cardInfo,
-        token: localStorage.getItem("token"),
-      });
-      dispatch(addCardAction(cardInfo));
-      const { name, birthdate, birthcity, gender, livingcity, offset } =
-        cardInfo;
+      const {
+        birthcity,
+        birthdate,
+        livingcity,
+        name,
+        gender,
+        offset,
+      }: inputDataType = cardInfo;
       const inputData: inputDataType = {
         name,
         birthdate,
@@ -112,6 +124,12 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
         livingcity,
         offset,
       };
+      const newCard = await countCard({ inputData });
+      const result = await addCard({
+        card: newCard,
+        token: localStorage.getItem("token"),
+      });
+      dispatch(addCardAction(cardInfo));
       dispatch(closeModalAction());
       navigate({
         search: createSearchParams({
@@ -126,7 +144,7 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
   return (
     <>
       <div className={styles.container}>
-        {!isEditingMode && (
+        {!isEditingMode && doneFor === "Card" && (
           <EditIcon
             onClick={() => {
               setIsEditingMode(true);
@@ -134,7 +152,11 @@ export default function ModalCardInfo({ cardInfo, isToday }: propsType) {
             className={styles.editIcon}
           />
         )}
-        <ModalHeading text={isEditingMode ? "РЕДАКТИРОВАТЬ КАРТУ" : "КАРТА"} />
+        {doneFor === "Card" && (
+          <ModalHeading
+            text={isEditingMode ? "РЕДАКТИРОВАТЬ КАРТУ" : "КАРТА"}
+          />
+        )}
         <ul className={styles.list}>
           <CardColumn
             doneFor={"Calculator"}

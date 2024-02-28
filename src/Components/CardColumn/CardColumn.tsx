@@ -202,11 +202,11 @@ export default function CardColumn({
           }}
         >
           <ElementPic
-            element={editingModeElement}
+            element={doneFor === "Editing" ? editingModeElement : element}
             doneFor={doneFor === "Editing" ? "Calculator" : doneFor}
           />
           <AnimalPic
-            animal={editingModeAnimal}
+            animal={doneFor === "Editing" ? editingModeAnimal : animal}
             doneFor={doneFor === "Editing" ? "Calculator" : doneFor}
           />
         </div>

@@ -2,9 +2,10 @@ import React, {
   SetStateAction,
   Dispatch,
   useState,
-  useEffect,
   useCallback,
   useMemo,
+  useRef,
+  useEffect,
 } from "react";
 import styles from "./CardLineChart.module.css";
 import { Line } from "react-chartjs-2";
@@ -33,7 +34,6 @@ ChartJS.register(
   LineElement
 );
 
-type chartDataType = ChartData<"line", (number | Point)[], unknown>;
 type propsType = {
   chartData: lineChartDataType;
   backgroundColor: string;
@@ -56,6 +56,12 @@ const Modal = ({
     viewType[],
     Dispatch<SetStateAction<viewType[]>>
   ] = useState([]);
+  const yearRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (yearRef.current) {
+      yearRef.current.scrollTo({ left: 2300 });
+    }
+  }, [yearRef, yearRef.current]);
   return (
     <div className={styles.modalContainer}>
       <ModalHeading text="ГРАФИК" />
@@ -78,7 +84,12 @@ const Modal = ({
                 {view}
               </button>
               {openedViews.includes(view) && (
-                <div style={{ overflowX: "scroll" }}>
+                <div
+                  style={{
+                    overflowX: "scroll",
+                  }}
+                  ref={view === "Жизнь" ? yearRef : undefined}
+                >
                   <div
                     style={{
                       overflowX: "scroll",
@@ -172,13 +183,6 @@ export default function CardLineChart({
   const dispatch = useDispatch();
   const [view, setView]: [viewType, Dispatch<SetStateAction<viewType>>] =
     useState("Неделя" as viewType);
-  const handleClick = useCallback(() => {
-    dispatch(
-      openModalAction(
-        <Modal dataArray={dataArray} backgroundColor={backgroundColor} />
-      )
-    );
-  }, [dispatch]);
   const dataArray = useMemo(() => {
     const object: {
       Неделя?: ChartData<"line", (number | Point)[], unknown>;
@@ -226,6 +230,13 @@ export default function CardLineChart({
 
     return object;
   }, [backgroundColor, chartData]);
+  const handleClick = useCallback(() => {
+    dispatch(
+      openModalAction(
+        <Modal dataArray={dataArray} backgroundColor={backgroundColor} />
+      )
+    );
+  }, [dispatch, backgroundColor, dataArray]);
 
   return (
     <>
