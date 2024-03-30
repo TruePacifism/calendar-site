@@ -74,11 +74,12 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             animal={cardInfo.month.animal}
             element={cardInfo.month.element}
             title={
-              typeof cardInfo.birthdate.month === "number"
+              typeof cardInfo.birthdate.month === "number" &&
+              cardInfo.birthdate.month !== -1
                 ? getMonthName(cardInfo.birthdate.month)
                     .slice(0, 3)
                     .toLowerCase()
-                : "НЕТ"
+                : "ㅤ"
             }
             name={"month"}
           />
