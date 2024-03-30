@@ -15,9 +15,7 @@ export default function ServiceInfo() {
         </div>
       </div>
       <div className={styles.feedbackContainer}>
-        <p className={styles.feedbackInfo}>
-          Оставить отзыв, сообщить об ошибке, задать вопрос:
-        </p>
+        <p className={styles.feedbackInfo}>Канал Виктории в Телеграм:</p>
         <a
           href="https://t.me/ViktoriaMankova"
           className={styles.feedbackButton}

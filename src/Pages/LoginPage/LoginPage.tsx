@@ -67,7 +67,7 @@ export default function LoginPage(props: propsType) {
     }
   }, [token]);
   const [isAgreed, setIsAgreed]: [boolean, Dispatch<SetStateAction<boolean>>] =
-    useState(true);
+    useState(false);
   const [userInfo, setUserInfo]: [
     userInput,
     Dispatch<SetStateAction<userInput>>

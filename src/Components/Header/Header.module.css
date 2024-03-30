@@ -168,9 +168,12 @@
 .warningButtonsContainer {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   overflow: hidden;
   & > *:not(:last-child) {
     margin-right: 13px;
+  }
+  & > *:last-child {
+    margin-right: 0;
   }
 }

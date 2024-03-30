@@ -54,7 +54,7 @@ export default function CardInfo({ cardInfo, doneFor }: propsType) {
             element={cardInfo.hour.element}
             title={
               cardInfo.birthdate.hour === -1 || cardInfo.birthdate.minute === -1
-                ? "Время"
+                ? "время"
                 : normalizeTime(
                     cardInfo.birthdate.hour,
                     cardInfo.birthdate.minute

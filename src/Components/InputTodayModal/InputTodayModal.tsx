@@ -95,6 +95,14 @@ export default function InputTodayModal({ selected }: propsType) {
     useState(inputRefs.hour.value);
   const [dayValue, setDayValue]: [string, Dispatch<SetStateAction<string>>] =
     useState(inputRefs.day.value);
+  const [selectedLivingCity, setSelectedLivingCity]: [
+    cityInfoType,
+    Dispatch<SetStateAction<cityInfoType>>
+  ] = useState(mainPageInfo.livingcity);
+  const [selectedBirthCity, setSelectedBirthCity]: [
+    cityInfoType,
+    Dispatch<SetStateAction<cityInfoType>>
+  ] = useState(mainPageInfo.birthcity);
   const [monthValue, setMonthValue]: [
     string,
     Dispatch<SetStateAction<string>>
@@ -226,9 +234,10 @@ export default function InputTodayModal({ selected }: propsType) {
       },
       gender: "female",
       name: "today",
-      livingcity: e.target.elements.livingcity.value,
-      birthcity: e.target.elements.birthcity.value,
+      livingcity: selectedLivingCity,
+      birthcity: selectedBirthCity,
     };
+    console.log(newTodayDatabirthdate);
 
     dispatch(setMainPageDateAction(newTodayDatabirthdate));
     dispatch(closeModalAction());
@@ -346,6 +355,9 @@ export default function InputTodayModal({ selected }: propsType) {
             placeholder="место рождения"
             doneFor="homeModal"
             defaultValue={mainPageInfo.birthcity}
+            onChange={(e, value) => {
+              setSelectedBirthCity(value);
+            }}
           />
           <CityInput
             title="Место жительства"
@@ -353,6 +365,9 @@ export default function InputTodayModal({ selected }: propsType) {
             placeholder="место жительства"
             doneFor="homeModal"
             defaultValue={mainPageInfo.livingcity}
+            onChange={(e, value) => {
+              setSelectedLivingCity(value);
+            }}
           />
           <div className={styles.buttonList}>
             <ThemeProvider theme={darkButtonTheme}>

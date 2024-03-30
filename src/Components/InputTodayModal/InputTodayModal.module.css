@@ -18,5 +18,16 @@
 .buttonList {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+}
+.buttonList > *:first-child {
+  margin-right: 15px;
+}
+.buttonList > *:last-child {
+  margin-right: 0;
+}
+.buttonList > * {
+  padding: 7px !important;
+  width: 131px;
+  height: 51px;
 }
