@@ -19,6 +19,7 @@ import { ReactComponent as PowerIcon } from "../../images/power-icon.svg";
 // import { ReactComponent as LivingsideIcon } from "../../images/living-side-icon.svg";
 import {
   cardInfoType,
+  cityInfoType,
   colorType,
   stateType,
   stylesType,
@@ -65,7 +66,7 @@ export default function IconedCardInfoList({
   backgroundColor,
 }: propsType) {
   const dispatch = useDispatch();
-  const livingCity = useSelector<stateType, string>(
+  const livingCity = useSelector<stateType, cityInfoType>(
     (store) => store.mainPageInfo.livingcity
   );
   const [values, setValues]: [
@@ -88,7 +89,10 @@ export default function IconedCardInfoList({
         value: cardInfo.direction.shortName,
       },
       {
-        Icon: cardInfo.genderCount.female > cardInfo.genderCount.male ? FemaleIcon : MaleIcon,
+        Icon:
+          cardInfo.genderCount.female > cardInfo.genderCount.male
+            ? FemaleIcon
+            : MaleIcon,
         value: `${Math.max(
           cardInfo.genderCount.female,
           cardInfo.genderCount.male
@@ -145,7 +149,7 @@ export default function IconedCardInfoList({
             );
           }}
         >
-          {livingCity}
+          {livingCity.shortName}
         </span>
       )}
     </div>

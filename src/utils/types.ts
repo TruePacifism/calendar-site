@@ -193,8 +193,8 @@ export type cardInfoType = {
   birthdate: dateType;
   trueBirthdate: dateType;
   offset?: offsetType;
-  birthcity: string;
-  livingcity: string;
+  birthcity: cityInfoType;
+  livingcity: cityInfoType;
   date: string;
   age: ageType;
   year: {
@@ -242,18 +242,18 @@ export type offsetType = {
 export type inputDataType = {
   name: string;
   birthdate: dateType;
-  birthcity: string;
+  birthcity: cityInfoType;
   gender: "male" | "female";
-  livingcity: string;
+  livingcity: cityInfoType;
   offset?: offsetType;
 };
 
 export type cityInfoType = {
-  name: string;
-  // coordinates: {
-  //   lat: number;
-  //   lng: number;
-  // };
+  fullName: string;
+  shortName: string;
+  lon: number;
+  lat: number;
+  UTC: number;
 };
 
 export type userInput = {
@@ -262,8 +262,8 @@ export type userInput = {
   thirdName?: string;
   token: string;
   mail: string;
-  livingcity: string;
-  birthcity: string;
+  livingcity: cityInfoType;
+  birthcity: cityInfoType;
 };
 
 export type stateType = {
@@ -281,8 +281,8 @@ export type userType = {
   secondName?: string;
   thirdName?: string;
   mail: string;
-  livingcity: string;
-  birthcity: string;
+  livingcity: cityInfoType;
+  birthcity: cityInfoType;
   UTC: number;
   cards: cardInfoType[];
 };

@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { FirebaseOptions, initializeApp } from "firebase/app";
 import { ReactComponent as GoogleIcon } from "../../images/google-icon.svg";
-import { userInput } from "../../utils/types";
+import { cityInfoType, userInput } from "../../utils/types";
 import { Button, Checkbox, TextField, ThemeProvider } from "@mui/material";
 import { googleAuthButton, loginTheme } from "../../utils/muiThemes";
 import CityInput from "../../Components/CityInput/CityInput";
@@ -90,17 +90,25 @@ export default function LoginPage(props: propsType) {
           secondName: result.user.displayName.split(" ")[1],
           thirdName: "",
           mail: result.user.email,
-          livingcity: "",
-          birthcity: "",
+          livingcity: null,
+          birthcity: null,
         };
         setUserInfo({
           ...user,
-          livingcity: "",
-          birthcity: "",
+          livingcity: null,
+          birthcity: null,
         });
       }
     });
   };
+  const [selectedLivingCity, setSelectedLivingCity]: [
+    cityInfoType,
+    Dispatch<SetStateAction<cityInfoType>>
+  ] = useState(null);
+  const [selectedBirthCity, setSelectedBirthCity]: [
+    cityInfoType,
+    Dispatch<SetStateAction<cityInfoType>>
+  ] = useState(null);
   const [isRulesShowing, setIsRulesShowing]: [
     boolean,
     Dispatch<SetStateAction<boolean>>
@@ -152,10 +160,10 @@ export default function LoginPage(props: propsType) {
                         value: string;
                       };
                       birthcity: {
-                        value: string;
+                        value: cityInfoType;
                       };
                       livingcity: {
-                        value: string;
+                        value: cityInfoType;
                       };
                     };
                   };
@@ -175,8 +183,8 @@ export default function LoginPage(props: propsType) {
                   firstName: firstName.value,
                   secondName: secondName.value,
                   thirdName: thirdName.value,
-                  livingcity: livingcity.value,
-                  birthcity: birthcity.value,
+                  livingcity: selectedLivingCity,
+                  birthcity: selectedBirthCity,
                 };
 
                 fetchUser(user);
@@ -222,12 +230,18 @@ export default function LoginPage(props: propsType) {
                 />
               </label>
               <CityInput
+                onChange={(e, value) => {
+                  setSelectedBirthCity(value);
+                }}
                 name="birthcity"
                 title="Место рождения"
                 placeholder="место рождения"
                 doneFor="loginPage"
               />
               <CityInput
+                onChange={(e, value) => {
+                  setSelectedLivingCity(value);
+                }}
                 name="livingcity"
                 title="Место жительства"
                 placeholder="место жительства"

@@ -49,8 +49,20 @@ const cardInfoPlaceholder: cardInfoType = {
     SNAKE: 0,
     GOAT: 5,
   },
-  livingcity: "Питер",
-  birthcity: "Иркутск",
+  livingcity: {
+    fullName: "Санкт-Петербург",
+    shortName: "Питер",
+    lat: 32,
+    lon: 45,
+    UTC: 5,
+  },
+  birthcity: {
+    fullName: "Санкт-Петербург",
+    shortName: "Питер",
+    lat: 32,
+    lon: 45,
+    UTC: 5,
+  },
   year: {
     animal: {
       name: "Лошадь",

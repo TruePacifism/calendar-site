@@ -4,6 +4,8 @@ import { ThemeProvider } from "@emotion/react";
 import { cityInputTheme, loginTheme } from "../../utils/muiThemes";
 import {
   Autocomplete,
+  AutocompleteChangeDetails,
+  AutocompleteChangeReason,
   TextField,
   TextFieldProps,
   debounce,
@@ -18,8 +20,14 @@ type propsType = {
   name: string;
   placeholder: string;
   doneFor: doneForType;
-  defaultValue?: string;
-} & TextFieldProps;
+  defaultValue?: cityInfoType;
+  onChange?: (
+    event: React.SyntheticEvent<Element, Event>,
+    value: cityInfoType,
+    reason: AutocompleteChangeReason,
+    details?: AutocompleteChangeDetails<cityInfoType>
+  ) => void;
+};
 
 export default function CityInput({
   title,
@@ -27,6 +35,7 @@ export default function CityInput({
   placeholder,
   doneFor,
   defaultValue,
+  onChange,
 }: propsType) {
   const [citiesList, setCitiesList]: [
     cityInfoType[],
@@ -76,17 +85,14 @@ export default function CityInput({
         )}
         <Autocomplete
           id={name}
-          // renderOption={(props, option) => {
-          //   console.log(props);
-
-          //   return (
-          //     <li {...props} key={option}>
-          //       {option}
-          //     </li>
-          //   );
-          // }}
-
           defaultValue={defaultValue}
+          getOptionLabel={(option) => {
+            if (typeof option === "string") {
+              return option; // если option - строка, возвращаем как есть
+            }
+            return option.fullName; // если option - объект типа cityInfoType, возвращаем поле fullName
+          }}
+          onChange={onChange}
           renderInput={(params) =>
             citiesList ? (
               <TextField
@@ -95,7 +101,7 @@ export default function CityInput({
                 name={name}
                 onChange={updateInput}
                 label={placeholder}
-                defaultValue={defaultValue}
+                defaultValue={defaultValue ? defaultValue.fullName : ""} // Учитываем правильное поле
                 required={doneFor === "loginPage"}
                 error={doneFor === "loginPage" && inputValue === ""}
               />
@@ -110,7 +116,7 @@ export default function CityInput({
               ? { width: "100%" }
               : { width: "203.4px", height: "100%" }
           }
-          options={citiesList.map((city) => city.name)}
+          options={citiesList} // Оставляем массив объектов городов
         />
       </label>
     </ThemeProvider>

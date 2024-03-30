@@ -14,6 +14,7 @@ import CityInput from "../CityInput/CityInput";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModalAction, setMainPageDateAction } from "../../utils/store";
 import {
+  cityInfoType,
   inputDataType,
   monthType,
   stateType,
@@ -201,10 +202,10 @@ export default function InputTodayModal({ selected }: propsType) {
             value: string;
           };
           birthcity: {
-            value: string;
+            value: cityInfoType;
           };
           livingcity: {
-            value: string;
+            value: cityInfoType;
           };
           gender: any[];
         };

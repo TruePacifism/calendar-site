@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Calculator.module.css";
 import { months } from "../../enums";
-import { monthType } from "../../utils/types";
+import { cityInfoType, monthType } from "../../utils/types";
 import Container from "../../Components/Container/Container";
 import { Select, MenuItem, Input, Button } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
@@ -68,6 +68,14 @@ export default function Calculator() {
     number,
     Dispatch<SetStateAction<number>>
   ] = useState();
+  const [selectedLivingCity, setSelectedLivingCity]: [
+    cityInfoType,
+    Dispatch<SetStateAction<cityInfoType>>
+  ] = useState();
+  const [selectedBirthCity, setSelectedBirthCity]: [
+    cityInfoType,
+    Dispatch<SetStateAction<cityInfoType>>
+  ] = useState();
   const onSubmit = (
     e: React.FormEvent<HTMLFormElement> & {
       target: {
@@ -128,8 +136,8 @@ export default function Calculator() {
         minute: minute.value ? Number(minute.value) : -1,
       },
       gender: gender,
-      birthcity: e.target.elements.birthcity.value,
-      livingcity: e.target.elements.livingcity.value,
+      birthcity: selectedBirthCity,
+      livingcity: selectedLivingCity,
     };
     navigate({
       pathname: "/cards",
@@ -292,12 +300,18 @@ export default function Calculator() {
             title="Место рождения"
             placeholder="населенный пункт"
             doneFor="calculator"
+            onChange={(e, value) => {
+              setSelectedBirthCity(value);
+            }}
           />
           <CityInput
             name="livingcity"
             title="Место жительства"
             placeholder="населенный пункт"
             doneFor="calculator"
+            onChange={(e, value) => {
+              setSelectedLivingCity(value);
+            }}
           />
           <Button className={styles.countButton} type="submit">
             РАССЧИТАТЬ
