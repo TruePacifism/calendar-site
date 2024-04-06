@@ -45,6 +45,10 @@ export default function CityInput({
     string,
     Dispatch<SetStateAction<string>>
   ] = useState("");
+  const [value, setValue]: [
+    cityInfoType,
+    Dispatch<SetStateAction<cityInfoType>>
+  ] = useState(null);
   // const updateInputDebounced = debounce(updateInput, 2000)
   const updateInput = debounce(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -92,13 +96,29 @@ export default function CityInput({
             }
             return option.fullName; // если option - объект типа cityInfoType, возвращаем поле fullName
           }}
-          onChange={onChange}
+          onChange={(q, w, e, r) => {
+            if (typeof w === "string") {
+              return;
+            }
+            onChange(q, w, e, r);
+            setValue(w);
+          }}
           renderInput={(params) =>
             citiesList ? (
               <TextField
                 {...params}
                 InputLabelProps={{ shrink: true }}
                 name={name}
+                onBlur={(e) => {
+                  console.log(value);
+                  console.log(e.target.value);
+
+                  if (value === null) {
+                    console.log("yes");
+                    setInputValue("");
+                    e.target.value = "";
+                  }
+                }}
                 onChange={updateInput}
                 label={placeholder}
                 defaultValue={defaultValue ? defaultValue.fullName : ""} // Учитываем правильное поле

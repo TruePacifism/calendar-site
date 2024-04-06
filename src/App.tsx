@@ -72,7 +72,7 @@ function App() {
       <MyModal />
 
       {(currentUser || !token) && (
-        <div className={styles.container}>
+        <div className={styles.container} id="container">
           <Header />
           <Routes>
             <Route Component={MainPage} path="/" />
