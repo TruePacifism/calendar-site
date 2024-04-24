@@ -129,7 +129,17 @@ export default function LoginPage(props: propsType) {
   useEffect(() => {
     setNameValue(userInfo?.firstName);
   }, [userInfo?.firstName]);
-
+  const [isSubmitAvailable, setIsSubmitAvailable]: [
+    boolean,
+    Dispatch<SetStateAction<boolean>>
+  ] = useState(false);
+  useEffect(() => {
+    setIsSubmitAvailable(
+      nameValue !== "" &&
+        selectedLivingCity !== null &&
+        selectedBirthCity !== null
+    );
+  }, [nameValue, selectedLivingCity, selectedBirthCity]);
   return (
     <div className={styles.container}>
       <div className={styles.companyContainer}>
@@ -247,7 +257,12 @@ export default function LoginPage(props: propsType) {
                 placeholder="место жительства"
                 doneFor="loginPage"
               />
-              <Button className={styles.regButton} type="submit">
+              <Button
+                style={{ filter: isSubmitAvailable ? "" : "grayscale(100%)" }}
+                disabled={!isSubmitAvailable}
+                className={styles.regButton}
+                type="submit"
+              >
                 ДАЛЕЕ
               </Button>
             </form>
