@@ -1,4 +1,10 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import styles from "./ModalCardInfo.module.css";
 import {
   cardInfoType,
@@ -103,19 +109,13 @@ export default function ModalCardInfo({
         }
   );
   useEffect(() => {
-    console.log(offset);
+    console.log("offset: ", offset);
   }, [offset]);
-  const handleRecount = () => {
+  const handleRecount = useCallback(() => {
     dispatch(setLoadingAction({ from: "edited card", value: true }));
     const addCardFunc = async () => {
-      const {
-        birthcity,
-        birthdate,
-        livingcity,
-        name,
-        gender,
-        offset,
-      }: inputDataType = cardInfo;
+      const { birthcity, birthdate, livingcity, name, gender }: inputDataType =
+        cardInfo;
       const inputData: inputDataType = {
         name,
         birthdate,
@@ -124,12 +124,14 @@ export default function ModalCardInfo({
         livingcity,
         offset,
       };
+      console.log(inputData);
+
       const newCard = await countCard({ inputData });
       const result = await addCard({
         card: newCard,
         token: localStorage.getItem("token"),
       });
-      dispatch(addCardAction(cardInfo));
+      dispatch(addCardAction(newCard));
       dispatch(closeModalAction());
       navigate({
         search: createSearchParams({
@@ -140,7 +142,7 @@ export default function ModalCardInfo({
       });
     };
     addCardFunc();
-  };
+  }, [cardInfo, dispatch, navigate, offset]);
   return (
     <>
       <div className={styles.container}>
